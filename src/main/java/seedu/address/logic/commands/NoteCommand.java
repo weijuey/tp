@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,11 +13,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Updates the notes of a person
@@ -34,6 +35,10 @@ public class NoteCommand extends Command {
     private final Index index;
     private final Note note;
 
+    /**
+     * @param index index of the person in the filtered list to edit
+     * @param note new note to update with
+     */
     public NoteCommand(Index index, Note note) {
         requireAllNonNull(index, note);
 
@@ -59,6 +64,11 @@ public class NoteCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
+    /**
+     * Creates the message to be printed for the result of this NoteCommand
+     * @param personToEdit the person edited by this NoteCommand
+     * @return message to be printed
+     */
     public String generateSuccessMessage(Person personToEdit) {
         String message = note.value.isEmpty() ? MESSAGE_DELETE_NOTE_SUCCESS : MESSAGE_UPDATE_NOTE_SUCCESS;
         return String.format(message, personToEdit);
