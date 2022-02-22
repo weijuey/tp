@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Note;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -27,9 +28,9 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Note: %2$s";
 
     private final Index index;
-    private final String note;
+    private final Note note;
 
-    public NoteCommand(Index index, String note) {
+    public NoteCommand(Index index, Note note) {
         requireAllNonNull(index, note);
 
         this.index = index;
