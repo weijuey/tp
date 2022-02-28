@@ -257,27 +257,40 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+d'Intérieur is designed for interior designers who:
+
+* Has a preference for CLI apps
+* has many clients and projects to keep track of
 * can type fast
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: organise information on client and projects, giving a one-stop overview of current work progress and schedule.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                   | I want to …​                                                                         | So that I can…​                                                                                   |
+|----------|-------------------------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                  | look at a basic tutorial for adding persons                                          | understand what details I can add to a contact                                                    |
+| `* * *`  | user                                      | add a new person                                                                     |                                                                                                   |
+| `* * *`  | user                                      | delete a person                                                                      | remove entries that I no longer need                                                              |
+| `* * *`  | user                                      | find a person by name                                                                | locate details of persons without having to go through the entire list                            |
+| `* * *`  | interior designer                         | label my contacts with some fixed labels                                             | categorise my clients based on the stage of design I am at                                        |
+| `* * *`  | interior designer with many ongoing leads | filter my contacts list based on label                                               | easily keep track of who I am working with at a specific point of time without having to remember |
+| `* * *`  | interior designer                         | add notes under a client                                                             | keep track of the demands and requirements of each individual project                             |
+| `* * *`  | busy interior designer                    | add a deadline                                                                       | keep track of my deadlines easily                                                                 |
+| `* * *`  | user                                      | favourite certain contacts                                                           | look up favourites and contact them easily                                                        |
+| `* *`    | interior designer                         | check upcoming deadlines in chronological order                                      | keep track of deadlines automatically                                                             |
+| `* *`    | long-time user                            | separate past and current clients                                                    | avoid contacting clients with similar names or old clients that I am not presently working with   |
+| `* *`    | new user                                  | view a list of commands                                                              | know what commands are available and the right commands to use                                    |
+| `*`      | interior designer                         | add images under a client                                                            | keep track of images such as floor plans and inspirational designs relevant to the client         |
+| `*`      | interior designer                         | add a high importance tag to a client                                                | take note of pressing issues regarding a client, such as mobility issues                          |
+| `*`      | interior designer                         | track and calculate costs accumulated for a client                                   | at a glance, know how much money has been spent on them for a project                             |
+| `*`      | interior designer                         | generate invoices                                                                    | easily generate, store and print invoices for my clients                                          |
+| `*`      | interior designer                         | send out automated messages/emails to clients to wish them well on festive occasions | maintain good rapport with clients                                                                |
+| `*`      | user                                      | create contacts by importing information from other apps                             | create contacts more easily                                                                       |
 
 *{More to be added}*
 
