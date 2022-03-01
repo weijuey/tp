@@ -296,16 +296,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `d'Intérieur` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User adds a person with the required fields
+2. d'Intérieur shows the new contact added with the details entered.
+
+    Use case ends
+
+**Extensions**
+
+* 1a. User includes address field
+
+  * Use case resumes at step 2
+
+**UC02: Delete a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. d'Intérieur shows a list of contacts
+3. User requests to delete a specific contact in the list
+4. d'Intérieur deletes the contact
 
     Use case ends.
 
@@ -320,6 +335,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+**UC03: Add a label to a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. d'Intérieur shows a list of contacts
+3. User requests to add a label to a specific contact in the list
+4. d'Intérieur adds the label to the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The label requested does not currently exist in d'Intérieur
+
+  * To be added
 
 *{More to be added}*
 
