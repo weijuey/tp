@@ -11,10 +11,10 @@ d'Intérieur is a desktop address book application, designed with interior desig
 Given below are my contributions to the project.
 
 * **New Feature**: `To be added`
-  * What it does: 
-  * Justification: 
-  * Highlights: 
-  * Credits: 
+  * What it does:
+  * Justification:
+  * Highlights:
+  * Credits:
 
 * **New Feature**: `To be added`
 
