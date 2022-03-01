@@ -1,6 +1,6 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Ezekiel Toh's Project Portfolio Page
 ---
 
 ### Project: d'Intérieur
