@@ -128,20 +128,20 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating persons by tag : `findtag`
+### Locating contacts by tag : `findtag`
 
-Find persons with the given tag.
+Find contact with the given tag.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `tag` will match `Tag`
 * Only the tag is searched
 * Only full words will be matched e.g. `Ta` will not match `Tag`
-* List of persons matching at least one tag will be returned. e.g. `Tag1` will return `Person` A with tags `Tag1` and `Tag2` will be returned.
+* List of contacts matching at least one tag will be returned. e.g. `Tag1` will return `Contact` A with tags `Tag1` and `Tag2` will be returned.
 
 Examples:
-* `findtag Friends` returns persons with tag `Friends`
-* `findtag InProgress` returns persons with tag `InProgress`
+* `findtag Friends` returns contacts with tag `Friends`
+* `findtag InProgress` returns contacts with tag `InProgress`
 
 ### Deleting a person : `delete`
 
