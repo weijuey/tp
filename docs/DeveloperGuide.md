@@ -302,25 +302,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User adds a person with the required fields
+1. User adds a person with the required fields.
 2. d'Intérieur shows the new contact added with the details entered.
 
-    Use case ends
+    Use case ends.
 
 **Extensions**
 
-* 1a. User includes address field
+* 1a. User includes address field.
 
-  * Use case resumes at step 2
+  * Use case resumes at step 2.
 
 **UC02: Delete a contact**
 
 **MSS**
 
-1. User requests to list contacts
-2. d'Intérieur shows a list of contacts
-3. User requests to delete a specific contact in the list
-4. d'Intérieur deletes the contact
+1. User requests to list contacts.
+2. d'Intérieur shows a list of contacts.
+3. User requests to delete a specific contact in the list.
+4. d'Intérieur deletes the contact.
 
   Use case ends.
 
@@ -340,10 +340,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contacts
-2. d'Intérieur shows a list of contacts
-3. User requests to add a label to a specific contact in the list
-4. d'Intérieur adds the label to the contact
+1. User requests to list contacts.
+2. d'Intérieur shows a list of contacts.
+3. User requests to add a label to a specific contact in the list.
+4. d'Intérieur adds the label to the contact.
 
   Use case ends.
 
@@ -359,7 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The label requested does not currently exist in d'Intérieur
+* 3b. The label requested does not currently exist in d'Intérieur.
 
   * To be added
 
@@ -367,14 +367,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests list of contacts filtered to those containing the given label
-2. d'Intérieur shows a list of contacts who have the given label
+1. User requests list of contacts filtered to those containing the given label.
+2. d'Intérieur shows a list of contacts who have the given label.
 
   Use case ends.
 
 **Extensions**
 
-* 1a. The given label does not exist
+* 1a. The given label does not exist.
 
   * To be added
 
@@ -382,40 +382,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a note to a specific contact in the list
-2. d'Intérieur adds the note to the contact
+1. User requests to add a note to a specific contact in the list.
+2. d'Intérieur adds the note to the contact.
 
   Use case ends.
 
 **Extensions**
 
-* 1a. User enters only whitespaces or nothing as a note
+* 1a. User enters only whitespaces or nothing as a note.
 
   * d'Intérieur shows an error message that notes cannot be empty.
 
     Use case resumes at step 1.
 
+* 1b. The given index is invalid.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
 **UC06: Adding a contact to favourites**
 
 **MSS**
 
-1. User requests to add a specific contact in the list to favourites
-2. d'Intérieur adds the contact to favourites
+1. User requests to add a specific contact in the list to favourites.
+2. d'Intérieur adds the contact to favourites.
 
-  Use case ends
-
-**UC07: Add a deadline**
-
-1. User requests to add a deadline under a contact
-2. d'Intérieur adds the deadline under the contact
-
-  Use cse ends
+  Use case ends.
 
 **Extensions**
 
-* 1a. The deadline given does not contain a valid date or time
+* 1a. The given index is invalid.
+
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+**UC07: Add a deadline**
+
+1. User requests to add a deadline under a contact.
+2. d'Intérieur adds the deadline under the contact.
+
+  Use case ends.
+
+**Extensions**
+
+* 1a. The deadline given does not contain a valid date or time.
 
   * To be added
+
+* 1b. The given index is invalid.
+
+    * 1b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
 
 *{More to be added}*
 
@@ -429,6 +449,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **User** and **Interior Designer**: Both are used interchangeably as d'Intérieur is enhanced for interior designers
+* **Contact**: An entry in the d'Intérieur app
+* **Client**: A specific type of contact that interior designers will most likely keep track of
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
