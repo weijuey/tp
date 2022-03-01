@@ -30,6 +30,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
+   * **`findtag`**`Friends` : Finds persons associated with the tag `Friends` 
+
    * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
@@ -128,6 +130,22 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag : `findtag`
+
+Find persons with the given tag.
+
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g tag will match Tag
+* The order of the keywords does not matter. e.g. Tag One will match One Tag
+* Only the tag is searched
+* Only full words will be matched e.g. Ta will not match Tag
+* List of persons matching at least one tag will be returned. e.g. `Tag1` will return `Person` A with tags `Tag1` and `Tag2` will be returned.
+
+Examples:
+* `findtag Friends` returns persons with tag `Friends`
+* `findtag InProgress` returns persons with tag `InProgress`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -188,5 +206,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find Tag** | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`
 **List** | `list`
 **Help** | `help`
