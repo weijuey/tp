@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to delete a specific contact in the list
 4. d'Intérieur deletes the contact
 
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to add a label to a specific contact in the list
 4. d'Intérieur adds the label to the contact
 
-    Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -362,6 +362,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. The label requested does not currently exist in d'Intérieur
 
   * To be added
+
+**UC04: Filter contacts using labels**
+
+**MSS**
+
+1. User requests list of contacts filtered to those containing the given label
+2. d'Intérieur shows a list of contacts who have the given label
+
+  Use case ends.
+
+**Extensions**
+
+* 1a. The given label does not exist
+
+  * To be added
+
+**UC05: Adding a note to a contact**
+
+**MSS**
+
+1. User requests to add a note to a specific contact in the list
+2. d'Intérieur adds the note to the contact
+
+  Use case ends.
+
+**Extensions**
+
+* 1a. User enters only whitespaces or nothing as a note
+
+  * d'Intérieur shows an error message that notes cannot be empty.
+
+    Use case resumes at step 1.
 
 *{More to be added}*
 
