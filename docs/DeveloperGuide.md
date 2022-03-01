@@ -317,8 +317,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should work on both 32-bit and 64-bit environments.
 5. The system should boot up within five seconds.
-6. The product is not required to handle a non-text input.
-7. The product should be able to have up to 5000 contacts.
+6. The system is not required to handle a non-text input.
+7. The system should be able to have up to 5000 contacts.
 8. The response to any action should become visible within five seconds.
 
 *{More to be added}*
