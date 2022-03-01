@@ -280,7 +280,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | interior designer                         | label my contacts with some fixed labels                                             | categorise my clients based on the stage of design I am at                                        |
 | `* * *`  | interior designer with many ongoing leads | filter my contacts list based on label                                               | easily keep track of who I am working with at a specific point of time without having to remember |
 | `* * *`  | interior designer                         | add notes under a contact                                                            | keep track of the demands and requirements of each individual project                             |
-| `* * *`  | busy interior designer                    | add a deadline                                                                       | keep track of my deadlines easily                                                                 |
+| `* * *`  | busy interior designer                    | add a deadline under a contact                                                       | keep track of my deadlines easily                                                                 |
 | `* * *`  | user                                      | favourite certain contacts                                                           | look up favourites and contact them easily                                                        |
 | `* *`    | interior designer                         | check upcoming deadlines in chronological order                                      | keep track of deadlines automatically                                                             |
 | `* *`    | long-time user                            | separate past and current clients                                                    | avoid contacting clients with similar names or old clients that I am not presently working with   |
@@ -394,6 +394,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * d'Intérieur shows an error message that notes cannot be empty.
 
     Use case resumes at step 1.
+
+**UC06: Adding a contact to favourites**
+
+**MSS**
+
+1. User requests to add a specific contact in the list to favourites
+2. d'Intérieur adds the contact to favourites
+
+  Use case ends
+
+**UC07: Add a deadline**
+
+1. User requests to add a deadline under a contact
+2. d'Intérieur adds the deadline under the contact
+
+  Use cse ends
+
+**Extensions**
+
+* 1a. The deadline given does not contain a valid date or time
+
+  * To be added
 
 *{More to be added}*
 
