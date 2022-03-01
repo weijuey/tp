@@ -259,10 +259,10 @@ _{Explain here how the data archiving feature will be implemented}_
 
 d'Intérieur is designed for interior designers who:
 
-* Has a preference for CLI apps
-* has many clients and projects to keep track of
+* Have a preference for CLI apps
+* have many clients and projects to keep track of
 * can type fast
-* prefers typing to mouse interactions
+* prefer typing to mouse interactions
 
 **Value proposition**: organise information on client and projects, giving a one-stop overview of current work progress and schedule.
 
@@ -291,8 +291,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | interior designer                         | generate invoices                                                                    | easily generate, store and print invoices for my clients                                          |
 | `*`      | interior designer                         | send out automated messages/emails to clients to wish them well on festive occasions | maintain good rapport with clients                                                                |
 | `*`      | user                                      | create contacts by importing information from other apps                             | create contacts more easily                                                                       |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -391,9 +389,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User enters only whitespaces or nothing as a note.
 
-  * d'Intérieur shows an error message that notes cannot be empty.
+  * 1a1. d'Intérieur alerts the user that no changes have been made to notes
 
-    Use case resumes at step 1.
+    Use case ends.
 
 * 1b. The given index is invalid.
 
