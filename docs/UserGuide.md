@@ -134,10 +134,9 @@ Find persons with the given tag.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g tag will match Tag
-* The order of the keywords does not matter. e.g. Tag One will match One Tag
+* The search is case-insensitive. e.g `tag` will match `Tag`
 * Only the tag is searched
-* Only full words will be matched e.g. Ta will not match Tag
+* Only full words will be matched e.g. `Ta` will not match `Tag`
 * List of persons matching at least one tag will be returned. e.g. `Tag1` will return `Person` A with tags `Tag1` and `Tag2` will be returned.
 
 Examples:
