@@ -320,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list contacts.
 2. d'Intérieur shows a list of contacts.
 3. User requests to delete a specific contact in the list.
-4. d'Intérieur deletes the contact.
+4. d'Intérieur shows contact deleted and updates the list.
 
   Use case ends.
 
@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list contacts.
 2. d'Intérieur shows a list of contacts.
 3. User requests to add a label to a specific contact in the list.
-4. d'Intérieur adds the label to the contact.
+4. d'Intérieur adds the label to the contact and shows the contact.
 
   Use case ends.
 
@@ -383,7 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a note to a specific contact in the list.
-2. d'Intérieur adds the note to the contact.
+2. d'Intérieur adds the note to the contact and shows the contact.
 
   Use case ends.
 
@@ -399,14 +399,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **UC06: Adding a contact to favourites**
 
 **MSS**
 
 1. User requests to add a specific contact in the list to favourites.
-2. d'Intérieur adds the contact to favourites.
+2. d'Intérieur adds the contact to favourites and shows the contact.
 
   Use case ends.
 
@@ -416,12 +416,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **UC07: Add a deadline**
 
 1. User requests to add a deadline under a contact.
-2. d'Intérieur adds the deadline under the contact.
+2. d'Intérieur adds the deadline under the contact and shows the contact.
 
   Use case ends.
 
@@ -435,7 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 *{More to be added}*
 
