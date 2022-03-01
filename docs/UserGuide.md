@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+d'Intérieur is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, d'Intérieur can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -141,6 +141,19 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a deadlines to meet in relation to a client : `deadline`
+
+Creates a deadline that is placed under the profile of a client.
+
+Format : `deadline INDEX DATE`
+
+- The given date is added to the client’s contact as deadline.
+- Date should be dd/mm/yyyy
+
+Example:
+
+- `deadline 1 01/01/2022` adds the date `01/01/2022` to the client contact in index `1`.
 
 ### Clearing all entries : `clear`
 
