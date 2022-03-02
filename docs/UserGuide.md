@@ -73,7 +73,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to the address book.
 
@@ -110,7 +110,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name : `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -127,6 +127,21 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating contacts by tag : `findtag`
+
+Find contact with the given tag.
+
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `tag` will match `Tag`
+* Only the tag is searched
+* Only full words will be matched e.g. `Ta` will not match `Tag`
+* List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with tags `Tag1` and `Tag2` will be returned.
+
+Examples:
+* `findtag Friends` returns contacts with tag `Friends`
+* `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
 
 ### Deleting a person : `delete`
 
@@ -201,6 +216,8 @@ _Details coming soon ..._
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+| **Find Tag** | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`|
 | **List**     | `list`                                                                                                                                                                |
 | **Help**     | `help`                                                                                                                                                                |
+
