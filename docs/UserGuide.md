@@ -76,20 +76,22 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person : `add`
 
-Adds a person to the address book.
+You can add a person to the address book with the address as an optional field.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have 0 or 1 address 
+</div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com`
+* `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`
 
 ### Listing all persons : `list`
 
@@ -262,3 +264,4 @@ _Details coming soon ..._
 | **List**     | `list`                                                                                                                                                                |
 | **Help**     | `help`                                                                                                                                                                |
 | **Note**     | `note INDEX NOTES`<br> e.g. `note 2 loves green`                                                                                                                      |
+
