@@ -1,6 +1,6 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Teh Kok Hoe's Project Portfolio Page
 ---
 
 ### Project: d'Intérieur
