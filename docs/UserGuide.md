@@ -185,7 +185,7 @@ Examples:
 
 Creates a deadline that is placed under the profile of a client.
 
-Format : `deadline INDEX DATE`
+Format: `deadline INDEX DATE`
 
 - The given date is added to the client’s contact as deadline.
 - Date should be dd/mm/yyyy
@@ -193,6 +193,23 @@ Format : `deadline INDEX DATE`
 Example:
 
 - `deadline 1 01/01/2022` adds the date `01/01/2022` to the client contact in index `1`.
+
+### Add additional notes to a contact: `note`
+
+Adds the given note under the contact.
+
+Format: `note INDEX NOTES`
+
+- Notes are displayed in a list.
+- The given note is appended to the existing list of notes at the end.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Notes store good-to-know information about the user. To classify contacts so that you can search for them, use tags instead.
+</div>
+
+Example:
+
+`note 2 loves green` will create a note under the contact at index 2 that reads `loves green`
 
 ### Clearing all entries : `clear`
 
@@ -233,16 +250,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                        |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
-| **Deadline** | `deadline INDEX DATE` e.g., `deadline 1 01/01/2022`                                                                                                                     |
-| **Clear**    | `clear`                                                                                                                                                                 |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                     |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                             |
-| **Favourite** | `favourite INDEX` <br> e.g., `favourite 1`                                                                                                                              
-| **Favourites** | `favourites`                                                                                                                                                            
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                              
-| **Find Tag** | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                                          |
-| **List**     | `list`                                                                                                                                                                  |
-| **Help**     | `help`                                                                                                                                                                  |
+| Action       | Format, Examples                                                                                                                                                      |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**    | `clear`                                                                                                                                                               |
+| **Deadline** | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                                               |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Favourite** | `favourite INDEX` <br> e.g., `favourite 1`
+| **Favourites** | `favourites`
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+| **Find Tag** | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`|
+| **List**     | `list`                                                                                                                                                                |
+| **Help**     | `help`                                                                                                                                                                |
+| **Note**     | `note INDEX NOTES`<br> e.g. `note 2 loves green`                                                                                                                      |
+
