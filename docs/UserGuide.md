@@ -137,11 +137,11 @@ Format: `findtag KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `tag` will match `Tag`
 * Only the tag is searched
 * Only full words will be matched e.g. `Ta` will not match `Tag`
-* List of contacts matching at least one tag will be returned. e.g. `Tag1` will return `Contact` A with tags `Tag1` and `Tag2` will be returned.
+* List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with tags `Tag1` and `Tag2` will be returned.
 
 Examples:
 * `findtag Friends` returns contacts with tag `Friends`
-* `findtag InProgress AlmostFinished` returns contacts with tagged by both `InProgress` and `AlmostFinished`
+* `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
 
 ### Deleting a person : `delete`
 
