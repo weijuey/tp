@@ -76,7 +76,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### <a name"add"></a>Adding a person : `add`
+### Adding a person : `add`
 
 You can add a person to the address book with the address as an optional field.
 
@@ -233,16 +233,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                      |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Deadline** | `deadline INDEX DATE` e.g., `deadline 1 01/01/2022`                                                                                                                   |
-| **Clear**    | `clear`                                                                                                                                                               |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Favourite** | `favourite INDEX` <br> e.g., `favourite 1`
-| **Favourites** | `favourites`
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-| **Find Tag** | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`|
-| **List**     | `list`                                                                                                                                                                |
-| **Help**     | `help`                                                                                                                                                                |
+| Action       | Format, Examples                                                                                                                                                        |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
+| **Deadline** | `deadline INDEX DATE` e.g., `deadline 1 01/01/2022`                                                                                                                     |
+| **Clear**    | `clear`                                                                                                                                                                 |
+| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                     |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                             |
+| **Favourite** | `favourite INDEX` <br> e.g., `favourite 1`                                                                                                                              
+| **Favourites** | `favourites`                                                                                                                                                            
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                              
+| **Find Tag** | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                                          |
+| **List**     | `list`                                                                                                                                                                  |
+| **Help**     | `help`                                                                                                                                                                  |
