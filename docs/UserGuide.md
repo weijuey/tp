@@ -32,7 +32,7 @@ d'Intérieur is a **desktop app for managing contacts, optimized for use via a C
 
    * **`favourite`**`2` : Adds the 2nd contact shown in the current list to your list of favourite contacts
    
-   * **`favourite`** : Lists all your favourite contacts.
+   * **`favourites`** : Lists all your favourite contacts.
 
    * **`clear`** : Deletes all contacts.
 
@@ -238,8 +238,9 @@ _Details coming soon ..._
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Favourite** | `favourite INDEX` <br> e.g., `favourite 1`
+| **Favourites** | `favourites`
 | **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 | **Find Tag** | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`|
 | **List**     | `list`                                                                                                                                                                |
 | **Help**     | `help`                                                                                                                                                                |
-
