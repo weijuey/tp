@@ -14,7 +14,7 @@ d'Intérieur is a **desktop app for managing contacts, optimized for use via a C
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `dinterieur.jar` from [here]().
 
 3. Copy the file to the folder you want to use as the _home folder_ for your d'Intérieur.
 
