@@ -76,49 +76,49 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a person : `add`
+### Adding a contact : `add`
 
-You can add a person to the address book with the address as an optional field.
+You can add a contact to the address book with the address as an optional field.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have 0 or 1 address 
+A contact can have 0 or 1 address 
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of tags (including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`
 
-### Listing all persons : `list`
+### Listing all contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-### Adding favourites: `favourite`
+### Adding favourites : `favourite`
 
-Adds the client to your list of favourite clients and view them.
+Adds the contact to your list of favourite contacts and view them.
 
 Format:
 
@@ -132,11 +132,11 @@ Format:
 
 Examples:
 
-- `favourite 1` — Adds person at index 1 to your list of favourites
+- `favourite 1` — Adds contact at index 1 to your list of favourites
 
-### Locating persons by name : `find`
+### Locating contacts by name : `find`
 
-Finds persons whose names contain any of the given keywords.
+Find contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -144,7 +144,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -167,34 +167,34 @@ Examples:
 * `findtag Friends` returns contacts with tag `Friends`
 * `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
 
-### Deleting a person : `delete`
+### Deleting a contact : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
-### Adding deadlines to meet in relation to a client : `deadline`
+### Adding deadlines to meet in relation to a contact : `deadline`
 
-Creates a deadline that is placed under the profile of a client.
+Creates a deadline that is placed under the profile of a contact.
 
 Format: `deadline INDEX DATE`
 
-- The given date is added to the client’s contact as deadline.
+- The given date is added to the contact as deadline.
 - Date should be dd/mm/yyyy
 
 Example:
 
-- `deadline 1 01/01/2022` adds the date `01/01/2022` to the client contact in index `1`.
+- `deadline 1 01/01/2022` adds the date `01/01/2022` to the contact in index `1`.
 
-### Add additional notes to a contact: `note`
+### Add additional notes to a contact : `note`
 
 Adds the given note under the contact.
 
@@ -264,4 +264,3 @@ _Details coming soon ..._
 | **List**     | `list`                                                                                                                                                                |
 | **Help**     | `help`                                                                                                                                                                |
 | **Note**     | `note INDEX NOTES`<br> e.g. `note 2 loves green`                                                                                                                      |
-
