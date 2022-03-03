@@ -26,7 +26,7 @@ d'Intérieur is a **desktop app for managing contacts, optimized for use via a C
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`** : Adds a contact named Mary Jane to the Address Book.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -252,7 +252,7 @@ _Details coming soon ..._
 
 | Action       | Format, Examples                                                                                                                                                      |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
 | **Clear**    | `clear`                                                                                                                                                               |
 | **Deadline** | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                                               |
 | **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
