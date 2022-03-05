@@ -250,6 +250,7 @@ _Details coming soon ..._
 
 ## Command summary
 
+
 | Action       | Format, Examples                                                                                                                                                      |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
@@ -264,3 +265,4 @@ _Details coming soon ..._
 | **List**     | `list`                                                                                                                                                                |
 | **Help**     | `help`                                                                                                                                                                |
 | **Note**     | `note INDEX NOTES`<br> e.g. `note 2 loves green`                                                                                                                      |
+
