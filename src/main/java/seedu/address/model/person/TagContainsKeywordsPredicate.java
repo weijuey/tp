@@ -17,11 +17,9 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        int numTags = person.getTags().size();
         boolean hasAllMatches = true;
 
-        for (int i = 0; i < keywords.size(); i++) {
-            String keyword = keywords.get(i);
+        for (String keyword : keywords) {
             boolean doesKeywordMatchAnyTags = person.getTags().stream()
                     .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword));
             hasAllMatches = hasAllMatches && doesKeywordMatchAnyTags;
