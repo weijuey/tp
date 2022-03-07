@@ -23,6 +23,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Favourite favouriteStatus = new Favourite(false);
 
     /**
      * Every field must be present and not null.
@@ -50,6 +51,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Favourite getFavouriteStatus() {
+        return favouriteStatus;
     }
 
     /**
