@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,9 +18,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.Set;
-
 public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "fav";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -29,12 +29,22 @@ public class FavouriteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * @param targetIndex of the person in the filtered person list to favourite.
+     */
     public FavouriteCommand(Index targetIndex) {
-       requireNonNull(targetIndex);
+        requireNonNull(targetIndex);
 
-       this.targetIndex = targetIndex;
+        this.targetIndex = targetIndex;
     }
 
+    /**
+     * Executes the Favourite command based on the {@code targetIndex} given.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the result of the command.
+     * @throws CommandException if the index given is out of bounds.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -58,7 +68,7 @@ public class FavouriteCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, editedPerson));
     }
-    
+
     private static Person createFavouritedPerson(Person personToEdit, Favourite newFavouriteStatus) {
         assert personToEdit != null;
         assert newFavouriteStatus != null;

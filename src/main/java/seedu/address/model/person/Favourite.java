@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Favourite {
     public static final Favourite IS_FAVOURITE = new Favourite(true);
@@ -9,13 +8,14 @@ public class Favourite {
     public static final String MESSAGE_CONSTRAINTS =
             "Favourite should be either true or false, and should not be blank.";
 
-    public final String value;
-
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+
+    public final String value;
+
 
     /**
      * Constructs a {@code Phone}.
@@ -27,6 +27,12 @@ public class Favourite {
         value = isFavourite.toString();
     }
 
+    /**
+     * Takes the string representation of the boolean and returns the correct {@code Favourite} object.
+     *
+     * @param isFavourite is the String representation provided.
+     * @return the {@code Favourite} object that corresponds to the String provided.
+     */
     public static Favourite valueOf(String isFavourite) {
         return "true".equals(isFavourite)
                 ? IS_FAVOURITE
