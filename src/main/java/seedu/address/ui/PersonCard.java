@@ -1,12 +1,20 @@
 package seedu.address.ui;
 
+import java.awt.*;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import seedu.address.model.person.Person;
 
 /**
@@ -39,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label isFavourite;
+    private Rectangle favBox;
     @FXML
     private FlowPane tags;
 
@@ -54,10 +62,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        isFavourite.setText(person.getFavouriteStatus().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        if (person.getFavouriteStatus().isFavourite()) {
+            favBox.setFill(Color.YELLOW);
+        }
     }
 
     @Override
