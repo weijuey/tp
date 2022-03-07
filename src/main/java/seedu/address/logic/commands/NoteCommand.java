@@ -21,16 +21,15 @@ public class NoteCommand extends Command {
     public static final String COMMAND_WORD = "note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the remark of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Existing remark will be overwritten by the input.\n"
+            + ": Adds the given note to the person identified "
+            + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "r/ [REMARK]\n"
+            + "NOTES\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "r/ Likes to swim.";
+            + "Likes to swim.";
 
-    public static final String MESSAGE_UPDATE_NOTE_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_UPDATE_NOTE_SUCCESS = "Added note to Person: %1$s";
+    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed note from Person: %1$s";
 
     private final Index index;
     private final Note note;
