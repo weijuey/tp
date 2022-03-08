@@ -16,9 +16,8 @@ public class Notes {
         notes = new ArrayList<>();
     }
 
-    private Notes(Notes old, String newNote) {
-        notes = old.notes;
-        notes.add(newNote);
+    private Notes(List<String> notes) {
+        this.notes = notes;
     }
 
     // TODO: Consider if there is a need to check for valid notes
@@ -37,14 +36,19 @@ public class Notes {
         return new Notes();
     }
 
+    public static Notes loadJsonNotes(List<String> jsonNotes) {
+
+    }
+
+    public List<String> value() {
+        return this.notes;
+    }
     /**
-     * Create a new Notes object with the old notes list
-     * and the new note appended to it.
+     * Appends the new note to this notes list.
      * @param newNote new note to be added
-     * @return new Notes object with the updated list
      */
-    public Notes updateNotes(String newNote) {
-        return new Notes(this, newNote);
+    public void updateNotes(String newNote) {
+        this.notes.add(newNote);
     }
 
     @Override

@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Note;
 
 public class NoteCommandParser implements Parser<NoteCommand> {
     @Override
@@ -25,7 +24,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
                     NoteCommand.MESSAGE_USAGE), ive);
         }
 
-        Note note = new Note(argMultimap.getValue(PREFIX_NOTE).orElse(""));
+        String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
 
         return new NoteCommand(index, note);
     }

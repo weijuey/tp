@@ -22,19 +22,19 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Note note;
+    private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Notes notes, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.note = note;
+        this.notes = notes;
         this.tags.addAll(tags);
     }
 
@@ -54,8 +54,8 @@ public class Person {
         return address;
     }
 
-    public Note getNote() {
-        return note;
+    public Notes getNotes() {
+        return notes;
     }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -97,14 +97,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getNote().equals(getNote())
+                && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, note, tags);
+        return Objects.hash(name, phone, email, address, notes, tags);
     }
 
     @Override
@@ -117,8 +117,8 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; Note: ")
-                .append(getNote());
+                .append("; Notes: ")
+                .append(getNotes());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

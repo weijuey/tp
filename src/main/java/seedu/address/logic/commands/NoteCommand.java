@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import java.util.List;
 
@@ -10,7 +10,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
 
@@ -24,21 +23,20 @@ public class NoteCommand extends Command {
             + ": Adds the given note to the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "NOTES\n"
+            + PREFIX_NOTE + "NOTES\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "Likes to swim.";
+            + PREFIX_NOTE + "Likes to swim.";
 
     public static final String MESSAGE_UPDATE_NOTE_SUCCESS = "Added note to Person: %1$s";
-    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed note from Person: %1$s";
 
     private final Index index;
-    private final Note note;
+    private final String note;
 
     /**
      * @param index index of the person in the filtered list to edit
      * @param note new note to update with
      */
-    public NoteCommand(Index index, Note note) {
+    public NoteCommand(Index index, String note) {
         requireAllNonNull(index, note);
 
         this.index = index;
@@ -55,12 +53,8 @@ public class NoteCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), note, personToEdit.getTags());
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        personToEdit.getNotes().updateNotes(note);
+        return new CommandResult(generateSuccessMessage(personToEdit));
     }
 
     /**
@@ -69,8 +63,7 @@ public class NoteCommand extends Command {
      * @return message to be printed
      */
     public String generateSuccessMessage(Person personToEdit) {
-        String message = note.value.isEmpty() ? MESSAGE_DELETE_NOTE_SUCCESS : MESSAGE_UPDATE_NOTE_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(MESSAGE_UPDATE_NOTE_SUCCESS, personToEdit);
     }
     @Override
     public boolean equals(Object other) {
