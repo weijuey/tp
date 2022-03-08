@@ -18,7 +18,7 @@ public class Favourite {
 
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Favourite} status object.
      *
      * @param isFavourite The favourite status.
      */
