@@ -18,10 +18,6 @@ public class Notes {
         notes = new ArrayList<>();
     }
 
-    private Notes(List<String> notes) {
-        this.notes = notes;
-    }
-
     public static boolean isValidNote(String noteToAdd) {
         boolean isAllWhiteSpace = true;
         int i = 0;
@@ -41,8 +37,10 @@ public class Notes {
         return new Notes();
     }
 
-    public static Notes loadJsonNotes(List<String> jsonNotes) {
-        return new Notes(jsonNotes);
+    public static Notes loadNotesFromList(List<String> notes) {
+        Notes newNotes = getNewNotes();
+        newNotes.notes.addAll(notes);
+        return newNotes;
     }
 
     public List<String> value() {
