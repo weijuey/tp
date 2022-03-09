@@ -25,7 +25,7 @@ public class Notes {
             isAllWhiteSpace = noteToAdd.charAt(i) == WHITESPACE;
             i++;
         }
-        return isAllWhiteSpace;
+        return !isAllWhiteSpace;
     }
 
     /**
@@ -55,13 +55,20 @@ public class Notes {
         this.notes.add(newNote);
     }
 
-    @Override
-    public String toString() {
+    public String listFormat() {
+        if (notes.size() == 0) {
+            return "";
+        }
         StringBuilder result = new StringBuilder();
         for (int i = 1; i <= notes.size(); i++) {
             result.append(i).append(". ").append(notes.get(i - 1)).append("\n");
         }
         return result.toString();
+    }
+
+    @Override
+    public String toString() {
+        return notes.toString();
     }
 
     @Override
