@@ -7,6 +7,8 @@ public class Notes {
 
     public static final String MESSAGE_CONSTRAINTS = "Notes can take any values, and it should not be blank";
 
+    private static final char WHITESPACE = ' ';
+
     private final List<String> notes;
 
     /**
@@ -20,12 +22,15 @@ public class Notes {
         this.notes = notes;
     }
 
-    // TODO: Consider if there is a need to check for valid notes
-    /*
-    public static boolean isValidNote(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidNote(String noteToAdd) {
+        boolean isAllWhiteSpace = true;
+        int i = 0;
+        while (isAllWhiteSpace && i < noteToAdd.length()) {
+            isAllWhiteSpace = noteToAdd.charAt(i) == WHITESPACE;
+            i++;
+        }
+        return isAllWhiteSpace;
     }
-    */
 
     /**
      * Create a fresh Notes for when a new contact is
@@ -37,12 +42,13 @@ public class Notes {
     }
 
     public static Notes loadJsonNotes(List<String> jsonNotes) {
-
+        return new Notes(jsonNotes);
     }
 
     public List<String> value() {
         return this.notes;
     }
+
     /**
      * Appends the new note to this notes list.
      * @param newNote new note to be added
