@@ -30,7 +30,7 @@ public class NoteCommand extends Command {
 
     public static final String MESSAGE_UPDATE_NOTE_SUCCESS = "Added note to Person: %1$s";
 
-    public static final String MESSAGE_UPDATE_NOTE_FAILURE = "No note added to Person: %1$s";
+    public static final String MESSAGE_NO_UPDATE_TO_NOTES = "No note added to Person: %1$s";
 
     private final Index index;
     private final String note;
@@ -57,7 +57,7 @@ public class NoteCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (!Notes.isValidNote(note)) {
-            return new CommandResult(generateFailureMessage(personToEdit));
+            return new CommandResult(generateNoChangeMessage(personToEdit));
         }
         personToEdit.getNotes().updateNotes(note);
         return new CommandResult(generateSuccessMessage(personToEdit));
@@ -72,8 +72,8 @@ public class NoteCommand extends Command {
         return String.format(MESSAGE_UPDATE_NOTE_SUCCESS, personToEdit);
     }
 
-    public String generateFailureMessage(Person person) {
-        return String.format(MESSAGE_UPDATE_NOTE_FAILURE, person);
+    public String generateNoChangeMessage(Person person) {
+        return String.format(MESSAGE_NO_UPDATE_TO_NOTES, person);
     }
 
     @Override
