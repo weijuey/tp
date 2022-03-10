@@ -33,6 +33,7 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
     </VBox>
     <VBox alignment="CENTER_RIGHT" minHeight="105" GridPane.columnIndex="0">
       <padding>
