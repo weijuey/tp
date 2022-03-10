@@ -22,17 +22,21 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Deadline deadline;
     private final Set<Tag> tags = new HashSet<>();
+    private final Favourite favouriteStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags, Favourite favouriteStatus) {
+        requireAllNonNull(name, phone, email, address, deadline, tags, favouriteStatus);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.deadline = deadline;
+        this.favouriteStatus = favouriteStatus;
         this.tags.addAll(tags);
     }
 
@@ -50,6 +54,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Favourite getFavouriteStatus() {
+        return favouriteStatus;
+    }
+
+    public Deadline getDeadline() {
+        return deadline;
     }
 
     /**
@@ -92,6 +104,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getDeadline().equals(getDeadline())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -110,7 +123,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Deadline: ")
+                .append(getDeadline());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
