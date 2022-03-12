@@ -11,6 +11,7 @@ import java.util.Date;
  */
 public class Deadline {
     public static final String MESSAGE_CONSTRAINTS = "Deadlines can only take dd/mm/yyyy";
+    public static final String NO_DEADLINE_PLACEHOLDER = "*No deadline specified*";
 
     public final String value;
 
@@ -22,14 +23,14 @@ public class Deadline {
     public Deadline(String dateAsString) {
         requireNonNull(dateAsString);
         checkArgument(isValidDeadline(dateAsString));
-        if (dateAsString.equals("*No deadline specified*")) {
+        if (dateAsString.equals(NO_DEADLINE_PLACEHOLDER)) {
             new Deadline();
         }
         value = dateAsString;
     }
 
     public Deadline() {
-        value = "*No deadline specified*";
+        value = NO_DEADLINE_PLACEHOLDER;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class Deadline {
      * @return true if given string is a valid date.
      */
     public static boolean isValidDeadline(String dateAsString) {
-        if (dateAsString.equals("*No deadline specified*")) {
+        if (dateAsString.equals(NO_DEADLINE_PLACEHOLDER)) {
             return true;
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
