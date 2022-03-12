@@ -115,8 +115,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Deadline.class.getSimpleName()));
         }
-        if (!Deadline.isValidDate(deadline)) {
-            throw new IllegalValueException(Favourite.MESSAGE_CONSTRAINTS);
+        if (!Deadline.isValidDeadline(deadline)) {
+            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
         }
         final Deadline modelDeadline = new Deadline(deadline);
 

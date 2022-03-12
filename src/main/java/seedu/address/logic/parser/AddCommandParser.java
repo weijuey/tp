@@ -53,7 +53,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             addressString = optionalAddress.get();
             address = ParserUtil.parseAddress(addressString);
         }
-        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
+        Deadline deadline = new Deadline();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Person person = new Person(name, phone, email, address, deadline, tagList, Favourite.NOT_FAVOURITE);
 

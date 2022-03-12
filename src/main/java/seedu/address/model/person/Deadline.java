@@ -10,6 +10,8 @@ import java.util.Date;
  * Represents a Person's deadline in the address book.
  */
 public class Deadline {
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+
     public final String value;
 
     /**
@@ -19,17 +21,17 @@ public class Deadline {
      */
     public Deadline(String dateAsString) {
         requireNonNull(dateAsString);
-        checkArgument(isValidDate(dateAsString));
+        checkArgument(isValidDeadline(dateAsString));
         value = dateAsString;
     }
 
     public Deadline() {
-        value = null;
+        value = "*No deadline specified*";
     }
 
     @Override
     public String toString() {
-        return value.toString();
+        return value;
     }
 
     @Override
@@ -50,7 +52,10 @@ public class Deadline {
      * @param dateAsString the given string.
      * @return true if given string is a valid date.
      */
-    public static boolean isValidDate(String dateAsString) {
+    public static boolean isValidDeadline(String dateAsString) {
+        if (dateAsString.equals("*No deadline specified*")) {
+            return true;
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date;
 
