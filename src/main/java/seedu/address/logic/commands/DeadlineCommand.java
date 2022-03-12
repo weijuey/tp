@@ -19,7 +19,7 @@ public class DeadlineCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Gives a deadline to person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 01/01/2022";
+            + "Example: " + COMMAND_WORD + " 1 d/01/01/2022";
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline for: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
