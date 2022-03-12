@@ -112,7 +112,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (deadline == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deadline.class.getSimpleName()));
         }
         if (!Deadline.isValidDate(deadline)) {
             throw new IllegalValueException(Favourite.MESSAGE_CONSTRAINTS);

@@ -1,24 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Deadline;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Deadline;
+import seedu.address.model.person.Person;
 
 public class DeadlineCommand extends Command {
 
@@ -35,6 +27,11 @@ public class DeadlineCommand extends Command {
     private final Index targetIndex;
     private final Deadline deadline;
 
+    /**
+     * Creates a DeadlineCommand to add to specified {@code Person}.
+     * @param targetIndex the index of the person specified.
+     * @param deadline the date of the deadline.
+     */
     public DeadlineCommand(Index targetIndex, Deadline deadline) {
         requireNonNull(targetIndex);
         requireNonNull(deadline);
@@ -54,7 +51,8 @@ public class DeadlineCommand extends Command {
         Person personToAddDeadline = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = new Person(
                 personToAddDeadline.getName(), personToAddDeadline.getPhone(), personToAddDeadline.getEmail(),
-                personToAddDeadline.getAddress(), deadline, personToAddDeadline.getTags(), personToAddDeadline.getFavouriteStatus());
+                personToAddDeadline.getAddress(), deadline, personToAddDeadline.getTags(),
+                personToAddDeadline.getFavouriteStatus());
 
         if (!personToAddDeadline.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);

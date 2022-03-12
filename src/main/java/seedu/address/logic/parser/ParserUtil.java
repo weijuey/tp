@@ -96,6 +96,14 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String deadline} into a {@code Deadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param deadline the date of the deadline.
+     * @return the resulting {@code Deadline} object.
+     * @throws ParseException if the given {@code deadline} is invalid.
+     */
     public static Deadline parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();

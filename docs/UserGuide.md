@@ -26,7 +26,7 @@ d'Intérieur is a **desktop app for managing contacts, optimized for use via a C
 
    * **`list`** : Lists all contacts.
 
-   * **`add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`** : Adds a contact named Mary Jane to the Address Book.
+   * **`add n/Mary Jane p/12345678 e/maryJ@example.com`** : Adds a contact named Mary Jane to the Address Book.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 

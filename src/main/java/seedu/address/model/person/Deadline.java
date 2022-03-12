@@ -1,16 +1,10 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE_FORMAT;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's deadline in the address book.
@@ -18,6 +12,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Deadline {
     public final String value;
 
+    /**
+     * Constructs a {@code Deadline}.
+     *
+     * @param dateAsString a valid date.
+     */
     public Deadline(String dateAsString) {
         requireNonNull(dateAsString);
         checkArgument(isValidDate(dateAsString));
@@ -45,6 +44,12 @@ public class Deadline {
         return value.hashCode();
     }
 
+    /**
+     * Check if given string is a valid date.
+     *
+     * @param dateAsString the given string.
+     * @return true if given string is a valid date.
+     */
     public static boolean isValidDate(String dateAsString) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date;
