@@ -10,7 +10,7 @@ import java.util.Date;
  * Represents a Person's deadline in the address book.
  */
 public class Deadline {
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Deadlines can only take dd/mm/yyyy";
 
     public final String value;
 
@@ -22,6 +22,9 @@ public class Deadline {
     public Deadline(String dateAsString) {
         requireNonNull(dateAsString);
         checkArgument(isValidDeadline(dateAsString));
+        if (dateAsString.equals("*No deadline specified*")) {
+            new Deadline();
+        }
         value = dateAsString;
     }
 
