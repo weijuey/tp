@@ -13,6 +13,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
+import java.util.List;
+
 class NoteCommandTest {
     private static final String VALID_NOTE = "Bestie";
     private static final String INVALID_NOTE = "    ";
@@ -23,8 +25,7 @@ class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, VALID_NOTE);
 
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personToEdit).build();
-        editedPerson.getNotes().updateNotes(VALID_NOTE);
+        Person editedPerson = new PersonBuilder(personToEdit).withNotes(List.of(VALID_NOTE)).build();
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
         String expectedMessage = String.format(NoteCommand.MESSAGE_UPDATE_NOTE_SUCCESS, editedPerson);

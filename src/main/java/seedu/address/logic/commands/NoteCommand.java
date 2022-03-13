@@ -60,9 +60,10 @@ public class NoteCommand extends Command {
         if (!Notes.isValidNote(note)) {
             return new CommandResult(generateNoChangeMessage(personToEdit));
         }
-        personToEdit.getNotes().updateNotes(note);
+        Person editedPerson = updateNotes(personToEdit, note);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(generateSuccessMessage(personToEdit));
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
@@ -76,6 +77,14 @@ public class NoteCommand extends Command {
 
     public String generateNoChangeMessage(Person person) {
         return String.format(MESSAGE_NO_UPDATE_TO_NOTES, person);
+    }
+
+    private static Person updateNotes(Person personToEdit, String note) {
+        Notes newNotes = Notes.loadNotesFromList(personToEdit.getNotes().value);
+        newNotes.updateNotes(note);
+        return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getDeadline(), newNotes,
+                personToEdit.getTags(), personToEdit.getFavouriteStatus());
     }
 
     @Override
