@@ -68,7 +68,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         deadline = source.getDeadline().value;
-        notes.addAll(source.getNotes().value());
+        notes.addAll(source.getNotes().value);
         isFavourite = source.getFavouriteStatus().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)

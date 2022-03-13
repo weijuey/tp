@@ -22,7 +22,6 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_NOTE = "Lunch together every Saturday";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DEADLINE = "*No deadline specified*";
     public static final String DEFAULT_FAVOURITE = "false";
@@ -45,7 +44,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         notes = Notes.getNewNotes();
-        notes.updateNotes(DEFAULT_NOTE);
         deadline = new Deadline(DEFAULT_DEADLINE);
         favouriteStatus = Favourite.valueOf(DEFAULT_FAVOURITE);
         tags = new HashSet<>();
@@ -59,7 +57,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        notes = Notes.loadNotesFromList(personToCopy.getNotes().value());
+        notes = Notes.loadNotesFromList(personToCopy.getNotes().value);
         deadline = personToCopy.getDeadline();
         favouriteStatus = personToCopy.getFavouriteStatus();
         tags = new HashSet<>(personToCopy.getTags());
@@ -114,11 +112,10 @@ public class PersonBuilder {
     }
 
     /**
-<<<<<<< HEAD
      * Sets the {@code Notes} of the {@code Person} that we are building.
      */
     public PersonBuilder withNotes(Notes notes) {
-        this.notes = Notes.loadNotesFromList(notes.value());
+        this.notes = Notes.loadNotesFromList(notes.value);
         return this;
     }
 

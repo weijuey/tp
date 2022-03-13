@@ -9,13 +9,13 @@ public class Notes {
 
     private static final char WHITESPACE = ' ';
 
-    private final List<String> notes;
+    public final List<String> value;
 
     /**
      * Constructs a new {@code Notes}.
      */
     private Notes() {
-        notes = new ArrayList<>();
+        value = new ArrayList<>();
     }
 
     public static boolean isValidNote(String noteToAdd) {
@@ -39,12 +39,8 @@ public class Notes {
 
     public static Notes loadNotesFromList(List<String> notes) {
         Notes newNotes = getNewNotes();
-        newNotes.notes.addAll(notes);
+        newNotes.value.addAll(notes);
         return newNotes;
-    }
-
-    public List<String> value() {
-        return this.notes;
     }
 
     /**
@@ -52,35 +48,35 @@ public class Notes {
      * @param newNote new note to be added
      */
     public void updateNotes(String newNote) {
-        this.notes.add(newNote);
+        this.value.add(newNote);
     }
 
     public String listFormat() {
-        if (notes.size() == 0) {
+        if (value.size() == 0) {
             return "";
         }
         StringBuilder result = new StringBuilder();
-        for (int i = 1; i <= notes.size(); i++) {
-            result.append(i).append(". ").append(notes.get(i - 1)).append("\n");
+        for (int i = 1; i <= value.size(); i++) {
+            result.append(i).append(". ").append(value.get(i - 1)).append("\n");
         }
         return result.toString();
     }
 
     @Override
     public String toString() {
-        return notes.toString();
+        return value.toString();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Notes // instanceof handles nulls
-                && notes.equals(((Notes) other).notes)); // state check
+                && value.equals(((Notes) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return notes.hashCode();
+        return value.hashCode();
     }
 
 }
