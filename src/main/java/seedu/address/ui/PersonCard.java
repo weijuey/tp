@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import seedu.address.model.person.Person;
 
 /**
@@ -41,6 +43,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label notes;
     @FXML
+    private Rectangle favBox;
+    @FXML
+    private Label deadline;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,9 +61,14 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         notes.setText(person.getNotes().listFormat());
         email.setText(person.getEmail().value);
+        deadline.setText(person.getDeadline().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        if (person.getFavouriteStatus().isFavourite()) {
+            favBox.setFill(Color.YELLOW);
+        }
     }
 
     @Override

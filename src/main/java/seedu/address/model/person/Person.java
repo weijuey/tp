@@ -22,19 +22,24 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Deadline deadline;
     private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
+    private final Favourite favouriteStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Notes notes, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Deadline deadline, Notes notes,
+                Set<Tag> tags, Favourite favouriteStatus) {
+        requireAllNonNull(name, phone, email, address, deadline, notes, tags, favouriteStatus);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.deadline = deadline;
         this.notes = notes;
+        this.favouriteStatus = favouriteStatus;
         this.tags.addAll(tags);
     }
 
@@ -54,9 +59,18 @@ public class Person {
         return address;
     }
 
+    public Deadline getDeadline() {
+        return deadline;
+    }
+
     public Notes getNotes() {
         return notes;
     }
+
+    public Favourite getFavouriteStatus() {
+        return favouriteStatus;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -97,6 +111,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getDeadline().equals(getDeadline())
                 && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -117,8 +132,11 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Deadline: ")
+                .append(getDeadline())
                 .append("; Notes: ")
                 .append(getNotes());
+
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

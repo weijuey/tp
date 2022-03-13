@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -22,12 +24,16 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "Lunch together every Saturday";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DEADLINE = "*No deadline specified*";
+    public static final String DEFAULT_FAVOURITE = "false";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Notes notes;
+    private Deadline deadline;
+    private Favourite favouriteStatus;
     private Set<Tag> tags;
 
     /**
@@ -40,6 +46,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         notes = Notes.getNewNotes();
         notes.updateNotes(DEFAULT_NOTE);
+        deadline = new Deadline(DEFAULT_DEADLINE);
+        favouriteStatus = Favourite.valueOf(DEFAULT_FAVOURITE);
         tags = new HashSet<>();
     }
 
@@ -52,6 +60,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         notes = Notes.loadNotesFromList(personToCopy.getNotes().value());
+        deadline = personToCopy.getDeadline();
+        favouriteStatus = personToCopy.getFavouriteStatus();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -80,6 +90,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Deadline} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDeadline(String deadline) {
+        this.deadline = new Deadline(deadline);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -96,6 +114,7 @@ public class PersonBuilder {
     }
 
     /**
+<<<<<<< HEAD
      * Sets the {@code Notes} of the {@code Person} that we are building.
      */
     public PersonBuilder withNotes(Notes notes) {
@@ -103,8 +122,15 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, notes, tags);
+    /**
+     * Sets the {@code FavouriteStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavourite(String favourite) {
+        this.favouriteStatus = Favourite.valueOf(favourite);
+        return this;
     }
 
+    public Person build() {
+        return new Person(name, phone, email, address, deadline, notes, tags, favouriteStatus);
+    }
 }
