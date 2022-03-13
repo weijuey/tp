@@ -18,6 +18,13 @@ public class Notes {
         value = new ArrayList<>();
     }
 
+    /**
+     * Checks if the given note is a valid note that will be added.
+     * A note is valid as long as it contains at least 1 character that
+     * is not a whitespace.
+     * @param noteToAdd note to check validity
+     * @return true if string is valid, false otherwise
+     */
     public static boolean isValidNote(String noteToAdd) {
         boolean isAllWhiteSpace = true;
         int i = 0;
@@ -37,6 +44,12 @@ public class Notes {
         return new Notes();
     }
 
+    /**
+     * Initialises a Notes object containing notes that
+     * are in the List passed to it.
+     * @param notes list of notes to initialise the Notes object with
+     * @return Notes containing notes passed to it
+     */
     public static Notes loadNotesFromList(List<String> notes) {
         Notes newNotes = getNewNotes();
         newNotes.value.addAll(notes);
@@ -51,6 +64,11 @@ public class Notes {
         this.value.add(newNote);
     }
 
+    /**
+     * Produces a string representation of this Notes
+     * object for printing to GUI.
+     * @return list view of notes in this Notes object
+     */
     public String listFormat() {
         if (value.size() == 0) {
             return "";
