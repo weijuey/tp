@@ -79,6 +79,12 @@ public class NoteCommand extends Command {
         return String.format(MESSAGE_NO_UPDATE_TO_NOTES, person);
     }
 
+    /**
+     * Creates new Person object with the note added
+     * @param personToEdit person to add note to
+     * @param note note to add
+     * @return new Person with note added
+     */
     private static Person updateNotes(Person personToEdit, String note) {
         Notes newNotes = Notes.loadNotesFromList(personToEdit.getNotes().value);
         newNotes.updateNotes(note);
