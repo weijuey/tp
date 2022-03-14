@@ -25,7 +25,6 @@ public class FavouriteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS = "Changed Person's Favourite Status: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index targetIndex;
 
@@ -59,10 +58,6 @@ public class FavouriteCommand extends Command {
                 ? Favourite.NOT_FAVOURITE
                 : Favourite.IS_FAVOURITE;
         Person editedPerson = createFavouritedPerson(personToFavourite, newFavouriteStatus);
-
-        if (!personToFavourite.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
 
         model.setPerson(personToFavourite, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
