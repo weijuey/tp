@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 import static java.util.Objects.requireNonNull;
 
 public class Favourite {
@@ -35,7 +33,7 @@ public class Favourite {
      * @return the {@code Favourite} object that corresponds to the String provided.
      */
     public static Favourite valueOf(String isFavourite) throws IllegalArgumentException {
-        if (!("true".equals(isFavourite)|| "false".equals(isFavourite))) {
+        if (!("true".equals(isFavourite) || "false".equals(isFavourite))) {
             throw new IllegalArgumentException("Favourite can only be true or false.");
         }
 
