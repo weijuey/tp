@@ -23,21 +23,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Deadline deadline;
+    private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
 
     /**
      * Every field must be present and not null.
      */
-
-    public Person(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags,
-                  Favourite favouriteStatus) {
-        requireAllNonNull(name, phone, email, address, deadline, tags, favouriteStatus);
+    public Person(Name name, Phone phone, Email email, Address address, Deadline deadline, Notes notes,
+                Set<Tag> tags, Favourite favouriteStatus) {
+        requireAllNonNull(name, phone, email, address, deadline, notes, tags, favouriteStatus);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.deadline = deadline;
+        this.notes = notes;
         this.favouriteStatus = favouriteStatus;
         this.tags.addAll(tags);
     }
@@ -58,12 +59,16 @@ public class Person {
         return address;
     }
 
-    public Favourite getFavouriteStatus() {
-        return favouriteStatus;
-    }
-
     public Deadline getDeadline() {
         return deadline;
+    }
+
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public Favourite getFavouriteStatus() {
+        return favouriteStatus;
     }
 
     /**
@@ -107,13 +112,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getDeadline().equals(getDeadline())
+                && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, notes, tags);
     }
 
     @Override
@@ -127,7 +133,10 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Deadline: ")
-                .append(getDeadline());
+                .append(getDeadline())
+                .append("; Notes: ")
+                .append(getNotes());
+
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
