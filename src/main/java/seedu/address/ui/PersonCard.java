@@ -50,8 +50,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private HBox headerBox;
-    @FXML
     private Canvas starCanvas;
 
     /**
