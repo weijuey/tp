@@ -20,7 +20,7 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
+      <HBox fx:id="headerBox" spacing="5" alignment="CENTER_LEFT">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
@@ -35,15 +35,6 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
       <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" textOverrun="WORD_ELLIPSIS"/>
-    </VBox>
-    <VBox alignment="CENTER_RIGHT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="15" bottom="5" left="5" />
-      </padding>
-      <VBox alignment="CENTER" minHeight="105" maxWidth="100">
-        <Rectangle fx:id="favBox" height="15" width="15" strokeWidth="2" stroke="RED" fill="#fff" />
-        <Label styleClass="cell_small_label" text="Favourite" />
-      </VBox>
     </VBox>
   </GridPane>
 </HBox>
