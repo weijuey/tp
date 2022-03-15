@@ -89,7 +89,8 @@ public class AddCommandParserTest {
                 + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoAddress));
 
         // zero address and tags
-        Person expectedPersonNoAddressNoTags = new PersonBuilder(AMY).withAddress("*No Address Specified*").withTags().build();
+        Person expectedPersonNoAddressNoTags =
+                new PersonBuilder(AMY).withAddress("*No Address Specified*").withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + EMPTY_ADDRESS_DESC,
                 new AddCommand(expectedPersonNoAddressNoTags));
     }
