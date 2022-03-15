@@ -5,12 +5,8 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-<<<<<<< HEAD
     "deadlines" : [ "*No deadline specified*" ],
-=======
-    "deadline" : "*No deadline specified*",
     "notes" : [ ],
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     "tagged" : [ "friends" ],
     "isFavourite" : "false"
   }, {
@@ -18,12 +14,8 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-<<<<<<< HEAD
     "deadlines" : [ "*No deadline specified*" ],
-=======
-    "deadline" : "*No deadline specified*",
     "notes" : [ ],
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     "tagged" : [ "owesMoney", "friends" ],
     "isFavourite" : "false"
   }, {
@@ -31,12 +23,8 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-<<<<<<< HEAD
     "deadlines" : [ "*No deadline specified*" ],
-=======
-    "deadline" : "*No deadline specified*",
     "notes" : [ ],
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     "tagged" : [ ],
     "isFavourite" : "false"
   }, {
@@ -44,12 +32,8 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-<<<<<<< HEAD
     "deadlines" : [ "*No deadline specified*" ],
-=======
-    "deadline" : "*No deadline specified*",
     "notes" : [ ],
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     "tagged" : [ "friends" ],
     "isFavourite" : "true"
   }, {
@@ -57,12 +41,8 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-<<<<<<< HEAD
     "deadlines" : [ "*No deadline specified*" ],
-=======
-    "deadline" : "*No deadline specified*",
     "notes" : [ ],
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     "tagged" : [ ],
     "isFavourite" : "false"
   }, {
@@ -70,12 +50,8 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-<<<<<<< HEAD
     "deadlines" : [ "*No deadline specified*" ],
-=======
-    "deadline" : "*No deadline specified*",
     "notes" : [ ],
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     "tagged" : [ ],
     "isFavourite" : "true"
   }, {
@@ -83,12 +59,8 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-<<<<<<< HEAD
     "deadlines" : [ "*No deadline specified*" ],
-=======
-    "deadline" : "*No deadline specified*",
     "notes" : [ ],
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     "tagged" : [ ],
     "isFavourite" : "false"
   } ]

@@ -45,12 +45,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Rectangle favBox;
     @FXML
-<<<<<<< HEAD
     private Label deadlines;
-
-=======
-    private Label deadline;
->>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     @FXML
     private FlowPane tags;
 
