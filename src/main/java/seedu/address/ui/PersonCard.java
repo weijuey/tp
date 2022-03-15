@@ -41,10 +41,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label notes;
+    @FXML
     private Rectangle favBox;
     @FXML
     private Label deadline;
-
     @FXML
     private FlowPane tags;
 
@@ -58,6 +59,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
+        notes.setText(person.getNotes().listFormat());
         email.setText(person.getEmail().value);
         deadline.setText(person.getDeadline().toString());
         person.getTags().stream()
