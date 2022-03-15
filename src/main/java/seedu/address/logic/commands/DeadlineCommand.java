@@ -9,7 +9,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Deadline;
+import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Person;
 
 public class DeadlineCommand extends Command {
@@ -25,18 +25,18 @@ public class DeadlineCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index targetIndex;
-    private final Deadline deadline;
+    private final DeadlineList deadlines;
 
     /**
      * Creates a DeadlineCommand to add to specified {@code Person}.
      * @param targetIndex the index of the person specified.
-     * @param deadline the date of the deadline.
+     * @param deadlines the date of the deadline.
      */
-    public DeadlineCommand(Index targetIndex, Deadline deadline) {
+    public DeadlineCommand(Index targetIndex, DeadlineList deadlines) {
         requireNonNull(targetIndex);
-        requireNonNull(deadline);
+        requireNonNull(deadlines);
         this.targetIndex = targetIndex;
-        this.deadline = deadline;
+        this.deadlines = deadlines;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class DeadlineCommand extends Command {
         Person personToAddDeadline = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = new Person(
                 personToAddDeadline.getName(), personToAddDeadline.getPhone(), personToAddDeadline.getEmail(),
-                personToAddDeadline.getAddress(), deadline, personToAddDeadline.getTags(),
+                personToAddDeadline.getAddress(), deadlines, personToAddDeadline.getTags(),
                 personToAddDeadline.getFavouriteStatus());
 
         if (!personToAddDeadline.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -68,7 +68,7 @@ public class DeadlineCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeadlineCommand // instanceof handles nulls
                 && targetIndex.equals(((DeadlineCommand) other).targetIndex))
-                && deadline.equals(((DeadlineCommand) other).deadline); // state check
+                && deadlines.equals(((DeadlineCommand) other).deadlines); // state check
     }
 
 }
