@@ -41,10 +41,16 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label notes;
+    @FXML
     private Rectangle favBox;
     @FXML
+<<<<<<< HEAD
     private Label deadlines;
 
+=======
+    private Label deadline;
+>>>>>>> 879b1c470e435efd2fe73dc064847f2edd0bc96d
     @FXML
     private FlowPane tags;
 
@@ -58,6 +64,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
+        notes.setText(person.getNotes().listFormat());
         email.setText(person.getEmail().value);
         deadlines.setText(person.getDeadlines().listFormat());
         person.getTags().stream()

@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,21 +22,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final DeadlineList deadlines;
+    private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
 
     /**
      * Every field must be present and not null.
      */
-
-    public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Set<Tag> tags,
-                  Favourite favouriteStatus) {
-        requireAllNonNull(name, phone, email, address, deadlines, tags, favouriteStatus);
+    public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Notes notes,
+                Set<Tag> tags, Favourite favouriteStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.deadlines = deadlines;
+        this.notes = notes;
         this.favouriteStatus = favouriteStatus;
         this.tags.addAll(tags);
     }
@@ -59,12 +57,16 @@ public class Person {
         return address;
     }
 
-    public Favourite getFavouriteStatus() {
-        return favouriteStatus;
-    }
-
     public DeadlineList getDeadlines() {
         return deadlines;
+    }
+
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public Favourite getFavouriteStatus() {
+        return favouriteStatus;
     }
 
     /**
@@ -108,13 +110,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getDeadlines().equals(getDeadlines())
+                && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, notes, tags);
     }
 
     @Override
@@ -133,6 +136,9 @@ public class Person {
         for (Deadline deadline : deadlines) {
             builder.append(deadline);
         }
+
+        builder.append("; Notes: ")
+                .append(getNotes());
 
         Set<Tag> tags = getTags();
 

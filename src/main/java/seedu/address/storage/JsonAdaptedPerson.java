@@ -16,6 +16,7 @@ import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedDeadline> deadlines = new ArrayList<>();
+    private final List<String> notes = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String isFavourite;
 
@@ -42,6 +44,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("deadlines") List<JsonAdaptedDeadline> deadlines,
+                             @JsonProperty("notes") List<String> notes,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                              @JsonProperty("isFavourite") String isFavourite) {
         this.name = name;
@@ -50,6 +53,9 @@ class JsonAdaptedPerson {
         this.address = address;
         if (deadlines != null) {
             this.deadlines.addAll(deadlines);
+        }
+        if (notes != null) {
+            this.notes.addAll(notes);
         }
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -68,6 +74,7 @@ class JsonAdaptedPerson {
         deadlines.addAll(source.getDeadlines().getDeadlines().stream()
                 .map(JsonAdaptedDeadline::new)
                 .collect(Collectors.toList()));
+        notes.addAll(source.getNotes().value);
         isFavourite = source.getFavouriteStatus().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -91,7 +98,8 @@ class JsonAdaptedPerson {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -122,6 +130,8 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Notes modelNotes = Notes.loadNotesFromList(notes);
+
         if (isFavourite == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Favourite.class.getSimpleName()));
@@ -134,7 +144,8 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final DeadlineList modelDeadlines = new DeadlineList(personDeadlines);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadlines, modelTags, modelFavourite);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadlines,
+                modelNotes, modelTags, modelFavourite);
     }
 
 }
