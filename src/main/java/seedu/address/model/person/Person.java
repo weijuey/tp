@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -22,7 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Deadline deadline;
+    private final DeadlineList deadlines;
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
 
@@ -30,14 +31,14 @@ public class Person {
      * Every field must be present and not null.
      */
 
-    public Person(Name name, Phone phone, Email email, Address address, Deadline deadline, Set<Tag> tags,
+    public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Set<Tag> tags,
                   Favourite favouriteStatus) {
-        requireAllNonNull(name, phone, email, address, deadline, tags, favouriteStatus);
+        requireAllNonNull(name, phone, email, address, deadlines, tags, favouriteStatus);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.deadline = deadline;
+        this.deadlines = deadlines;
         this.favouriteStatus = favouriteStatus;
         this.tags.addAll(tags);
     }
@@ -62,8 +63,8 @@ public class Person {
         return favouriteStatus;
     }
 
-    public Deadline getDeadline() {
-        return deadline;
+    public DeadlineList getDeadlines() {
+        return deadlines;
     }
 
     /**
@@ -106,7 +107,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getDeadline().equals(getDeadline())
+                && otherPerson.getDeadlines().equals(getDeadlines())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -125,11 +126,16 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; Deadline: ")
-                .append(getDeadline());
+                .append(getAddress());
+        ArrayList<Deadline> deadlines = getDeadlines().getDeadlines();
+        builder.append("; Deadline(s): ");
+
+        for (Deadline deadline : deadlines) {
+            builder.append(deadline);
+        }
 
         Set<Tag> tags = getTags();
+
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
