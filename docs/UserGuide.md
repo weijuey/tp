@@ -208,7 +208,7 @@ Example:
 
 Adds the given note under the contact.
 
-Format: `note INDEX NOTES`
+Format: `note INDEX r/NOTES`
 
 - Notes are displayed in a list.
 - The given note is appended to the existing list of notes at the end.
@@ -219,7 +219,7 @@ Notes store good-to-know information about the user. To classify contacts so tha
 
 Example:
 
-`note 2 loves green` will create a note under the contact at index 2 that reads `loves green`
+`note 2 r/loves green` will create a note under the contact at index 2 that reads `loves green`
 
 ### Clearing all entries : `clear`
 
@@ -274,6 +274,6 @@ the data of your previous d'Intérieur home folder.
 | **Favourites** | `favourites`
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 | **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`|
-| **List**       | `list`                                                                                                                                                                |
 | **Help**       | `help`                                                                                                                                                                |
-| **Note**       | `note INDEX NOTES`<br> e.g. `note 2 loves green`                                                                                                                      |
+| **List**       | `list`                                                                                                                                                                |
+| **Note**       | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |

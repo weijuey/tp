@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -8,6 +9,7 @@ import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Notes notes;
     private Deadline deadline;
     private Favourite favouriteStatus;
     private Set<Tag> tags;
@@ -41,6 +44,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        notes = Notes.getNewNotes();
         deadline = new Deadline(DEFAULT_DEADLINE);
         favouriteStatus = Favourite.valueOf(DEFAULT_FAVOURITE);
         tags = new HashSet<>();
@@ -54,6 +58,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        notes = Notes.loadNotesFromList(personToCopy.getNotes().value);
         deadline = personToCopy.getDeadline();
         favouriteStatus = personToCopy.getFavouriteStatus();
         tags = new HashSet<>(personToCopy.getTags());
@@ -108,6 +113,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Notes} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNotes(List<String> notes) {
+        this.notes = Notes.loadNotesFromList(notes);
+        return this;
+    }
+
+    /**
      * Sets the {@code FavouriteStatus} of the {@code Person} that we are building.
      */
     public PersonBuilder withFavourite(String favourite) {
@@ -116,7 +129,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, deadline, tags, favouriteStatus);
+        return new Person(name, phone, email, address, deadline, notes, tags, favouriteStatus);
     }
-
 }

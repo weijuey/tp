@@ -18,6 +18,7 @@ import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -52,9 +53,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             addressString = optionalAddress.get();
             address = ParserUtil.parseAddress(addressString);
         }
+
         Deadline deadline = new Deadline();
+        Notes notes = Notes.getNewNotes();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Person person = new Person(name, phone, email, address, deadline, tagList, Favourite.NOT_FAVOURITE);
+        Person person = new Person(name, phone, email, address, deadline, notes,
+                tagList, Favourite.NOT_FAVOURITE);
 
         return new AddCommand(person);
     }
