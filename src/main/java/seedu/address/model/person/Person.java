@@ -69,6 +69,10 @@ public class Person {
         return favouriteStatus;
     }
 
+    public boolean isFavourite() {
+        return favouriteStatus.isFavourite();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
