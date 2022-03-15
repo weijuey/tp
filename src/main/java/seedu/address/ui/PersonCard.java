@@ -51,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private HBox headerBox;
+    @FXML
+    private Canvas starCanvas;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -68,17 +70,17 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
         if (person.getFavouriteStatus().isFavourite()) {
-            headerBox.getChildren().add(drawStarShape());
+            starCanvas.setVisible(true);
+            drawStarShape(starCanvas.getGraphicsContext2D());
         }
     }
 
-    private Canvas drawStarShape() {
+    private void drawStarShape(GraphicsContext gc) {
         //@@author takufunkai-reused
         //Reused from https://zetcode.com/gui/javafx/canvas/
         // with minor modifications to the points and fill, for suitable colour and size.
-        Canvas canvas = new Canvas(20, 20);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
         double[] xpoints = {1, 7, 9, 11, 17, 13,
                 14, 9, 4, 5};
@@ -90,8 +92,6 @@ public class PersonCard extends UiPart<Region> {
 
         gc.setStroke(Color.BLACK);
         gc.strokePolygon(xpoints, ypoints, xpoints.length);
-
-        return canvas;
 
         //@@author
     }
