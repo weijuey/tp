@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static javafx.application.Application.launch;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -11,8 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
-
-import static javafx.application.Application.launch;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -71,7 +71,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        if (person.getFavouriteStatus().isFavourite()) {
+        if (person.isFavourite()) {
             starCanvas.setVisible(true);
             drawStarShape(starCanvas.getGraphicsContext2D());
         }
@@ -82,10 +82,8 @@ public class PersonCard extends UiPart<Region> {
         //Reused from https://zetcode.com/gui/javafx/canvas/
         // with minor modifications to the points and fill, for suitable colour and size.
 
-        double[] xpoints = {1, 7, 9, 11, 17, 13,
-                14, 9, 4, 5};
-        double[] ypoints = {7, 6.5, 1, 6.5, 7, 10,
-                15, 12, 15, 10};
+        double[] xpoints = {1, 7, 9, 11, 17, 13, 14, 9, 4, 5};
+        double[] ypoints = {7, 6.5, 1, 6.5, 7, 10, 15, 12, 15, 10};
 
         gc.setFill(Color.YELLOW);
         gc.fillPolygon(xpoints, ypoints, xpoints.length);
