@@ -43,7 +43,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Rectangle favBox;
     @FXML
-    private Label deadline;
+    private Label deadlines;
 
     @FXML
     private FlowPane tags;
@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        deadline.setText(person.getDeadline().toString());
+        deadlines.setText(person.getDeadlines().listFormat());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
