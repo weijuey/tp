@@ -4,7 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "deadline": "01/01/2023",
+    "deadlines" : [ ],
     "tagged": [ "friends" ],
     "isFavourite" : "false"
   }, {
@@ -12,7 +12,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "deadline":"*No deadline specified*",
+    "deadlines" : [ ],
     "isFavourite" : "true"
   } ]
 }
