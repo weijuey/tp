@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
+import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -111,6 +112,20 @@ public class ParserUtil {
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(trimmedDeadline);
+    }
+
+    /**
+     * parses {@code String deadlines} into a {@code DeadlineList}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param deadlines the string representing deadline/s
+     * @return the resulting {@code DeadlineList} object
+     * @throws ParseException if one of the given {@code deadlines} is invalid.
+     */
+    public static DeadlineList parseDeadlines(String deadlines) throws ParseException {
+        requireNonNull(deadlines);
+        String[] deadlineList = deadlines.split("\\s+");
+        return new DeadlineList(deadlineList);
     }
 
     /**
