@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_ADDRESS;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -76,10 +78,22 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
+
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPersonNoTags = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedPersonNoTags));
+
+        // zero address
+        Person expectedPersonNoAddress = new PersonBuilder(AMY).withAddress(EMPTY_ADDRESS).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + EMPTY_ADDRESS_DESC
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoAddress));
+
+        // zero address and tags
+        Person expectedPersonNoAddressNoTags =
+                new PersonBuilder(AMY).withAddress(EMPTY_ADDRESS).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + EMPTY_ADDRESS_DESC,
+                new AddCommand(expectedPersonNoAddressNoTags));
     }
 
     @Test

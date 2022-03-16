@@ -129,7 +129,8 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidFavourite_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DEADLINE, VALID_TAGS, INVALID_FAVOURITE);
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DEADLINE, new ArrayList<>(VALID_NOTES.value),
+                VALID_TAGS, INVALID_FAVOURITE);
         String expectedMessage = Favourite.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
 

@@ -30,9 +30,9 @@ management tasks done faster than traditional GUI apps.
 
     * **`add n/Mary Jane p/12345678 e/maryJ@example.com`** : Adds a contact named Mary Jane to the Address Book.
 
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`** `3` : Deletes the 3rd contact shown in the current list.
 
-    * **`favourite`**`2` : Adds the 2nd contact shown in the current list to your list of favourite contacts
+    * **`fav`** `2` : Adds the 2nd contact shown in the current list to your list of favourite contacts
 
     * **`favourites`** : Lists all your favourite contacts.
 
@@ -123,23 +123,22 @@ Examples:
   and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-### Adding favourites : `favourite`
+### Adding favourites : `fav`
 
 Adds the contact to your list of favourite contacts and view them.
 
 Format:
 
-- `favourite INDEX`
+- `fav INDEX`
 - `favourites` — Shows a list of your favourite contacts
 
-<aside>
-💡 **Tip:** You can run `favourite INDEX` where `INDEX` is the index of a contact that currently belongs in your favourites list to remove them.
-
-</aside>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can run `fav INDEX` where `INDEX` is the index of a contact that currently belongs in your favourites list to remove them.
+</div>
 
 Examples:
 
-- `favourite 1` — Adds contact at index 1 to your list of favourites
+- `fav 1` — Adds contact at index 1 to your list of favourites
 
 ### Locating contacts by name : `find`
 
@@ -264,17 +263,17 @@ the data of your previous d'Intérieur home folder.
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action         | Format, Examples                                                                                                                                                      |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
-| **Clear**      | `clear`                                                                                                                                         |
-| **Deadline**   | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                     |
-| **Favourite**  | `favourite INDEX` <br> e.g., `favourite 1`                                                                                                      |
-| **Favourites** | `favourites`                                                                                                                                    |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
-| **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |
-| **List**       | `list`                                                                                                                                          |
-| **Help**       | `help`                                                                                                                                          |
+| **Clear**      | `clear`                                                                                                                                                               |
+| **Deadline**   | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                                               |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Fav**        | `fav INDEX` <br> e.g., `fav 1`
+| **Favourites** | `favourites`
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+| **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`|
+| **Help**       | `help`                                                                                                                                                                |
+| **List**       | `list`                                                                                                                                                                |
 | **Note**       | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |
