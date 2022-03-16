@@ -1,14 +1,17 @@
 package seedu.address.ui;
 
+import static javafx.application.Application.launch;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,11 +46,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label notes;
     @FXML
-    private Rectangle favBox;
-    @FXML
     private Label deadline;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Canvas starCanvas;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -66,9 +69,31 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        if (person.getFavouriteStatus().isFavourite()) {
-            favBox.setFill(Color.YELLOW);
+        if (person.isFavourite()) {
+            starCanvas.setVisible(true);
+            drawStarShape(starCanvas.getGraphicsContext2D());
         }
+    }
+
+    private void drawStarShape(GraphicsContext gc) {
+        //@@author takufunkai-reused
+        //Reused from https://zetcode.com/gui/javafx/canvas/
+        // with minor modifications to the points and fill, for suitable colour and size.
+
+        double[] xpoints = {1, 7, 9, 11, 17, 13, 14, 9, 4, 5};
+        double[] ypoints = {7, 6.5, 1, 6.5, 7, 10, 15, 12, 15, 10};
+
+        gc.setFill(Color.YELLOW);
+        gc.fillPolygon(xpoints, ypoints, xpoints.length);
+
+        gc.setStroke(Color.BLACK);
+        gc.strokePolygon(xpoints, ypoints, xpoints.length);
+
+        //@@author
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     @Override
