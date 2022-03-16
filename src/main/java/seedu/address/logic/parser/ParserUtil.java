@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -108,10 +109,19 @@ public class ParserUtil {
     public static Deadline parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
-        if (!Deadline.isValidDeadline(trimmedDeadline)) {
+        StringBuilder originalInput = new StringBuilder(trimmedDeadline);
+        originalInput.reverse();
+        String[] reversedAndSplit = originalInput.toString().split("\\s+", 2);
+        if (reversedAndSplit.length < 2) {
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
-        return new Deadline(trimmedDeadline);
+        String description = new StringBuilder(reversedAndSplit[1]).reverse().toString();
+        String date = new StringBuilder(reversedAndSplit[0]).reverse().toString();
+        if (!Deadline.isValidDeadline(description, date)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Deadline(description, date);
     }
 
     /**
@@ -122,9 +132,12 @@ public class ParserUtil {
      * @return the resulting {@code DeadlineList} object
      * @throws ParseException if one of the given {@code deadlines} is invalid.
      */
-    public static DeadlineList parseDeadlines(String deadlines) throws ParseException {
+    public static DeadlineList parseDeadlines(Collection<String> deadlines) throws ParseException {
         requireNonNull(deadlines);
-        String[] deadlineList = deadlines.split("\\s+");
+        ArrayList<Deadline> deadlineList = new ArrayList<>();
+        for (String deadline:deadlines) {
+            deadlineList.add(parseDeadline(deadline));
+        }
         return new DeadlineList(deadlineList);
     }
 
