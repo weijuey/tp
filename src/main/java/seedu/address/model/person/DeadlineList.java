@@ -14,17 +14,7 @@ public class DeadlineList {
 
     /**
      * Constructs a {@code DeadlineList} object.
-     * @param deadlines the array of strings that represent deadline dates.
-     */
-    public DeadlineList(String[] deadlines) {
-        requireNonNull(deadlines);
-        for (String deadline : deadlines) {
-            this.deadlines.add(new Deadline(deadline));
-        }
-    }
-
-    /**
-     * Constructs a {@code DeadlineList} object.
+     *
      * @param deadlines the list of the deadlines to be put into {@code DeadlineList}.
      */
     public DeadlineList(List<Deadline> deadlines) {
@@ -38,6 +28,7 @@ public class DeadlineList {
 
     /**
      * Produces a string representation of this {@code Deadline} object for printing to GUI.
+     *
      * @return list view of deadlines in this {@code Deadline} object.
      */
     public String listFormat() {
