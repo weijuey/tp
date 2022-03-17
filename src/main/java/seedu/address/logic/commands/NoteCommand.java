@@ -89,7 +89,7 @@ public class NoteCommand extends Command {
         Notes newNotes = Notes.loadNotesFromList(personToEdit.getNotes().value);
         newNotes.updateNotes(note);
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getDeadline(), newNotes,
+                personToEdit.getAddress(), personToEdit.getDeadlines(), newNotes,
                 personToEdit.getTags(), personToEdit.getFavouriteStatus());
     }
 

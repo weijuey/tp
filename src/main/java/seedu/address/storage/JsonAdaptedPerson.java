@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
+import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
 import seedu.address.model.person.Name;
@@ -31,7 +32,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String deadline;
+    private final List<JsonAdaptedDeadline> deadlines = new ArrayList<>();
     private final List<String> notes = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String isFavourite;
@@ -41,15 +42,18 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("deadline") String deadline, @JsonProperty("notes") List<String> notes,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("isFavourite") String isFavourite) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("deadlines") List<JsonAdaptedDeadline> deadlines,
+                             @JsonProperty("notes") List<String> notes,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("isFavourite") String isFavourite) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.deadline = deadline;
+        if (deadlines != null) {
+            this.deadlines.addAll(deadlines);
+        }
         if (notes != null) {
             this.notes.addAll(notes);
         }
@@ -67,7 +71,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        deadline = source.getDeadline().value;
+        deadlines.addAll(source.getDeadlines().getDeadlines().stream()
+                .map(JsonAdaptedDeadline::new)
+                .collect(Collectors.toList()));
         notes.addAll(source.getNotes().value);
         isFavourite = source.getFavouriteStatus().value;
         tagged.addAll(source.getTags().stream()
@@ -86,8 +92,14 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        final List<Deadline> personDeadlines = new ArrayList<>();
+        for (JsonAdaptedDeadline deadline : deadlines) {
+            personDeadlines.add(deadline.toModelType());
+        }
+
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -120,15 +132,6 @@ class JsonAdaptedPerson {
 
         final Notes modelNotes = Notes.loadNotesFromList(notes);
 
-        if (deadline == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Deadline.class.getSimpleName()));
-        }
-        if (!Deadline.isValidDeadline(deadline)) {
-            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
-        }
-        final Deadline modelDeadline = new Deadline(deadline);
-
         if (isFavourite == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Favourite.class.getSimpleName()));
@@ -139,8 +142,9 @@ class JsonAdaptedPerson {
         final Favourite modelFavourite = Favourite.valueOf(isFavourite);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final DeadlineList modelDeadlines = new DeadlineList(personDeadlines);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadline,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadlines,
                 modelNotes, modelTags, modelFavourite);
     }
 
