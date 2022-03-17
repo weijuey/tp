@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -133,15 +132,10 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
-        ArrayList<Deadline> deadlines = getDeadlines().getDeadlines();
-        builder.append("; Deadline(s): ");
-
-        for (Deadline deadline : deadlines) {
-            builder.append(deadline);
-        }
-
-        builder.append("; Notes: ")
+                .append(getAddress())
+                .append("; Deadline(s): ")
+                .append(getDeadlines())
+                .append("; Notes: ")
                 .append(getNotes());
 
         Set<Tag> tags = getTags();

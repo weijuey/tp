@@ -43,6 +43,18 @@ public class DeadlineList {
     }
 
     @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < deadlines.size(); i++) {
+            result.append(deadlines.get(i));
+            if (i < deadlines.size() - 1) {
+                result.append(", ");
+            }
+        }
+        return result.toString();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeadlineList // instanceof handles nulls
