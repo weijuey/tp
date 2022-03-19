@@ -46,7 +46,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label notes;
     @FXML
-    private Label deadline;
+    private Label deadlines;
     @FXML
     private FlowPane tags;
     @FXML
@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         notes.setText(person.getNotes().listFormat());
         email.setText(person.getEmail().value);
-        deadline.setText(person.getDeadline().toString());
+        deadlines.setText(person.getDeadlines().listFormat());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

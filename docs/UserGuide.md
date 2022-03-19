@@ -195,14 +195,15 @@ Examples:
 
 Creates a deadline that is placed under the profile of a contact.
 
-Format: `deadline INDEX d/DATE`
+Format: `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 
+- deadline must have description.
 - The given date is added to the contact as deadline.
 - Date should be dd/mm/yyyy
 
 Example:
 
-- `deadline 1 d/01/01/2022` adds the date `01/01/2022` to the contact in index `1`.
+- `deadline 1 d/windows 01/01/2022` adds the description `windows` and date `01/01/2022` to the contact in index `1`.
 
 ### Add additional notes to a contact : `note`
 
