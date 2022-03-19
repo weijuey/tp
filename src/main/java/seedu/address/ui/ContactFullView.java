@@ -15,8 +15,7 @@ import java.util.Comparator;
 
 public class ContactFullView extends UiPart<Region> {
     private static final String FXML = "ContactFullView.fxml";
-
-    private final Person person;
+    private Person person;
 
     @FXML
     private Label name;
@@ -41,8 +40,10 @@ public class ContactFullView extends UiPart<Region> {
     @FXML
     private ImageView images;
 
-    public ContactFullView(Person person) {
+    public ContactFullView() {
         super(FXML);
+    }
+    public void setPerson(Person person) {
         this.person = person;
 
         name.setText(person.getName().fullName);
@@ -63,6 +64,20 @@ public class ContactFullView extends UiPart<Region> {
         }
     }
 
+    public void clearContactView() {
+        this.person = null;
+
+        name.setText(null);
+        phone.setText(null);
+        address.setText(null);
+        email.setText(null);
+        notes.setText(null);
+        deadlines.setText(null);
+        images.setImage(null);
+        tags.getChildren().clear();
+        starCanvas.setVisible(false);
+    }
+
     private void drawStarShape(GraphicsContext gc) {
         //@@author takufunkai-reused
         //Reused from https://zetcode.com/gui/javafx/canvas/
@@ -79,5 +94,4 @@ public class ContactFullView extends UiPart<Region> {
 
         //@@author
     }
-
 }
