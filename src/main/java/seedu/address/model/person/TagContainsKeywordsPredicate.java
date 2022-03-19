@@ -19,6 +19,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         boolean hasAllMatches = true;
 
+        if (keywords.size() == 0) {
+            return false;
+        }
+
         for (String keyword : keywords) {
             boolean doesKeywordMatchAnyTags = person.getTags().stream()
                     .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword));

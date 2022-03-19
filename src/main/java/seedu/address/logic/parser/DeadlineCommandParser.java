@@ -8,7 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Deadline;
+import seedu.address.model.person.DeadlineList;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -33,9 +33,8 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeadlineCommand.MESSAGE_USAGE), ive);
         }
+        DeadlineList deadlines = ParserUtil.parseDeadlines(argMultimap.getAllValues(PREFIX_DEADLINE));
 
-        String deadline = argMultimap.getValue(PREFIX_DEADLINE).orElse("");
-
-        return new DeadlineCommand(index, new Deadline(deadline));
+        return new DeadlineCommand(index, deadlines);
     }
 }
