@@ -43,6 +43,7 @@ public class ContactFullView extends UiPart<Region> {
     public ContactFullView() {
         super(FXML);
     }
+
     public void setPerson(Person person) {
         this.person = person;
 
