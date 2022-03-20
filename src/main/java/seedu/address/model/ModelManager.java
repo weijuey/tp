@@ -147,4 +147,11 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    public void setContactFullView(Person person) {
+
+    }
+
+    public void clearContactFullView() {
+
+    }
 }
