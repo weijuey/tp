@@ -13,9 +13,8 @@ import seedu.address.model.person.Person;
 
 import java.util.Comparator;
 
-public class ContactFullView extends UiPart<Region> {
-    private static final String FXML = "ContactFullView.fxml";
-    private Person person;
+public class DetailedPersonCard extends UiPart<Region> {
+    private static final String FXML = "DetailedPersonCard.fxml";
 
     @FXML
     private Label name;
@@ -40,12 +39,8 @@ public class ContactFullView extends UiPart<Region> {
     @FXML
     private ImageView images;
 
-    public ContactFullView() {
+    public DetailedPersonCard(Person person) {
         super(FXML);
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
 
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
@@ -63,20 +58,6 @@ public class ContactFullView extends UiPart<Region> {
             starCanvas.setVisible(true);
             drawStarShape(starCanvas.getGraphicsContext2D());
         }
-    }
-
-    public void clearContactView() {
-        this.person = null;
-
-        name.setText(null);
-        phone.setText(null);
-        address.setText(null);
-        email.setText(null);
-        notes.setText(null);
-        deadlines.setText(null);
-        images.setImage(null);
-        tags.getChildren().clear();
-        starCanvas.setVisible(false);
     }
 
     private void drawStarShape(GraphicsContext gc) {
