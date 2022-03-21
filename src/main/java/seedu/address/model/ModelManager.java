@@ -7,11 +7,13 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.ui.DetailedPersonCard;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Person> contactFullView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        contactFullView = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -147,11 +151,19 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
-    public void setContactFullView(Person person) {
-
+    @Override
+    public ObservableList<Person> getContactFullView() {
+        return contactFullView;
     }
 
-    public void clearContactFullView() {
+    @Override
+    public void setContactFullView(Person person) {
+        contactFullView.add(person);
+        assert(contactFullView.size() == 1);
+    }
 
+    @Override
+    public void clearContactFullView() {
+        contactFullView.clear();
     }
 }

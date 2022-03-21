@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ContactFullView contactFullView;
+    private ContactFullViewPanel contactFullView;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        contactFullView = new ContactFullView();
+        contactFullView = new ContactFullViewPanel(logic.getContactFullView());
         contactFullViewPlaceholder.getChildren().add(contactFullView.getRoot());
 
         resultDisplay = new ResultDisplay();
