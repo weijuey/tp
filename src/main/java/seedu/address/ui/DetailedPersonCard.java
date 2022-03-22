@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,8 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
-
+/**
+ * A UI component that shows a full, detailed view of a Person
+ */
 public class DetailedPersonCard extends UiPart<Region> {
     private static final String FXML = "DetailedPersonCard.fxml";
 
@@ -36,6 +39,10 @@ public class DetailedPersonCard extends UiPart<Region> {
     @FXML
     private Canvas starCanvas;
 
+    /**
+     * Creates a {@code DetailedPersonCard} with the given {@code Person} to display
+     * @param person
+     */
     public DetailedPersonCard(Person person) {
         super(FXML);
 
