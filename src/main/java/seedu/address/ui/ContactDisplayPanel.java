@@ -27,11 +27,11 @@ public class ContactDisplayPanel extends UiPart<Region> {
     /**
      * Creates a {@code ContactDisplayPanel} with the given {@code ObservableList}.
      */
-    public ContactDisplayPanel(ObservableList<Person> personList, ObservableList<Person> DetailedContactView) {
+    public ContactDisplayPanel(ObservableList<Person> personList, ObservableList<Person> detailedContactView) {
         super(FXML);
-        detailedContactViewPanel.setItems(DetailedContactView);
+        detailedContactViewPanel.setItems(detailedContactView);
         detailedContactViewPanel.setCellFactory(listView -> new DetailedPersonCardCell());
-        DetailedContactView.addListener(new EmptyListener(detailedContactViewPanel, "Detailed Contact View"));
+        detailedContactView.addListener(new EmptyListener(detailedContactViewPanel, "Detailed Contact View"));
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personList.addListener(new EmptyListener(personListView, "Contact List"));
