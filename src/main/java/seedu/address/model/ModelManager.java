@@ -132,6 +132,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getContactFullView() {
+        return contactFullView;
+    }
+
+    @Override
+    public void setContactFullView(Person person) {
+        contactFullView.add(person);
+        assert(contactFullView.size() == 1);
+    }
+
+    @Override
+    public void clearContactFullView() {
+        contactFullView.clear();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -147,22 +163,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
-    }
-
-    @Override
-    public ObservableList<Person> getContactFullView() {
-        return contactFullView;
-    }
-
-    @Override
-    public void setContactFullView(Person person) {
-        contactFullView.add(person);
-        assert(contactFullView.size() == 1);
-    }
-
-    @Override
-    public void clearContactFullView() {
-        contactFullView.clear();
+                && filteredPersons.equals(other.filteredPersons)
+                && contactFullView.equals(other.contactFullView);
     }
 }
