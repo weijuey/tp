@@ -14,9 +14,9 @@ import seedu.address.model.person.Person;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class ContactDisplayPanel extends UiPart<Region> {
+    private static final String FXML = "ContactDisplayPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ContactDisplayPanel.class);
 
     @FXML
     private ListView<Person> contactFullViewPanel;
@@ -25,16 +25,16 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<Person> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ContactDisplayPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, ObservableList<Person> contactFullView) {
+    public ContactDisplayPanel(ObservableList<Person> personList, ObservableList<Person> contactFullView) {
         super(FXML);
         contactFullViewPanel.setItems(contactFullView);
         contactFullViewPanel.setCellFactory(listView -> new DetailedPersonCardCell());
-        contactFullView.addListener(new EmptyListener(contactFullViewPanel));
+        contactFullView.addListener(new EmptyListener(contactFullViewPanel, "Contact Full View"));
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
-        personList.addListener(new EmptyListener(personListView));
+        personList.addListener(new EmptyListener(personListView, "Contact List"));
     }
 
     /**
@@ -44,19 +44,22 @@ public class PersonListPanel extends UiPart<Region> {
      */
     class EmptyListener implements ListChangeListener<Person> {
         private ListView<Person> listView;
+        private String listName;
 
-        public EmptyListener(ListView<Person> listView) {
+        public EmptyListener(ListView<Person> listView, String listName) {
             this.listView = listView;
+            this.listName = listName;
         }
 
         @Override
         public void onChanged(Change c) {
             int len = c.getList().size();
-            logger.info("change detected, list size: " + len);
             if (len == 0) {
+                logger.info("Hiding " + listName);
                 listView.setPrefHeight(0);
             } else {
-                listView.setPrefHeight(800);
+                logger.info("Showing " + listName);
+                listView.setPrefHeight(Region.USE_COMPUTED_SIZE);
             }
         }
     }
