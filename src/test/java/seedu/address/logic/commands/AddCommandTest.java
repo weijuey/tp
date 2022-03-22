@@ -149,18 +149,18 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getContactFullView() {
+        public ObservableList<Person> getDetailedContactView() {
             throw new AssertionError("This method should not be called.");
 
         }
 
         @Override
-        public void setContactFullView(Person person) {
+        public void setDetailedContactView(Person person) {
             throw new AssertionError("This method should not be called.");
         };
 
         @Override
-        public void clearContactFullView() {
+        public void clearDetailedContactView() {
             throw new AssertionError("This method should not be called.");
         };
     }

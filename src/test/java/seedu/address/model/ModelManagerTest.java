@@ -125,9 +125,9 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different contactFullView -> returns false
-        modelManager.setContactFullView(ALICE);
+        modelManager.setDetailedContactView(ALICE);
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-        modelManager.clearContactFullView();
+        modelManager.clearDetailedContactView();
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ObservableList<Person> contactFullView;
+    private final ObservableList<Person> detailedContactView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,7 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        contactFullView = FXCollections.observableArrayList();
+        detailedContactView = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -132,19 +132,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getContactFullView() {
-        return contactFullView;
+    public ObservableList<Person> getDetailedContactView() {
+        return detailedContactView;
     }
 
     @Override
-    public void setContactFullView(Person person) {
-        contactFullView.add(person);
-        assert(contactFullView.size() == 1);
+    public void setDetailedContactView(Person person) {
+        if (detailedContactView.size() > 0) {
+            logger.warning("Called with a contact already in view. Clearing detailed" +
+                    "contact view first...");
+            clearDetailedContactView();
+        }
+        detailedContactView.add(person);
+        assert(detailedContactView.size() == 1);
     }
 
     @Override
-    public void clearContactFullView() {
-        contactFullView.clear();
+    public void clearDetailedContactView() {
+        detailedContactView.clear();
     }
 
     @Override
@@ -164,6 +169,6 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && contactFullView.equals(other.contactFullView);
+                && detailedContactView.equals(other.detailedContactView);
     }
 }

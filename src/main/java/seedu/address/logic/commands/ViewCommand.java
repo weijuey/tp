@@ -40,7 +40,7 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(PREDICATE_HIDE_ALL_PERSONS);
-        model.setContactFullView(personToView);
+        model.setDetailedContactView(personToView);
         return new CommandResult(String.format(VIEW_SUCCESS, personToView.getName().fullName));
     }
 }

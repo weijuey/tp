@@ -88,9 +88,15 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    ObservableList<Person> getContactFullView();
+    /** Returns the contact that is being viewed in detail */
+    ObservableList<Person> getDetailedContactView();
 
-    void setContactFullView(Person person);
+    /**
+     * Sets the given {@code Person} as the contact to be viewed in detail.
+     * @param person person to be viewed
+     */
+    void setDetailedContactView(Person person);
 
-    void clearContactFullView();
+    /** Removes the contact that is being viewed in detail */
+    void clearDetailedContactView();
 }

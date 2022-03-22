@@ -33,8 +33,8 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns the full view of a contact */
-    ObservableList<Person> getContactFullView();
+    /** Returns the detailed view of a contact */
+    ObservableList<Person> getDetailedContactView();
 
     /**
      * Returns the user prefs' address book file path.

@@ -19,7 +19,7 @@ public class ContactDisplayPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ContactDisplayPanel.class);
 
     @FXML
-    private ListView<Person> contactFullViewPanel;
+    private ListView<Person> detailedContactViewPanel;
 
     @FXML
     private ListView<Person> personListView;
@@ -27,11 +27,11 @@ public class ContactDisplayPanel extends UiPart<Region> {
     /**
      * Creates a {@code ContactDisplayPanel} with the given {@code ObservableList}.
      */
-    public ContactDisplayPanel(ObservableList<Person> personList, ObservableList<Person> contactFullView) {
+    public ContactDisplayPanel(ObservableList<Person> personList, ObservableList<Person> DetailedContactView) {
         super(FXML);
-        contactFullViewPanel.setItems(contactFullView);
-        contactFullViewPanel.setCellFactory(listView -> new DetailedPersonCardCell());
-        contactFullView.addListener(new EmptyListener(contactFullViewPanel, "Contact Full View"));
+        detailedContactViewPanel.setItems(DetailedContactView);
+        detailedContactViewPanel.setCellFactory(listView -> new DetailedPersonCardCell());
+        DetailedContactView.addListener(new EmptyListener(detailedContactViewPanel, "Detailed Contact View"));
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personList.addListener(new EmptyListener(personListView, "Contact List"));
@@ -40,7 +40,7 @@ public class ContactDisplayPanel extends UiPart<Region> {
     /**
      * Custom {@code ListChangeListener} to check when a given list contains no
      * elements, and hides the ListView so that the other ListView can use more
-     * space in the MainWindow.
+     * space in the {@code ContactDisplayPanel}.
      */
     class EmptyListener implements ListChangeListener<Person> {
         private ListView<Person> listView;
