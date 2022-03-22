@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.text.Font?>
+
+
 <?import javafx.scene.layout.Region?>
-
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" prefHeight="300">
-    <HBox nodeOrientation="LEFT_TO_RIGHT">
-        <VBox>
-            <HBox>
-                <Label fx:id="name"/>
-                <Canvas fx:id="starCanvas" height="20" width="20" visible="false"/>
-            </HBox>
-            <Label fx:id="phone"/>
-            <Label fx:id="address"/>
-            <Label fx:id="email"/>
-            <FlowPane fx:id="tags"/>
-        </VBox>
-    </HBox>
-
-    <HBox nodeOrientation="LEFT_TO_RIGHT">
-        <VBox>
-            <Label fx:id="notes" wrapText="true"/>
-        </VBox>
-        <Region>
-            <!-- separator for notes and deadlines -->
-        </Region>
-        <VBox>
-            <Label fx:id="deadlines" wrapText="true"/>
-        </VBox>
-    </HBox>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox prefWidth="800.0">
+            <children>
+                <Region prefWidth="100" />
+                <Label fx:id="name" alignment="CENTER_LEFT" text="Label" textAlignment="CENTER" prefWidth="300" style="-fx-font-size: 40;"/>
+                <VBox>
+                    <Region prefHeight="20" />
+                    <Canvas fx:id="starCanvas" height="30.0" width="30.0" />
+                </VBox>
+            </children>
+        </HBox>
+        <FlowPane fx:id="tags" columnHalignment="CENTER" prefHeight="30.0" prefWidth="200.0" />
+        <HBox>
+            <children>
+                <VBox>
+                    <children>
+                        <Label fx:id="phone" text="Label" />
+                        <Label fx:id="address" text="Label" />
+                        <Label fx:id="email" text="Label" />
+                        <AnchorPane prefWidth="620.0">
+                            <children>
+                                <Label prefWidth="300.0" text="Notes" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                <Label prefWidth="300.0" text="Deadlines" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                <Label fx:id="notes" prefWidth="300.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0" wrapText="true"/>
+                                <Label fx:id="deadlines" prefWidth="300.0" text="Label" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0" wrapText="true"/>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
 </VBox>
