@@ -31,7 +31,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ContactFullViewPanel contactFullView;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -41,9 +40,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
-
-    @FXML
-    private StackPane contactFullViewPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -114,11 +110,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getContactFullView());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
-        contactFullView = new ContactFullViewPanel(logic.getContactFullView());
-        contactFullViewPlaceholder.getChildren().add(contactFullView.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -36,8 +35,6 @@ public class DetailedPersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Canvas starCanvas;
-    @FXML
-    private ImageView images;
 
     public DetailedPersonCard(Person person) {
         super(FXML);
@@ -48,7 +45,6 @@ public class DetailedPersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         notes.setText(person.getNotes().listFormat());
         deadlines.setText(person.getDeadlines().listFormat());
-        images.setImage(null);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
