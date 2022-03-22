@@ -37,6 +37,11 @@ public class PersonListPanel extends UiPart<Region> {
         personList.addListener(new EmptyListener(personListView));
     }
 
+    /**
+     * Custom {@code ListChangeListener} to check when a given list contains no
+     * elements, and hides the ListView so that the other ListView can use more
+     * space in the MainWindow.
+     */
     class EmptyListener implements ListChangeListener<Person> {
         private ListView<Person> listView;
 
@@ -73,6 +78,10 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a
+     * {@code DetailedPersonCard}.
+     */
     class DetailedPersonCardCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
