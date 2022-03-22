@@ -47,8 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 
         Optional<String> optionalAddress = argMultimap.getValue(PREFIX_ADDRESS);
-        String addressString = " ";
-        Address address = new Address("*No address specified*");
+        String addressString = "";
+        Address address = Address.EMPTY_ADDRESS;
         if (optionalAddress.isPresent()) {
             addressString = optionalAddress.get();
             address = ParserUtil.parseAddress(addressString);
