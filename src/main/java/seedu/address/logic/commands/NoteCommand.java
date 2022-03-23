@@ -90,7 +90,7 @@ public class NoteCommand extends Command {
         newNotes.updateNotes(note);
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getDeadlines(), newNotes,
-                personToEdit.getTags(), personToEdit.getFavouriteStatus());
+                personToEdit.getTags(), personToEdit.getFavouriteStatus(), personToEdit.getHighImportanceStatus());
     }
 
     @Override

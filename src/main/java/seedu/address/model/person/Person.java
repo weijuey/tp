@@ -24,12 +24,13 @@ public class Person {
     private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
+    private final HighImportance highImportanceStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Notes notes,
-                Set<Tag> tags, Favourite favouriteStatus) {
+                Set<Tag> tags, Favourite favouriteStatus, HighImportance highImportanceStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -37,6 +38,7 @@ public class Person {
         this.deadlines = deadlines;
         this.notes = notes;
         this.favouriteStatus = favouriteStatus;
+        this.highImportanceStatus = highImportanceStatus;
         this.tags.addAll(tags);
     }
 
@@ -70,6 +72,14 @@ public class Person {
 
     public boolean isFavourite() {
         return favouriteStatus.isFavourite();
+    }
+
+    public HighImportance getHighImportanceStatus() {
+        return highImportanceStatus;
+    }
+
+    public boolean hasHighImportance() {
+        return highImportanceStatus.hasHighImportance();
     }
 
     /**
@@ -114,13 +124,14 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getDeadlines().equals(getDeadlines())
                 && otherPerson.getNotes().equals(getNotes())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getHighImportanceStatus().equals(getHighImportanceStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, notes, tags);
+        return Objects.hash(name, phone, email, address, notes, tags, highImportanceStatus);
     }
 
     @Override

@@ -140,6 +140,22 @@ Examples:
 
 - `fav 1` — Adds contact at index 1 to your list of favourites
 
+### Adding high importance flag: `impt`
+
+Adds the contact to your list of people with high importance.
+
+Format:
+
+- `impt INDEX`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can run `impt INDEX` where `INDEX` is the index of a contact that currently belongs in your high importance list to remove them.
+</div>
+
+Examples:
+
+- `impt 1` — Adds contact at index 1 to your list of people with high importance
+
 ### Locating contacts by name : `find`
 
 Find contacts whose names contain any of the given keywords.
@@ -276,5 +292,6 @@ the data of your previous d'Intérieur home folder.
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 | **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`|
 | **Help**       | `help`                                                                                                                                                                |
+| **Impt**       | `impt INDEX` <br> e.g., `impt 1` |
 | **List**       | `list`                                                                                                                                                                |
 | **Note**       | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |

@@ -3,11 +3,14 @@ package seedu.address.ui;
 import static javafx.application.Application.launch;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -51,6 +54,10 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Canvas starCanvas;
+    @FXML
+    private ImageView flagImageView;
+    private final Image highImportanceFlag = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/red_flag.png")));
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -73,6 +80,13 @@ public class PersonCard extends UiPart<Region> {
             starCanvas.setVisible(true);
             drawStarShape(starCanvas.getGraphicsContext2D());
         }
+
+        if (person.hasHighImportance()) {
+            flagImageView.setImage(highImportanceFlag);
+            flagImageView.setFitHeight(20);
+            flagImageView.setFitWidth(20);
+            flagImageView.setVisible(true);
+        }
     }
 
     private void drawStarShape(GraphicsContext gc) {
@@ -90,6 +104,19 @@ public class PersonCard extends UiPart<Region> {
         gc.strokePolygon(xpoints, ypoints, xpoints.length);
 
         //@@author
+
+        //@@author xSaints19x-reused
+        //Reused from https://docs.oracle.com/javafx/2/canvas/jfxpub-canvas.htm
+        //
+
+//        double[] xp = {1, 7, 9, 11, 17, 13, 14, 9, 4, 5};
+//        double[] yp = {7, 6.5, 1, 6.5, 7, 10, 15, 12, 15, 10};
+//
+//        gc.setFill(Color.YELLOW);
+//        gc.fillPolygon(xp, yp, xp.length);
+//
+//        gc.setStroke(Color.BLACK);
+//        gc.strokePolygon(xp, yp, xp.length);
     }
 
     public static void main(String[] args) {
