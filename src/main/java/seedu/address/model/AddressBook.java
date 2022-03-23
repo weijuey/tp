@@ -133,6 +133,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.setTag(target, editedTag);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTag(Tag key) {
+        tags.remove(key);
+    }
+
     //// util methods
 
     @Override

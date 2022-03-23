@@ -95,6 +95,12 @@ public interface Model {
      */
     void setTag(Tag target, Tag editedTag);
 
+    /**
+     * Deletes the given tag.
+     * The tag must exist in the address book.
+     */
+    void deleteTag(Tag target);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 

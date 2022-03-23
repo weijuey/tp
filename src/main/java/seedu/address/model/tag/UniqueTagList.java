@@ -8,7 +8,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -84,6 +86,17 @@ public class UniqueTagList implements Iterable<Tag> {
         }
 
         internalList.setAll(tags);
+    }
+
+    /**
+     * Removes the equivalent tag from the list.
+     * The tag must exist in the list.
+     */
+    public void remove(Tag toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new TagNotFoundException();
+        }
     }
 
     /**

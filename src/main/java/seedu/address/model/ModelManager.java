@@ -130,6 +130,11 @@ public class ModelManager implements Model {
         addressBook.setTag(target, editedTag);
     }
 
+    @Override
+    public void deleteTag(Tag target) {
+        addressBook.removeTag(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
