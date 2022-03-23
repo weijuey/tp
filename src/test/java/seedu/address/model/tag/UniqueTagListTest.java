@@ -3,12 +3,10 @@ package seedu.address.model.tag;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalTags.VALID_TAG_COLLEAGUES;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_FRIENDS;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_NEIGHBOURS;
-import static seedu.address.testutil.TypicalTags.VALID_TAG_COLLEAGUES;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_TEST;
 
 import java.util.Arrays;
@@ -19,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
-import seedu.address.testutil.PersonBuilder;
 
 public class UniqueTagListTest {
 
