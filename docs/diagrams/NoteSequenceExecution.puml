@@ -7,9 +7,10 @@ end box
 
 Box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "new:Person" as NewPerson MODEL_COLOR
+participant "personToEdit:Person" as OldPerson MODEL_COLOR
+participant "oldNotes:Notes" as OldNotes MODEL_COLOR
 participant "newNotes:Notes" as NewNotes MODEL_COLOR
-participant "old:Person" as OldPerson MODEL_COLOR
+participant "editedPerson:Person" as NewPerson MODEL_COLOR
 end box
 
 [-> NoteCommand : "execute"
@@ -17,23 +18,27 @@ activate NoteCommand
 
 NoteCommand -> Model : "getFilteredPersonList()"
 
-NoteCommand -> NoteCommand : "updateNotes(old, note)"
+NoteCommand -> NoteCommand : "updateNotes(personToEdit, note)"
 activate NoteCommand
 
-create NewNotes
-NoteCommand -> NewNotes : "Notes.loadNotesFromList(personToEdit.getNotes().value)"
-activate NewNotes
-NewNotes -> NoteCommand
-deactivate NewNotes
+NoteCommand -> OldPerson : "getNotes()"
 
-NoteCommand -> NewNotes : "updateNotes(note)"
+NoteCommand -> OldNotes : "updateNotes(note)"
+activate OldNotes
+create NewNotes
+OldNotes -> NewNotes
+activate NewNotes
+NewNotes -> OldNotes
+deactivate NewNotes
+OldNotes -> NoteCommand : "newNotes"
+deactivate OldNotes
 
 create NewPerson
 NoteCommand -> NewPerson
 activate NewPerson
 NewPerson -> NoteCommand
 deactivate NewPerson
-NoteCommand -> NoteCommand
+NoteCommand -> NoteCommand : "editedPerson"
 deactivate NoteCommand
 
 NoteCommand -> Model : "model.setPerson(old, new)"
