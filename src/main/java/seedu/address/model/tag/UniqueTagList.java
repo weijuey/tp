@@ -16,7 +16,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  * A list of tags that enforces uniqueness between its elements and does not allow nulls.
  * A tag is considered unique by comparing using {@code Tag#isSameTag(Tag)}. As such, adding and updating of
  * tags uses Tag#isSameTag(Tag) for equality so as to ensure that the tag being added or updated is
- * unique in terms of identity in the UniqueTagList.
+ * unique in terms of identity in the UniqueTagList. However, the removal of a tag uses Tag#equals(Object).
  *
  * Supports a minimal set of list operations.
  *
