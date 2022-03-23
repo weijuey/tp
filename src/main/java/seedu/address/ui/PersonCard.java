@@ -104,19 +104,6 @@ public class PersonCard extends UiPart<Region> {
         gc.strokePolygon(xpoints, ypoints, xpoints.length);
 
         //@@author
-
-        //@@author xSaints19x-reused
-        //Reused from https://docs.oracle.com/javafx/2/canvas/jfxpub-canvas.htm
-        //
-
-//        double[] xp = {1, 7, 9, 11, 17, 13, 14, 9, 4, 5};
-//        double[] yp = {7, 6.5, 1, 6.5, 7, 10, 15, 12, 15, 10};
-//
-//        gc.setFill(Color.YELLOW);
-//        gc.fillPolygon(xp, yp, xp.length);
-//
-//        gc.setStroke(Color.BLACK);
-//        gc.strokePolygon(xp, yp, xp.length);
     }
 
     public static void main(String[] args) {
