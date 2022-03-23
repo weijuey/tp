@@ -37,7 +37,7 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final List<String> VALID_NOTES = BENSON.getNotes().value;
     private static final String VALID_FAVOURITE = BENSON.getFavouriteStatus().toString();
-    private static final String VALID_IMPORTANCE_STATUS =  BENSON.getHighImportanceStatus().toString();
+    private static final String VALID_IMPORTANCE_STATUS = BENSON.getHighImportanceStatus().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -144,7 +144,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidImportanceStatus_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DEADLINES,
-                VALID_NOTES, VALID_TAGS, INVALID_FAVOURITE, INVALID_IMPORTANCE_STATUS);
+                VALID_NOTES, VALID_TAGS, VALID_FAVOURITE, INVALID_IMPORTANCE_STATUS);
         String expectedMessage = HighImportance.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
 

@@ -29,7 +29,7 @@ public class HighImportanceCommand extends Command {
             + "used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_CHANGE_HIGH_IMPORTANCE_SUCCESS = "Changed Person's Favourite Status: %1$s";
+    public static final String MESSAGE_CHANGE_HIGH_IMPORTANCE_SUCCESS = "Changed Person's Importance Status: %1$s";
 
     private final Index index;
 
