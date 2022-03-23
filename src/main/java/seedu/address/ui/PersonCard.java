@@ -58,6 +58,8 @@ public class PersonCard extends UiPart<Region> {
     private ImageView flagImageView;
     private final Image highImportanceFlag = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/red_flag.png")));
+    private final Image notHighImportanceFlag = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/white_flag.png")));
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -85,7 +87,10 @@ public class PersonCard extends UiPart<Region> {
             flagImageView.setImage(highImportanceFlag);
             flagImageView.setFitHeight(20);
             flagImageView.setFitWidth(20);
-            flagImageView.setVisible(true);
+        } else {
+            flagImageView.setImage(notHighImportanceFlag);
+            flagImageView.setFitHeight(20);
+            flagImageView.setFitWidth(20);
         }
     }
 
