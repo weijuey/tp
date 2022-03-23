@@ -22,20 +22,20 @@ public class HighImportance {
      *
      * @param hasHighImportance The HighImportance status.
      */
-    private HighImportance(Boolean hasHighImportance) {
+    public HighImportance(Boolean hasHighImportance) {
         requireNonNull(hasHighImportance);
         value = hasHighImportance.toString();
     }
 
     /**
-     * Takes the string representation of the boolean and returns the correct {@code Favourite} object.
+     * Takes the string representation of the boolean and returns the correct {@code HighImportance} object.
      *
      * @param hasHighImportance is the String representation provided.
      * @return the {@code HighImportance} object that corresponds to the String provided.
      */
     public static HighImportance valueOf(String hasHighImportance) throws IllegalArgumentException {
         if (!(TRUE_STRING.equals(hasHighImportance) || FALSE_STRING.equals(hasHighImportance))) {
-            throw new IllegalArgumentException("Favourite can only be true or false.");
+            throw new IllegalArgumentException("HighImportance can only be true or false.");
         }
 
         return TRUE_STRING.equals(hasHighImportance)
