@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+
+Box Logic LOGIC_COLOR_T1
+participant ":NoteCommand" as NoteCommand LOGIC_COLOR
+end box
+
+Box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "new:Person" as NewPerson MODEL_COLOR
+participant "newNotes:Notes" as NewNotes MODEL_COLOR
+participant "old:Person" as OldPerson MODEL_COLOR
+end box
+
+[-> NoteCommand : "execute"
+activate NoteCommand
+
+NoteCommand -> Model : "getFilteredPersonList()"
+
+NoteCommand -> NoteCommand : "updateNotes(old, note)"
+activate NoteCommand
+
+create NewNotes
+NoteCommand -> NewNotes : "Notes.loadNotesFromList(personToEdit.getNotes().value)"
+activate NewNotes
+NewNotes -> NoteCommand
+deactivate NewNotes
+
+NoteCommand -> NewNotes : "updateNotes(note)"
+
+create NewPerson
+NoteCommand -> NewPerson
+activate NewPerson
+NewPerson -> NoteCommand
+deactivate NewPerson
+NoteCommand -> NoteCommand
+deactivate NoteCommand
+
+NoteCommand -> Model : "model.setPerson(old, new)"
+
+Model -> OldPerson
+destroy OldPerson
+
+@enduml
