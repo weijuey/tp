@@ -5,9 +5,9 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 package List<Person> {
-Class "List[index - 1]" as Person1
-Class "List[index]" as Person2
-Class "List[index + 1]" as Person3
+Class "Person1" as Person1
+Class "Person2" as Person2
+Class "Person3" as Person3
 }
 
 Person1 - Person2
