@@ -162,7 +162,7 @@ In the execution of a command that modify a contact's notes, for instance, the N
 
 The sequence diagram below illustrates this behaviour.
 
-![NoteCommandExecution](diagrams/NoteSequenceExecution.puml)
+![NoteCommandExecution](images/NoteSequenceExecution.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for `personToEdit` and `oldNotes` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines reaches the end of diagram.
 
