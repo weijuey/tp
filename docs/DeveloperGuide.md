@@ -166,6 +166,7 @@ Diagram below represents the list of `Person`
 Step 2. The user executes `deadline 1 /d return book 1/1/2023` command to add the deadline `1/1/2023` with description `return book` to the first person in the address book.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Adding multiple `deadline` is supported, for example: `deadline 1 /d return book 1/1/2023 /d write report 5/1/2023`.
+</div>
 
 Step 3. The `DeadlineCommand#execute()` method will find the `Person` at the index specified.
 <img src="images/DeadlineState2.png" width="574" />
@@ -181,9 +182,14 @@ Step 6. The `UI` displays the updated list.
 Diagram below shows the execution of `deadline 1 /d return book 1/1/2023` command
 <img src="images/DeadlineSequenceDiagram.png" width="574" />
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeadlineCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram
+</div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Calling `deadline 1` without the date and description clears the deadlines for contact specified in index given.
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Duplicate `deadline` for the same `Person` is not allowed.
+</div>
 
 #### Limitations and proposed solutions
 Currently, calling `deadline` command resets all `deadlines` previously stored for `Person` specified, so it does not scale well.
