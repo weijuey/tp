@@ -244,7 +244,7 @@ The find tag feature is used when a user is interested in finding contacts who h
 
 This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
 
-The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate` the model then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list. 
+The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list. 
 
 As such, `FindTagCommand` extends `Command` and executes the command by calling `FindTagCommand#execute()`.
 
