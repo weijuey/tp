@@ -85,13 +85,11 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.hasHighImportance()) {
             flagImageView.setImage(highImportanceFlag);
-            flagImageView.setFitHeight(20);
-            flagImageView.setFitWidth(20);
         } else {
             flagImageView.setImage(notHighImportanceFlag);
-            flagImageView.setFitHeight(20);
-            flagImageView.setFitWidth(20);
         }
+        flagImageView.setFitHeight(20);
+        flagImageView.setFitWidth(20);
     }
 
     private void drawStarShape(GraphicsContext gc) {
