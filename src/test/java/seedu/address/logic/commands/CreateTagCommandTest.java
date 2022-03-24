@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalTagNames.VALID_TAGNAME_COLLEAGUES;
-import static seedu.address.testutil.TypicalTagNames.VALID_TAGNAME_NEIGHBOURS;
+import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_COLLEAGUES;
+import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_NEIGHBOURS;
 
 import org.junit.jupiter.api.Test;
 
@@ -77,7 +77,7 @@ public class CreateTagCommandTest {
         // null -> returns false
         assertFalse(createTagFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different tag -> returns false
         assertFalse(createTagFirstCommand.equals(createTagSecondCommand));
     }
 

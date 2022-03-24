@@ -39,10 +39,10 @@ public class UniqueTagListTest {
     }
 
     @Test
-    public void contains_tagWithSameSpellingDifferentCapitalisation_returnsTrue() {
+    public void contains_tagWithSameNameDifferentCase_returnsTrue() {
         uniqueTagList.add(VALID_TAG_FRIENDS);
-        Tag sameSpellingDifferentCapitalisationTag = new Tag("frIenDs");
-        assertTrue(uniqueTagList.contains(sameSpellingDifferentCapitalisationTag));
+        Tag sameNameDifferentCaseTag = new Tag("frIenDs");
+        assertTrue(uniqueTagList.contains(sameNameDifferentCaseTag));
     }
 
     @Test
@@ -81,12 +81,12 @@ public class UniqueTagListTest {
     }
 
     @Test
-    public void setTag_editedTagHasSameSpellingDifferentCapitalisation_success() {
+    public void setTag_editedTagHasSameNameDifferentCase_success() {
         uniqueTagList.add(VALID_TAG_FRIENDS);
-        Tag sameSpellingDifferentCapitalisationTag = new Tag("frIeNdS");
-        uniqueTagList.setTag(VALID_TAG_FRIENDS, sameSpellingDifferentCapitalisationTag);
+        Tag sameNameDifferentCaseTag = new Tag("frIeNdS");
+        uniqueTagList.setTag(VALID_TAG_FRIENDS, sameNameDifferentCaseTag);
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.add(sameSpellingDifferentCapitalisationTag);
+        expectedUniqueTagList.add(sameNameDifferentCaseTag);
         assertEquals(expectedUniqueTagList, uniqueTagList);
     }
 
@@ -100,7 +100,7 @@ public class UniqueTagListTest {
     }
 
     @Test
-    public void setTag_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setTag_editedTagHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueTagList.add(VALID_TAG_TEST);
         uniqueTagList.add(VALID_TAG_FRIENDS);
         assertThrows(DuplicateTagException.class, () -> uniqueTagList.setTag(VALID_TAG_TEST, VALID_TAG_FRIENDS));

@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalTags;
 
 public class JsonSerializableAddressBookTest {
 
@@ -64,11 +65,11 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_typicalTagsFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_TAGS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+        AddressBook typicalTagsAddressBook = TypicalTags.getTypicalAddressBook();
+        assertEquals(addressBookFromFile, typicalTagsAddressBook);
     }
 
 }

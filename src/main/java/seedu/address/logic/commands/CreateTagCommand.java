@@ -11,7 +11,7 @@ public class CreateTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates a tag with a given tag name.\n"
-            + "Parameters: TAG (case insensitive)\n"
+            + "Parameters: TAG_NAME (case insensitive)\n"
             + "Example: " + COMMAND_WORD + " Friends";
 
     public static final String MESSAGE_CREATE_TAG_SUCCESS = "Created tag: %1$s";

@@ -69,7 +69,7 @@ public class TypicalPersons {
             ab.addPerson(person);
         }
 
-        for (Tag tag : getTypicalTags()) {
+        for (Tag tag : TypicalTags.getTypicalTags()) {
             ab.addTag(tag);
         }
         return ab;
@@ -79,7 +79,4 @@ public class TypicalPersons {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
-    public static List<Tag> getTypicalTags() {
-        return new ArrayList<>(Arrays.asList(new Tag("friends"), new Tag("owesMoney")));
-    }
 }

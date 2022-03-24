@@ -121,7 +121,7 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code tag} contains only unique tag.
      */
     private boolean tagsAreUnique(List<Tag> tags) {
         for (int i = 0; i < tags.size() - 1; i++) {
