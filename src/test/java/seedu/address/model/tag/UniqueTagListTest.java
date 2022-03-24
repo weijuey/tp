@@ -130,7 +130,7 @@ public class UniqueTagListTest {
     }
 
     @Test
-    public void setTags_UniqueTagList_replacesOwnListWithProvidedUniqueTagList() {
+    public void setTags_uniqueTagList_replacesOwnListWithProvidedUniqueTagList() {
         uniqueTagList.add(VALID_TAG_FRIENDS);
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
         expectedUniqueTagList.add(VALID_TAG_TEST);
@@ -162,6 +162,6 @@ public class UniqueTagListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueTagList.asUnmodifiableObservableList().remove(0));
+            -> uniqueTagList.asUnmodifiableObservableList().remove(0));
     }
 }

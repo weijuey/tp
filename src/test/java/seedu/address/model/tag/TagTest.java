@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_FRIENDS;
-import static seedu.address.testutil.TypicalTags.VALID_TAG_NEIGHBOURS;
 
 import org.junit.jupiter.api.Test;
 
