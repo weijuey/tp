@@ -166,6 +166,8 @@ The sequence diagram below illustrates this behaviour.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for `personToEdit` and `oldNotes` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines reaches the end of diagram.
 
+</div>
+
 This implementation is in line with other forms of editing a contact, and will facilitate new features you may plan to implement, such as the planned undo/redo feature.
 
 Another reason for this implementation is the ease of testing. You will find that the TypicalPersons contains Person objects as the baseline to create a list of contacts. Writing tests for Notes is easier without having to intently reverse any changes to the Notes of these Persons.
