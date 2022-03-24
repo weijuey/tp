@@ -268,6 +268,10 @@ Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned 
 
 ![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindTagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
 #### Design considerations:
 
 **Aspect: Should contacts have all the keywords searched for:**

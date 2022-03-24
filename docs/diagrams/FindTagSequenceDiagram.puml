@@ -36,6 +36,7 @@ FindTagCommandParser -> TagContainsKeywordPredicate
 activate TagContainsKeywordPredicate
 
 TagContainsKeywordPredicate --> FindTagCommandParser : p
+deactivate TagContainsKeywordPredicate
 
 create FindTagCommand
 FindTagCommandParser -> FindTagCommand : p
