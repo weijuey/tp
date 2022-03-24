@@ -154,6 +154,22 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Implementation of Notes
+
+The Notes class encapsulates a List<String> that contains the notes added to a Person. The main feature of the class is that updating a Notes object, be it adding or deleting a note, returns a new Notes object that contains a new list with the result.
+
+In the execution of a command that modify a contact's notes, for instance, the NoteCommand which adds a given note to a contact, a new Person object is created with the new Notes object. Thus, this implementation of Notes avoids the problem of aliasing between different Person objects, and reduces coupling.
+
+The sequence diagram below illustrates this behaviour.
+
+![NoteCommandExecution](diagrams/NoteSequenceExecution.puml)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifelines for `personToEdit` and `oldNotes` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifelines reaches the end of diagram.
+
+This implementation is in line with other forms of editing a contact, and will facilitate new features you may plan to implement, such as the planned undo/redo feature.
+
+Another reason for this implementation is the ease of testing. You will find that the TypicalPersons contains Person objects as the baseline to create a list of contacts. Writing tests for Notes is easier without having to intently reverse any changes to the Notes of these Persons.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

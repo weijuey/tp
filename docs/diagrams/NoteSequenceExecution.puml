@@ -32,6 +32,9 @@ NewNotes -> OldNotes
 deactivate NewNotes
 OldNotes -> NoteCommand : "newNotes"
 deactivate OldNotes
+'Hidden arrow to move destroy marker lower'
+OldNotes -[hidden]-> OldNotes
+destroy OldNotes
 
 create NewPerson
 NoteCommand -> NewPerson
