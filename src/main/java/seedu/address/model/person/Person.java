@@ -125,13 +125,14 @@ public class Person {
                 && otherPerson.getDeadlines().equals(getDeadlines())
                 && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags())
+                && otherPerson.getFavouriteStatus().equals(getFavouriteStatus())
                 && otherPerson.getHighImportanceStatus().equals(getHighImportanceStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, notes, tags, highImportanceStatus);
+        return Objects.hash(name, phone, email, address, notes, tags, favouriteStatus, highImportanceStatus);
     }
 
     @Override
@@ -147,7 +148,9 @@ public class Person {
                 .append("; Deadline(s): ")
                 .append(getDeadlines())
                 .append("; Notes: ")
-                .append(getNotes());
+                .append(getNotes())
+                .append("; Favourite: ")
+                .append(getFavouriteStatus());
 
         Set<Tag> tags = getTags();
 

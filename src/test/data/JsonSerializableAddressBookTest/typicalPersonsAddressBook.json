@@ -24,8 +24,8 @@
     } ],
     "notes" : [ ],
     "tagged" : [ "owesMoney", "friends" ],
-    "isFavourite" : "false",
-    "hasHighImportance" : "true"
+    "isFavourite" : "true",
+    "hasHighImportance" : "true"=
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
