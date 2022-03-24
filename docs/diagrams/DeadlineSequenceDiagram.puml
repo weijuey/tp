@@ -12,9 +12,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "deadlines:DeadlineList" as DeadlineList MODEL_COLOR
-participant "personToAddDeadline:Person" as Person1 MODEL_COLOR
-participant "editedPerson:Person" as Person2 MODEL_COLOR
 end box
 
 [-> LogicManager : execute("deadline 1 /d return book 1/1/2023")
@@ -41,13 +38,6 @@ deactivate ParserUtil
 
 DeadlineCommandParser -> ParserUtil : parseDeadlines([" return book 1/1/2023"])
 activate ParserUtil
-
-create DeadlineList
-ParserUtil -> DeadlineList : DeadlineList(deadlineList)
-activate DeadlineList
-
-DeadlineList --> ParserUtil : deadlines
-deactivate DeadlineList
 
 ParserUtil --> DeadlineCommandParser : deadlines
 deactivate ParserUtil
@@ -76,55 +66,6 @@ activate Model
 
 Model --> DeadlineCommand : lastShownList
 deactivate Model
-
-DeadlineCommand -> Person1 : getName()
-activate Person1
-
-Person1 --> DeadlineCommand : name
-deactivate Person1
-
-DeadlineCommand -> Person1 : getPhone()
-activate Person1
-
-Person1 --> DeadlineCommand : phone
-deactivate Person1
-
-DeadlineCommand -> Person1 : getEmail()
-activate Person1
-
-Person1 --> DeadlineCommand : email
-deactivate Person1
-
-DeadlineCommand -> Person1 : getAddress()
-activate Person1
-
-Person1 --> DeadlineCommand : address
-deactivate Person1
-
-DeadlineCommand -> Person1 : getNotes()
-activate Person1
-
-Person1 --> DeadlineCommand : notes
-deactivate Person1
-
-DeadlineCommand -> Person1 : getTags()
-activate Person1
-
-Person1 --> DeadlineCommand : tags
-deactivate Person1
-
-DeadlineCommand -> Person1 : getFavouriteStatus()
-activate Person1
-
-Person1 --> DeadlineCommand : favourite
-deactivate Person1
-
-create Person2
-DeadlineCommand -> Person2 : Person(name, phone, email, address, deadlines, notes, tags, favourite)
-activate Person2
-
-Person2 --> DeadlineCommand : editedPerson
-deactivate Person2
 
 DeadlineCommand -> Model : setPerson(personToAddDeadline, editedPerson)
 activate Model
