@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,7 +154,57 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Implementation of Notes
+### Find tag feature
+
+#### Implementation
+
+The find tag feature is used when a user is interested in finding contacts who have a certain `Tag`. Each `Person` has a set of `Tags` which contains unique `Tags` since each `Person` should not have more than 1 of the same tag.
+
+This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
+
+The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list.
+
+As such, `FindTagCommand` extends `Command` and executes the command by calling `FindTagCommand#execute()`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are multiple keywords, e.g.`findtag friends colleagues`, then the contact should have both tags `friends` and `colleagues` in order for the contact to be reflected on the updated filtered person list.
+
+</div>
+
+Given below is an example usage scenario and how the find tag feature behaves at each step.
+
+Step 1. The user launches the address book for the first time, initialized with the initial address book state.
+
+Step 2. The user executes the command `findtag friends` to find contacts with the tag `friends` in their set of tags.
+
+Step 3. The AddressBookParser parses the command `findtag friends` and creates a `FindTagCommandParser` to parse the keyword `friends`.
+
+Step 4. The `TagContainsKeywordPredicate` is created and passed onto the constructor of `FindTagCommand` to create a new `FindTagCommand` object.
+
+Step 5. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
+
+Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
+
+![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindTagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Should contacts have all the keywords searched for:**
+
+* **Alternative 1 (current choice):** Contacts containing strictly the same tags as all the keywords searched for.
+    * Pros: More intuitive, as only contacts with strictly the same tags as all the keywords searched will be listed.
+    * Cons: Have to ensure the contacts are tagged correctly, or they will not be found with this feature.
+
+* **Alternative 2:** Contacts containing any tags of the keywords searched for.
+    * Pros: Can find contacts who have any tags the keywords searched.
+    * Cons: Unintuitive, as we usually narrow down the scope for filtering.
+
+### Notes feature
+
+#### Implementation
 
 The Notes class encapsulates a List<String> that contains the notes added to a Person. The main feature of the class is that updating a Notes object, be it adding or deleting a note, returns a new Notes object that contains a new list with the result.
 
@@ -208,9 +258,11 @@ The following sequence diagram shows how the favourite operation works:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+
 If the user runs `fav 3` again, or commands `fav` on an existing favourited contact, the only difference in the execution would be that the `NOT_FAVOURITE` reference will be passed into the `FavouriteCommand#createFavouritePerson` method instead.
 
-From the user experience point of view, not having an un-favourite command is intuitive. In order to favourite a contact, they will need to look-up their current index number, in which case, they will already know if they are a favourite contact or not. 
+From the user experience point of view, not having an un-favourite command is intuitive. In order to favourite a contact, they will need to look-up their current index number, in which case, they will already know if they are a favourite contact or not.
 This makes toggling instead of hard-setting the favourite status of a contact feasible, and reduces the number of commands the user has to remember.
 
 #### Design considerations:
@@ -218,23 +270,24 @@ This makes toggling instead of hard-setting the favourite status of a contact fe
 **Aspect: How favourite and list favourite commands execute:**
 
 * **Alternative 1 (current choice):** Each person responsible for their own favourite state
-  * Pros:
-    * Less coupling between favourite and other commands such as edit and delete, as well as the model.
-    * Easy to reference to check favourite status of contact.
-    * Easy to implement.
-  * Cons:
-    * Adds more fields to the person contact, increasing the complexity of the contact in the long run.
-    * Need to have a `Favourite` class to represent a contact's status.
+    * Pros:
+        * Less coupling between favourite and other commands such as edit and delete, as well as the model.
+        * Easy to reference to check favourite status of contact.
+        * Easy to implement.
+    * Cons:
+        * Adds more fields to the person contact, increasing the complexity of the contact in the long run.
+        * Need to have a `Favourite` class to represent a contact's status.
 * **Alternative 2:** Store favourited contacts into a `FavouritePersonList`.
-  * Pros:
-    * No need to add field into `Persons` class.
-    * No need to have `Favourite` class, which basically just acts as a boolean.
-    * `List` command will be easy to implement.
-  * Cons:
-    * Have to update the `FavouritePersonList` if a favourited contact has been modified.
-    * Needs more work, specially within the storage.
+    * Pros:
+        * No need to add field into `Persons` class.
+        * No need to have `Favourite` class, which basically just acts as a boolean.
+        * `List` command will be easy to implement.
+    * Cons:
+        * Have to update the `FavouritePersonList` if a favourited contact has been modified.
+        * Needs more work, specially within the storage.
 
 ### Deadline feature
+
 #### Implementation
 The `deadline` mechanism borrows from the current `edit` mechanism. The main idea of the mechanism is creating a new `Person` object with added `deadline`, then replace existing `Person` in list with the new `Person`.
 
@@ -281,6 +334,56 @@ Currently, calling `deadline` command resets all `deadlines` previously stored f
 The main problem with the solutions is that new delimiters have to be created. These delimiters might not be intuitive for users to remember or might overlap with other delimiters.
 
 (more limitations and solutions to be discovered...)
+
+### Add contact with address as optional field feature
+
+#### Implementation
+
+The implemented enhanced add mechanism is facilitated by the `add` command.
+
+Classes changed for this feature:
+- `AddCommand`
+- `AddCommandParser`
+
+Given below is a code snippet implemented for `AddCommandParser`:
+
+![AddCommandParserEnhancement](images/AddCommandParserEnhancement.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** A string value of `*No Address Specified*` is used for `Address.EMPTY_ADDRESS` instead of an empty string.
+</div>
+
+#### Design considerations:
+
+**Aspect: Values to accept in address field:**
+
+* **Alternative 1 (current choice):** Having a string `*No Address Specified*` in the address field
+    * Pros: Easy to implement.
+    * Cons: UI may look less pleasing with repetitive words for each contact.
+
+* **Alternative 2:** Accepting empty string in address field
+    * Pros: UI may look neater and cleaner.
+    * Cons: Will need to change many components for address field to be an empty string.
+
+### Add a high importance flag feature
+
+#### Implementation
+
+The implemented high importance flag feature is facilitated by using the `execute()` method in `HighImportanceCommand` with the keyword `impt` to execute the command. This feature is stored as an additional attribute `highImportanceStatus` for each person within the application and is implemented as a separate class within the `Person` package.
+
+The `highImportanceStatus` contains an attribute `value` which takes on the values of either `"true"` or `"false"`.
+- `"true"` denotes that the `Person` is a person of high importance.
+- `"false"` denotes that the `Person` is a person not of high importance.
+
+Classes added for this feature:
+- `HighImportance`
+- `HighImportanceCommand`
+- `HighImportanceParser`
+
+The following sequence diagram shows how the feature works:
+
+![HighImportanceSequenceDiagram](images/HighImportanceSequenceDiagram.png)
+
+_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Undo/redo feature
 
@@ -352,115 +455,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Implemented\] Add contact with address as optional field feature
-
-#### Implementation
-
-The implemented enhanced add mechanism is facilitated by the `add` command.
-
-Classes changed for this feature:
-- `AddCommand`
-- `AddCommandParser`
-
-Given below is a code snippet implemented for `AddCommandParser`:
-
-![AddCommandParserEnhancement](images/AddCommandParserEnhancement.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** A string value of `*No Address Specified*` is used for `Address.EMPTY_ADDRESS` instead of an empty string.
-</div>
-
-#### Design considerations:
-
-**Aspect: Values to accept in address field:**
-
-* **Alternative 1 (current choice):** Having a string `*No Address Specified*` in the address field
-    * Pros: Easy to implement.
-    * Cons: UI may look less pleasing with repetitive words for each contact.
-
-* **Alternative 2:** Accepting empty string in address field
-    * Pros: UI may look neater and cleaner.
-    * Cons: Will need to change many components for address field to be an empty string.
-
-### \[Implemented\] Add a high importance flag feature
-
-#### Implementation
-
-The implemented high importance flag feature is facilitated by using the `execute()` method in `HighImportanceCommand` with the keyword `impt` to execute the command. This feature is stored as an additional attribute `highImportanceStatus` for each person within the application and is implemented as a separate class within the `Person` package.
-
-The `highImportanceStatus` contains an attribute `value` which takes on the values of either `"true"` or `"false"`.
-- `"true"` denotes that the `Person` is a person of high importance.
-- `"false"` denotes that the `Person` is a person not of high importance.
-
-Classes added for this feature:
-- `HighImportance`
-- `HighImportanceCommand`
-- `HighImportanceParser`
-
-The following sequence diagram shows how the feature works:
-
-![HighImportanceSequenceDiagram](images/HighImportanceSequenceDiagram.png)
-
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
-### Find tag feature
-
-The find tag feature is used when a user is interested in finding contacts who have a certain `Tag`. Each `Person` has a set of `Tags` which contains unique `Tags` since each `Person` should not have more than 1 of the same tag.
-
-This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
-
-The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list. 
-
-As such, `FindTagCommand` extends `Command` and executes the command by calling `FindTagCommand#execute()`.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are multiple keywords, e.g. `findtag friends colleagues`, then both contact should have both tags `friends` and `colleagues` in order for the contact to be reflected on the updated filtered person list.
-
-</div>
-
-Given below is an example usage scenario and how the find tag feature behaves at each step.
-
-Step 1. The user launches the address book for the first time, initialized with the initial address book state.
-
-Step 2. The user executes the command `findtag friends` to find contacts with the tag `friends` in their set of tags.
-
-Step 3. The AddressBookParser parses the command `findtag friends` and creates a `FindTagCommandParser` to parse the keyword `friends`.
-
-Step 4. The `TagContainsKeywordPredicate` is created and passed onto the constructor of `FindTagCommand` to create a new `FindTagCommand` object.
-
-Step 5. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
-
-Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
-
-![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindTagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-#### Design considerations:
-
-**Aspect: Should contacts have all the keywords searched for:**
-
-* **Alternative 1 (current choice):** Contacts containing strictly the same tags as all the keywords searched for.
-  * Pros: More intuitive, as only contacts with strictly the same tags as all the keywords searched will be listed.
-  * Cons: Have to ensure the contacts are tagged correctly, or they will not be found with this feature.
-
-* **Alternative 2:** Contacts containing any tags of the keywords searched for.
-  * Pros: Can find contacts who have any tags the keywords searched.
-  * Cons: Unintuitive, as we usually narrow down the scope for filtering.
-
-{more aspects and alternatives to be added}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -526,13 +532,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User adds a person with the required fields.
 2. d'Intérieur shows the new contact added with the details entered.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. User includes address field.
 
-  * Use case resumes at step 2.
+    * Use case resumes at step 2.
 
 **UC02: Delete a contact**
 
@@ -543,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to delete a specific contact in the list.
 4. d'Intérieur shows contact deleted and updates the list.
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -566,7 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to add a label to a specific contact in the list.
 4. d'Intérieur adds the label to the contact and shows the contact.
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -582,7 +588,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The label requested does not currently exist in d'Intérieur.
 
-  * To be added
+    * To be added
 
 **UC04: Filter contacts using labels**
 
@@ -591,13 +597,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests list of contacts filtered to those containing the given label.
 2. d'Intérieur shows a list of contacts who have the given label.
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
 * 1a. The given label does not exist.
 
-  * To be added
+    * To be added
 
 **UC05: Adding a note to a contact**
 
@@ -606,15 +612,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a note to a specific contact in the list.
 2. d'Intérieur adds the note to the contact and shows the contact.
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
 * 1a. User enters only whitespaces or nothing as a note.
 
-  * 1a1. d'Intérieur alerts the user that no changes have been made to notes
+    * 1a1. d'Intérieur alerts the user that no changes have been made to notes
 
-    Use case ends.
+      Use case ends.
 
 * 1b. The given index is invalid.
 
@@ -629,7 +635,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a specific contact in the list to favourites.
 2. d'Intérieur adds the contact to favourites and shows the contact.
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -644,13 +650,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a deadline under a contact.
 2. d'Intérieur adds the deadline under the contact and shows the contact.
 
-  Use case ends.
+Use case ends.
 
 **Extensions**
 
 * 1a. The deadline given does not contain a valid date or time.
 
-  * To be added
+    * To be added
 
 * 1b. The given index is invalid.
 
@@ -696,15 +702,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -713,16 +719,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -730,6 +736,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
