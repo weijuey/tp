@@ -360,6 +360,54 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+### \[Implemented\] Add contact with address as optional field feature
+
+#### Implementation
+
+The implemented enhanced add mechanism is facilitated by the `add` command.
+
+Classes changed for this feature:
+- `AddCommand`
+- `AddCommandParser`
+
+Given below is a code snippet implemented for `AddCommandParser`:
+
+![AddCommandParserEnhancement](images/AddCommandParserEnhancement.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** A string value of `*No Address Specified*` is used for `Address.EMPTY_ADDRESS` instead of an empty string.
+</div>
+
+#### Design considerations:
+
+**Aspect: Values to accept in address field:**
+
+* **Alternative 1 (current choice):** Having a string `*No Address Specified*` in the address field
+    * Pros: Easy to implement.
+    * Cons: UI may look less pleasing with repetitive words for each contact.
+
+* **Alternative 2:** Accepting empty string in address field
+    * Pros: UI may look neater and cleaner.
+    * Cons: Will need to change many components for address field to be an empty string.
+
+### \[Implemented\] Add a high importance flag feature
+
+#### Implementation
+
+The implemented high importance flag feature is facilitated by using the `execute()` method in `HighImportanceCommand` with the keyword `impt` to execute the command. This feature is stored as an additional attribute `highImportanceStatus` for each person within the application and is implemented as a separate class within the `Person` package.
+
+The `highImportanceStatus` contains an attribute `value` which takes on the values of either `"true"` or `"false"`.
+- `"true"` denotes that the `Person` is a person of high importance.
+- `"false"` denotes that the `Person` is a person not of high importance.
+
+Classes added for this feature:
+- `HighImportance`
+- `HighImportanceCommand`
+- `HighImportanceParser`
+
+The following sequence diagram shows how the feature works:
+
+![HighImportanceSequenceDiagram](images/HighImportanceSequenceDiagram.png)
+
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
@@ -447,26 +495,25 @@ d'Intérieur is designed for interior designers who:
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                   | I want to …​                                                                         | So that I can…​                                                                                   |
-|---------|-------------------------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `* * *` | new user                                  | look at a basic tutorial for adding contacts                                         | understand what details I can add to a contact                                                    |
-| `* * *` | busy interior designer                    | add a new contact quickly                                                            | reduce time on adding new contacts                                                                |
-| `* * *` | user                                      | delete a contact                                                                     | remove entries that I no longer need                                                              |
-| `* * *` | user                                      | find a contact by name                                                               | locate details of contacts without having to go through the entire list                           |
-| `* * *` | interior designer                         | label my contacts with some fixed labels                                             | categorise my clients based on the stage of design I am at                                        |
-| `* * *` | interior designer with many ongoing leads | filter my contacts list based on label                                               | easily keep track of who I am working with at a specific point of time without having to remember |
-| `* * *` | interior designer                         | add notes under a contact                                                            | keep track of the demands and requirements of each individual project                             |
-| `* * *` | busy interior designer                    | add a deadline under a contact                                                       | keep track of my deadlines easily                                                                 |
-| `* * *` | user                                      | favourite certain contacts                                                           | look up favourites and contact them easily                                                        |
-| `* *`   | interior designer                         | check upcoming deadlines in chronological order                                      | keep track of deadlines automatically                                                             |
-| `* *`   | long-time user                            | separate past and current clients                                                    | avoid contacting clients with similar names or old clients that I am not presently working with   |
-| `* *`   | new user                                  | view a list of commands                                                              | know what commands are available and the right commands to use                                    |
-| `* *`   | user                                      | view one contact in detail                                                           | see all information I have saved on the contact clearly no matter how much I add                  |
-| `*`     | interior designer                         | add images under a client                                                            | keep track of images such as floor plans and inspirational designs relevant to the client         |
-| `*`     | interior designer                         | add a high importance tag to a client                                                | take note of pressing issues regarding a client, such as mobility issues                          |
-| `*`     | interior designer                         | track and calculate costs accumulated for a client                                   | at a glance, know how much money has been spent on them for a project                             |
-| `*`     | interior designer                         | generate invoices                                                                    | easily generate, store and print invoices for my clients                                          |
-| `*`     | interior designer                         | send out automated messages/emails to clients to wish them well on festive occasions | maintain good rapport with clients                                                                |
-| `*`     | user                                      | create contacts by importing information from other apps                             | create contacts more easily                                                                       |
+|----------|-------------------------------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                  | look at a basic tutorial for adding contacts                                         | understand what details I can add to a contact                                                    |
+| `* * *`  | busy interior designer                    | add a new contact quickly                                                            | reduce time on adding new contacts                                                                |
+| `* * *`  | user                                      | delete a contact                                                                     | remove entries that I no longer need                                                              |
+| `* * *`  | user                                      | find a contact by name                                                               | locate details of contacts without having to go through the entire list                           |
+| `* * *`  | interior designer                         | label my contacts with some fixed labels                                             | categorise my clients based on the stage of design I am at                                        |
+| `* * *`  | interior designer with many ongoing leads | filter my contacts list based on label                                               | easily keep track of who I am working with at a specific point of time without having to remember |
+| `* * *`  | interior designer                         | add notes under a contact                                                            | keep track of the demands and requirements of each individual project                             |
+| `* * *`  | busy interior designer                    | add a deadline under a contact                                                       | keep track of my deadlines easily                                                                 |
+| `* * *`  | user                                      | favourite certain contacts                                                           | look up favourites and contact them easily                                                        |
+| `* *`    | interior designer                         | check upcoming deadlines in chronological order                                      | keep track of deadlines automatically                                                             |
+| `* *`    | long-time user                            | separate past and current clients                                                    | avoid contacting clients with similar names or old clients that I am not presently working with   |
+| `* *`    | new user                                  | view a list of commands                                                              | know what commands are available and the right commands to use                                    |
+| `* *`    | interior designer                         | add a high importance flag to a client                                               | take note of pressing issues regarding a client, such as mobility issues                          |
+| `*`      | interior designer                         | add images under a client                                                            | keep track of images such as floor plans and inspirational designs relevant to the client         |
+| `*`      | interior designer                         | track and calculate costs accumulated for a client                                   | at a glance, know how much money has been spent on them for a project                             |
+| `*`      | interior designer                         | generate invoices                                                                    | easily generate, store and print invoices for my clients                                          |
+| `*`      | interior designer                         | send out automated messages/emails to clients to wish them well on festive occasions | maintain good rapport with clients                                                                |
+| `*`      | user                                      | create contacts by importing information from other apps                             | create contacts more easily                                                                       |
 
 ### Use cases
 
