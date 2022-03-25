@@ -172,6 +172,116 @@ This implementation is in line with other forms of editing a contact, and will f
 
 Another reason for this implementation is the ease of testing. You will find that the TypicalPersons contains Person objects as the baseline to create a list of contacts. Writing tests for Notes is easier without having to intently reverse any changes to the Notes of these Persons.
 
+### Favourite feature
+
+#### Implementation
+
+The favourites feature is implemented by identifying the user's favourite contacts through their `favouriteStatus` state,  which is stored as a `Persons` field. The favourite-status of a person is represented by a `Favourite`, which can be either `IS_FAVOURITE`, or `NOT_FAVOURITE` singletons.
+
+Although it is a `Persons` field, it cannot be instantiated in an add command, nor modified through an edit command, unlike other fields such as "name" or "address". It should be thought of as metadata for the contact, and is set as `NOT_FAVOURITE` by default.
+
+As such, a contact's favourite-status is handled through the `FavouritesCommand`, which extends `Command`. Toggles the contact's favourite status based on their current favourite-status. Its execution behaves rather similarly to `edit`, and has its own `FavouritesCommand#createFavouritedPerson(target, newPerson)` operation.
+
+As part of the favourites feature, a user can also list all their favourite contacts through the `ListFavouritesCommand`, which extends `Command` as well. It leverages on the `PersonIsFavouriteContactPredicate`, which can be passed as an argument to `Model#updateFilteredPersonList(predicate)`
+
+Given below is an example scenario of the favourites feature in operation.
+
+Step 1. When a user is created, they are automatically assigned `NOT_FAVOURITE` as their favourite-status.
+
+![FavouriteState0](images/favourite/FavouriteState0.png)
+
+Step 2. The user executes `fav 3` command to favourite the 3rd person in the address book. The `fav` command executes and determines the current `favouriteStatus` of the contact (which in this case is `NOT_FAVOURITE`). It then calls the private helper method `createFavouritedPerson` to create a copy of the target contact, except with their `favouriteStatus` now pointing to the opposite `Favourite` value (which will be the `IS_FAVOURITE` singleton).
+
+![FavouriteState1](images/favourite/FavouriteState1.png)
+
+Step 3. The command execution continues on to replace the existing person object with the newly favourited contact through `Model#setPerson`. After the execution successfully terminates, the user can visually identify their favourite contacts through the yellow star right beside their contact names.
+
+![FavouriteState2](images/favourite/FavouriteState2.png)
+
+Step 4. The user decides that they want to see only their favourite contacts. The `favourites` command will then execute, passing the `PersonIsFavouriteContactPredicate` into the `Model#updateFilteredPersonList`.
+
+![FavouriteState3](images/favourite/FavouriteState3.png)
+
+The following sequence diagram shows how the favourite operation works:
+
+![FavouriteSequenceDiagram](images/favourite/FavouriteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+If the user runs `fav 3` again, or commands `fav` on an existing favourited contact, the only difference in the execution would be that the `NOT_FAVOURITE` reference will be passed into the `FavouriteCommand#createFavouritePerson` method instead.
+
+From the user experience point of view, not having an un-favourite command is intuitive. In order to favourite a contact, they will need to look-up their current index number, in which case, they will already know if they are a favourite contact or not. 
+This makes toggling instead of hard-setting the favourite status of a contact feasible, and reduces the number of commands the user has to remember.
+
+#### Design considerations:
+
+**Aspect: How favourite and list favourite commands execute:**
+
+* **Alternative 1 (current choice):** Each person responsible for their own favourite state
+  * Pros:
+    * Less coupling between favourite and other commands such as edit and delete, as well as the model.
+    * Easy to reference to check favourite status of contact.
+    * Easy to implement.
+  * Cons:
+    * Adds more fields to the person contact, increasing the complexity of the contact in the long run.
+    * Need to have a `Favourite` class to represent a contact's status.
+* **Alternative 2:** Store favourited contacts into a `FavouritePersonList`.
+  * Pros:
+    * No need to add field into `Persons` class.
+    * No need to have `Favourite` class, which basically just acts as a boolean.
+    * `List` command will be easy to implement.
+  * Cons:
+    * Have to update the `FavouritePersonList` if a favourited contact has been modified.
+    * Needs more work, specially within the storage.
+
+### Deadline feature
+#### Implementation
+The `deadline` mechanism borrows from the current `edit` mechanism. The main idea of the mechanism is creating a new `Person` object with added `deadline`, then replace existing `Person` in list with the new `Person`.
+
+Step 1. The user is currently on the screen displaying the list of `Person`.
+
+Diagram below represents the list of `Person`
+<img src="images/DeadlineState1.png" width="574" />
+
+Step 2. The user executes `deadline 1 /d return book 1/1/2023` command to add the deadline `1/1/2023` with description `return book` to the first person in the address book.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Adding multiple `deadline` is supported, for example: `deadline 1 /d return book 1/1/2023 /d write report 5/1/2023`.
+</div>
+
+Step 3. The `DeadlineCommand#execute()` method will find the `Person` at the index specified.
+<img src="images/DeadlineState2.png" width="574" />
+
+Step 4. After getting `personToAddDeadline`, `DeadlineCommand#execute()` method creates a new `Person` called `editedPerson` with added `Deadline` and all the other attributes of `personToAddDeadline`.
+<img src="images/DeadlineState3.png" width="574" />
+
+Step 5. The `editedPerson` replaces the `personToAddDeadline` in the list.
+<img src="images/DeadlineState4.png" width="574" />
+
+Step 6. The `UI` displays the updated list.
+
+Diagram below shows the execution of `deadline 1 /d return book 1/1/2023` command
+<img src="images/DeadlineSequenceDiagram.png" width="574" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeadlineCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Calling `deadline 1` without the date and description clears the deadlines for contact specified in index given.
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Duplicate `deadline` for the same `Person` is not allowed.
+</div>
+
+#### Limitations and proposed solutions
+Currently, calling `deadline` command resets all `deadlines` previously stored for `Person` specified, so it does not scale well.
+
+**Solution 1**: Allow `deadline` command to differentiate between adding and deleting `deadline`.
+
+**Solution 2**: Modify the `add` command and `delete` command to include adding and deleting deadlines.
+
+The main problem with the solutions is that new delimiters have to be created. These delimiters might not be intuitive for users to remember or might overlap with other delimiters.
+
+(more limitations and solutions to be discovered...)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -256,6 +366,53 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Find tag feature
+
+The find tag feature is used when a user is interested in finding contacts who have a certain `Tag`. Each `Person` has a set of `Tags` which contains unique `Tags` since each `Person` should not have more than 1 of the same tag.
+
+This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
+
+The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list. 
+
+As such, `FindTagCommand` extends `Command` and executes the command by calling `FindTagCommand#execute()`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are multiple keywords, e.g. `findtag friends colleagues`, then both contact should have both tags `friends` and `colleagues` in order for the contact to be reflected on the updated filtered person list.
+
+</div>
+
+Given below is an example usage scenario and how the find tag feature behaves at each step.
+
+Step 1. The user launches the address book for the first time, initialized with the initial address book state.
+
+Step 2. The user executes the command `findtag friends` to find contacts with the tag `friends` in their set of tags.
+
+Step 3. The AddressBookParser parses the command `findtag friends` and creates a `FindTagCommandParser` to parse the keyword `friends`.
+
+Step 4. The `TagContainsKeywordPredicate` is created and passed onto the constructor of `FindTagCommand` to create a new `FindTagCommand` object.
+
+Step 5. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
+
+Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
+
+![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindTagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Should contacts have all the keywords searched for:**
+
+* **Alternative 1 (current choice):** Contacts containing strictly the same tags as all the keywords searched for.
+  * Pros: More intuitive, as only contacts with strictly the same tags as all the keywords searched will be listed.
+  * Cons: Have to ensure the contacts are tagged correctly, or they will not be found with this feature.
+
+* **Alternative 2:** Contacts containing any tags of the keywords searched for.
+  * Pros: Can find contacts who have any tags the keywords searched.
+  * Cons: Unintuitive, as we usually narrow down the scope for filtering.
+
+{more aspects and alternatives to be added}
 
 --------------------------------------------------------------------------------------------------------------------
 
