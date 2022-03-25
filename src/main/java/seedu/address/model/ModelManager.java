@@ -139,16 +139,16 @@ public class ModelManager implements Model {
     @Override
     public void setDetailedContactView(Person person) {
         if (detailedContactView.size() > 0) {
-            logger.warning("Called with a contact already in view. Clearing detailed"
-                    + "contact view first...");
             clearDetailedContactView();
         }
+        logger.fine("Setting " + person.getName().fullName + " in detailed view");
         detailedContactView.add(person);
         assert(detailedContactView.size() == 1);
     }
 
     @Override
     public void clearDetailedContactView() {
+        logger.fine("Clearing detailed view");
         detailedContactView.clear();
     }
 

@@ -94,6 +94,15 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setDetailedContactView_personInContactView_newPersonInContactViewOnly() {
+        modelManager.setDetailedContactView(ALICE);
+        modelManager.setDetailedContactView(BENSON);
+        assertTrue(modelManager.getDetailedContactView().size() == 1);
+        assertEquals(modelManager.getDetailedContactView().get(0), BENSON);
+        modelManager.clearDetailedContactView();
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
