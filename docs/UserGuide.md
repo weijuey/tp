@@ -87,7 +87,7 @@ You can add a contact to the address book with the address as an optional field.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A contact can have 0 or 1 address
+A contact can have 0 or 1 address 
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of tags (including 0)

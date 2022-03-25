@@ -236,7 +236,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The implemented enhanced add mechanism is facilitated by the `add` command.
+The implemented enhanced add mechanism is facilitated by the `add` command. 
 
 Classes changed for this feature:
 - `AddCommand`
@@ -255,10 +255,10 @@ Given below is a code snippet implemented for `AddCommandParser`:
 
 * **Alternative 1 (current choice):** Having a string `*No Address Specified*` in the address field
     * Pros: Easy to implement.
-    * Cons: UI may look less pleasing with repetitive words for each contact.
+    * Cons: UI may look less pleasing with repetitive words for each contact. 
 
-* **Alternative 2:** Accepting empty string in address field
-    * Pros: UI may look neater and cleaner.
+* **Alternative 2:** Accepting empty string in address field 
+    * Pros: UI may look neater and cleaner. 
     * Cons: Will need to change many components for address field to be an empty string.
 
 ### \[Implemented\] Add a high importance flag feature
