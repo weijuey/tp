@@ -154,6 +154,54 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Deadline feature
+#### Implementation
+The `deadline` mechanism borrows from the current `edit` mechanism. The main idea of the mechanism is creating a new `Person` object with added `deadline`, then replace existing `Person` in list with the new `Person`.
+
+Step 1. The user is currently on the screen displaying the list of `Person`.
+
+Diagram below represents the list of `Person`
+<img src="images/DeadlineState1.png" width="574" />
+
+Step 2. The user executes `deadline 1 /d return book 1/1/2023` command to add the deadline `1/1/2023` with description `return book` to the first person in the address book.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Adding multiple `deadline` is supported, for example: `deadline 1 /d return book 1/1/2023 /d write report 5/1/2023`.
+</div>
+
+Step 3. The `DeadlineCommand#execute()` method will find the `Person` at the index specified.
+<img src="images/DeadlineState2.png" width="574" />
+
+Step 4. After getting `personToAddDeadline`, `DeadlineCommand#execute()` method creates a new `Person` called `editedPerson` with added `Deadline` and all the other attributes of `personToAddDeadline`.
+<img src="images/DeadlineState3.png" width="574" />
+
+Step 5. The `editedPerson` replaces the `personToAddDeadline` in the list.
+<img src="images/DeadlineState4.png" width="574" />
+
+Step 6. The `UI` displays the updated list.
+
+Diagram below shows the execution of `deadline 1 /d return book 1/1/2023` command
+<img src="images/DeadlineSequenceDiagram.png" width="574" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeadlineCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Calling `deadline 1` without the date and description clears the deadlines for contact specified in index given.
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Duplicate `deadline` for the same `Person` is not allowed.
+</div>
+
+#### Limitations and proposed solutions
+Currently, calling `deadline` command resets all `deadlines` previously stored for `Person` specified, so it does not scale well.
+
+**Solution 1**: Allow `deadline` command to differentiate between adding and deleting `deadline`.
+
+**Solution 2**: Modify the `add` command and `delete` command to include adding and deleting deadlines.
+
+The main problem with the solutions is that new delimiters have to be created. These delimiters might not be intuitive for users to remember or might overlap with other delimiters.
+
+(more limitations and solutions to be discovered...)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
