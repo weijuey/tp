@@ -24,7 +24,7 @@ public class CreateTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validTagName_success() {
+    public void execute_validTagNameAndTagDoesNotExistInModel_success() {
         CreateTagCommand createTagCommand = new CreateTagCommand(VALID_TAGNAME_NEIGHBOURS);
         String expectedMessage = String.format(CreateTagCommand.MESSAGE_CREATE_TAG_SUCCESS, VALID_TAGNAME_NEIGHBOURS);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -36,23 +36,13 @@ public class CreateTagCommandTest {
     public void execute_sameTagNameDifferentCase_throwsCommandException() {
         Tag newTag = new Tag(VALID_TAGNAME_NEIGHBOURS);
         model.addTag(newTag);
-        CreateTagCommand createTagCommand1 = new CreateTagCommand("frIenDS");
+        CreateTagCommand createTagCommand = new CreateTagCommand("frIenDS");
         String expectedMessage = CreateTagCommand.MESSAGE_DUPLICATE_TAG;
-        assertCommandFailure(createTagCommand1, model, expectedMessage);
+        assertCommandFailure(createTagCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_tagDoesNotExistInModel_success() {
-        Tag newTag = new Tag(VALID_TAGNAME_NEIGHBOURS);
-        CreateTagCommand createTagCommand = new CreateTagCommand(VALID_TAGNAME_NEIGHBOURS);
-        String expectedMessage = String.format(CreateTagCommand.MESSAGE_CREATE_TAG_SUCCESS, VALID_TAGNAME_NEIGHBOURS);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addTag(newTag);
-        assertCommandSuccess(createTagCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_tagExistsInModel_throwsCommandException() {
+    public void execute_sameCaseSameTagExistsInModel_throwsCommandException() {
         Tag newTag = new Tag(VALID_TAGNAME_NEIGHBOURS);
         model.addTag(newTag);
         CreateTagCommand createTagCommand = new CreateTagCommand(VALID_TAGNAME_NEIGHBOURS);
