@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -532,13 +532,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User adds a person with the required fields.
 2. d'Intérieur shows the new contact added with the details entered.
 
-   Use case ends.
+  Use case ends.
 
 **Extensions**
 
 * 1a. User includes address field.
 
-    * Use case resumes at step 2.
+  * Use case resumes at step 2.
 
 **UC02: Delete a contact**
 
@@ -549,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to delete a specific contact in the list.
 4. d'Intérieur shows contact deleted and updates the list.
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -572,7 +572,7 @@ Use case ends.
 3. User requests to add a label to a specific contact in the list.
 4. d'Intérieur adds the label to the contact and shows the contact.
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -588,7 +588,7 @@ Use case ends.
 
 * 3b. The label requested does not currently exist in d'Intérieur.
 
-    * To be added
+  * To be added
 
 **UC04: Filter contacts using labels**
 
@@ -597,13 +597,13 @@ Use case ends.
 1. User requests list of contacts filtered to those containing the given label.
 2. d'Intérieur shows a list of contacts who have the given label.
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
 * 1a. The given label does not exist.
 
-    * To be added
+  * To be added
 
 **UC05: Adding a note to a contact**
 
@@ -612,15 +612,15 @@ Use case ends.
 1. User requests to add a note to a specific contact in the list.
 2. d'Intérieur adds the note to the contact and shows the contact.
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
 * 1a. User enters only whitespaces or nothing as a note.
 
-    * 1a1. d'Intérieur alerts the user that no changes have been made to notes
+  * 1a1. d'Intérieur alerts the user that no changes have been made to notes
 
-      Use case ends.
+    Use case ends.
 
 * 1b. The given index is invalid.
 
@@ -635,7 +635,7 @@ Use case ends.
 1. User requests to add a specific contact in the list to favourites.
 2. d'Intérieur adds the contact to favourites and shows the contact.
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
@@ -650,13 +650,13 @@ Use case ends.
 1. User requests to add a deadline under a contact.
 2. d'Intérieur adds the deadline under the contact and shows the contact.
 
-Use case ends.
+  Use case ends.
 
 **Extensions**
 
 * 1a. The deadline given does not contain a valid date or time.
 
-    * To be added
+  * To be added
 
 * 1b. The given index is invalid.
 
@@ -702,15 +702,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -719,16 +719,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -736,6 +736,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
