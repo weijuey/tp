@@ -83,6 +83,7 @@ public class PersonCard extends UiPart<Region> {
             drawStarShape(starCanvas.getGraphicsContext2D());
         }
 
+        // Red flag if importance, otherwise empty plain flag
         if (person.hasHighImportance()) {
             flagImageView.setImage(highImportanceFlag);
         } else {
