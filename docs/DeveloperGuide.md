@@ -172,7 +172,7 @@ Step 1. When a user is created, they are automatically assigned `NOT_FAVOURITE` 
 
 ![FavouriteState0](images/favourite/FavouriteState0.png)
 
-Step 2. The user executes `fav 3` command to favourite the 3rd person in the address book. The `fav` command executes and determines the current `favouriteStatus` of the contact (which in this case is `NOT_FAVOURITE`). It then calls the private helper method `createFavouritedPerson` to create a deep copy of the target contact, except with their `favouriteStatus` now pointing to the opposite `Favourite` value (which will be the `IS_FAVOURITE` singleton).
+Step 2. The user executes `fav 3` command to favourite the 3rd person in the address book. The `fav` command executes and determines the current `favouriteStatus` of the contact (which in this case is `NOT_FAVOURITE`). It then calls the private helper method `createFavouritedPerson` to create a copy of the target contact, except with their `favouriteStatus` now pointing to the opposite `Favourite` value (which will be the `IS_FAVOURITE` singleton).
 
 ![FavouriteState1](images/favourite/FavouriteState1.png)
 
@@ -187,6 +187,8 @@ Step 4. The user decides that they want to see only their favourite contacts. Th
 The following sequence diagram shows how the favourite operation works:
 
 ![FavouriteSequenceDiagram](images/favourite/FavouriteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 If the user runs `fav 3` again, or commands `fav` on an existing favourited contact, the only difference in the execution would be that the `NOT_FAVOURITE` reference will be passed into the `FavouriteCommand#createFavouritePerson` method instead.
 

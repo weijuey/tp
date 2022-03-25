@@ -15,7 +15,7 @@ end box
 [-> LogicManager : execute(fav 3)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(fav)
+LogicManager -> AddressBookParser : parseCommand(fav 3)
 activate AddressBookParser
 
 create FavouriteCommandParser
@@ -75,4 +75,5 @@ deactivate FavouriteCommand
 
 [<--LogicManager
 deactivate LogicManager
+destroy FavouriteCommand
 @enduml
