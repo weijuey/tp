@@ -23,7 +23,7 @@
     } ],
     "notes" : [ ],
     "tagged" : [ "owesMoney", "friends" ],
-    "isFavourite" : "true"
+    "isFavourite" : "false"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -47,7 +47,7 @@
     } ],
     "notes" : [ ],
     "tagged" : [ "friends" ],
-    "isFavourite" : "false"
+    "isFavourite" : "true"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -85,5 +85,6 @@
     "tagged" : [ ],
     "isFavourite" : "false"
   } ],
-  "tags": [ "friends", "owesMoney" ]
+  "_comment2": "AddressBook save file with duplicate tags",
+  "tags": [ "friends", "owesMoney", "friends" ]
 }
