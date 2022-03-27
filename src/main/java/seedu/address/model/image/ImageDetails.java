@@ -15,6 +15,18 @@ public class ImageDetails {
         return this.imageFile.getName();
     }
 
+    public File getImageFile() {
+        return this.imageFile;
+    }
+
+    public String getAbsolutePath() {
+        return this.imageFile.getAbsolutePath();
+    }
+
+    public String getJavaFXImageUrl() {
+        return String.format("file:%s", Path.of(CONTACT_IMAGES_PATH.toString(), getName()));
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

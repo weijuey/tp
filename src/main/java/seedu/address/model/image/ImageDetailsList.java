@@ -21,7 +21,23 @@ public class ImageDetailsList {
         return new ImageDetailsList(newImages);
     }
 
+    public List<ImageDetails> getImages() {
+        return this.images;
+    }
+
     public boolean isEmpty() {
         return this.images.isEmpty();
+    }
+
+    public int size() {
+        return this.images.size();
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < images.size(); i++) {
+            sb.append(i+1).append(": ").append(images.get(i)).append("\n");
+        }
+        return sb.toString();
     }
 }

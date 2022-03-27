@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ImageViewPanel imageViewPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -163,6 +164,15 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Loads the contact's images.
+     */
+    @FXML
+    private void handleViewImages() {
+        imageViewPanel = new ImageViewPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +194,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isViewImages()) {
+                handleViewImages();
             }
 
             return commandResult;

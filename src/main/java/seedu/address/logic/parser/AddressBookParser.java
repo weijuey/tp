@@ -19,6 +19,7 @@ import seedu.address.logic.commands.FavouriteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImagesCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFavouritesCommand;
 import seedu.address.logic.commands.NoteCommand;
@@ -99,6 +100,9 @@ public class AddressBookParser {
 
         case AddImageCommand.COMMAND_WORD:
             return new AddImageCommandParser().parse(arguments);
+
+        case ImagesCommand.COMMAND_WORD:
+            return new ImagesCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
