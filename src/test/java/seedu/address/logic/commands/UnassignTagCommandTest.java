@@ -7,13 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_COLLEAGUES;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_FRIENDS;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_OWESMONEY;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_TEST;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_FRIENDS;
+import static seedu.address.testutil.TypicalTags.VALID_TAG_OWESMONEY;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,23 +36,23 @@ public class UnassignTagCommandTest {
 
     @Test
     public void execute_validIndexCreatedTagTaggedPerson_success() {
-        Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        assert personToAddTag == ALICE;
+        Person personToRemoveTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertTrue(personToRemoveTag.getTags().contains(VALID_TAG_FRIENDS));
         UnassignTagCommand unassignTagCommand = new UnassignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_FRIENDS);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Tag removingTag = VALID_TAG_FRIENDS;
-        Person editedPerson = new PersonBuilder(personToAddTag).withoutTag(removingTag).build();
+        Person editedPerson = new PersonBuilder(personToRemoveTag).withoutTag(removingTag).build();
         String expectedMessage = String.format(UnassignTagCommand.MESSAGE_SUCCESS, editedPerson);
-        expectedModel.setPerson(personToAddTag, editedPerson);
+        expectedModel.setPerson(personToRemoveTag, editedPerson);
 
         assertCommandSuccess(unassignTagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validIndexCreatedTagUntaggedPerson_throwsCommandException() {
-        Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        assert personToAddTag == ALICE;
+        Person personToRemoveTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        assertFalse(personToRemoveTag.getTags().contains(VALID_TAG_OWESMONEY));
         UnassignTagCommand unassignTagCommand = new UnassignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_OWESMONEY);
 
         assertCommandFailure(unassignTagCommand, model, UnassignTagCommand.MESSAGE_NOT_TAGGED);

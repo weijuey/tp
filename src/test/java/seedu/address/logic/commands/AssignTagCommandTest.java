@@ -7,12 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_COLLEAGUES;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_FRIENDS;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_OWESMONEY;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_TEST;
+import static seedu.address.testutil.TypicalTags.VALID_TAG_FRIENDS;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_OWESMONEY;
 
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ public class AssignTagCommandTest {
     @Test
     public void execute_validIndexCreatedTagUntaggedPerson_success() {
         Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        assert personToAddTag == ALICE;
+        assertFalse(personToAddTag.getTags().contains(VALID_TAG_OWESMONEY));
         AssignTagCommand assignTagCommand = new AssignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_OWESMONEY);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -52,7 +52,7 @@ public class AssignTagCommandTest {
     @Test
     public void execute_validIndexCreatedTagTaggedPerson_throwsCommandException() {
         Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        assert personToAddTag == ALICE;
+        assertTrue(personToAddTag.getTags().contains(VALID_TAG_FRIENDS));
         AssignTagCommand assignTagCommand = new AssignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_FRIENDS);
 
         assertCommandFailure(assignTagCommand, model, AssignTagCommand.MESSAGE_DUPLICATE_TAG);
