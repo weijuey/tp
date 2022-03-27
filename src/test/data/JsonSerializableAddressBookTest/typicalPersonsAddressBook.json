@@ -91,5 +91,6 @@
     "tagged" : [ ],
     "isFavourite" : "false",
     "hasHighImportance" : "false"
-  } ]
+  } ],
+  "tags": [ "friends", "owesMoney" ]
 }

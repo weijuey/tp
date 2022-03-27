@@ -7,8 +7,8 @@ public class HighImportance {
     public static final HighImportance NOT_HIGH_IMPORTANCE = new HighImportance(false);
     public static final String MESSAGE_CONSTRAINTS =
             "HighImportance should be either true or false, and should not be blank.";
-    public static final String TRUE_STRING = "true";
-    public static final String FALSE_STRING = "false";
+    public static final String TRUE_STRING = String.valueOf(true);
+    public static final String FALSE_STRING = String.valueOf(false);
     /*
      * The first character of the HighImportance status must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.

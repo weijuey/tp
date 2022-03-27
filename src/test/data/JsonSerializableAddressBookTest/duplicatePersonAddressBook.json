@@ -16,5 +16,6 @@
     "deadlines" : [ ],
     "isFavourite" : "true",
     "hasHighImportance" : "false"
-  } ]
+  } ],
+  "tags": [ "friends" ]
 }
