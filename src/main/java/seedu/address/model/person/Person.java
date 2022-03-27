@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +25,7 @@ public class Person {
     private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
+    private ImageDetailsList imageDetailsList = new ImageDetailsList();
 
     /**
      * Every field must be present and not null.
@@ -72,6 +74,17 @@ public class Person {
         return favouriteStatus.isFavourite();
     }
 
+    public ImageDetailsList getImageDetailsList() {
+        return imageDetailsList;
+    }
+
+    public void setImageDetailsList(ImageDetailsList list) {
+        // Should only mutate at most once during initialization
+        assert this.imageDetailsList.isEmpty();
+
+        this.imageDetailsList = list;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -115,13 +128,14 @@ public class Person {
                 && otherPerson.getDeadlines().equals(getDeadlines())
                 && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getFavouriteStatus().equals(getFavouriteStatus());
+                && otherPerson.getFavouriteStatus().equals(getFavouriteStatus())
+                && otherPerson.getImageDetailsList().equals(getImageDetailsList());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, notes, tags, favouriteStatus);
+        return Objects.hash(name, phone, email, address, notes, tags, favouriteStatus, getImageDetailsList());
     }
 
     @Override
@@ -149,5 +163,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

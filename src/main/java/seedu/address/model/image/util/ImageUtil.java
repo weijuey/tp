@@ -2,16 +2,13 @@ package seedu.address.model.image.util;
 
 import javafx.stage.FileChooser;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.model.image.ImageDetails;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ImageUtil {
     private static final FileChooser.ExtensionFilter IMAGE_FILE_FILTERS = new FileChooser.ExtensionFilter(
@@ -31,25 +28,40 @@ public class ImageUtil {
         return fileChooser;
     }
 
-    public static List<File> copyTo(List<File> srcFiles, Path parentPath) throws IOException {
-        List<File> destFiles = new ArrayList<>();
-        for (File src : srcFiles) {
-            BufferedImage srcImg = ImageIO.read(src);
+    /**
+     * Checks if the {@code file} exists in the {@code directoryDirectory}.
+     * @param file the file to check
+     * @param directoryPath path of the directory to check if file exists within
+     * @return true if the file exists
+     */
+    public static boolean fileExists(File file, Path directoryPath) {
+        File directory = directoryPath.toFile();
+        File[] directoryFiles = directory.listFiles();
 
-            Path destPath = Paths.get(parentPath.toString(), src.getName());
-            if (FileUtil.isFileExists(destPath)) {
-                throw new FileAlreadyExistsException(destPath.getFileName().toString());
-            }
-
-            FileUtil.createIfMissing(destPath);
-            File destFile = destPath.toFile();
-
-            String imgExtension = getImageExtension(src.getName());
-
-            ImageIO.write(srcImg, imgExtension, destFile);
-            destFiles.add(destFile);
+        if (directoryFiles == null) {
+            // Directory doesn't exist yet
+            return false;
         }
-        return destFiles;
+
+        for (File f : directoryFiles) {
+            if (f.getName().equals(file.getName())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static ImageDetails copyTo(File src, Path destPath) throws IOException {
+        BufferedImage srcImg = ImageIO.read(src);
+
+        FileUtil.createIfMissing(destPath);
+        File destFile = destPath.toFile();
+
+        String imgExtension = getImageExtension(src.getName());
+
+        ImageIO.write(srcImg, imgExtension, destFile);
+        return new ImageDetails(destFile);
     }
 
     private static String getImageExtension(String fileName) {
