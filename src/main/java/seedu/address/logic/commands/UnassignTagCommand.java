@@ -40,6 +40,11 @@ public class UnassignTagCommand extends Command {
     private final String tagName;
     private final Index targetIndex;
 
+    /**
+     * Creates an UnassignTagCommand to un-assign a {@code Tag} to a {@code Person}.
+     * @param targetIndex the index of the contact specified.
+     * @param tagName the name of the Tag.
+     */
     public UnassignTagCommand(Index targetIndex, String tagName) {
         this.tagName = tagName;
         this.targetIndex = targetIndex;
