@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -53,8 +52,8 @@ public class AssignTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Tag checkingTag = new Tag(tagName);
-        boolean tagHasBeenCreated = model.hasTag(checkingTag);
+        Tag newTag = new Tag(tagName);
+        boolean tagHasBeenCreated = model.hasTag(newTag);
 
         if (!tagHasBeenCreated) {
             throw new CommandException(String.format(MESSAGE_UNKNOWN_TAG, tagName));
@@ -66,24 +65,27 @@ public class AssignTagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Set<Tag> personTags = personToEdit.getTags();
-        Set<Tag> copyOfPersonTags = new HashSet<>(personTags);
-        boolean personNotTagged = copyOfPersonTags.add(checkingTag);
 
-        if (!personNotTagged) {
+        if (!canAddTag(personToEdit, newTag)) {
             throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
-        Person editedPerson = addTagToNewPerson(personToEdit, copyOfPersonTags);
+        Person editedPerson = addTagToNewPerson(personToEdit, newTag);
         model.setPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
     }
 
-    private static Person addTagToNewPerson(Person personToEdit, Set<Tag> newTags) {
+    /**
+     * Adds a specific {@code Tag} to the {@code Set<Tag>} of a {@code Person}.
+     * @param personToEdit the person to add the tag to.
+     * @param newTag the tag to add.
+     * @return the person with the added tag.
+     */
+    private static Person addTagToNewPerson(Person personToEdit, Tag newTag) {
         requireNonNull(personToEdit);
-        requireAllNonNull(newTags);
+        requireNonNull(newTag);
         assert personToEdit != null;
-        assert newTags != null;
+        assert newTag != null;
 
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
@@ -91,9 +93,27 @@ public class AssignTagCommand extends Command {
         Address address = personToEdit.getAddress();
         DeadlineList deadlines = personToEdit.getDeadlines();
         Notes notes = personToEdit.getNotes();
+        Set<Tag> tags = personToEdit.getTags();
         Favourite favourite = personToEdit.getFavouriteStatus();
 
+        Set<Tag> newTags = new HashSet<>(tags);
+        newTags.add(newTag);
+
         return new Person(name, phone, email, address, deadlines, notes, newTags, favourite);
+    }
+
+    /**
+     * Checks if a specific {@code Tag} can be added to the {@code Set<Tag>} of a {@code Person}.
+     * @param personToEdit the person to add the tag to.
+     * @param newTag the tag to add.
+     * @return boolean value of whether the tag can be added.
+     */
+    private static boolean canAddTag(Person personToEdit, Tag newTag) {
+        requireNonNull(personToEdit);
+        requireNonNull(newTag);
+        Set<Tag> tags = personToEdit.getTags();
+        Set<Tag> newTags = new HashSet<>(tags);
+        return !newTags.contains(newTag);
     }
 
     @Override

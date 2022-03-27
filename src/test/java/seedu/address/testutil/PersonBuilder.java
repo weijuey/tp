@@ -135,6 +135,26 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Adds a {@code Tag} to the current {@code Set<Tag>} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNewTag(Tag tag) {
+        Set<Tag> newTags = new HashSet<>(this.tags);
+        newTags.add(tag);
+        this.tags = newTags;
+        return this;
+    }
+
+    /**
+     * Removes a {@code Tag} from the current {@code Set<Tag>} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withoutTag(Tag tag) {
+        Set<Tag> withoutTag = new HashSet<>(this.tags);
+        withoutTag.remove(tag);
+        this.tags = withoutTag;
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus);
     }
