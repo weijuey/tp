@@ -7,6 +7,7 @@ import java.util.Set;
 
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.DeadlineList;
@@ -41,6 +42,7 @@ public class PersonBuilder {
     private Favourite favouriteStatus;
     private HighImportance highImportanceStatus;
     private Set<Tag> tags;
+    private ImageDetailsList images;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -55,6 +57,7 @@ public class PersonBuilder {
         favouriteStatus = Favourite.valueOf(DEFAULT_FAVOURITE);
         highImportanceStatus = HighImportance.valueOf(DEFAULT_HIGH_IMPORTANCE);
         tags = new HashSet<>();
+        images = new ImageDetailsList();
     }
 
     /**
@@ -70,6 +73,7 @@ public class PersonBuilder {
         favouriteStatus = personToCopy.getFavouriteStatus();
         highImportanceStatus = personToCopy.getHighImportanceStatus();
         tags = new HashSet<>(personToCopy.getTags());
+        images = personToCopy.getImageDetailsList();
     }
 
     /**
@@ -141,6 +145,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code ImageDetailsList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withImageDetails(String... imagePaths) {
+        this.images = SampleDataUtil.getImageDetailsList(imagePaths);
+        return this;
+    }
+
+    /**
      * Sets the {@code FavouriteStatus} of the {@code Person} that we are building.
      */
     public PersonBuilder withHighImportance(String highImportance) {
@@ -148,7 +160,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the person based on the values supplied to the builder.
+     *
+     * @return the built person
+     */
     public Person build() {
-        return new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus, highImportanceStatus);
+        return new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus, highImportanceStatus,
+                images);
     }
+
 }

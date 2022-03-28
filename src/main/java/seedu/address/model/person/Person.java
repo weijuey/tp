@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,13 +25,15 @@ public class Person {
     private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
+    private final ImageDetailsList imageDetailsList;
     private final HighImportance highImportanceStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Notes notes,
-                Set<Tag> tags, Favourite favouriteStatus, HighImportance highImportanceStatus) {
+                  Set<Tag> tags, Favourite favouriteStatus, HighImportance highImportanceStatus,
+                  ImageDetailsList images) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -40,6 +43,7 @@ public class Person {
         this.favouriteStatus = favouriteStatus;
         this.highImportanceStatus = highImportanceStatus;
         this.tags.addAll(tags);
+        this.imageDetailsList = images;
     }
 
     public Name getName() {
@@ -72,6 +76,10 @@ public class Person {
 
     public boolean isFavourite() {
         return favouriteStatus.isFavourite();
+    }
+
+    public ImageDetailsList getImageDetailsList() {
+        return imageDetailsList;
     }
 
     public HighImportance getHighImportanceStatus() {
@@ -126,13 +134,15 @@ public class Person {
                 && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getFavouriteStatus().equals(getFavouriteStatus())
+                && otherPerson.getImageDetailsList().equals(getImageDetailsList())
                 && otherPerson.getHighImportanceStatus().equals(getHighImportanceStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, deadlines, notes, tags, favouriteStatus, highImportanceStatus);
+        return Objects.hash(
+                name, phone, email, address, deadlines, notes, tags, favouriteStatus, imageDetailsList, highImportanceStatus);
     }
 
     @Override
@@ -162,5 +172,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
