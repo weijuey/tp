@@ -147,7 +147,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code ImageDetailsList} of the {@code Person} that we are building.
      */
-    public PersonBuilder withImageDetails(String imagePaths) {
+    public PersonBuilder withImageDetails(String... imagePaths) {
         this.images = SampleDataUtil.getImageDetailsList(imagePaths);
         return this;
     }
@@ -166,10 +166,8 @@ public class PersonBuilder {
      * @return the built person
      */
     public Person build() {
-        Person result =
-                new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus, highImportanceStatus);
-        result.setImageDetailsList(images);
-        return result;
+        return new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus, highImportanceStatus,
+                images);
     }
 
 }

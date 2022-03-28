@@ -90,11 +90,10 @@ public class AddImageCommand extends Command {
     private static Person addImages(Person personToEdit, List<ImageDetails> images) {
         ImageDetailsList oldImages = personToEdit.getImageDetailsList();
         ImageDetailsList newImages = oldImages.appendImageDetails(images);
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getDeadlines(), personToEdit.getNotes(),
-                personToEdit.getTags(), personToEdit.getFavouriteStatus(), personToEdit.getHighImportanceStatus());
-        editedPerson.setImageDetailsList(newImages);
-        return editedPerson;
+        return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                          personToEdit.getAddress(), personToEdit.getDeadlines(), personToEdit.getNotes(),
+                          personToEdit.getTags(), personToEdit.getFavouriteStatus(),
+                          personToEdit.getHighImportanceStatus(), newImages);
     }
 
     private List<File> openImageChooser() {

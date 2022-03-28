@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -11,7 +12,16 @@ import seedu.address.model.Model;
 import seedu.address.model.image.ImageDetails;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.image.util.ImageUtil;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DeadlineList;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 public class DeleteImageCommand extends Command {
     public static final String COMMAND_WORD = "delimg";
@@ -58,9 +68,30 @@ public class DeleteImageCommand extends Command {
         ImageDetails imageToDelete = images.get(imageIndex.getZeroBased());
         ImageUtil.removeFile(imageToDelete);
         ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images);
-        personToEdit.setImageDetailsList(sanitizedList);
+        Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
+
+        model.setPerson(personToEdit, editedPerson);
 
         return new CommandResult(
-                String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), personToEdit));
+                String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), editedPerson));
+    }
+
+    private static Person createImageDeletedPerson(Person personToEdit, ImageDetailsList sanitizedList) {
+        assert personToEdit != null;
+        assert sanitizedList != null;
+
+        Name name = personToEdit.getName();
+        Phone phone = personToEdit.getPhone();
+        Email email = personToEdit.getEmail();
+        Address address = personToEdit.getAddress();
+        DeadlineList deadlines = personToEdit.getDeadlines();
+        Notes notes = personToEdit.getNotes();
+        HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
+        Favourite favouriteStatus = personToEdit.getFavouriteStatus();
+        Set<Tag> tags = personToEdit.getTags();
+
+        return new Person(name, phone, email, address, deadlines,
+                notes, tags, favouriteStatus, highImportanceStatus, sanitizedList);
+
     }
 }

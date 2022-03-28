@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 class ImageDetailsTest {
+    Path testImageDirectory = Paths.get("src", "test", "data", "testImages");
+    String testFileName = "test_image_1.png";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -18,36 +20,30 @@ class ImageDetailsTest {
 
     @Test
     void getName() {
-        String fileName = "name.test";
-        File file = Path.of("test", fileName).toFile();
+        File file = testImageDirectory.resolve(testFileName).toFile();
         ImageDetails imageDetails = new ImageDetails(file);
-        assertEquals(fileName, imageDetails.getName());
+        assertEquals(testFileName, imageDetails.getName());
     }
 
     @Test
     void getImageFile() {
-        String fileName = "name.test";
-        File file = Path.of("test", fileName).toFile();
+        File file = testImageDirectory.resolve(testFileName).toFile();
         ImageDetails imageDetails = new ImageDetails(file);
         assertEquals(file, imageDetails.getImageFile());
     }
 
     @Test
-    void getAbsolutePath() {
-        String fileName = "name.test";
-        Path path = Path.of("test", fileName);
-
+    void getPath() {
+        Path path = testImageDirectory.resolve(testFileName);
         File file = path.toFile();
         ImageDetails imageDetails = new ImageDetails(file);
 
-        assertEquals(path.toString(), imageDetails.getPath(Paths.get("test")));
+        assertEquals(path.toString(), imageDetails.getPath(testImageDirectory));
     }
 
     @Test
     void getJavaFxImageUrl() {
-        String fileName = "name.test";
-
-        Path path = ImageDetails.CONTACT_IMAGES_PATH.resolve(fileName);
+        Path path = ImageDetails.CONTACT_IMAGES_PATH.resolve(testFileName);
         File file = path.toFile();
 
         ImageDetails imageDetails = new ImageDetails(file);

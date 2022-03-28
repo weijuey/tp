@@ -174,10 +174,8 @@ class JsonAdaptedPerson {
         }
         final ImageDetailsList modelImages = new ImageDetailsList(personImages);
 
-        Person personModel = new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadlines,
-                modelNotes, modelTags, modelFavourite, modelHighImportance);
-        personModel.setImageDetailsList(modelImages);
-        return personModel;
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadlines,
+                modelNotes, modelTags, modelFavourite, modelHighImportance, modelImages);
     }
 
 }

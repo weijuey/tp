@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import seedu.address.MainApp;
@@ -12,7 +13,16 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.image.util.ImageUtil;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.DeadlineList;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 public class ImagesCommand extends Command {
 
@@ -60,12 +70,35 @@ public class ImagesCommand extends Command {
 
         ImageDetailsList originalList = targetPerson.getImageDetailsList();
         ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList);
-        targetPerson.setImageDetailsList(sanitizedList);
+        Person sanitizedPerson = createImageDeletedPerson(targetPerson, sanitizedList);
         logger.info(String.format("Result of sanitization: %d -> %d", originalList.size(), sanitizedList.size()));
+
+        if (originalList.size() != sanitizedList.size()) {
+            model.setPerson(targetPerson, sanitizedPerson);
+        }
 
         model.updateImagesToView(sanitizedList);
 
-        String result = String.format(MESSAGE_IMAGES_SUCCESS, targetPerson + "\n") + sanitizedList;
+        String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedPerson + "\n") + sanitizedList;
         return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
+    }
+
+    private static Person createImageDeletedPerson(Person personToEdit, ImageDetailsList sanitizedList) {
+        assert personToEdit != null;
+        assert sanitizedList != null;
+
+        Name name = personToEdit.getName();
+        Phone phone = personToEdit.getPhone();
+        Email email = personToEdit.getEmail();
+        Address address = personToEdit.getAddress();
+        DeadlineList deadlines = personToEdit.getDeadlines();
+        Notes notes = personToEdit.getNotes();
+        HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
+        Favourite favouriteStatus = personToEdit.getFavouriteStatus();
+        Set<Tag> tags = personToEdit.getTags();
+
+        return new Person(name, phone, email, address, deadlines,
+                notes, tags, favouriteStatus, highImportanceStatus, sanitizedList);
+
     }
 }
