@@ -35,7 +35,7 @@ public class AssignTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexCreatedTagUntaggedPerson_success() {
+    public void execute_validIndexTagExistsAndPersonNotTagged_success() {
         Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         assertFalse(personToAddTag.getTags().contains(VALID_TAG_OWESMONEY));
         AssignTagCommand assignTagCommand = new AssignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_OWESMONEY);
@@ -50,7 +50,7 @@ public class AssignTagCommandTest {
     }
 
     @Test
-    public void execute_validIndexCreatedTagTaggedPerson_throwsCommandException() {
+    public void execute_validIndexTagExistsAndPersonTagged_throwsCommandException() {
         Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         assertTrue(personToAddTag.getTags().contains(VALID_TAG_FRIENDS));
         AssignTagCommand assignTagCommand = new AssignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_FRIENDS);
@@ -59,7 +59,7 @@ public class AssignTagCommandTest {
     }
 
     @Test
-    public void execute_validIndexUncreatedTag_throwsCommandException() {
+    public void execute_validIndexTagDoesNotExist_throwsCommandException() {
         AssignTagCommand assignTagCommand = new AssignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_TEST);
         String expectedMessage = String.format(AssignTagCommand.MESSAGE_UNKNOWN_TAG, VALID_TAGNAME_TEST);
 
@@ -67,7 +67,7 @@ public class AssignTagCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexCreatedTag_throwsCommandException() {
+    public void execute_invalidIndexTagExists_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
@@ -81,7 +81,7 @@ public class AssignTagCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUncreatedTag_throwsCommandException() {
+    public void execute_invalidIndexTagDoesNotExist_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;

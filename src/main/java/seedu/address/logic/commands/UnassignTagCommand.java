@@ -10,6 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
@@ -30,7 +31,7 @@ public class UnassignTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a tag with a given tag name "
             + "(case-insensitive) to a contact identified by a given index number used in the displayed "
-            + "persons list.\n"
+            + "contacts list.\n"
             + "Parameters: INDEX (must be a positive integer), TAGNAME"
             + "Example: " + COMMAND_WORD + " 1 friends";
 
@@ -86,8 +87,6 @@ public class UnassignTagCommand extends Command {
     private static Person addTagToNewPerson(Person personToEdit, Tag newTag) {
         requireNonNull(personToEdit);
         requireNonNull(newTag);
-        assert personToEdit != null;
-        assert newTag != null;
 
         Name name = personToEdit.getName();
         Phone phone = personToEdit.getPhone();
@@ -98,11 +97,12 @@ public class UnassignTagCommand extends Command {
         Set<Tag> tags = personToEdit.getTags();
         Favourite favourite = personToEdit.getFavouriteStatus();
         HighImportance highImportance = personToEdit.getHighImportanceStatus();
+        ImageDetailsList images = personToEdit.getImageDetailsList();
 
         Set<Tag> newTags = new HashSet<>(tags);
         newTags.remove(newTag);
 
-        return new Person(name, phone, email, address, deadlines, notes, newTags, favourite, highImportance);
+        return new Person(name, phone, email, address, deadlines, notes, newTags, favourite, highImportance, images);
     }
 
     /**

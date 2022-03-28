@@ -35,7 +35,7 @@ public class UnassignTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexCreatedTagTaggedPerson_success() {
+    public void execute_validIndexTagExistsAndPersonTagged_success() {
         Person personToRemoveTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         assertTrue(personToRemoveTag.getTags().contains(VALID_TAG_FRIENDS));
         UnassignTagCommand unassignTagCommand = new UnassignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_FRIENDS);
@@ -50,7 +50,7 @@ public class UnassignTagCommandTest {
     }
 
     @Test
-    public void execute_validIndexCreatedTagUntaggedPerson_throwsCommandException() {
+    public void execute_validIndexTagExistsAndPersonNotTagged_throwsCommandException() {
         Person personToRemoveTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         assertFalse(personToRemoveTag.getTags().contains(VALID_TAG_OWESMONEY));
         UnassignTagCommand unassignTagCommand = new UnassignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_OWESMONEY);
@@ -59,7 +59,7 @@ public class UnassignTagCommandTest {
     }
 
     @Test
-    public void execute_validIndexUncreatedTag_throwsCommandException() {
+    public void execute_validIndexTagDoesNotExist_throwsCommandException() {
         UnassignTagCommand unassignTagCommand = new UnassignTagCommand(INDEX_FIRST_PERSON, VALID_TAGNAME_TEST);
         String expectedMessage = String.format(UnassignTagCommand.MESSAGE_UNKNOWN_TAG, VALID_TAGNAME_TEST);
 
@@ -67,7 +67,7 @@ public class UnassignTagCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexCreatedTag_throwsCommandException() {
+    public void execute_invalidIndexTagExists_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
@@ -81,7 +81,7 @@ public class UnassignTagCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUncreatedTag_throwsCommandException() {
+    public void execute_invalidIndexTagDoesNotExist_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
