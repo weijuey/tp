@@ -7,11 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddImageCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteImageCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FavouriteCommand;
@@ -19,6 +21,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HighImportanceCommand;
+import seedu.address.logic.commands.ImagesCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFavouritesCommand;
 import seedu.address.logic.commands.ListImportantCommand;
@@ -103,6 +106,15 @@ public class AddressBookParser {
 
         case CreateTagCommand.COMMAND_WORD:
             return new CreateTagCommandParser().parse(arguments);
+
+        case AddImageCommand.COMMAND_WORD:
+            return new AddImageCommandParser().parse(arguments);
+
+        case ImagesCommand.COMMAND_WORD:
+            return new ImagesCommandParser().parse(arguments);
+
+        case DeleteImageCommand.COMMAND_WORD:
+            return new DeleteImageCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

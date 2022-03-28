@@ -12,7 +12,8 @@
     "notes" : [ ],
     "tagged" : [ "friends" ],
     "isFavourite" : "false",
-    "hasHighImportance" : "true"
+    "images" : [ ],
+    "hasHighImportance" : "true",
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -25,6 +26,7 @@
     "notes" : [ ],
     "tagged" : [ "owesMoney", "friends" ],
     "isFavourite" : "true",
+    "images" : [ "src/test/data/images/test_image_1.png" ],
     "hasHighImportance" : "true"
   }, {
     "name" : "Carl Kurz",
@@ -38,6 +40,7 @@
     "notes" : [ ],
     "tagged" : [ ],
     "isFavourite" : "false",
+    "images" : [ ],
     "hasHighImportance" : "false"
   }, {
     "name" : "Daniel Meier",
@@ -51,6 +54,7 @@
     "notes" : [ ],
     "tagged" : [ "friends" ],
     "isFavourite" : "false",
+    "images" : [ ],
     "hasHighImportance" : "false"
   }, {
     "name" : "Elle Meyer",
@@ -64,6 +68,7 @@
     "notes" : [ ],
     "tagged" : [ ],
     "isFavourite" : "false",
+    "images" : [ ],
     "hasHighImportance" : "false"
   }, {
     "name" : "Fiona Kunz",
@@ -77,6 +82,7 @@
     "notes" : [ ],
     "tagged" : [ ],
     "isFavourite" : "true",
+    "images" : [ ],
     "hasHighImportance" : "false"
   }, {
     "name" : "George Best",
@@ -90,6 +96,7 @@
     "notes" : [ ],
     "tagged" : [ ],
     "isFavourite" : "false",
+    "images" : [ ],
     "hasHighImportance" : "false"
   } ],
   "tags": [ "friends", "owesMoney" ]

@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
@@ -57,9 +58,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         DeadlineList deadlines = new DeadlineList();
         Notes notes = Notes.getNewNotes();
+        ImageDetailsList emptyImageList = new ImageDetailsList();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Person person = new Person(name, phone, email, address, deadlines, notes,
-                tagList, Favourite.NOT_FAVOURITE, HighImportance.NOT_HIGH_IMPORTANCE);
+                tagList, Favourite.NOT_FAVOURITE, HighImportance.NOT_HIGH_IMPORTANCE,
+                emptyImageList);
 
         return new AddCommand(person);
     }
