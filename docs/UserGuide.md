@@ -114,20 +114,22 @@ Format: `list`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To edit tags, use assign and unassign commands
+</div>
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567`
   and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+* `edit 1 n/John` Edits the name of the 1st contact to be `John`.
 
 ### Adding favourites : `fav`
 
@@ -232,7 +234,7 @@ Format: `assign INDEX TAGNAME`
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, ...​
 * The contact should have **at most one** `TAG` with a given unique `TAGNAME`.
-* The contact assigned to the given `TAGNAME` will not be assigned to the same `TAGNAME` again.
+* The contact assigned to the given `TAGNAME` cannot be assigned to the same `TAGNAME` again.
 e.g. assigning the tag `friends` to Alice at index 1 will not allow `Friends` to be assigned to the same contact.
 
 Examples:
@@ -352,7 +354,7 @@ the data of your previous d'Intérieur home folder.
 | **Create Tag**  | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          |
 | **Deadline**    | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |
 | **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                     |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |
 | **Fav**         | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |
 | **Favourites**  | `favourites`                                                                                                                                    |
 | **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
