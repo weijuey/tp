@@ -13,7 +13,7 @@
     "tagged" : [ "friends" ],
     "isFavourite" : "false",
     "images" : [ ],
-    "hasHighImportance" : "true",
+    "hasHighImportance" : "true"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
