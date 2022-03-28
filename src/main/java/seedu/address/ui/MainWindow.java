@@ -32,7 +32,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ContactDisplayPanel contactDisplayPanel;
+    private PersonListPanel personListPanel;
+    private DetailedContactPanel detailedContactPanel;
     private ImageViewPanel imageViewPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -46,7 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane informationDisplayPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,12 +115,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        contactDisplayPanel = new ContactDisplayPanel(logic.getFilteredPersonList(), logic.getDetailedContactView());
-        personListPanelPlaceholder.getChildren().add(contactDisplayPanel.getRoot());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        informationDisplayPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        detailedContactPanel = new DetailedContactPanel(logic.getDetailedContactView());
+        informationDisplayPanelPlaceholder.getChildren().add(detailedContactPanel.getRoot());
 
         ImageDetailsList list = logic.getImagesToView();
         imageViewPanel = new ImageViewPanel(list);
-        personListPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
+        informationDisplayPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
         imageViewPanel.getRoot().setVisible(false);
 
         resultDisplay = new ResultDisplay();
@@ -133,7 +137,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setPanel(Panel panelToShow) {
-        contactDisplayPanel.getRoot().setVisible(panelToShow.equals(Panel.PERSON_LIST));
+        personListPanel.getRoot().setVisible(panelToShow.equals(Panel.PERSON_LIST));
         imageViewPanel.getRoot().setVisible(panelToShow.equals(Panel.IMAGE_VIEW));
     }
 
@@ -177,8 +181,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ContactDisplayPanel getContactDisplayPanel() {
-        return contactDisplayPanel;
+    public PersonListPanel getPersonListPanel() {
+        return personListPanel;
     }
 
     /**
@@ -189,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleViewImages() {
         ImageDetailsList list = logic.getImagesToView();
         imageViewPanel = new ImageViewPanel(list);
-        personListPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
+        informationDisplayPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
         setPanel(Panel.IMAGE_VIEW);
     }
 

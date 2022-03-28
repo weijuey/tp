@@ -160,7 +160,6 @@ public class ModelManager implements Model {
 
     //=========== Detailed Contact View methods =============================================================
 
-
     @Override
     public ObservableList<Person> getDetailedContactView() {
         return detailedContactView;
