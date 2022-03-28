@@ -9,8 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -104,11 +102,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         DeadlineList updatedDeadlines = editPersonDescriptor.getDeadlines().orElse(personToEdit.getDeadlines());
         Notes oldNotes = personToEdit.getNotes();
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Tag> oldTags = personToEdit.getTags();
         Favourite favouriteStatus = personToEdit.getFavouriteStatus();
+        System.out.println("oldTags for " + personToEdit.getName() + ": " + oldTags);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadlines,
-                oldNotes, updatedTags, favouriteStatus);
+                oldNotes, oldTags, favouriteStatus);
     }
 
     @Override
@@ -139,7 +138,6 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private DeadlineList deadlines;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
@@ -153,14 +151,13 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setDeadlines(toCopy.deadlines);
-            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, deadlines, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, deadlines);
         }
 
         public void setName(Name name) {
@@ -203,22 +200,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(deadlines);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
+        ///**
+        // * Sets {@code tags} to this object's {@code tags}.
+        // * A defensive copy of {@code tags} is used internally.
+        // */
+        //public void setTags(Set<Tag> tags) {
+        //    this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        //}
+        //
+        ///**
+        // * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+        // * if modification is attempted.
+        // * Returns {@code Optional#empty()} if {@code tags} is null.
+        // */
+        //public Optional<Set<Tag>> getTags() {
+        //    return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        //}
 
         @Override
         public boolean equals(Object other) {
@@ -239,8 +236,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getDeadlines().equals(e.getDeadlines())
-                    && getTags().equals(e.getTags());
+                    && getDeadlines().equals(e.getDeadlines());
         }
     }
 }
