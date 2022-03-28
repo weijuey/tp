@@ -24,6 +24,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -106,9 +107,10 @@ public class EditCommand extends Command {
         Notes oldNotes = personToEdit.getNotes();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Favourite favouriteStatus = personToEdit.getFavouriteStatus();
+        HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadlines,
-                oldNotes, updatedTags, favouriteStatus);
+                oldNotes, updatedTags, favouriteStatus, highImportanceStatus);
     }
 
     @Override
