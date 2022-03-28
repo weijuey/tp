@@ -38,7 +38,9 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
-    private enum Panel { PERSON_LIST , IMAGE_VIEW }
+    private enum Panel { PERSON_LIST , DETAILED_VIEW , IMAGE_VIEW }
+
+    private Panel panelInDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -137,7 +139,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setPanel(Panel panelToShow) {
+        panelInDisplay = panelToShow;
         personListPanel.getRoot().setVisible(panelToShow.equals(Panel.PERSON_LIST));
+        detailedContactPanel.getRoot().setVisible(panelToShow.equals(Panel.DETAILED_VIEW));
         imageViewPanel.getRoot().setVisible(panelToShow.equals(Panel.IMAGE_VIEW));
     }
 
@@ -183,6 +187,11 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    @FXML
+    private void handleDetailedView() {
+        setPanel(Panel.DETAILED_VIEW);
     }
 
     /**
