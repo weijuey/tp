@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,12 +25,15 @@ public class Person {
     private final Notes notes;
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
+    private final ImageDetailsList imageDetailsList;
+    private final HighImportance highImportanceStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Notes notes,
-                Set<Tag> tags, Favourite favouriteStatus) {
+                  Set<Tag> tags, Favourite favouriteStatus, HighImportance highImportanceStatus,
+                  ImageDetailsList images) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -37,7 +41,9 @@ public class Person {
         this.deadlines = deadlines;
         this.notes = notes;
         this.favouriteStatus = favouriteStatus;
+        this.highImportanceStatus = highImportanceStatus;
         this.tags.addAll(tags);
+        this.imageDetailsList = images;
     }
 
     public Name getName() {
@@ -70,6 +76,18 @@ public class Person {
 
     public boolean isFavourite() {
         return favouriteStatus.isFavourite();
+    }
+
+    public ImageDetailsList getImageDetailsList() {
+        return imageDetailsList;
+    }
+
+    public HighImportance getHighImportanceStatus() {
+        return highImportanceStatus;
+    }
+
+    public boolean hasHighImportance() {
+        return highImportanceStatus.hasHighImportance();
     }
 
     /**
@@ -115,13 +133,16 @@ public class Person {
                 && otherPerson.getDeadlines().equals(getDeadlines())
                 && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getFavouriteStatus().equals(getFavouriteStatus());
+                && otherPerson.getFavouriteStatus().equals(getFavouriteStatus())
+                && otherPerson.getImageDetailsList().equals(getImageDetailsList())
+                && otherPerson.getHighImportanceStatus().equals(getHighImportanceStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, notes, tags, favouriteStatus);
+        return Objects.hash(
+                name, phone, email, address, notes, tags, favouriteStatus, imageDetailsList, highImportanceStatus);
     }
 
     @Override
@@ -149,5 +170,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

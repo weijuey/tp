@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -79,6 +81,30 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Returns true if a person with the same identity as {@code tag} exists in the address book.
+     */
+    boolean hasTag(Tag tag);
+
+    /**
+     * Adds the given tag
+     * {@code tag} must not already exist in the address book.
+     */
+    void addTag(Tag tag);
+
+    /**
+     * Replaces the given tag {@code target} with {@code editedTag}.
+     * {@code target} must exist in the address book.
+     * The tag identity of {@code editedTag} must not be the same as another existing tag in the address book.
+     */
+    void setTag(Tag target, Tag editedTag);
+
+    /**
+     * Deletes the given tag.
+     * The tag must exist in the address book.
+     */
+    void deleteTag(Tag target);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -99,4 +125,14 @@ public interface Model {
 
     /** Removes the contact that is being viewed in detail */
     void clearDetailedContactView();
+
+    /**
+     * Updates the images to be displayed.
+     */
+    void updateImagesToView(ImageDetailsList images);
+
+    /**
+     * Gets the images to be displayed.
+     */
+    ImageDetailsList getImagesToView();
 }

@@ -12,7 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ObservableList<Person> detailedContactView;
+    private ImageDetailsList imagesToView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         detailedContactView = FXCollections.observableArrayList();
+        this.imagesToView = new ImageDetailsList();
     }
 
     public ModelManager() {
@@ -114,6 +118,29 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return addressBook.hasTag(tag);
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        addressBook.addTag(tag);
+    }
+
+    @Override
+    public void setTag(Tag target, Tag editedTag) {
+        requireAllNonNull(target, editedTag);
+
+        addressBook.setTag(target, editedTag);
+    }
+
+    @Override
+    public void deleteTag(Tag target) {
+        addressBook.removeTag(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -130,6 +157,9 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    //=========== Detailed Contact View methods =============================================================
+
 
     @Override
     public ObservableList<Person> getDetailedContactView() {
@@ -152,6 +182,17 @@ public class ModelManager implements Model {
         detailedContactView.clear();
     }
 
+    //=========== Person Images to View ==============================================================================
+    @Override
+    public void updateImagesToView(ImageDetailsList images) {
+        this.imagesToView = images;
+    }
+
+    @Override
+    public ImageDetailsList getImagesToView() {
+        return this.imagesToView;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -169,6 +210,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && detailedContactView.equals(other.detailedContactView);
+                && detailedContactView.equals(other.detailedContactView)
+                && imagesToView.equals(other.imagesToView);
     }
 }
