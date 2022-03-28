@@ -14,6 +14,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -76,9 +77,11 @@ public class FavouriteCommand extends Command {
         Address address = personToEdit.getAddress();
         DeadlineList deadlines = personToEdit.getDeadlines();
         Notes notes = personToEdit.getNotes();
+        HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
         Set<Tag> tags = personToEdit.getTags();
 
-        return new Person(name, phone, email, address, deadlines, notes, tags, newFavouriteStatus);
+        return new Person(name, phone, email, address, deadlines,
+                notes, tags, newFavouriteStatus, highImportanceStatus);
 
     }
 
