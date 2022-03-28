@@ -10,8 +10,8 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 class ImageDetailsTest {
-    Path testImageDirectory = Paths.get("src", "test", "data", "testImages");
-    String testFileName = "test_image_1.png";
+    private Path testImageDirectory = Paths.get("src", "test", "data", "testImages");
+    private String testFileName = "test_image_1.png";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
