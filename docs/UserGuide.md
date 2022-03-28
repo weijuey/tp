@@ -140,21 +140,24 @@ Examples:
 
 - `fav 1` — Adds contact at index 1 to your list of favourites
 
-### Adding high importance flag: `impt`
+### Adding high importance flag : `impt`
 
-Adds the contact to your list of people with high importance.
+Adds the contact to your list of people with high importance and a red flag will appear beside the contact's name to indicate that.
 
-Format:
-
-- `impt INDEX`
+Format: `impt INDEX`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can run `impt INDEX` where `INDEX` is the index of a contact that currently belongs in your high importance list to remove them.
+When a red flag appears beside the contact's name, you can run `impt INDEX` again where `INDEX` is the index of a contact that currently belongs in your list of people with high importance to remove them.
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You may wish to use the `note` command to add a note to indicate why the contact is important. E.g. Mobility Issues.
 </div>
 
-Examples:
+### List contacts with high importance : `impts`
 
-- `impt 1` — Adds contact at index 1 to your list of people with high importance
+Shows you all contact(s) with high importance.
+
+Format: `impts`
 
 ### Locating contacts by name : `find`
 
@@ -293,5 +296,6 @@ the data of your previous d'Intérieur home folder.
 | **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |
 | **Help**       | `help`                                                                                                                                          |
 | **Impt**       | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |
+| **Impts**      | `impts`                                                                                                                                         |
 | **List**       | `list`                                                                                                                                          |
 | **Note**       | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |
