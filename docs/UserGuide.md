@@ -134,21 +134,17 @@ Examples:
 Toggles the favourite status of your contacts. 
 Favourited contacts **can be un-favourited** by running the same command on the contact again.
 
-Format:
-
-- `fav INDEX`
+Format: `fav INDEX`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can run `fav INDEX` where `INDEX` is the index of a contact that currently belongs in your favourites list to remove them.
 </div>
 
-Examples:
-
-- `fav 1` — Adds contact at index 1 to your list of favourites
+Examples: `fav 1` — Adds contact at index 1 to your list of favourites
 
 ![favourite](images/favourite_command.png)
 
-- `fav 1` - Run the command for the same person, and the favourite status will be toggled off.
+- `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
 
 ![unfavourited](images/after_unfavourite_command.png)
 
