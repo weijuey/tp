@@ -28,6 +28,10 @@ public class ImageDetailsList implements Iterable<ImageDetails> {
         return this.images;
     }
 
+    public ImageDetails get(int i) {
+        return this.images.get(i);
+    }
+
     public boolean isEmpty() {
         return this.images.isEmpty();
     }

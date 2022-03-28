@@ -12,6 +12,7 @@
 <?import javafx.scene.image.ImageView?>
 
 <?import javafx.scene.shape.Rectangle?>
-<HBox id="cardPane" fx:id="cardPane" alignment="center" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="cardPane" fx:id="cardPane" alignment="top_center" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <Label fx:id="indexLabel" style="-fx-text-fill: #fff" />
   <ImageView fx:id="imageView" />
-</HBox>
+</VBox>
