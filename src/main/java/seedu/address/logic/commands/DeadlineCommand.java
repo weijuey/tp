@@ -53,7 +53,7 @@ public class DeadlineCommand extends Command {
                 personToAddDeadline.getName(), personToAddDeadline.getPhone(), personToAddDeadline.getEmail(),
                 personToAddDeadline.getAddress(), deadlines, personToAddDeadline.getNotes(),
                 personToAddDeadline.getTags(), personToAddDeadline.getFavouriteStatus(),
-                personToAddDeadline.getHighImportanceStatus());
+                personToAddDeadline.getHighImportanceStatus(), personToAddDeadline.getImageDetailsList());
 
         if (!personToAddDeadline.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
