@@ -13,6 +13,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteImageCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FavouriteCommand;
@@ -103,6 +104,9 @@ public class AddressBookParser {
 
         case ImagesCommand.COMMAND_WORD:
             return new ImagesCommandParser().parse(arguments);
+
+        case DeleteImageCommand.COMMAND_WORD:
+            return new DeleteImageCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

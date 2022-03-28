@@ -85,4 +85,13 @@ public class ImageUtil {
         }
         return new ImageDetailsList(sanitizedList);
     }
+
+    public static void removeFile(ImageDetails imageToDelete) {
+        Path filePath = imageToDelete.getImageFile().toPath();
+        if (!FileUtil.isFileExists(filePath)) {
+            return;
+        }
+
+       FileUtil.deleteFile(filePath);
+    }
 }
