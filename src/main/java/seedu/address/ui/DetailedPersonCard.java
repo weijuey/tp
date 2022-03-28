@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -38,6 +41,12 @@ public class DetailedPersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Canvas starCanvas;
+    @FXML
+    private ImageView flagImageView;
+    private final Image highImportanceFlag = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/red_flag.png")));
+    private final Image notHighImportanceFlag = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/white_flag.png")));
 
     /**
      * Creates a {@code DetailedPersonCard} with the given {@code Person} to display
@@ -61,6 +70,15 @@ public class DetailedPersonCard extends UiPart<Region> {
             starCanvas.setVisible(true);
             drawStarShape(starCanvas.getGraphicsContext2D());
         }
+
+        // Red flag if importance, otherwise empty plain flag
+        if (person.hasHighImportance()) {
+            flagImageView.setImage(highImportanceFlag);
+        } else {
+            flagImageView.setImage(notHighImportanceFlag);
+        }
+        flagImageView.setFitHeight(20);
+        flagImageView.setFitWidth(20);
     }
 
     private void drawStarShape(GraphicsContext gc) {
