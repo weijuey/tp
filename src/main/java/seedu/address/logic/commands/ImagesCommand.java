@@ -1,25 +1,23 @@
 package seedu.address.logic.commands;
 
+import seedu.address.MainApp;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.image.ImageDetailsList;
+import seedu.address.model.image.util.ImageUtil;
 import seedu.address.model.person.Person;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 public class ImagesCommand extends Command {
 
     public static final String COMMAND_WORD = "images";
-
+    public static final Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the images of the person identified "
             + "by the index number used in the displayed person list.\n"
@@ -32,7 +30,7 @@ public class ImagesCommand extends Command {
 
     public ImagesCommand(Index index) {
         requireNonNull(index);
-        this.index=index;
+        this.index = index;
     }
 
     /**
@@ -52,8 +50,16 @@ public class ImagesCommand extends Command {
         }
 
         Person targetPerson = lastShownList.get(index.getZeroBased());
+        logger.info(String.format("Sanitizing images of person at index %d", index.getZeroBased()));
 
-        return new CommandResult(
-                targetPerson.getImageDetailsList().toString(), CommandResult.SpecialCommandResult.VIEW_IMAGES);
+        ImageDetailsList originalList = targetPerson.getImageDetailsList();
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList);
+        targetPerson.setImageDetailsList(sanitizedList);
+        logger.info(String.format("Result of sanitization: %d -> %d", originalList.size(), sanitizedList.size()));
+
+        model.updateImagesToView(sanitizedList);
+
+        String result = String.format(MESSAGE_IMAGES_SUCCESS, targetPerson + "\n") + sanitizedList;
+        return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
     }
 }

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -110,4 +111,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the images to be displayed.
+     */
+    void updateImagesToView(ImageDetailsList images);
+
+    /**
+     * Gets the images to be displayed.
+     */
+    ImageDetailsList getImagesToView();
+
 }

@@ -2,9 +2,11 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.image.ImageDetailsList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,9 +35,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ImageViewPanel imageViewPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private ImageViewPanel imageViewPanel;
+
+    private enum Panel { PERSON_LIST , IMAGE_VIEW }
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -114,6 +119,11 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        ImageDetailsList list = logic.getImagesToView();
+        imageViewPanel = new ImageViewPanel(list);
+        personListPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
+        imageViewPanel.getRoot().setVisible(false);
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -122,6 +132,11 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void setPanel(Panel panelToShow) {
+        personListPanel.getRoot().setVisible(panelToShow.equals(Panel.PERSON_LIST));
+        imageViewPanel.getRoot().setVisible(panelToShow.equals(Panel.IMAGE_VIEW));
     }
 
     /**
@@ -166,15 +181,14 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Loads the contact's images.
+     * Initializes a new ImageViewPanel for each new contact to clear the previous images.
      */
     @FXML
     private void handleViewImages() {
-        imageViewPanel = new ImageViewPanel(logic.getFilteredPersonList());
+        ImageDetailsList list = logic.getImagesToView();
+        imageViewPanel = new ImageViewPanel(list);
         personListPanelPlaceholder.getChildren().add(imageViewPanel.getRoot());
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+        setPanel(Panel.IMAGE_VIEW);
     }
 
     /**
@@ -187,6 +201,8 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            setPanel(Panel.PERSON_LIST);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

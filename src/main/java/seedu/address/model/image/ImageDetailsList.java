@@ -1,9 +1,12 @@
 package seedu.address.model.image;
 
+import seedu.address.model.person.Person;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class ImageDetailsList {
+public class ImageDetailsList implements Iterable<ImageDetails> {
     private final List<ImageDetails> images;
 
     public ImageDetailsList() {
@@ -39,5 +42,15 @@ public class ImageDetailsList {
             sb.append(i+1).append(": ").append(images.get(i)).append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * Returns an iterator over elements of type {@code Images}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<ImageDetails> iterator() {
+        return this.images.iterator();
     }
 }

@@ -15,15 +15,12 @@ public class ImageCard extends UiPart<Region> {
     public final Image image;
 
     @FXML
-    private Label name;
-    @FXML
     private ImageView imageView;
 
-    public ImageCard(ImageDetails imageDetails, int displayedIndex) {
+    public ImageCard(ImageDetails imageDetails, int height, int width) {
         super(FXML);
         this.imageDetails = imageDetails;
-        this.image = new Image(imageDetails.getJavaFXImageUrl());
-        this.imageView.setImage(image);
-        this.name.setText(imageDetails.getName());
+        image = new Image(imageDetails.getJavaFXImageUrl(), width, height, true, true);
+        imageView.setImage(image);
     }
 }

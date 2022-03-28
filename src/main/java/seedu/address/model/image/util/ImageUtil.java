@@ -3,18 +3,20 @@ package seedu.address.model.image.util;
 import javafx.stage.FileChooser;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageUtil {
     private static final FileChooser.ExtensionFilter IMAGE_FILE_FILTERS = new FileChooser.ExtensionFilter(
             "Image Files", "*.png", "*.jpg");
     private static FileChooser fileChooser;
-
 
     /**
      * Opens a FileChooser configured to view and select only image files.
@@ -67,5 +69,20 @@ public class ImageUtil {
     private static String getImageExtension(String fileName) {
         String[] splitFileName = fileName.split("\\.");
         return splitFileName[splitFileName.length -1];
+    }
+
+    /**
+     * Removes from this list images that no longer exist within the data/images directory.
+     *
+     * @return a sanitized {@code ImageDetailsList} object.
+     */
+    public static ImageDetailsList sanitizeList(ImageDetailsList listToSanitize) {
+        List<ImageDetails> sanitizedList = new ArrayList<>();
+        for (ImageDetails img : listToSanitize) {
+            if (fileExists(img.getImageFile(), ImageDetails.CONTACT_IMAGES_PATH)) {
+                sanitizedList.add(img);
+            }
+        }
+        return new ImageDetailsList(sanitizedList);
     }
 }
