@@ -1,6 +1,7 @@
 package seedu.address.model.image;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.UniqueTagList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -47,6 +48,20 @@ public class ImageDetailsList implements Iterable<ImageDetails> {
         }
         return sb.toString();
     }
+
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ImageDetailsList // instanceof handles nulls
+                && images.equals(((ImageDetailsList) other).images));
+    }
+
+    @Override
+    public int hashCode() {
+        return images.hashCode();
+    }
+
 
     /**
      * Returns an iterator over elements of type {@code Images}.

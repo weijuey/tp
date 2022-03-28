@@ -14,8 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageUtil {
+    private static final String JPG_EXTENSION = "jpg";
+    private static final String PNG_EXTENSION = "png";
     private static final FileChooser.ExtensionFilter IMAGE_FILE_FILTERS = new FileChooser.ExtensionFilter(
-            "Image Files", "*.png", "*.jpg");
+            "Image Files", "*." + PNG_EXTENSION, "*." + JPG_EXTENSION);
+
     private static FileChooser fileChooser;
 
     /**
@@ -68,7 +71,14 @@ public class ImageUtil {
 
     private static String getImageExtension(String fileName) {
         String[] splitFileName = fileName.split("\\.");
-        return splitFileName[splitFileName.length -1];
+        // FileChooser should have already ensured that the file must have _some_ valid extension
+        assert splitFileName.length > 1;
+
+        String extension = splitFileName[splitFileName.length -1];
+        // FileChooser should have already ensured that the file must have some _valid_ extension
+        assert extension.equals(JPG_EXTENSION) || extension.equals(PNG_EXTENSION);
+
+        return extension;
     }
 
     /**

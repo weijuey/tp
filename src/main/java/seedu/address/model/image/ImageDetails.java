@@ -2,12 +2,16 @@ package seedu.address.model.image;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static java.util.Objects.requireNonNull;
 
 public class ImageDetails {
-    public static final Path CONTACT_IMAGES_PATH = Path.of("data", "images");
+    public static final Path CONTACT_IMAGES_PATH = Paths.get("data", "images");
     public final File imageFile;
 
     public ImageDetails(File imageFile) {
+        requireNonNull(imageFile);
         this.imageFile = imageFile;
     }
 
@@ -19,12 +23,17 @@ public class ImageDetails {
         return this.imageFile;
     }
 
-    public String getAbsolutePath() {
-        return this.imageFile.getAbsolutePath();
+    /**
+     * The string representation of the path returned is relative to the project root.
+     *
+     * @return path of the image file, relative to the project root.
+     */
+    public String getPath(Path parentDirectory) {
+        return parentDirectory.resolve(getName()).toString();
     }
 
     public String getJavaFXImageUrl() {
-        return String.format("file:%s", Path.of(CONTACT_IMAGES_PATH.toString(), getName()));
+        return String.format("file:%s", CONTACT_IMAGES_PATH.resolve(getName()));
     }
 
     @Override

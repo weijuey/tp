@@ -1,11 +1,16 @@
 package seedu.address.model.util;
 
+import java.awt.*;
+import java.io.File;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
@@ -73,6 +78,16 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns an image details list containing the list of image details given
+     */
+    public static ImageDetailsList getImageDetailsList(String... imageDetails) {
+        return new ImageDetailsList(Arrays.stream(imageDetails)
+                .map(File::new)
+                .map(ImageDetails::new)
+                .collect(Collectors.toList()));
     }
 
 }

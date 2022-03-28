@@ -62,7 +62,7 @@ public class AddImageCommand extends Command {
         StringBuilder resultStringBuilder = new StringBuilder();
         List<ImageDetails> imagesToAdd = new ArrayList<>();
         for (File imgFile : images) {
-            Path destPath = Path.of(CONTACT_IMAGES_PATH.toString(), imgFile.getName());
+            Path destPath = CONTACT_IMAGES_PATH.resolve(imgFile.getName());
             if (ImageUtil.fileExists(imgFile, CONTACT_IMAGES_PATH)) {
                 resultStringBuilder
                         .append(String.format(DUPLICATE_IMAGES, imgFile.getName()))
@@ -71,8 +71,6 @@ public class AddImageCommand extends Command {
             }
             ImageDetails copiedImage;
             try {
-                // Uploads the file to the designated path @ destPath.
-                // TODO: let storage/addressbook handle this, so that users can set their "contactImagesPath" pref.
                  copiedImage = ImageUtil.copyTo(imgFile, destPath);
             } catch (IOException ioe) {
                 throw new CommandException(ADD_IMAGE_FAIL);

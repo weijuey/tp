@@ -8,6 +8,8 @@ import seedu.address.model.tag.Tag;
 
 import java.io.File;
 
+import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
+
 public class JsonAdaptedImageDetails {
 
     private final String imageFilePath;
@@ -24,7 +26,7 @@ public class JsonAdaptedImageDetails {
      * Converts a given {@code source} into this class for Jackson use.
      */
     public JsonAdaptedImageDetails(ImageDetails source) {
-        imageFilePath = source.getAbsolutePath();
+        imageFilePath = source.getPath(CONTACT_IMAGES_PATH);
     }
 
     @JsonValue

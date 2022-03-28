@@ -7,6 +7,8 @@ import java.util.Set;
 
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.DeadlineList;
@@ -38,6 +40,7 @@ public class PersonBuilder {
     private Notes notes;
     private Favourite favouriteStatus;
     private Set<Tag> tags;
+    private ImageDetailsList images;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -51,6 +54,7 @@ public class PersonBuilder {
         notes = Notes.getNewNotes();
         favouriteStatus = Favourite.valueOf(DEFAULT_FAVOURITE);
         tags = new HashSet<>();
+        images = new ImageDetailsList();
     }
 
     /**
@@ -65,6 +69,7 @@ public class PersonBuilder {
         notes = Notes.loadNotesFromList(personToCopy.getNotes().value);
         favouriteStatus = personToCopy.getFavouriteStatus();
         tags = new HashSet<>(personToCopy.getTags());
+        images = personToCopy.getImageDetailsList();
     }
 
     /**
@@ -135,7 +140,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ImageDetailsList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withImageDetails(String imagePaths) {
+        this.images = SampleDataUtil.getImageDetailsList(imagePaths);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus);
+        Person result = new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus);
+        result.setImageDetailsList(images);
+        return result;
     }
 }
