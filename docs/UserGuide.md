@@ -224,9 +224,9 @@ Examples:
 
 * `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`
 
-### Unassigning a tag to a contact : `unassign`
+### Unassigning a tag from a contact : `unassign`
 
-Unassigns a created tag to a contact.
+Unassigns a created tag from a contact.
 
 Format: `unassign INDEX TAGNAME`
 
