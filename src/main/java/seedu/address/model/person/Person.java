@@ -26,12 +26,13 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Favourite favouriteStatus;
     private ImageDetailsList imageDetailsList = new ImageDetailsList();
+    private final HighImportance highImportanceStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, DeadlineList deadlines, Notes notes,
-                Set<Tag> tags, Favourite favouriteStatus) {
+                Set<Tag> tags, Favourite favouriteStatus, HighImportance highImportanceStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,6 +40,7 @@ public class Person {
         this.deadlines = deadlines;
         this.notes = notes;
         this.favouriteStatus = favouriteStatus;
+        this.highImportanceStatus = highImportanceStatus;
         this.tags.addAll(tags);
     }
 
@@ -85,6 +87,14 @@ public class Person {
         this.imageDetailsList = list;
     }
 
+    public HighImportance getHighImportanceStatus() {
+        return highImportanceStatus;
+    }
+
+    public boolean hasHighImportance() {
+        return highImportanceStatus.hasHighImportance();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -129,13 +139,15 @@ public class Person {
                 && otherPerson.getNotes().equals(getNotes())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getFavouriteStatus().equals(getFavouriteStatus())
-                && otherPerson.getImageDetailsList().equals(getImageDetailsList());
+                && otherPerson.getImageDetailsList().equals(getImageDetailsList())
+                && otherPerson.getHighImportanceStatus().equals(getHighImportanceStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, notes, tags, favouriteStatus, imageDetailsList);
+        return Objects.hash(
+                name, phone, email, address, notes, tags, favouriteStatus, imageDetailsList, highImportanceStatus);
     }
 
     @Override

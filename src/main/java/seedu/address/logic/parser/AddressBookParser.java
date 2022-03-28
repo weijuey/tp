@@ -20,6 +20,7 @@ import seedu.address.logic.commands.FavouriteCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HighImportanceCommand;
 import seedu.address.logic.commands.ImagesCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFavouritesCommand;
@@ -95,6 +96,9 @@ public class AddressBookParser {
 
         case DeadlineCommand.COMMAND_WORD:
             return new DeadlineCommandParser().parse(arguments);
+
+        case HighImportanceCommand.COMMAND_WORD:
+            return new HighImportanceCommandParser().parse(arguments);
 
         case CreateTagCommand.COMMAND_WORD:
             return new CreateTagCommandParser().parse(arguments);

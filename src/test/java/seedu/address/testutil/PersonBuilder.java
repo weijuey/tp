@@ -13,6 +13,7 @@ import seedu.address.model.person.Deadline;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -30,6 +31,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_FAVOURITE = "false";
+    public static final String DEFAULT_HIGH_IMPORTANCE = "false";
 
     private Name name;
     private Phone phone;
@@ -38,6 +40,7 @@ public class PersonBuilder {
     private DeadlineList deadlines;
     private Notes notes;
     private Favourite favouriteStatus;
+    private HighImportance highImportanceStatus;
     private Set<Tag> tags;
     private ImageDetailsList images;
 
@@ -52,6 +55,7 @@ public class PersonBuilder {
         deadlines = new DeadlineList();
         notes = Notes.getNewNotes();
         favouriteStatus = Favourite.valueOf(DEFAULT_FAVOURITE);
+        highImportanceStatus = HighImportance.valueOf(DEFAULT_HIGH_IMPORTANCE);
         tags = new HashSet<>();
         images = new ImageDetailsList();
     }
@@ -67,6 +71,7 @@ public class PersonBuilder {
         deadlines = personToCopy.getDeadlines();
         notes = Notes.loadNotesFromList(personToCopy.getNotes().value);
         favouriteStatus = personToCopy.getFavouriteStatus();
+        highImportanceStatus = personToCopy.getHighImportanceStatus();
         tags = new HashSet<>(personToCopy.getTags());
         images = personToCopy.getImageDetailsList();
     }
@@ -148,13 +153,23 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code FavouriteStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withHighImportance(String highImportance) {
+        this.highImportanceStatus = HighImportance.valueOf(highImportance);
+        return this;
+    }
+
+    /**
      * Builds the person based on the values supplied to the builder.
      *
      * @return the built person
      */
     public Person build() {
-        Person result = new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus);
+        Person result =
+                new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus, highImportanceStatus);
         result.setImageDetailsList(images);
         return result;
     }
+
 }

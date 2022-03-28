@@ -92,7 +92,7 @@ public class AddImageCommand extends Command {
         ImageDetailsList newImages = oldImages.appendImageDetails(images);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getDeadlines(), personToEdit.getNotes(),
-                personToEdit.getTags(), personToEdit.getFavouriteStatus());
+                personToEdit.getTags(), personToEdit.getFavouriteStatus(), personToEdit.getHighImportanceStatus());
         editedPerson.setImageDetailsList(newImages);
         return editedPerson;
     }

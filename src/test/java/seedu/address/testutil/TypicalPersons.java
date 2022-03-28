@@ -33,7 +33,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withFavourite("true")
             .withImageDetails(Path.of("src", "test", "data", "testImages", "test_image_1.png").toString())
-            .build();
+            .withHighImportance("true").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
