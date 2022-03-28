@@ -2,9 +2,15 @@
 layout: page title: User Guide
 ---
 
-d'Intérieur is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still
-having the benefits of a Graphical User Interface (GUI). If you can type fast, d'Intérieur can get your contact
-management tasks done faster than traditional GUI apps.
+d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a 
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, d'Intérieur can get your contact management tasks done faster than traditional GUI apps.
+
+If you utilize other online applications for interior designing and lack a centralized, robust, and efficient customer
+management tool, this application will be able to meet your needs.
+
+In this user guide, we will work you through the basic use cases and commands of the application, so that you can 
+quickly get started and make full of use of what the application has to offer.
 
 * Table of Contents {:toc}
 
@@ -76,9 +82,9 @@ management tasks done faster than traditional GUI apps.
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![helpMessage](images/helpMessage.png)
 
 ### Adding a contact : `add`
 
@@ -125,12 +131,12 @@ Examples:
 
 ### Adding favourites : `fav`
 
-Adds the contact to your list of favourite contacts and view them.
+Toggles the favourite status of your contacts. 
+Favourited contacts **can be un-favourited** by running the same command on the contact again.
 
 Format:
 
 - `fav INDEX`
-- `favourites` — Shows a list of your favourite contacts
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can run `fav INDEX` where `INDEX` is the index of a contact that currently belongs in your favourites list to remove them.
@@ -139,6 +145,21 @@ You can run `fav INDEX` where `INDEX` is the index of a contact that currently b
 Examples:
 
 - `fav 1` — Adds contact at index 1 to your list of favourites
+
+![favourite](images/favourite_command.png)
+
+- `fav 1` - Run the command for the same person, and the favourite status will be toggled off.
+
+![unfavourited](images/after_unfavourite_command.png)
+
+
+### Listing Favourites : `favourites`
+
+Lists all your favourite contacts to the list of displayed contacts.
+
+Format:
+
+- `favourites`
 
 ### Locating contacts by name : `find`
 
@@ -161,7 +182,7 @@ Examples:
 
 ### Locating contacts by tag : `findtag`
 
-Find contact with the given tag.
+Finds contact with the given tag.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
