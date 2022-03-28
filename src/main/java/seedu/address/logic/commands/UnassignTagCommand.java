@@ -14,6 +14,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -95,11 +96,12 @@ public class UnassignTagCommand extends Command {
         Notes notes = personToEdit.getNotes();
         Set<Tag> tags = personToEdit.getTags();
         Favourite favourite = personToEdit.getFavouriteStatus();
+        HighImportance highImportance = personToEdit.getHighImportanceStatus();
 
         Set<Tag> newTags = new HashSet<>(tags);
         newTags.remove(newTag);
 
-        return new Person(name, phone, email, address, deadlines, notes, newTags, favourite);
+        return new Person(name, phone, email, address, deadlines, notes, newTags, favourite, highImportance);
     }
 
     /**
