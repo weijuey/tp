@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PersonHasHighImportancePredicate;
 
 /**
- * Finds and lists all persons in address book who are favourite contacts.
+ * Finds and lists all persons in address book who are of high importance contacts.
  */
 public class ListImportantCommand extends Command {
 

@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person} is a {@code Favourite} contact.
+ * Tests that a {@code Person} is a {@code HighImportance} contact.
  */
 public class PersonHasHighImportancePredicate implements Predicate<Person> {
     @Override

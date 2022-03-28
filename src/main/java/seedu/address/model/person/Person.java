@@ -132,7 +132,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, notes, tags, favouriteStatus, highImportanceStatus);
+        return Objects.hash(name, phone, email, address, deadlines, notes, tags, favouriteStatus, highImportanceStatus);
     }
 
     @Override
@@ -150,7 +150,9 @@ public class Person {
                 .append("; Notes: ")
                 .append(getNotes())
                 .append("; Favourite: ")
-                .append(getFavouriteStatus());
+                .append(getFavouriteStatus())
+                .append("; Importance Status: ")
+                .append(getHighImportanceStatus());
 
         Set<Tag> tags = getTags();
 
