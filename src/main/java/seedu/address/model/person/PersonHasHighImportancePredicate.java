@@ -14,6 +14,6 @@ public class PersonHasHighImportancePredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate);
+                || (other instanceof PersonHasHighImportancePredicate);
     }
 }
