@@ -161,6 +161,22 @@ Format:
 
 - `favourites`
 
+### Adding high importance flag : `impt`
+
+Adds the contact to your list of people with high importance.
+
+Format:
+
+- `impt INDEX`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can run `impt INDEX` where `INDEX` is the index of a contact that currently belongs in your high importance list to remove them.
+</div>
+
+Examples:
+
+- `impt 1` — Adds contact at index 1 to your list of people with high importance
+
 ### Locating contacts by name : `find`
 
 Find contacts whose names contain any of the given keywords.
@@ -285,17 +301,18 @@ the data of your previous d'Intérieur home folder.
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                                                                                      |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`                                                                                                                       |
-| **Clear**      | `clear`                                                                                                                                                                                                                                                               |
-| **Deadline**   | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                                                                                                                                               |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                   |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                           |
-| **Fav**        | `fav INDEX` <br> e.g., `fav 1`                                                                                                                                                                                                                                        |
-| **Favourites** | `favourites`                                                                                                                                                                                                                                                          |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                            |
-| **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                                                                                                                                        |
-| **Help**       | `help`                                                                                                                                                                                                                                                                |
-| **List**       | `list`                                                                                                                                                                                                                                                                |
-| **Note**       | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                                                                                                                                   |
+| Action         | Format, Examples                                                                                                                                |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
+| **Clear**      | `clear`                                                                                                                                         |
+| **Deadline**   | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                     |
+| **Fav**        | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |
+| **Favourites** | `favourites`                                                                                                                                    |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
+| **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |
+| **Help**       | `help`                                                                                                                                          |
+| **Impt**       | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |
+| **List**       | `list`                                                                                                                                          |
+| **Note**       | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |

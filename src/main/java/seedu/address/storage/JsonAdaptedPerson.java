@@ -10,11 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -36,6 +39,8 @@ class JsonAdaptedPerson {
     private final List<String> notes = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String isFavourite;
+    private final List<JsonAdaptedImageDetails> images = new ArrayList<>();
+    private final String hasHighImportance;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +51,9 @@ class JsonAdaptedPerson {
                              @JsonProperty("deadlines") List<JsonAdaptedDeadline> deadlines,
                              @JsonProperty("notes") List<String> notes,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("isFavourite") String isFavourite) {
+                             @JsonProperty("isFavourite") String isFavourite,
+                             @JsonProperty("images") List<JsonAdaptedImageDetails> images,
+                             @JsonProperty("hasHighImportance") String hasHighImportance) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,6 +68,10 @@ class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.isFavourite = isFavourite;
+        if (images != null) {
+            this.images.addAll(images);
+        }
+        this.hasHighImportance = hasHighImportance;
     }
 
     /**
@@ -76,8 +87,12 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         notes.addAll(source.getNotes().value);
         isFavourite = source.getFavouriteStatus().value;
+        hasHighImportance = source.getHighImportanceStatus().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        images.addAll(source.getImageDetailsList().getImages().stream()
+                .map(JsonAdaptedImageDetails::new)
                 .collect(Collectors.toList()));
     }
 
@@ -141,11 +156,26 @@ class JsonAdaptedPerson {
         }
         final Favourite modelFavourite = Favourite.valueOf(isFavourite);
 
+        if (hasHighImportance == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, HighImportance.class.getSimpleName()));
+        }
+        if (!HighImportance.isValidHighImportance(hasHighImportance)) {
+            throw new IllegalValueException(HighImportance.MESSAGE_CONSTRAINTS);
+        }
+        final HighImportance modelHighImportance = HighImportance.valueOf(hasHighImportance);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final DeadlineList modelDeadlines = new DeadlineList(personDeadlines);
 
+        final List<ImageDetails> personImages = new ArrayList<>();
+        for (JsonAdaptedImageDetails image : images) {
+            personImages.add(image.toModelType());
+        }
+        final ImageDetailsList modelImages = new ImageDetailsList(personImages);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadlines,
-                modelNotes, modelTags, modelFavourite);
+                modelNotes, modelTags, modelFavourite, modelHighImportance, modelImages);
     }
 
 }
