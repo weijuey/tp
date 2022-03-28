@@ -192,6 +192,55 @@ Examples:
 * `findtag Friends` returns contacts with tag `Friends`
 * `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
 
+### Creating a tag : `tag`
+
+Creates a tag that can be assigned to any contact.
+
+Format: `tag TAGNAME`
+
+* A tag with the same `TAGNAME` can only be created once.
+* The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created. 
+
+Examples:
+
+* `tag Friends` creates a tag `Friends` to be stored in the address book.
+
+### Assigning a tag to a contact : `assign`
+
+Assigns a created tag to a contact.
+
+Format: `assign INDEX TAGNAME`
+
+* Assigns a `TAG` with a given `TAGNAME` to a contact at the specified `INDEX`
+* The `TAG` given by the `TAGNAME` must be created first. 
+* The `TAGNAME` is case-insensitive.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, ...​
+* The contact should have **at most one** `TAG` with a given unique `TAGNAME`.
+* The contact assigned to the given `TAGNAME` will not be assigned to the same `TAGNAME` again.
+e.g. assigning the tag `friends` to Alice at index 1 will not allow `Friends` to be assigned to the same contact.
+
+Examples:
+
+* `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`
+
+### Unassigning a tag to a contact : `unassign`
+
+Unassigns a created tag to a contact.
+
+Format: `unassign INDEX TAGNAME`
+
+* Removes a `TAG` with a given `TAGNAME` from a contact at the specified `INDEX`
+* The `TAG` given by the `TAGNAME` must be created first.
+* The `TAGNAME` is case-insensitive.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, ...​
+* The contact must have been assigned to this `TAG` previously.
+
+Examples:
+
+* `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`
+
 ### Deleting a contact : `delete`
 
 Deletes the specified contact from the address book.
