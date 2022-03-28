@@ -10,6 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
@@ -79,9 +80,10 @@ public class FavouriteCommand extends Command {
         Notes notes = personToEdit.getNotes();
         HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
         Set<Tag> tags = personToEdit.getTags();
+        ImageDetailsList imageDetailsList = personToEdit.getImageDetailsList();
 
         return new Person(name, phone, email, address, deadlines,
-                notes, tags, newFavouriteStatus, highImportanceStatus);
+                notes, tags, newFavouriteStatus, highImportanceStatus, imageDetailsList);
 
     }
 
