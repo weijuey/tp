@@ -29,7 +29,8 @@ public class AssignTagCommand extends Command {
     public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a tag with a given tag name "
-            + "(case-insensitive) and a given index of the contact in the address book.\n"
+            + "(case-insensitive) to a contact identified by a given index number used in the displayed "
+            + "persons list.\n"
             + "Parameters: INDEX (must be a positive integer), TAGNAME"
             + "Example: " + COMMAND_WORD + " 1 friends";
 
