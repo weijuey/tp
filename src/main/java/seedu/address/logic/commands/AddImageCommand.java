@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,13 +21,7 @@ import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.image.util.ImageUtil;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
-
 public class AddImageCommand extends Command {
-
-    private static final Logger logger = Logger.getLogger(String.valueOf(AddImageCommand.class));
 
     public static final String COMMAND_WORD = "addimg";
 
@@ -35,8 +33,9 @@ public class AddImageCommand extends Command {
     public static final String ADD_IMAGE_SUCCESS = "Added %d image(s) to Person: %s";
     public static final String ADD_IMAGE_NONE_SELECTED = "No images were selected to be added";
     public static final String ADD_IMAGE_FAIL = "Failed to add image(s)";
-    public static final String DUPLICATE_IMAGES
-            = "An image with the name: \"%s\" already exists";
+    public static final String DUPLICATE_IMAGES = "An image with the name: \"%s\" already exists";
+
+    private static final Logger logger = Logger.getLogger(String.valueOf(AddImageCommand.class));
 
     private final Index targetIndex;
 
@@ -71,7 +70,7 @@ public class AddImageCommand extends Command {
             }
             ImageDetails copiedImage;
             try {
-                 copiedImage = ImageUtil.copyTo(imgFile, destPath);
+                copiedImage = ImageUtil.copyTo(imgFile, destPath);
             } catch (IOException ioe) {
                 throw new CommandException(ADD_IMAGE_FAIL);
             }

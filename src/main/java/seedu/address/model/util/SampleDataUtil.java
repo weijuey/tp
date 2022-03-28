@@ -1,8 +1,6 @@
 package seedu.address.model.util;
 
-import java.awt.*;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;

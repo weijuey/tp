@@ -1,15 +1,20 @@
 package seedu.address.model.image;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import static java.util.Objects.requireNonNull;
 
 public class ImageDetails {
     public static final Path CONTACT_IMAGES_PATH = Paths.get("data", "images");
     public final File imageFile;
 
+    /**
+     * Creates an image details object that encapsulates the information of an image file.
+     *
+     * @param imageFile the file that is being encapsulated.
+     */
     public ImageDetails(File imageFile) {
         requireNonNull(imageFile);
         this.imageFile = imageFile;
@@ -32,7 +37,7 @@ public class ImageDetails {
         return parentDirectory.resolve(getName()).toString();
     }
 
-    public String getJavaFXImageUrl() {
+    public String getJavaFxImageUrl() {
         return String.format("file:%s", CONTACT_IMAGES_PATH.resolve(getName()));
     }
 

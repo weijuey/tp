@@ -1,17 +1,17 @@
 package seedu.address.model.image.util;
 
-import javafx.stage.FileChooser;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.model.image.ImageDetails;
-import seedu.address.model.image.ImageDetailsList;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
+
+import javafx.stage.FileChooser;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 
 public class ImageUtil {
     private static final String JPG_EXTENSION = "jpg";
@@ -57,6 +57,14 @@ public class ImageUtil {
         return false;
     }
 
+    /**
+     * Copies the image specified at the source file, to the destination path specified.
+     *
+     * @param src the image to be copied
+     * @param destPath the location that the newly copied image should be saved to
+     * @return the image details of the copied image
+     * @throws IOException if reading or writing the image failed
+     */
     public static ImageDetails copyTo(File src, Path destPath) throws IOException {
         BufferedImage srcImg = ImageIO.read(src);
 
@@ -74,7 +82,7 @@ public class ImageUtil {
         // FileChooser should have already ensured that the file must have _some_ valid extension
         assert splitFileName.length > 1;
 
-        String extension = splitFileName[splitFileName.length -1];
+        String extension = splitFileName[splitFileName.length - 1];
         // FileChooser should have already ensured that the file must have some _valid_ extension
         assert extension.equals(JPG_EXTENSION) || extension.equals(PNG_EXTENSION);
 
@@ -96,12 +104,17 @@ public class ImageUtil {
         return new ImageDetailsList(sanitizedList);
     }
 
+    /**
+     * Deletes the file from the specified filepath.
+     *
+     * @param imageToDelete the details of the image to delete.
+     */
     public static void removeFile(ImageDetails imageToDelete) {
         Path filePath = imageToDelete.getImageFile().toPath();
         if (!FileUtil.isFileExists(filePath)) {
             return;
         }
 
-       FileUtil.deleteFile(filePath);
+        FileUtil.deleteFile(filePath);
     }
 }

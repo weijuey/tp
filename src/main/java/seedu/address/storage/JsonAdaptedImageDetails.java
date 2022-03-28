@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.image.ImageDetails;
-import seedu.address.model.tag.Tag;
+import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
 
 import java.io.File;
 
-import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.image.ImageDetails;
 
 public class JsonAdaptedImageDetails {
 

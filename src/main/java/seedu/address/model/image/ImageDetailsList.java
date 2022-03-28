@@ -1,8 +1,5 @@
 package seedu.address.model.image;
 
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.UniqueTagList;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +15,12 @@ public class ImageDetailsList implements Iterable<ImageDetails> {
         this.images = images;
     }
 
+    /**
+     * Creates an iterable list of image details, appended to this current list.
+     *
+     * @param appendedImages the images to append to this list.
+     * @return the newly appended list.
+     */
     public ImageDetailsList appendImageDetails(List<ImageDetails> appendedImages) {
         List<ImageDetails> newImages = new ArrayList<>();
         newImages.addAll(images);
@@ -37,14 +40,20 @@ public class ImageDetailsList implements Iterable<ImageDetails> {
         return this.images.isEmpty();
     }
 
+    /**
+     * Returns the size of the list, indicated by the number of ImageDetails within the list.
+     *
+     * @return size of the list.
+     */
     public int size() {
         return this.images.size();
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < images.size(); i++) {
-            sb.append(i+1).append(": ").append(images.get(i)).append("\n");
+            sb.append(i + 1).append(": ").append(images.get(i)).append("\n");
         }
         return sb.toString();
     }

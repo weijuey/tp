@@ -11,9 +11,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class AddImageCommandParser implements Parser<AddImageCommand> {
 
-    /*
+    /**
      * Parses the given {@code String} of arguments in the context of the AddImageCommand
      * and returns a AddImageCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddImageCommand parse(String args) throws ParseException {

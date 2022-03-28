@@ -1,13 +1,13 @@
 package seedu.address.commons.util;
 
-import seedu.address.MainApp;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
+
+import seedu.address.MainApp;
 
 /**
  * Writes and reads files

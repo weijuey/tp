@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+import java.util.logging.Logger;
+
 import seedu.address.MainApp;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -9,15 +14,9 @@ import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.image.util.ImageUtil;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-import java.util.logging.Logger;
-
-import static java.util.Objects.requireNonNull;
-
 public class ImagesCommand extends Command {
 
     public static final String COMMAND_WORD = "images";
-    public static final Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the images of the person identified "
             + "by the index number used in the displayed person list.\n"
@@ -26,8 +25,15 @@ public class ImagesCommand extends Command {
 
     public static final String MESSAGE_IMAGES_SUCCESS = "Images for Person: %1$s";
 
+    private static final Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
+
     private final Index index;
 
+    /**
+     * Creates the command to show all images of a person.
+     *
+     * @param index of the persons whose images are to be displayed.
+     */
     public ImagesCommand(Index index) {
         requireNonNull(index);
         this.index = index;

@@ -7,7 +7,6 @@ import java.util.Set;
 
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.image.ImageDetails;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
@@ -148,6 +147,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the person based on the values supplied to the builder.
+     *
+     * @return the built person
+     */
     public Person build() {
         Person result = new Person(name, phone, email, address, deadlines, notes, tags, favouriteStatus);
         result.setImageDetailsList(images);

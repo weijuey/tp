@@ -1,14 +1,13 @@
 package seedu.address.model.image;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.tag.Tag;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
 
 class ImageDetailsTest {
 
@@ -45,7 +44,7 @@ class ImageDetailsTest {
     }
 
     @Test
-    void getJavaFXImageUrl() {
+    void getJavaFxImageUrl() {
         String fileName = "name.test";
 
         Path path = ImageDetails.CONTACT_IMAGES_PATH.resolve(fileName);
@@ -54,6 +53,6 @@ class ImageDetailsTest {
         ImageDetails imageDetails = new ImageDetails(file);
         String expected = String.format("file:%s", path);
 
-        assertEquals(expected, imageDetails.getJavaFXImageUrl());
+        assertEquals(expected, imageDetails.getJavaFxImageUrl());
     }
 }

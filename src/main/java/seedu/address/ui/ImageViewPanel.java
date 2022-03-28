@@ -1,9 +1,8 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.Region;
-
+import javafx.scene.layout.TilePane;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.image.ImageDetails;
 import seedu.address.model.image.ImageDetailsList;

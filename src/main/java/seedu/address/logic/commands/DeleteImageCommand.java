@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -8,10 +12,6 @@ import seedu.address.model.image.ImageDetails;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.image.util.ImageUtil;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class DeleteImageCommand extends Command {
     public static final String COMMAND_WORD = "delimg";
@@ -28,6 +28,12 @@ public class DeleteImageCommand extends Command {
     private final Index personIndex;
     private final Index imageIndex;
 
+    /**
+     * Constructs a command to delete an image.
+     *
+     * @param personIndex of the person to delete.
+     * @param imageIndex of the image to delete, relative to the person to delete.
+     */
     public DeleteImageCommand(Index personIndex, Index imageIndex) {
         this.personIndex = personIndex;
         this.imageIndex = imageIndex;
@@ -54,6 +60,7 @@ public class DeleteImageCommand extends Command {
         ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images);
         personToEdit.setImageDetailsList(sanitizedList);
 
-       return new CommandResult(String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), personToEdit));
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), personToEdit));
     }
 }

@@ -4,11 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.EXIT;
-import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.NONE;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SHOW_HELP;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 
 import org.junit.jupiter.api.Test;
 
