@@ -122,6 +122,7 @@ public class MainWindow extends UiPart<Stage> {
 
         detailedContactPanel = new DetailedContactPanel(logic.getDetailedContactView());
         informationDisplayPanelPlaceholder.getChildren().add(detailedContactPanel.getRoot());
+        detailedContactPanel.getRoot().setVisible(false);
 
         ImageDetailsList list = logic.getImagesToView();
         imageViewPanel = new ImageViewPanel(list);
@@ -225,6 +226,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isDetailedView()) {
+                handleDetailedView();
             }
 
             if (commandResult.isViewImages()) {

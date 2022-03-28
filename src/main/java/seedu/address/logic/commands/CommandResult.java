@@ -15,6 +15,7 @@ public class CommandResult {
         SHOW_HELP, // Help information should be shown to the user
         EXIT, // The application should exit
         VIEW_IMAGES, // Should load up the contact's images
+        DETAILED_VIEW, // Should show the detailed contact view
         NONE
     }
 
@@ -50,6 +51,10 @@ public class CommandResult {
 
     public boolean isViewImages() {
         return this.specialCommandResult == SpecialCommandResult.VIEW_IMAGES;
+    }
+
+    public boolean isDetailedView() {
+        return this.specialCommandResult == SpecialCommandResult.DETAILED_VIEW;
     }
 
     @Override

@@ -41,6 +41,7 @@ public class ViewCommand extends Command {
         Person personToView = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(PREDICATE_HIDE_ALL_PERSONS);
         model.setDetailedContactView(personToView);
-        return new CommandResult(String.format(VIEW_SUCCESS, personToView.getName().fullName));
+        return new CommandResult(String.format(VIEW_SUCCESS, personToView.getName().fullName),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 }
