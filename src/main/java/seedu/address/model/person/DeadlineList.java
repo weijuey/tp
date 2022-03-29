@@ -1,11 +1,16 @@
 package seedu.address.model.person;
 
+import seedu.address.model.comparator.DeadlineComparator;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class DeadlineList {
+public class DeadlineList implements Comparable<DeadlineList> {
+    public static final String MODEL_NAME = "deadline";
     private ArrayList<Deadline> deadlines = new ArrayList<>();
 
     public DeadlineList() {
@@ -59,5 +64,11 @@ public class DeadlineList {
         return other == this // short circuit if same object
                 || (other instanceof DeadlineList // instanceof handles nulls
                 && deadlines.equals(((DeadlineList) other).deadlines)); // state check
+    }
+
+    @Override
+    public int compareTo(DeadlineList other) {
+        return Collections.min(this.deadlines, new DeadlineComparator())
+                .compareTo(Collections.min(other.getDeadlines(), new DeadlineComparator()));
     }
 }
