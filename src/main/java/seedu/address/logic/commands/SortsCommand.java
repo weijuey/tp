@@ -8,6 +8,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -56,11 +58,19 @@ public class SortsCommand extends Command {
             model.sortFilteredPersonListByPhone();
             break;
 
+        case Favourite.MODEL_NAME:
+            model.sortFilteredPersonListByFavourite();
+            break;
+
+        case HighImportance.MODEL_NAME:
+            model.sortFilteredPersonListByHighImportance();
+            break;
+
         default:
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_CRITERIA, criteria));
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_SORTED, criteria));
     }
 
     @Override
