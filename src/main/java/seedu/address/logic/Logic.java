@@ -24,6 +24,8 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+    CommandResult executeInDetailedViewMode(String commandText) throws CommandException, ParseException;
+
     /**
      * Returns the AddressBook.
      *

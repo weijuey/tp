@@ -121,4 +121,8 @@ public class AddressBookParser {
         }
     }
 
+    public Command parseDetailedViewCommand(String userInput) throws ParseException {
+        return new ListCommand();
+    }
+
 }
