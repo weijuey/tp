@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
@@ -104,13 +105,15 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         DeadlineList updatedDeadlines = editPersonDescriptor.getDeadlines().orElse(personToEdit.getDeadlines());
-        Notes oldNotes = personToEdit.getNotes();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        Notes oldNotes = personToEdit.getNotes();
         Favourite favouriteStatus = personToEdit.getFavouriteStatus();
         HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
+        ImageDetailsList imageDetailsList = personToEdit.getImageDetailsList();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadlines,
-                oldNotes, updatedTags, favouriteStatus, highImportanceStatus);
+                oldNotes, updatedTags, favouriteStatus, highImportanceStatus, imageDetailsList);
     }
 
     @Override

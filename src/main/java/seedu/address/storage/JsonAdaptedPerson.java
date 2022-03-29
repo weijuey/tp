@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.DeadlineList;
@@ -37,6 +39,7 @@ class JsonAdaptedPerson {
     private final List<String> notes = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String isFavourite;
+    private final List<JsonAdaptedImageDetails> images = new ArrayList<>();
     private final String hasHighImportance;
 
     /**
@@ -49,6 +52,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("notes") List<String> notes,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                              @JsonProperty("isFavourite") String isFavourite,
+                             @JsonProperty("images") List<JsonAdaptedImageDetails> images,
                              @JsonProperty("hasHighImportance") String hasHighImportance) {
         this.name = name;
         this.phone = phone;
@@ -64,6 +68,9 @@ class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.isFavourite = isFavourite;
+        if (images != null) {
+            this.images.addAll(images);
+        }
         this.hasHighImportance = hasHighImportance;
     }
 
@@ -83,6 +90,9 @@ class JsonAdaptedPerson {
         hasHighImportance = source.getHighImportanceStatus().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        images.addAll(source.getImageDetailsList().getImages().stream()
+                .map(JsonAdaptedImageDetails::new)
                 .collect(Collectors.toList()));
     }
 
@@ -158,8 +168,14 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final DeadlineList modelDeadlines = new DeadlineList(personDeadlines);
 
+        final List<ImageDetails> personImages = new ArrayList<>();
+        for (JsonAdaptedImageDetails image : images) {
+            personImages.add(image.toModelType());
+        }
+        final ImageDetailsList modelImages = new ImageDetailsList(personImages);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDeadlines,
-                modelNotes, modelTags, modelFavourite, modelHighImportance);
+                modelNotes, modelTags, modelFavourite, modelHighImportance, modelImages);
     }
 
 }

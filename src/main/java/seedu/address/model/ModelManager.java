@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ImageDetailsList imagesToView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.imagesToView = new ImageDetailsList();
     }
 
     public ModelManager() {
@@ -168,7 +171,19 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && imagesToView.equals(other.imagesToView);
     }
 
+    //=========== Person Images to View ==============================================================================
+
+    @Override
+    public void updateImagesToView(ImageDetailsList images) {
+        this.imagesToView = images;
+    }
+
+    @Override
+    public ImageDetailsList getImagesToView() {
+        return this.imagesToView;
+    }
 }
