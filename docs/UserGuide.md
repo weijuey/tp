@@ -142,12 +142,12 @@ Examples:
 
 ### Adding high importance flag : `impt`
 
-Adds the contact to your list of people with high importance and a red flag will appear beside the contact's name to indicate that.
+Adds the contact to your list of contacts with high importance and a red flag will appear beside the contact's name to indicate that.
 
 Format: `impt INDEX`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-When a red flag appears beside the contact's name, you can run `impt INDEX` again where `INDEX` is the index of a contact that currently belongs in your list of people with high importance to remove them.
+When a red flag appears beside the contact's name, you can run `impt INDEX` again where `INDEX` is the index of a contact that currently belongs in your list of contacts with high importance to remove them.
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may wish to use the `note` command to add a note to indicate why the contact is important. E.g. Mobility Issues.
@@ -155,7 +155,7 @@ You may wish to use the `note` command to add a note to indicate why the contact
 
 ### List contacts with high importance : `impts`
 
-Shows you all contact(s) with high importance.
+Shows you all contact(s) with high importance, tagged with the red flag.
 
 Format: `impts`
 
