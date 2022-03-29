@@ -116,14 +116,14 @@ Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To edit tags, use assign and unassign commands
-</div>
-
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To edit tags, use assign and unassign commands
+</div>
 
 Examples:
 
@@ -275,6 +275,23 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
+### Deleting a tag : `deltag`
+
+Deletes the specified tag(s)
+
+Format: `deltag TAGNAME [MORE_TAGNAME]`
+
+* Deletes the tag(s) identified by the given `TAGNAME`.
+* Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
+* If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
+t
+Examples:
+* `deltag friends` deletes the tag `friends`
+* `deltag friends colleagues` deletes the tag `friends` and `colleagues`
+* `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
+* `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
+
+
 ### Adding deadlines to meet in relation to a contact : `deadline`
 
 Creates a deadline that is placed under the profile of a contact.
@@ -348,22 +365,22 @@ the data of your previous d'Intérieur home folder.
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
-| **Assign Tag**   | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            |
-| **Clear**        | `clear`                                                                                                                                         |
-| **Create Tag**   | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          |
-| **Deadline**     | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |
-| **Fav**          | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |
-| **Favourites**   | `favourites`                                                                                                                                    |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
-| **Find Tag**     | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |
-| **Help**         | `help`                                                                                                                                          |
-| **Impt**         | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |
-| **Impts**        | `impts`                                                                                                                                         |
-| **List**         | `list`                                                                                                                                          |
-| **Note**         | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |
-| **Unassign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |
+| Action           | Format, Examples                                                                                                                                 |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`  |
+| **Assign Tag**   | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                             |
+| **Clear**        | `clear`                                                                                                                                          |
+| **Create Tag**   | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                           |
+| **Deadline**     | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                          |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                              |
+| **Fav**          | `fav INDEX` <br> e.g., `fav 1`                                                                                                                   |
+| **Favourites**   | `favourites`                                                                                                                                     |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
+| **Find Tag**     | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                   |
+| **Help**         | `help`                                                                                                                                           |
+| **Impt**         | `impt INDEX` <br> e.g., `impt 1`                                                                                                                 |
+| **Impts**        | `impts`                                                                                                                                          |
+| **List**         | `list`                                                                                                                                           |
+| **Note**         | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                             |
+| **Unassign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                         |
