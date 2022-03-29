@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -168,6 +169,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw uncalledAE;
+        }
+
+        @Override
+        public SortedList<Person> getSortedPersonList() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByName() {
             throw uncalledAE;
         }
     }
