@@ -73,7 +73,7 @@ public class UnassignTagCommand extends Command {
             throw new CommandException(MESSAGE_NOT_TAGGED);
         }
 
-        Person editedPerson = addTagToNewPerson(personToEdit, newTag);
+        Person editedPerson = removeTagFromNewPerson(personToEdit, newTag);
         model.setPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
     }
@@ -84,7 +84,7 @@ public class UnassignTagCommand extends Command {
      * @param newTag the tag to remove.
      * @return the person with the removed tag.
      */
-    private static Person addTagToNewPerson(Person personToEdit, Tag newTag) {
+    private static Person removeTagFromNewPerson(Person personToEdit, Tag newTag) {
         requireNonNull(personToEdit);
         requireNonNull(newTag);
 
