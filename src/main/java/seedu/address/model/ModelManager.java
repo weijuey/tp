@@ -15,6 +15,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.comparator.AddressComparator;
 import seedu.address.model.comparator.DeadlineListComparator;
 import seedu.address.model.comparator.EmailComparator;
+import seedu.address.model.comparator.FavouriteComparator;
+import seedu.address.model.comparator.HighImportanceComparator;
 import seedu.address.model.comparator.NameComparator;
 import seedu.address.model.comparator.PhoneComparator;
 import seedu.address.model.image.ImageDetailsList;
@@ -191,6 +193,16 @@ public class ModelManager implements Model {
     @Override
     public void sortFilteredPersonListByPhone() {
         sortedPersons.setComparator(new PhoneComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByFavourite() {
+        sortedPersons.setComparator(new FavouriteComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByHighImportance() {
+        sortedPersons.setComparator(new HighImportanceComparator());
     }
 
     @Override
