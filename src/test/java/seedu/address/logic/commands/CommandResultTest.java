@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.DETAILED_VIEW;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.EXIT;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.NONE;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SHOW_HELP;
@@ -40,6 +41,10 @@ public class CommandResultTest {
 
         // different view images value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", VIEW_IMAGES)));
+
+        // different detailed view value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", DETAILED_VIEW)));
+
     }
 
     @Test
@@ -60,5 +65,9 @@ public class CommandResultTest {
 
         // different view images value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", VIEW_IMAGES).hashCode());
+
+        // different detailed view value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", DETAILED_VIEW).hashCode());
+
     }
 }

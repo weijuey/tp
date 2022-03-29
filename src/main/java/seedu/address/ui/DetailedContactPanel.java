@@ -13,6 +13,9 @@ public class DetailedContactPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> detailedContactViewPanel;
 
+    /**
+     * Creates a {@code DetailedContactPanel} with the given {@code ObservableList}.
+     */
     public DetailedContactPanel(ObservableList<Person> detailedContactView) {
         super(FXML);
         detailedContactViewPanel.setItems(detailedContactView);

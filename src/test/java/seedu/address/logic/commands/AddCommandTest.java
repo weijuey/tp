@@ -183,18 +183,17 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getDetailedContactView() {
-            throw new AssertionError("This method should not be called.");
-
+            throw uncalledAE;
         }
 
         @Override
         public void setDetailedContactView(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw uncalledAE;
         };
 
         @Override
         public void clearDetailedContactView() {
-            throw new AssertionError("This method should not be called.");
+            throw uncalledAE;
         };
     }
 

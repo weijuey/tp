@@ -15,7 +15,7 @@
         <HBox alignment="CENTER" prefWidth="-Infinity">
             <children>
                 <Region prefWidth="100" />
-                <Label fx:id="name" alignment="CENTER" text="Label" textAlignment="CENTER" prefWidth="300" style="-fx-font-size: 40;"/>
+                <Label fx:id="name" alignment="CENTER" text="Label" textAlignment="CENTER" prefWidth="520" style="-fx-font-size: 40;" wrapText="true"/>
                 <VBox>
                     <Region prefHeight="20" />
                     <Canvas fx:id="starCanvas" height="30.0" width="30.0" />
@@ -27,24 +27,16 @@
             </children>
         </HBox>
         <FlowPane fx:id="tags" columnHalignment="CENTER" prefHeight="30.0" prefWidth="200.0" />
-        <HBox>
+        <Label fx:id="phone" text="Label" />
+        <Label fx:id="address" text="Label" />
+        <Label fx:id="email" text="Label" />
+        <AnchorPane prefWidth="655.0">
             <children>
-                <VBox>
-                    <children>
-                        <Label fx:id="phone" text="Label" />
-                        <Label fx:id="address" text="Label" />
-                        <Label fx:id="email" text="Label" />
-                        <AnchorPane prefWidth="620.0">
-                            <children>
-                                <Label prefWidth="360.0" text="Notes" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                                <Label prefWidth="360.0" text="Deadlines" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                                <Label fx:id="notes" prefWidth="360.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0" wrapText="true"/>
-                                <Label fx:id="deadlines" prefWidth="360.0" text="Label" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0" wrapText="true"/>
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </VBox>
+                <Label prefWidth="320.0" text="Notes" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                <Label prefWidth="320.0" text="Deadlines" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                <Label fx:id="notes" prefWidth="320.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0" wrapText="true"/>
+                <Label fx:id="deadlines" prefWidth="320.0" text="Label" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0" wrapText="true"/>
             </children>
-        </HBox>
+        </AnchorPane>
     </children>
 </VBox>

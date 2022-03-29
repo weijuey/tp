@@ -162,7 +162,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Person> getDetailedContactView() {
-        return detailedContactView;
+        return detailedContactView.filtered(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
