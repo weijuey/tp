@@ -348,22 +348,22 @@ the data of your previous d'Intérieur home folder.
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
-| **Assign Tag**  | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            |
-| **Clear**       | `clear`                                                                                                                                         |
-| **Create Tag**  | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          |
-| **Deadline**    | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |
-| **Fav**         | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |
-| **Favourites**  | `favourites`                                                                                                                                    |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
-| **Find Tag**    | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |
-| **Help**        | `help`                                                                                                                                          |
-| **Impt**        | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |
-| **Impts**       | `impts`                                                                                                                                         |
-| **List**        | `list`                                                                                                                                          |
-| **Note**        | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |
-| **Unasign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |
+| Action           | Format, Examples                                                                                                                                |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
+| **Assign Tag**   | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            |
+| **Clear**        | `clear`                                                                                                                                         |
+| **Create Tag**   | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          |
+| **Deadline**     | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |
+| **Fav**          | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |
+| **Favourites**   | `favourites`                                                                                                                                    |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
+| **Find Tag**     | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |
+| **Help**         | `help`                                                                                                                                          |
+| **Impt**         | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |
+| **Impts**        | `impts`                                                                                                                                         |
+| **List**         | `list`                                                                                                                                          |
+| **Note**         | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |
+| **Unassign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |
