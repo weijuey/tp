@@ -208,6 +208,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Changes the panel view to the full contacts list view
+     */
+    private void handleListView() {
+        setPanel(Panel.PERSON_LIST);
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -218,22 +225,27 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            setPanel(Panel.PERSON_LIST);
-
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getSpecialCommandResult()) {
+            case NONE:
+                break;
+            case LIST_VIEW:
+                handleListView();
+                break;
+            case SHOW_HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
-            if (commandResult.isDetailedView()) {
-                handleDetailedView();
-            }
-
-            if (commandResult.isViewImages()) {
+                break;
+            case VIEW_IMAGES:
                 handleViewImages();
+                break;
+            case DETAILED_VIEW:
+                handleDetailedView();
+                break;
+            case EXIT:
+                handleExit();
+                break;
+            default:
+                logger.warning("Program execution should not reach here");
+                assert false;
             }
 
             return commandResult;

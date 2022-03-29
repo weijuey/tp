@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
 
@@ -83,8 +84,9 @@ public class AddImageCommand extends Command {
         Person editedPerson = addImages(personToEdit, imagesToAdd);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateImagesToView(editedPerson.getImageDetailsList());
 
-        return new CommandResult(resultStringBuilder.toString());
+        return new CommandResult(resultStringBuilder.toString(), VIEW_IMAGES);
     }
 
     private static Person addImages(Person personToEdit, List<ImageDetails> images) {
