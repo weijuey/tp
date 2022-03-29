@@ -13,10 +13,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
@@ -47,8 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 
         Optional<String> optionalAddress = argMultimap.getValue(PREFIX_ADDRESS);
-        String addressString = " ";
-        Address address = new Address("*No address specified*");
+        String addressString = "";
+        Address address = Address.EMPTY_ADDRESS;
         if (optionalAddress.isPresent()) {
             addressString = optionalAddress.get();
             address = ParserUtil.parseAddress(addressString);
@@ -56,9 +58,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         DeadlineList deadlines = new DeadlineList();
         Notes notes = Notes.getNewNotes();
+        ImageDetailsList emptyImageList = new ImageDetailsList();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Person person = new Person(name, phone, email, address, deadlines, notes,
-                tagList, Favourite.NOT_FAVOURITE);
+                tagList, Favourite.NOT_FAVOURITE, HighImportance.NOT_HIGH_IMPORTANCE,
+                emptyImageList);
 
         return new AddCommand(person);
     }
