@@ -13,7 +13,7 @@ public class ListImportantCommand extends Command {
 
     public static final String COMMAND_WORD = "impts";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all person who have been set as a "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts who have been set as a "
             + "contact with high importance and displays them as a list with index numbers.\n";
 
     private static final PersonHasHighImportancePredicate predicate = new PersonHasHighImportancePredicate();
