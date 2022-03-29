@@ -2,9 +2,15 @@
 layout: page title: User Guide
 ---
 
-d'Intérieur is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still
-having the benefits of a Graphical User Interface (GUI). If you can type fast, d'Intérieur can get your contact
-management tasks done faster than traditional GUI apps.
+d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a 
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, d'Intérieur can get your contact management tasks done faster than traditional GUI apps.
+
+If you utilize other online applications for interior designing and lack a centralized, robust, and efficient customer
+management tool, this application will be able to meet your needs.
+
+In this user guide, we will work you through the basic use cases and commands of the application, so that you can 
+quickly get started and make full of use of what the application has to offer.
 
 * Table of Contents {:toc}
 
@@ -76,9 +82,9 @@ management tasks done faster than traditional GUI apps.
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![helpMessage](images/helpMessage.png)
 
 ### Adding a contact : `add`
 
@@ -108,37 +114,64 @@ Format: `list`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To edit tags, use assign and unassign commands
+</div>
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567`
   and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+* `edit 1 n/John` Edits the name of the 1st contact to be `John`.
 
 ### Adding favourites : `fav`
 
-Adds the contact to your list of favourite contacts and view them.
+Toggles the favourite status of your contacts. 
+Favourited contacts **can be un-favourited** by running the same command on the contact again.
 
-Format:
-
-- `fav INDEX`
-- `favourites` — Shows a list of your favourite contacts
+Format: `fav INDEX`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can run `fav INDEX` where `INDEX` is the index of a contact that currently belongs in your favourites list to remove them.
 </div>
 
+Examples: `fav 1` — Adds contact at index 1 to your list of favourites
+
+![favourite](images/favourite_command.png)
+
+- `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
+
+![unfavourited](images/after_unfavourite_command.png)
+
+
+### Listing Favourites : `favourites`
+
+Lists all your favourite contacts to the list of displayed contacts.
+
+Format: `favourites`
+
+### Adding high importance flag : `impt`
+
+Adds the contact to your list of people with high importance.
+
+Format:
+
+- `impt INDEX`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can run `impt INDEX` where `INDEX` is the index of a contact that currently belongs in your high importance list to remove them.
+</div>
+
 Examples:
 
-- `fav 1` — Adds contact at index 1 to your list of favourites
+- `impt 1` — Adds contact at index 1 to your list of people with high importance
 
 ### Locating contacts by name : `find`
 
@@ -161,7 +194,7 @@ Examples:
 
 ### Locating contacts by tag : `findtag`
 
-Find contact with the given tag.
+Finds contact with the given tag.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
@@ -175,6 +208,55 @@ Examples:
 
 * `findtag Friends` returns contacts with tag `Friends`
 * `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
+
+### Creating a tag : `tag`
+
+Creates a tag that can be assigned to any contact.
+
+Format: `tag TAGNAME`
+
+* A tag with the same `TAGNAME` can only be created once.
+* The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created. 
+
+Examples:
+
+* `tag Friends` creates a tag `Friends` to be stored in the address book.
+
+### Assigning a tag to a contact : `assign`
+
+Assigns a created tag to a contact.
+
+Format: `assign INDEX TAGNAME`
+
+* Assigns a `TAG` with a given `TAGNAME` to a contact at the specified `INDEX`
+* The `TAG` given by the `TAGNAME` must be created first. 
+* The `TAGNAME` is case-insensitive.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, ...​
+* The contact should have **at most one** `TAG` with a given unique `TAGNAME`.
+* The contact assigned to the given `TAGNAME` cannot be assigned to the same `TAGNAME` again.
+e.g. assigning the tag `friends` to Alice at index 1 will not allow `Friends` to be assigned to the same contact.
+
+Examples:
+
+* `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`
+
+### Unassigning a tag from a contact : `unassign`
+
+Unassigns a created tag from a contact.
+
+Format: `unassign INDEX TAGNAME`
+
+* Removes a `TAG` with a given `TAGNAME` from a contact at the specified `INDEX`
+* The `TAG` given by the `TAGNAME` must be created first.
+* The `TAGNAME` is case-insensitive.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, ...​
+* The contact must have been assigned to this `TAG` previously.
+
+Examples:
+
+* `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`
 
 ### Deleting a contact : `delete`
 
@@ -264,17 +346,21 @@ the data of your previous d'Intérieur home folder.
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                                                                                      |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`                                                                                                                       |
-| **Clear**      | `clear`                                                                                                                                                                                                                                                               |
-| **Deadline**   | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                                                                                                                                               |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                   |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                           |
-| **Fav**        | `fav INDEX` <br> e.g., `fav 1`                                                                                                                                                                                                                                        |
-| **Favourites** | `favourites`                                                                                                                                                                                                                                                          |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                            |
-| **Find Tag**   | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                                                                                                                                        |
-| **Help**       | `help`                                                                                                                                                                                                                                                                |
-| **List**       | `list`                                                                                                                                                                                                                                                                |
-| **Note**       | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                                                                                                                                   |
+| Action          | Format, Examples                                                                                                                                |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |
+| **Assign Tag**  | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            |
+| **Clear**       | `clear`                                                                                                                                         |
+| **Create Tag**  | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          |
+| **Deadline**    | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |
+| **Fav**         | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |
+| **Favourites**  | `favourites`                                                                                                                                    |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |
+| **Find Tag**    | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |
+| **Help**        | `help`                                                                                                                                          |
+| **Impt**        | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |
+| **List**        | `list`                                                                                                                                          |
+| **Note**        | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |
+| **Unasign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |
