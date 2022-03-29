@@ -169,7 +169,7 @@ When a red flag appears beside the contact's name, you can run `impt INDEX` agai
 You may wish to use the `note` command to add a note to indicate why the contact is important. E.g. Mobility Issues.
 </div>
 
-### List contacts with high importance : `impts`
+### Listing contacts with high importance : `impts`
 
 Shows you all contact(s) with high importance, tagged with the red flag.
 
@@ -289,7 +289,7 @@ Example:
 
 - `deadline 1 d/windows 01/01/2022` adds the description `windows` and date `01/01/2022` to the contact in index `1`.
 
-### Add additional notes to a contact : `note`
+### Adding additional notes to a contact : `note`
 
 Adds the given note under the contact.
 
@@ -305,6 +305,12 @@ Notes store good-to-know information about the user. To classify contacts so tha
 Example:
 
 `note 2 r/loves green` will create a note under the contact at index 2 that reads `loves green`
+
+### Viewing a contact's full details : `view`
+
+Allows you to view the full details of the contact, as some are hidden in the contact list.
+
+Format `view INDEX`
 
 ### Clearing all entries : `clear`
 
