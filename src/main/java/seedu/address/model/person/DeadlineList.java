@@ -1,13 +1,12 @@
 package seedu.address.model.person;
 
-import seedu.address.model.comparator.DeadlineComparator;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+
+import seedu.address.model.comparator.DeadlineComparator;
 
 public class DeadlineList implements Comparable<DeadlineList> {
     public static final String MODEL_NAME = "deadline";
