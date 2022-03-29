@@ -129,6 +129,10 @@ public interface Model {
 
     void sortFilteredPersonListByPhone();
 
+    void sortFilteredPersonListByFavourite();
+
+    void sortFilteredPersonListByHighImportance();
+
     SortedList<Person> getSortedPersonList();
 
     /**
