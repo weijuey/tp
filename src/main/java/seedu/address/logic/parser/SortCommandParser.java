@@ -10,6 +10,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Favourite;
+import seedu.address.model.person.HighImportance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -22,7 +24,9 @@ public class SortCommandParser implements Parser<SortsCommand> {
         Phone.MODEL_NAME,
         Email.MODEL_NAME,
         Address.MODEL_NAME,
-        DeadlineList.MODEL_NAME
+        DeadlineList.MODEL_NAME,
+        Favourite.MODEL_NAME,
+        HighImportance.MODEL_NAME
     };
 
     /**
