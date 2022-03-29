@@ -225,11 +225,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            handleListView();
+
             switch (commandResult.getSpecialCommandResult()) {
             case NONE:
-                break;
-            case LIST_VIEW:
-                handleListView();
                 break;
             case SHOW_HELP:
                 handleHelp();
