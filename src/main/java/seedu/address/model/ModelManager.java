@@ -9,8 +9,14 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.comparator.AddressComparator;
+import seedu.address.model.comparator.DeadlineListComparator;
+import seedu.address.model.comparator.EmailComparator;
+import seedu.address.model.comparator.NameComparator;
+import seedu.address.model.comparator.PhoneComparator;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -23,6 +29,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +42,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -147,9 +155,39 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public SortedList<Person> getSortedPersonList() {
+        return sortedPersons;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredPersonListByName() {
+        sortedPersons.setComparator(new NameComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByAddress() {
+        sortedPersons.setComparator(new AddressComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByDeadlineList() {
+        sortedPersons.setComparator(new DeadlineListComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByEmail() {
+        sortedPersons.setComparator(new EmailComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByPhone() {
+        sortedPersons.setComparator(new PhoneComparator());
     }
 
     @Override
