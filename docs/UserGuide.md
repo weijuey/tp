@@ -312,6 +312,16 @@ Allows you to view the full details of the contact, as some are hidden in the co
 
 Format `view INDEX`
 
+#### Commands in detailed view
+
+When viewing a contact in detailed view, some commands become available, and commands that work in list view may either still work, or will not work.
+
+In general, commands for modifying a contact will work, and will modify the contact currently displayed. As such, there is no need to give an index for those commands anymore, and they will be ignored if the command is called in this view.
+
+If the command does not work in list view, the app will inform you. To return to list view, use `list` or other commands that produces a list of contacts.
+
+_More details coming soon ..._
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
