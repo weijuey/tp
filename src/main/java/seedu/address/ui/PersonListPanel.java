@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of persons or a detailed view of a person.
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
@@ -45,5 +45,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

@@ -180,6 +180,21 @@ public class AddCommandTest {
         public ImageDetailsList getImagesToView() {
             throw uncalledAE;
         }
+
+        @Override
+        public ObservableList<Person> getDetailedContactView() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void setDetailedContactView(Person person) {
+            throw uncalledAE;
+        };
+
+        @Override
+        public void clearDetailedContactView() {
+            throw uncalledAE;
+        };
     }
 
     /**

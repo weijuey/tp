@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Person> detailedContactView;
     private ImageDetailsList imagesToView;
 
     /**
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        detailedContactView = FXCollections.observableArrayList();
         this.imagesToView = new ImageDetailsList();
     }
 
@@ -155,6 +158,40 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Detailed Contact View methods =============================================================
+
+    @Override
+    public ObservableList<Person> getDetailedContactView() {
+        return detailedContactView.filtered(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setDetailedContactView(Person person) {
+        if (detailedContactView.size() > 0) {
+            clearDetailedContactView();
+        }
+        logger.fine("Setting " + person.getName().fullName + " in detailed view");
+        detailedContactView.add(person);
+        assert(detailedContactView.size() == 1);
+    }
+
+    @Override
+    public void clearDetailedContactView() {
+        logger.fine("Clearing detailed view");
+        detailedContactView.clear();
+    }
+
+    //=========== Person Images to View ==============================================================================
+    @Override
+    public void updateImagesToView(ImageDetailsList images) {
+        this.imagesToView = images;
+    }
+
+    @Override
+    public ImageDetailsList getImagesToView() {
+        return this.imagesToView;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -172,18 +209,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
+                && detailedContactView.equals(other.detailedContactView)
                 && imagesToView.equals(other.imagesToView);
-    }
-
-    //=========== Person Images to View ==============================================================================
-
-    @Override
-    public void updateImagesToView(ImageDetailsList images) {
-        this.imagesToView = images;
-    }
-
-    @Override
-    public ImageDetailsList getImagesToView() {
-        return this.imagesToView;
     }
 }

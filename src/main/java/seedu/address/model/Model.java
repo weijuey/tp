@@ -16,6 +16,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluates to false */
+    Predicate<Person> PREDICATE_HIDE_ALL_PERSONS = unused -> false;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -111,6 +114,18 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /** Returns the contact that is being viewed in detail */
+    ObservableList<Person> getDetailedContactView();
+
+    /**
+     * Sets the given {@code Person} as the contact to be viewed in detail.
+     * @param person person to be viewed
+     */
+    void setDetailedContactView(Person person);
+
+    /** Removes the contact that is being viewed in detail */
+    void clearDetailedContactView();
+
     /**
      * Updates the images to be displayed.
      */
@@ -120,5 +135,4 @@ public interface Model {
      * Gets the images to be displayed.
      */
     ImageDetailsList getImagesToView();
-
 }
