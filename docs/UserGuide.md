@@ -383,3 +383,4 @@ the data of your previous d'Intérieur home folder.
 | **List**         | `list`                                                                                                                                          |
 | **Note**         | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |
 | **Unassign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |
+| **View**         | `view INDEX` <br> e.g., `view 1`                                                                                                                |
