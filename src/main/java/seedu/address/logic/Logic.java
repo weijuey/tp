@@ -40,6 +40,9 @@ public interface Logic {
 
     SortedList<Person> getSortedPersonList();
 
+    /** Returns the detailed view of a contact */
+    ObservableList<Person> getDetailedContactView();
+
     /**
      * Returns the user prefs' address book file path.
      */

@@ -27,6 +27,7 @@ import seedu.address.logic.commands.ListFavouritesCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.NotesCommand;
 import seedu.address.logic.commands.SortsCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -97,6 +98,9 @@ public class AddressBookParser {
 
         case DeadlineCommand.COMMAND_WORD:
             return new DeadlineCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         case HighImportanceCommand.COMMAND_WORD:
             return new HighImportanceCommandParser().parse(arguments);
