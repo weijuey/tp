@@ -180,6 +180,38 @@ public class AddCommandTest {
 
         @Override
         public void sortFilteredPersonListByName() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByAddress() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByDeadlineList() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByEmail() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByPhone() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByFavourite() {
+            throw uncalledAE;
+        };
+
+        @Override
+        public void sortFilteredPersonListByHighImportance() {
+            throw uncalledAE;
+        }
 
         @Override
         public void updateImagesToView(ImageDetailsList images) {
