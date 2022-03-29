@@ -21,7 +21,7 @@ public class SortsCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of people by specified"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of people by specified "
             + "criteria and displays them as a list with index numbers.\n"
             + "Parameters: CRITERIA\n"
             + "Example: " + COMMAND_WORD + " name";
