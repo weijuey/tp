@@ -15,7 +15,7 @@ import seedu.address.model.person.Phone;
 
 /**
  * Sorts list based on criteria given.
- * Keyword matching is case insensitive.
+ * Criteria matching is case sensitive.
  */
 public class SortsCommand extends Command {
 
