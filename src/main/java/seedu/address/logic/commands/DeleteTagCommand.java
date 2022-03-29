@@ -88,7 +88,6 @@ public class DeleteTagCommand extends Command {
         if (hasUncreatedTags) {
             if (tagNamesToDelete.size() >= 1) {
                 String result = MESSAGE_TAG_NOT_EXIST + "\n" + MESSAGE_DELETE_SUCCESS;
-                System.out.println(tagNamesToDelete);
                 return new CommandResult(String.format(result, tagsNotExist, tagNamesToDelete));
             } else {
                 throw new CommandException(MESSAGE_DELETE_FAIL);
