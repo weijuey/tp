@@ -94,6 +94,15 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setDetailedContactView_personInContactView_newPersonInContactViewOnly() {
+        modelManager.setDetailedContactView(ALICE);
+        modelManager.setDetailedContactView(BENSON);
+        assertTrue(modelManager.getDetailedContactView().size() == 1);
+        assertEquals(modelManager.getDetailedContactView().get(0), BENSON);
+        modelManager.clearDetailedContactView();
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -123,6 +132,11 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different contactFullView -> returns false
+        modelManager.setDetailedContactView(ALICE);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManager.clearDetailedContactView();
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
