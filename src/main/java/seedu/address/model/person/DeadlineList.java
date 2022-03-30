@@ -39,7 +39,7 @@ public class DeadlineList implements Comparable<DeadlineList> {
      * @return new DeadlineList with the result.
      */
     public DeadlineList appendDeadlines(DeadlineList deadlinesToAppend) {
-        if (this.isEmptyDeadlineList()) {
+        if (this.size() == 0) {
             return deadlinesToAppend;
         }
         DeadlineList newDeadlines = new DeadlineList(this.deadlines);
@@ -79,11 +79,11 @@ public class DeadlineList implements Comparable<DeadlineList> {
     }
 
     /**
-     * Checks if this {@code DeadlineList} contains only the empty {@code Deadline}.
-     * @return true if only contain empty deadline, false if contains at least one deadline
+     * Gives the size of this deadline list, considering only deadlines given by user.
      */
-    public boolean isEmptyDeadlineList() {
-        return this.deadlines.size() == 1 && this.deadlines.get(0).equals(EMPTY_DEADLINE);
+    public int size() {
+        return this.deadlines.size() == 1 && this.deadlines.get(0).equals(EMPTY_DEADLINE) ? 0
+                : this.deadlines.size();
     }
 
     @Override
