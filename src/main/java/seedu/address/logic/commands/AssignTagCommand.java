@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Assigns a tag to a contact in the address book.
  */
-public class AssignTagCommand extends Command {
+public class AssignTagCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "assign";
 
@@ -52,6 +52,11 @@ public class AssignTagCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    public AssignTagCommand(String tagName) {
+        this.targetIndex = null;
+        this.tagName = tagName;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -76,6 +81,29 @@ public class AssignTagCommand extends Command {
         Person editedPerson = addTagToNewPerson(personToEdit, newTag);
         model.setPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+        Tag newTag = new Tag(tagName);
+        boolean tagHasBeenCreated = model.hasTag(newTag);
+
+        if (!tagHasBeenCreated) {
+            throw new CommandException(String.format(MESSAGE_UNKNOWN_TAG, tagName));
+        }
+
+        Person personToEdit = model.getDetailedContactViewPerson();
+
+        if (!canAddTag(personToEdit, newTag)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
+
+        Person editedPerson = addTagToNewPerson(personToEdit, newTag);
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     /**

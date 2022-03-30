@@ -174,6 +174,9 @@ public class AddressBookParser {
         case HighImportanceCommand.COMMAND_WORD:
             return new HighImportanceCommand();
 
+        case AssignTagCommand.COMMAND_WORD:
+            return new AssignTagCommandParser().parseInDetailedViewContext(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
