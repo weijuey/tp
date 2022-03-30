@@ -82,12 +82,14 @@ public class NoteCommand extends Command implements DetailedViewExecutable {
         requireNonNull(model);
         Person personToEdit = model.getDetailedContactView().get(0);
         if (!Notes.isValidNote(note)) {
-            return new CommandResult(generateNoChangeMessage(personToEdit));
+            return new CommandResult(generateNoChangeMessage(personToEdit),
+                    CommandResult.SpecialCommandResult.DETAILED_VIEW);
         }
         Person editedPerson = updateNotes(personToEdit, note);
         model.setPerson(personToEdit, editedPerson);
         model.setDetailedContactView(editedPerson);
-        return new CommandResult(generateSuccessMessage(editedPerson), CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        return new CommandResult(generateSuccessMessage(editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     /**
