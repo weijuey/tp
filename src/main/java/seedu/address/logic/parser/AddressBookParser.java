@@ -135,6 +135,9 @@ public class AddressBookParser {
         case DeadlineCommand.COMMAND_WORD:
             return new DeadlineCommandParser().parseInDetailedViewContext(arguments);
 
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parseInDetailedViewContext(arguments);
+
         case NoteCommand.COMMAND_WORD:
             return new NoteCommandParser().parseInDetailedViewContext(arguments);
 
