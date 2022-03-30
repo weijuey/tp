@@ -7,10 +7,19 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.comparator.AddressComparator;
+import seedu.address.model.comparator.DeadlineListComparator;
+import seedu.address.model.comparator.EmailComparator;
+import seedu.address.model.comparator.FavouriteComparator;
+import seedu.address.model.comparator.HighImportanceComparator;
+import seedu.address.model.comparator.NameComparator;
+import seedu.address.model.comparator.PhoneComparator;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -24,6 +33,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
+    private final ObservableList<Person> detailedContactView;
     private ImageDetailsList imagesToView;
 
     /**
@@ -37,6 +48,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
+        detailedContactView = FXCollections.observableArrayList();
         this.imagesToView = new ImageDetailsList();
     }
 
@@ -150,9 +163,83 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public SortedList<Person> getSortedPersonList() {
+        return sortedPersons;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Detailed Contact View methods =============================================================
+
+    @Override
+    public ObservableList<Person> getDetailedContactView() {
+        return detailedContactView.filtered(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setDetailedContactView(Person person) {
+        if (detailedContactView.size() > 0) {
+            clearDetailedContactView();
+        }
+        logger.fine("Setting " + person.getName().fullName + " in detailed view");
+        detailedContactView.add(person);
+        assert(detailedContactView.size() == 1);
+    }
+
+    @Override
+    public void clearDetailedContactView() {
+        logger.fine("Clearing detailed view");
+        detailedContactView.clear();
+    }
+
+    //=========== Person Images to View ==============================================================================
+    @Override
+    public void updateImagesToView(ImageDetailsList images) {
+        this.imagesToView = images;
+    }
+
+    @Override
+    public ImageDetailsList getImagesToView() {
+        return this.imagesToView;
+    }
+
+    @Override
+    public void sortFilteredPersonListByName() {
+        sortedPersons.setComparator(new NameComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByAddress() {
+        sortedPersons.setComparator(new AddressComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByDeadlineList() {
+        sortedPersons.setComparator(new DeadlineListComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByEmail() {
+        sortedPersons.setComparator(new EmailComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByPhone() {
+        sortedPersons.setComparator(new PhoneComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByFavourite() {
+        sortedPersons.setComparator(new FavouriteComparator());
+    }
+
+    @Override
+    public void sortFilteredPersonListByHighImportance() {
+        sortedPersons.setComparator(new HighImportanceComparator());
     }
 
     @Override
@@ -172,18 +259,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
+                && detailedContactView.equals(other.detailedContactView)
                 && imagesToView.equals(other.imagesToView);
-    }
-
-    //=========== Person Images to View ==============================================================================
-
-    @Override
-    public void updateImagesToView(ImageDetailsList images) {
-        this.imagesToView = images;
-    }
-
-    @Override
-    public ImageDetailsList getImagesToView() {
-        return this.imagesToView;
     }
 }
