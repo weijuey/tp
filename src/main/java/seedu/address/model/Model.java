@@ -127,6 +127,11 @@ public interface Model {
     void clearDetailedContactView();
 
     /**
+     * Gets the {@code Person} in detailed view.
+     */
+    Person getDetailedContactViewPerson();
+
+    /**
      * Updates the images to be displayed.
      */
     void updateImagesToView(ImageDetailsList images);

@@ -181,6 +181,12 @@ public class ModelManager implements Model {
         detailedContactView.clear();
     }
 
+    @Override
+    public Person getDetailedContactViewPerson() {
+        assert detailedContactView.size() == 1;
+        return detailedContactView.get(0);
+    }
+
     //=========== Person Images to View ==============================================================================
     @Override
     public void updateImagesToView(ImageDetailsList images) {
