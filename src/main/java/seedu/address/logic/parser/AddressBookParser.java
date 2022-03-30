@@ -191,6 +191,9 @@ public class AddressBookParser {
         case DeleteDeadlineCommand.COMMAND_WORD:
             return new DeleteDeadlineCommandParser().parseInDetailedViewContext(arguments);
 
+        case AddImageCommand.COMMAND_WORD:
+            return new AddImageCommand();
+
         case ImagesCommand.COMMAND_WORD:
             return new ImagesCommand();
 

@@ -21,7 +21,7 @@ import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.image.util.ImageUtil;
 import seedu.address.model.person.Person;
 
-public class AddImageCommand extends Command {
+public class AddImageCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "addimg";
 
@@ -41,6 +41,10 @@ public class AddImageCommand extends Command {
 
     public AddImageCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+    }
+
+    public AddImageCommand() {
+        this.targetIndex = null;
     }
 
     @Override
@@ -85,6 +89,46 @@ public class AddImageCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(resultStringBuilder.toString());
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+
+        List<File> images = openImageChooser();
+
+        if (images.isEmpty()) {
+            return new CommandResult(ADD_IMAGE_NONE_SELECTED, CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        }
+
+        StringBuilder resultStringBuilder = new StringBuilder();
+        List<ImageDetails> imagesToAdd = new ArrayList<>();
+        for (File imgFile : images) {
+            Path destPath = CONTACT_IMAGES_PATH.resolve(imgFile.getName());
+            if (ImageUtil.fileExists(imgFile, CONTACT_IMAGES_PATH)) {
+                resultStringBuilder
+                        .append(String.format(DUPLICATE_IMAGES, imgFile.getName()))
+                        .append("\n");
+                continue;
+            }
+            ImageDetails copiedImage;
+            try {
+                copiedImage = ImageUtil.copyTo(imgFile, destPath);
+            } catch (IOException ioe) {
+                throw new CommandException(ADD_IMAGE_FAIL);
+            }
+
+            imagesToAdd.add(copiedImage);
+        }
+        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), targetIndex));
+
+        Person personToEdit = model.getDetailedContactViewPerson();
+        Person editedPerson = addImages(personToEdit, imagesToAdd);
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+
+        return new CommandResult(resultStringBuilder.toString(),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     private static Person addImages(Person personToEdit, List<ImageDetails> images) {
