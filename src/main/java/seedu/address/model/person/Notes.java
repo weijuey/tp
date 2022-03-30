@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.commons.core.index.Index;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +68,13 @@ public class Notes {
         Notes newNotes = new Notes();
         newNotes.value.addAll(this.value);
         newNotes.value.add(newNote);
+        return newNotes;
+    }
+
+    public Notes delete(int index) {
+        Notes newNotes = new Notes();
+        newNotes.value.addAll(this.value);
+        newNotes.value.remove(index);
         return newNotes;
     }
 

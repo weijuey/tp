@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.comparator.DeadlineComparator;
 
 public class DeadlineList implements Comparable<DeadlineList> {
@@ -45,6 +46,15 @@ public class DeadlineList implements Comparable<DeadlineList> {
         DeadlineList newDeadlines = new DeadlineList(this.deadlines);
         newDeadlines.deadlines.addAll(deadlinesToAppend.deadlines);
         return newDeadlines;
+    }
+
+    public DeadlineList delete(int index) {
+        DeadlineList newDeadlineList = new DeadlineList(this.deadlines);
+        newDeadlineList.deadlines.remove(index);
+        if (newDeadlineList.deadlines.isEmpty()) {
+            return new DeadlineList();
+        }
+        return newDeadlineList;
     }
 
     /**
