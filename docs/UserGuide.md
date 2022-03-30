@@ -338,7 +338,20 @@ List after `deadline` command:
 
 ![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.jpg)
 
-### Add additional notes to a contact : `note`
+### Deleting a deadline from a contact : `deldl`
+
+Deletes the deadline under the contact in detailed view. This command cannot be used in list view.
+
+Format: `deldl INDEX`
+
+- Deletes the note at the index of the list of deadlines displayed.
+
+Example:
+
+`view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
+notes list of the contact
+
+### Adding additional notes to a contact : `note`
 
 Adds the given note under the contact.
 
@@ -354,6 +367,19 @@ Notes store good-to-know information about the user. To classify contacts so tha
 Example:
 
 `note 2 r/loves green` will create a note under the contact at index 2 that reads `loves green`
+
+### Deleting notes from a contact : `delnote`
+
+Deletes the note under the contact in detailed view. This command cannot be used in list view.
+
+Format: `delnote INDEX`
+
+- Deletes the note at the index of the list of notes displayed.
+
+Example:
+
+`view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the 
+notes list of the contact
 
 ### Clearing all entries : `clear`
 
