@@ -53,8 +53,8 @@ public class AssignTagCommand extends Command implements DetailedViewExecutable 
     }
 
     public AssignTagCommand(String tagName) {
-        this.targetIndex = null;
         this.tagName = tagName;
+        this.targetIndex = null;
     }
 
     @Override

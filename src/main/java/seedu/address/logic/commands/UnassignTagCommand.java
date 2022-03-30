@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Unassigns a tag to a contact in the address book.
  */
-public class UnassignTagCommand extends Command {
+public class UnassignTagCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "unassign";
 
@@ -52,6 +52,11 @@ public class UnassignTagCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    public UnassignTagCommand(String tagName) {
+        this.tagName = tagName;
+        this.targetIndex = null;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -76,6 +81,29 @@ public class UnassignTagCommand extends Command {
         Person editedPerson = removeTagFromNewPerson(personToEdit, newTag);
         model.setPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+        Tag newTag = new Tag(tagName);
+        boolean tagHasBeenCreated = model.hasTag(newTag);
+
+        if (!tagHasBeenCreated) {
+            throw new CommandException(String.format(MESSAGE_UNKNOWN_TAG, tagName));
+        }
+
+        Person personToEdit = model.getDetailedContactViewPerson();
+
+        if (!canRemoveTag(personToEdit, newTag)) {
+            throw new CommandException(MESSAGE_NOT_TAGGED);
+        }
+
+        Person editedPerson = removeTagFromNewPerson(personToEdit, newTag);
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     /**

@@ -177,6 +177,9 @@ public class AddressBookParser {
         case AssignTagCommand.COMMAND_WORD:
             return new AssignTagCommandParser().parseInDetailedViewContext(arguments);
 
+        case UnassignTagCommand.COMMAND_WORD:
+            return new UnassignTagCommandParser().parseInDetailedViewContext(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
