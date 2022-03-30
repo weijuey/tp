@@ -20,7 +20,7 @@ public class CreateTagCommand extends Command {
     private final String tagName;
 
     /**
-     * Creates a CreateTagCommand to add to {@code TagList}.
+     * Creates a CreateTagCommand to add to {@code UniqueTagList}.
      * @param tagName the name of the Tag.
      */
     public CreateTagCommand(String tagName) {

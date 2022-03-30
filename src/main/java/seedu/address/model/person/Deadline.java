@@ -6,13 +6,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 /**
  * Represents a Person's deadline in the address book.
  */
-public class Deadline {
+public class Deadline implements Comparable<Deadline> {
     public static final String MESSAGE_CONSTRAINTS = "Deadlines can only take dd/mm/yyyy and must have a description";
     public static final String NO_DEADLINE_PLACEHOLDER = "*No deadline specified*";
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final SimpleDateFormat FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
+    public static final String STORAGE_PARSE_ERROR = "Deadline in storage could not be parsed properly";
 
     public final String description;
     public final String value;
@@ -40,6 +44,23 @@ public class Deadline {
         value = NO_DEADLINE_PLACEHOLDER;
     }
 
+    private Date getDate() throws ParseException {
+        if (value.equals(NO_DEADLINE_PLACEHOLDER)) {
+            return new Date(Long.MAX_VALUE);
+        }
+
+        FORMATTER.setLenient(false);
+        Date date;
+
+        try {
+            date = FORMATTER.parse(value);
+        } catch (java.text.ParseException e) {
+            throw new ParseException(STORAGE_PARSE_ERROR);
+        }
+
+        return date;
+    }
+
     @Override
     public String toString() {
         if (!description.equals("")) {
@@ -58,6 +79,15 @@ public class Deadline {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Deadline other) throws ClassCastException {
+        try {
+            return this.getDate().compareTo(other.getDate());
+        } catch (ParseException e) {
+            throw new ClassCastException(e.getMessage());
+        }
     }
 
     /**
@@ -79,12 +109,11 @@ public class Deadline {
             return false;
         }
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        formatter.setLenient(false);
+        FORMATTER.setLenient(false);
         Date date;
 
         try {
-            date = formatter.parse(dateAsString);
+            date = FORMATTER.parse(dateAsString);
             return true;
         } catch (java.text.ParseException e) {
             return false;
