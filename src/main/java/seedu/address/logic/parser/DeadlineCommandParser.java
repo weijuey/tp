@@ -13,7 +13,7 @@ import seedu.address.model.person.DeadlineList;
 /**
  * Parses input arguments and creates a new DeadlineCommand object
  */
-public class DeadlineCommandParser implements Parser<DeadlineCommand> {
+public class DeadlineCommandParser implements Parser<DeadlineCommand>, DetailedViewExecutableParser<DeadlineCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeadlineCommand
@@ -36,5 +36,16 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand> {
         DeadlineList deadlines = ParserUtil.parseDeadlines(argMultimap.getAllValues(PREFIX_DEADLINE));
 
         return new DeadlineCommand(index, deadlines);
+    }
+
+    @Override
+    public DeadlineCommand parseInDetailedViewContext(String userInput) throws ParseException {
+        requireNonNull(userInput);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
+                PREFIX_DEADLINE);
+
+        DeadlineList deadlines = ParserUtil.parseDeadlines(argMultimap.getAllValues(PREFIX_DEADLINE));
+
+        return new DeadlineCommand(deadlines);
     }
 }

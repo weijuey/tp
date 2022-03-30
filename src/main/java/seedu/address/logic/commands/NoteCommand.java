@@ -80,7 +80,7 @@ public class NoteCommand extends Command implements DetailedViewExecutable {
     @Override
     public CommandResult executeInDetailedView(Model model) {
         requireNonNull(model);
-        Person personToEdit = model.getDetailedContactView().get(0);
+        Person personToEdit = model.getDetailedContactViewPerson();
         if (!Notes.isValidNote(note)) {
             return new CommandResult(generateNoChangeMessage(personToEdit),
                     CommandResult.SpecialCommandResult.DETAILED_VIEW);

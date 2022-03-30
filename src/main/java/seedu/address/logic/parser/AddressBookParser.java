@@ -130,9 +130,14 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
+        case DeadlineCommand.COMMAND_WORD:
+            return new DeadlineCommandParser().parseInDetailedViewContext(arguments);
+
         case NoteCommand.COMMAND_WORD:
             return new NoteCommandParser().parseInDetailedViewContext(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

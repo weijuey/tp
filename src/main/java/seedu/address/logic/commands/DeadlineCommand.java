@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.Person;
 
-public class DeadlineCommand extends Command {
+public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "deadline";
 
@@ -39,6 +39,16 @@ public class DeadlineCommand extends Command {
         this.deadlines = deadlines;
     }
 
+    /**
+     * Creates a DeadlineCommand to add to {@code Person} in detailed view.
+     * @param deadlines the date of the deadline.
+     */
+    public DeadlineCommand(DeadlineList deadlines) {
+        requireNonNull(deadlines);
+        this.targetIndex = null;
+        this.deadlines = deadlines;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -49,9 +59,10 @@ public class DeadlineCommand extends Command {
         }
 
         Person personToAddDeadline = lastShownList.get(targetIndex.getZeroBased());
+        DeadlineList newDeadlineList = personToAddDeadline.getDeadlines().appendDeadlines(deadlines);
         Person editedPerson = new Person(
                 personToAddDeadline.getName(), personToAddDeadline.getPhone(), personToAddDeadline.getEmail(),
-                personToAddDeadline.getAddress(), deadlines, personToAddDeadline.getNotes(),
+                personToAddDeadline.getAddress(), newDeadlineList, personToAddDeadline.getNotes(),
                 personToAddDeadline.getTags(), personToAddDeadline.getFavouriteStatus(),
                 personToAddDeadline.getHighImportanceStatus(), personToAddDeadline.getImageDetailsList());
 
@@ -62,6 +73,24 @@ public class DeadlineCommand extends Command {
         model.setPerson(personToAddDeadline, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_DEADLINE_SUCCESS, personToAddDeadline));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        requireNonNull(model);
+
+        Person personToAddDeadline = model.getDetailedContactViewPerson();
+        DeadlineList newDeadlineList = personToAddDeadline.getDeadlines().appendDeadlines(deadlines);
+        Person editedPerson = new Person(
+                personToAddDeadline.getName(), personToAddDeadline.getPhone(), personToAddDeadline.getEmail(),
+                personToAddDeadline.getAddress(), newDeadlineList, personToAddDeadline.getNotes(),
+                personToAddDeadline.getTags(), personToAddDeadline.getFavouriteStatus(),
+                personToAddDeadline.getHighImportanceStatus(), personToAddDeadline.getImageDetailsList());
+
+        model.setPerson(personToAddDeadline, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_ADD_DEADLINE_SUCCESS, personToAddDeadline),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     @Override
