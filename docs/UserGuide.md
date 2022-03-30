@@ -175,6 +175,16 @@ Shows you all contact(s) with high importance, tagged with the red flag.
 
 Format: `impts`
 
+### Prioritising relevant contacts to you : `sort`
+Sort contacts by given criteria.
+
+Format: `sort CRITERIA`
+* `CRITERIA` should be written in lower-case.
+
+Examples:
+* `sort name` sorts list by name alphabetically.
+* `sort fav` sorts list so that favourite contacts are on top of the list.
+
 ### Locating contacts by name : `find`
 
 Find contacts whose names contain any of the given keywords.
@@ -288,6 +298,14 @@ Format: `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 Example:
 
 - `deadline 1 d/windows 01/01/2022` adds the description `windows` and date `01/01/2022` to the contact in index `1`.
+
+List before `deadline` command:
+
+![before 'deadline 1 d/windows 01/01/2022'](images/BeforeDeadlineCommand.png)
+
+List after `deadline` command:
+
+![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.jpg)
 
 ### Add additional notes to a contact : `note`
 
