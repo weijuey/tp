@@ -30,9 +30,9 @@ public class NoteCommandParser implements Parser<NoteCommand>, DetailedViewExecu
     }
 
     @Override
-    public NoteCommand parseInDetailedViewContext(String userInput) {
-        requireNonNull(userInput);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
+    public NoteCommand parseInDetailedViewContext(String args) {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NOTE);
         String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
 

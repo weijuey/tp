@@ -39,9 +39,9 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand>, DetailedV
     }
 
     @Override
-    public DeadlineCommand parseInDetailedViewContext(String userInput) throws ParseException {
-        requireNonNull(userInput);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
+    public DeadlineCommand parseInDetailedViewContext(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_DEADLINE);
 
         DeadlineList deadlines = ParserUtil.parseDeadlines(argMultimap.getAllValues(PREFIX_DEADLINE));

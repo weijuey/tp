@@ -57,10 +57,10 @@ public class EditCommandParser implements Parser<EditCommand>, DetailedViewExecu
     }
 
     @Override
-    public EditCommand parseInDetailedViewContext(String userInput) throws ParseException {
-        requireNonNull(userInput);
+    public EditCommand parseInDetailedViewContext(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
