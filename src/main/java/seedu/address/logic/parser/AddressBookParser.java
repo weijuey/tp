@@ -122,6 +122,13 @@ public class AddressBookParser {
         }
     }
 
+    /**
+     * Parses user input for a command to execute in detailed view mode.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DetailedViewExecutable parseDetailedViewCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
@@ -140,6 +147,9 @@ public class AddressBookParser {
 
         case NoteCommand.COMMAND_WORD:
             return new NoteCommandParser().parseInDetailedViewContext(arguments);
+
+        case FavouriteCommand.COMMAND_WORD:
+            return new FavouriteCommandParser().parseInDetailedViewContext(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

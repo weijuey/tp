@@ -72,6 +72,10 @@ public class EditCommand extends Command implements DetailedViewExecutable {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Constructs an EditCommand for {@code Person} in detailed view
+     * @param editPersonDescriptor details to edit the person with
+     */
     public EditCommand(EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
         this.index = null;

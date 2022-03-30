@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeadlineList {
+    private static final Deadline EMPTY_DEADLINE = new Deadline();
+
     private ArrayList<Deadline> deadlines = new ArrayList<>();
 
     public DeadlineList() {
         this.deadlines.add(new Deadline());
     }
-
-    private static final Deadline EMPTY_DEADLINE = new Deadline();
 
     /**
      * Constructs a {@code DeadlineList} object.
