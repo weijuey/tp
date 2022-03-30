@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -17,9 +18,12 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "deadline";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Gives a deadline to person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 d/01/01/2022";
+            + ": Gives a deadline with a description to person identified\n"
+            + "by the index number used in the displayed person list.\n"
+            + "Parameters: INDEX (must be a positive integer)"
+            + PREFIX_DEADLINE + "DESCRIPTION DATE (DATE should be in dd/mm/yyyy)\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_DEADLINE + "windows 01/01/2022";
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline for: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";

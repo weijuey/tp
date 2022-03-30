@@ -2,7 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-public class Favourite {
+public class Favourite implements Comparable<Favourite> {
+    public static final String MODEL_NAME = "fav";
     public static final Favourite IS_FAVOURITE = new Favourite(true);
     public static final Favourite NOT_FAVOURITE = new Favourite(false);
     public static final String MESSAGE_CONSTRAINTS =
@@ -72,5 +73,17 @@ public class Favourite {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Favourite other) {
+        if (this.isFavourite() && !other.isFavourite()) {
+            return -1;
+        } else if (this.isFavourite() == other.isFavourite()) {
+            return 0;
+        } else if (!this.isFavourite() && other.isFavourite()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
 }

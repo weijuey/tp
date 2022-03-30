@@ -8,12 +8,14 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddImageCommand;
+import seedu.address.logic.commands.AssignTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteImageCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DetailedViewExecutable;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -25,8 +27,11 @@ import seedu.address.logic.commands.HighImportanceCommand;
 import seedu.address.logic.commands.ImagesCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFavouritesCommand;
+import seedu.address.logic.commands.ListImportantCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.NotesCommand;
+import seedu.address.logic.commands.SortsCommand;
+import seedu.address.logic.commands.UnassignTagCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -105,8 +110,20 @@ public class AddressBookParser {
         case HighImportanceCommand.COMMAND_WORD:
             return new HighImportanceCommandParser().parse(arguments);
 
+        case ListImportantCommand.COMMAND_WORD:
+            return new ListImportantCommand();
+
         case CreateTagCommand.COMMAND_WORD:
             return new CreateTagCommandParser().parse(arguments);
+
+        case SortsCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case AssignTagCommand.COMMAND_WORD:
+            return new AssignTagCommandParser().parse(arguments);
+
+        case UnassignTagCommand.COMMAND_WORD:
+            return new UnassignTagCommandParser().parse(arguments);
 
         case AddImageCommand.COMMAND_WORD:
             return new AddImageCommandParser().parse(arguments);
@@ -116,6 +133,9 @@ public class AddressBookParser {
 
         case DeleteImageCommand.COMMAND_WORD:
             return new DeleteImageCommandParser().parse(arguments);
+
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
