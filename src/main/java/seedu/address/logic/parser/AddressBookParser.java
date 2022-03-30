@@ -180,6 +180,9 @@ public class AddressBookParser {
         case UnassignTagCommand.COMMAND_WORD:
             return new UnassignTagCommandParser().parseInDetailedViewContext(arguments);
 
+        case ImagesCommand.COMMAND_WORD:
+            return new ImagesCommand();
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
