@@ -14,6 +14,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.commands.DeleteImageCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.DetailedViewExecutable;
@@ -179,6 +180,9 @@ public class AddressBookParser {
 
         case UnassignTagCommand.COMMAND_WORD:
             return new UnassignTagCommandParser().parseInDetailedViewContext(arguments);
+
+        case DeleteNoteCommand.COMMAND_WORD:
+            return new DeleteNoteCommandParser().parseInDetailedViewContext(arguments);
 
         case ImagesCommand.COMMAND_WORD:
             return new ImagesCommand();

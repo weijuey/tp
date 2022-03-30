@@ -11,5 +11,6 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_CRITERIA = "%1$s is an invalid criteria!";
     public static final String MESSAGE_SORTED = "List sorted by %1$s";
+    public static final String MESSAGE_INCOMPATIBLE_VIEW_MODE = "This command cannot be run in this view mode!";
 
 }
