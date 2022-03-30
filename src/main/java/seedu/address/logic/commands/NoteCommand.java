@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 /**
  * Updates the notes of a person
  */
-public class NoteCommand extends Command {
+public class NoteCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -47,6 +47,17 @@ public class NoteCommand extends Command {
         this.note = note;
     }
 
+    /**
+     * Constructs NoteCommand without Index that operates on Person in detailed view.
+     * @param note new note to update with
+     */
+    public NoteCommand(String note) {
+        requireNonNull(note);
+
+        this.index = null;
+        this.note = note;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -64,6 +75,19 @@ public class NoteCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        requireNonNull(model);
+        Person personToEdit = model.getDetailedContactView().get(0);
+        if (!Notes.isValidNote(note)) {
+            return new CommandResult(generateNoChangeMessage(personToEdit));
+        }
+        Person editedPerson = updateNotes(personToEdit, note);
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(generateSuccessMessage(editedPerson), CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     /**

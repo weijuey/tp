@@ -14,6 +14,7 @@ import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteImageCommand;
+import seedu.address.logic.commands.DetailedViewExecutable;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FavouriteCommand;
@@ -121,8 +122,8 @@ public class AddressBookParser {
         }
     }
 
-    public Command parseDetailedViewCommand(String userInput) throws ParseException {
-        return new ListCommand();
+    public DetailedViewExecutable parseDetailedViewCommand(String userInput) throws ParseException {
+        return new NoteCommand("ss");
     }
 
 }

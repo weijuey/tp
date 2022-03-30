@@ -17,5 +17,5 @@ public interface DetailedViewExecutable {
      * @return feedback message of the operation result to display.
      * @throws CommandException If an error occurs during command execution.
      */
-    CommandResult executeOnDetailedViewPerson(Model model) throws CommandException;
+    CommandResult executeInDetailedView(Model model) throws CommandException;
 }

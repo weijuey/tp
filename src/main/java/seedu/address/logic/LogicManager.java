@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DetailedViewExecutable;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -60,8 +61,8 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseDetailedViewCommand(commandText);
-        commandResult = command.execute(model);
+        DetailedViewExecutable command = addressBookParser.parseDetailedViewCommand(commandText);
+        commandResult = command.executeInDetailedView(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

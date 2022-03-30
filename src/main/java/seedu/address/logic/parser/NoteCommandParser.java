@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class NoteCommandParser implements Parser<NoteCommand> {
+public class NoteCommandParser implements Parser<NoteCommand>, DetailedViewExecutableParser<NoteCommand> {
     @Override
     public NoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -27,5 +27,15 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
 
         return new NoteCommand(index, note);
+    }
+
+    @Override
+    public NoteCommand parseInDetailedViewContext(String userInput) {
+        requireNonNull(userInput);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
+                PREFIX_NOTE);
+        String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
+
+        return new NoteCommand(note);
     }
 }
