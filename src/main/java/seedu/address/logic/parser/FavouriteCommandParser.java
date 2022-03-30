@@ -7,8 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FavouriteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class FavouriteCommandParser implements Parser<FavouriteCommand>,
-        DetailedViewExecutableParser<FavouriteCommand> {
+public class FavouriteCommandParser implements Parser<FavouriteCommand> {
 
     /**
      * Parses {@code args} into a FavouriteCommand and returns it.
@@ -28,8 +27,4 @@ public class FavouriteCommandParser implements Parser<FavouriteCommand>,
         }
     }
 
-    @Override
-    public FavouriteCommand parseInDetailedViewContext(String args) {
-        return new FavouriteCommand();
-    }
 }

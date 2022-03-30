@@ -149,7 +149,10 @@ public class AddressBookParser {
             return new NoteCommandParser().parseInDetailedViewContext(arguments);
 
         case FavouriteCommand.COMMAND_WORD:
-            return new FavouriteCommandParser().parseInDetailedViewContext(arguments);
+            return new FavouriteCommand();
+
+        case HighImportanceCommand.COMMAND_WORD:
+            return new HighImportanceCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
