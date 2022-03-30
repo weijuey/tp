@@ -41,7 +41,7 @@ public class AssignTagCommandParser implements Parser<AssignTagCommand>,
     }
 
     @Override
-    public AssignTagCommand parseInDetailedViewContext(String args) throws ParseException{
+    public AssignTagCommand parseInDetailedViewContext(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(

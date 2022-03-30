@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.comparator.DeadlineComparator;
 
 public class DeadlineList implements Comparable<DeadlineList> {
@@ -48,6 +47,12 @@ public class DeadlineList implements Comparable<DeadlineList> {
         return newDeadlines;
     }
 
+    /**
+     * Deletes the deadline at the given index of this list of deadlines and return it in
+     * a new {@code DeadlineList}.
+     * @param index index of deadline to delete.
+     * @return new DeadlineList with the result.
+     */
     public DeadlineList delete(int index) {
         DeadlineList newDeadlineList = new DeadlineList(this.deadlines);
         newDeadlineList.deadlines.remove(index);

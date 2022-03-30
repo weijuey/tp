@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.core.index.Index;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +69,12 @@ public class Notes {
         return newNotes;
     }
 
+    /**
+     * Creates a new Notes that has this Notes' contents with the note at
+     * the given index deleted.
+     * @param index index of note to be deleted
+     * @return new Notes
+     */
     public Notes delete(int index) {
         Notes newNotes = new Notes();
         newNotes.value.addAll(this.value);

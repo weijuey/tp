@@ -43,7 +43,7 @@ public class UnassignTagCommand extends Command implements DetailedViewExecutabl
     private final Index targetIndex;
 
     /**
-     * Creates an UnassignTagCommand to un-assign a {@code Tag} to a {@code Person}.
+     * Creates an UnassignTagCommand to un-assign a {@code Tag} from a {@code Person}.
      * @param targetIndex the index of the contact specified.
      * @param tagName the name of the Tag.
      */
@@ -52,6 +52,11 @@ public class UnassignTagCommand extends Command implements DetailedViewExecutabl
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Creates an UnassignTagCommand to un-assign a {@code Tag} from the {@code Person}
+     * in detailed view.
+     * @param tagName the name of the Tag.
+     */
     public UnassignTagCommand(String tagName) {
         this.tagName = tagName;
         this.targetIndex = null;

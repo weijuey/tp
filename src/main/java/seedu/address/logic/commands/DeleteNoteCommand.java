@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
-
-import static java.util.Objects.requireNonNull;
 
 public class DeleteNoteCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "delnote";
@@ -39,6 +39,9 @@ public class DeleteNoteCommand extends Command implements DetailedViewExecutable
     public CommandResult executeInDetailedView(Model model) throws CommandException {
         requireNonNull(model);
         Person personToEdit = model.getDetailedContactViewPerson();
+        if (index.getZeroBased() >= personToEdit.getNotes().value.size()) {
+            throw new CommandException(Messages.MESSAGE_INDEX_OUT_OF_BOUND);
+        }
         Person editedPerson = updateNotes(personToEdit, index.getZeroBased());
 
         model.setPerson(personToEdit, editedPerson);

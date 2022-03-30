@@ -52,6 +52,11 @@ public class AssignTagCommand extends Command implements DetailedViewExecutable 
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Creates an AssignTagCommand to assign a {@code Tag} to the {@code Person}
+     * in detailed view.
+     * @param tagName the name of the Tag.
+     */
     public AssignTagCommand(String tagName) {
         this.tagName = tagName;
         this.targetIndex = null;
