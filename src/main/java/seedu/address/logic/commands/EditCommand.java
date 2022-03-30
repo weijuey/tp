@@ -129,15 +129,15 @@ public class EditCommand extends Command implements DetailedViewExecutable {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        DeadlineList updatedDeadlines = editPersonDescriptor.getDeadlines().orElse(personToEdit.getDeadlines());
+
+        DeadlineList oldDeadlines = personToEdit.getDeadlines();
         Notes oldNotes = personToEdit.getNotes();
         Set<Tag> oldTags = personToEdit.getTags();
-
         Favourite favouriteStatus = personToEdit.getFavouriteStatus();
         HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
         ImageDetailsList imageDetailsList = personToEdit.getImageDetailsList();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadlines,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, oldDeadlines,
                 oldNotes, oldTags, favouriteStatus, highImportanceStatus, imageDetailsList);
     }
 
@@ -168,7 +168,6 @@ public class EditCommand extends Command implements DetailedViewExecutable {
         private Phone phone;
         private Email email;
         private Address address;
-        private DeadlineList deadlines;
 
         public EditPersonDescriptor() {}
 
@@ -181,14 +180,13 @@ public class EditCommand extends Command implements DetailedViewExecutable {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setDeadlines(toCopy.deadlines);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, deadlines);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address);
         }
 
         public void setName(Name name) {
@@ -223,14 +221,6 @@ public class EditCommand extends Command implements DetailedViewExecutable {
             return Optional.ofNullable(address);
         }
 
-        public void setDeadlines(DeadlineList deadlines) {
-            this.deadlines = deadlines;
-        }
-
-        public Optional<DeadlineList> getDeadlines() {
-            return Optional.ofNullable(deadlines);
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -249,8 +239,7 @@ public class EditCommand extends Command implements DetailedViewExecutable {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getDeadlines().equals(e.getDeadlines());
+                    && getAddress().equals(e.getAddress());
         }
     }
 }
