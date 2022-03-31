@@ -19,6 +19,7 @@ public class ListCommand extends Command implements DetailedViewExecutable {
         requireNonNull(model);
         model.clearDetailedContactView();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.clearActivatedTagList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

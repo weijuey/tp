@@ -11,6 +11,11 @@ import seedu.address.commons.util.StringUtil;
 public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a TagContainKeywordsPredicate to test if a {@code Person} has all the tags listed in the {@code
+     * List<String>} of keywords
+     * @param keywords the keywords to check
+     */
     public TagContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
@@ -30,6 +35,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         return hasAllMatches;
+    }
+
+    public List<String> getMatchedKeyowrds() {
+        return this.keywords;
     }
 
     @Override

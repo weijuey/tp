@@ -35,7 +35,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
     private final ObservableList<Person> detailedContactView;
+    private final ObservableList<Tag> activatedTags;
     private ImageDetailsList imagesToView;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -50,6 +52,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
         detailedContactView = FXCollections.observableArrayList();
+        activatedTags = new FilteredList<>(this.addressBook.getActivatedTagList());
         this.imagesToView = new ImageDetailsList();
     }
 
@@ -151,6 +154,12 @@ public class ModelManager implements Model {
         addressBook.removeTag(target);
     }
 
+    @Override
+    public void addActivatedTag(Tag tag) {
+        requireNonNull(tag);
+        addressBook.addActivatedTag(tag);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -171,6 +180,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Tag> getActivatedTagList() {
+        return this.activatedTags;
+    }
+
+    @Override
+    public void clearActivatedTagList() {
+        logger.fine("Clearing activated tag lists");
+        addressBook.clearActivatedTagList();
     }
 
     //=========== Detailed Contact View methods =============================================================
