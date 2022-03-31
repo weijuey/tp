@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -68,7 +67,6 @@ public class HighImportanceCommand extends Command {
         Person editedPerson = createHighImportancePerson(highImportancePerson, highImportanceStatus);
 
         model.setPerson(highImportancePerson, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_CHANGE_HIGH_IMPORTANCE_SUCCESS, editedPerson));
     }
 
