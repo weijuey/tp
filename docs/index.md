@@ -17,4 +17,4 @@ title: AddressBook Level-3
 **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-* Icons used: [Red Flag by Flaticon](https://www.flaticon.com/free-icon/finish_2164620), [White Flag by Flaticon](https://www.flaticon.com/free-icon/finish_2164598)
+* Icons used: [Red Flag by Flaticon](https://www.flaticon.com/free-icon/finish_2164620), [White Flag by Flaticon](https://www.flaticon.com/free-icon/finish_2164598), [Check mark by Flaticon](https://www.flaticon.com/free-icon/checked_190411)
