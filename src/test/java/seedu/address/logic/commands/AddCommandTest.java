@@ -139,6 +139,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addActivatedTag(Tag tag) {
+            throw uncalledAE;
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw uncalledAE;
         }
@@ -169,12 +174,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Tag> getActivatedTagList() {
+            throw uncalledAE;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw uncalledAE;
         }
 
         @Override
         public SortedList<Person> getSortedPersonList() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void clearActivatedTagList() {
             throw uncalledAE;
         }
 
