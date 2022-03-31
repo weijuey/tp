@@ -232,6 +232,20 @@ When a red flag appears beside the contact's name, you can run `impt INDEX` agai
 You may wish to use the `note` command to add a note to indicate why the contact is important. E.g. Mobility Issues.
 </div>
 
+Examples:
+
+`impt 1` - Adds contact at index 1 to your list of contacts with high importance, indicated by the red flag
+
+![important](images/high-importance-flag/add_importance_flag.png)
+
+You will remove the red flag beside the contact's name after entering `impt 1` again.
+
+![not_important](images/high-importance-flag/before_command.png)
+
+`note 1 r/Mobility Issues` - Adds a note for your contact at index 1 indicating he/she has mobility issues
+
+![note_usage](images/high-importance-flag/add_note_for_reason.png)
+
 Format in detailed view: `impt`
 
 Example:
@@ -244,11 +258,20 @@ Shows you all contact(s) with high importance, tagged with the red flag. This co
 
 Format: `impts`
 
+Examples: You can enter `impt 1` followed by `impt 3` to add a red flag beside contacts at index 1 and index 3.
+
+![command_result](images/high-importance-flag/command_result.png)
+
+`impts` - To list all of your contacts that has been tagged with the red flag.
+
+![impts_command_result](images/high-importance-flag/impts_command_result.png)
+
 ### Prioritising relevant contacts to you : `sort`
 
 Sort contacts by given criteria. This command only works in list view.
 
 Format: `sort CRITERIA`
+
 * `CRITERIA` should be written in lower-case.
 
 Examples:
@@ -349,20 +372,29 @@ Example:
 
 ### Locating contacts by tag : `findtag`
 
-Finds contact with the given tag.
+Find contacts based on the selected tags given by keywords to search for.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
+* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`  
+  e.g.
+
+  * `findtag friends` adds `friends` as a tag to be searched for
+  * `findtag colleagues` adds `colleagues` to pre-existing search, now containing both colleagues and friends
 * The search is case-insensitive. e.g `tag` will match `Tag`
 * Only the tag is searched
 * Only full words will be matched e.g. `Ta` will not match `Tag`
 * List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with
-  tags `Tag1` and `Tag2` will be returned.
+  tags `Tag1` and `Tag2`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use `list` to clear currently selected tags!
+</div>
 
 Examples:
 
 * `findtag Friends` returns contacts with tag `Friends`
-* `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
+* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by at least `Friends`, InProgress` and `AlmostFinished`
 
 ### Deleting a tag : `deltag`
 

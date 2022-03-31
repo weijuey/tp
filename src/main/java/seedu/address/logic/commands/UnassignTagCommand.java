@@ -72,7 +72,7 @@ public class UnassignTagCommand extends Command implements DetailedViewExecutabl
             throw new CommandException(String.format(MESSAGE_UNKNOWN_TAG, tagName));
         }
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
