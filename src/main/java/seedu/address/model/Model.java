@@ -111,9 +111,20 @@ public interface Model {
     void deleteTag(Tag target);
 
     /**
+     * Adds the given tag to the {@code ActivatedTagList}
+     * {@code tag} must already exist in the address book.
+     */
+    void addActivatedTag(Tag tag);
+
+    /**
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the activated tag list
+     */
+    ObservableList<Tag> getActivatedTagList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -137,6 +148,11 @@ public interface Model {
     void sortFilteredPersonListByHighImportance();
 
     SortedList<Person> getSortedPersonList();
+
+    /**
+     * Clears the {@code tags} within the {@code ActivatedTagList}
+     */
+    void clearActivatedTagList();
 
     /** Returns the contact that is being viewed in detail */
     ObservableList<Person> getDetailedContactView();

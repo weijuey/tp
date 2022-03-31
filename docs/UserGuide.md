@@ -76,8 +76,6 @@ quickly get started and make full of use of what the application has to offer.
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-</div>
-
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -130,14 +128,14 @@ Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To edit tags, use assign and unassign commands
-</div>
-
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To edit tags, use assign and unassign commands
+</div>
 
 Examples:
 
@@ -181,7 +179,7 @@ Examples: `fav` Adds the currently viewed contact to your list of favourites
 
 ### Listing Favourites : `favourites`
 
-Lists all your favourite contacts to the list of displayed contacts.
+Lists all your favourite contacts in the list of displayed contacts.
 
 Format: `favourites`
 
@@ -200,11 +198,31 @@ You may wish to use the `note` command to add a note to indicate why the contact
 
 Format in detailed view: `impt`
 
+Examples: `impt 1` - Adds contact at index 1 to your list of contacts with high importance, indicated by the red flag
+
+![important](images/high-importance-flag/add_importance_flag.png)
+
+You will remove the red flag beside the contact's name after entering `impt 1` again.
+
+![not_important](images/high-importance-flag/before_command.png)
+
+`note 1 r/Mobility Issues` - Adds a note for your contact at index 1 indicating he/she has mobility issues
+
+![note_usage](images/high-importance-flag/add_note_for_reason.png)
+
 ### Listing contacts with high importance : `impts`
 
 Shows you all contact(s) with high importance, tagged with the red flag.
 
 Format: `impts`
+
+Examples: You can enter `impt 1` followed by `impt 3` to add a red flag beside contacts at index 1 and index 3.
+
+![command_result](images/high-importance-flag/command_result.png)
+
+`impts` - To list all of your contacts that has been tagged with the red flag.
+
+![impts_command_result](images/high-importance-flag/impts_command_result.png)
 
 ### Prioritising relevant contacts to you : `sort`
 Sort contacts by given criteria.
@@ -235,23 +253,6 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating contacts by tag : `findtag`
-
-Finds contact with the given tag.
-
-Format: `findtag KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `tag` will match `Tag`
-* Only the tag is searched
-* Only full words will be matched e.g. `Ta` will not match `Tag`
-* List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with
-  tags `Tag1` and `Tag2` will be returned.
-
-Examples:
-
-* `findtag Friends` returns contacts with tag `Friends`
-* `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
-
 ### Creating a tag : `tag`
 
 Creates a tag that can be assigned to any contact.
@@ -260,6 +261,17 @@ Format: `tag TAGNAME`
 
 * A tag with the same `TAGNAME` can only be created once.
 * The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created. 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can create meaningful tags to assign your contacts with! With tags, you can search for contacts assigned to that particular tag!
+Tags must be created first before you can perform any tag related features.
+</div>
+
+List of tag related features:
+* [Assign Tag](#assigning-a-tag-to-a-contact--assign)
+* [Unassign Tag](#unassigning-a-tag-from-a-contact--unassign)
+* [Find Tag](#locating-contacts-by-tag--findtag)
+* [Delete Tag](#deleting-a-tag--deltag)
 
 Examples:
 
@@ -301,6 +313,42 @@ Examples:
 
 * `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`
 
+
+### Locating contacts by tag : `findtag`
+
+Finds contact with the given tag.
+
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `tag` will match `Tag`
+* Only the tag is searched
+* Only full words will be matched e.g. `Ta` will not match `Tag`
+* List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with
+  tags `Tag1` and `Tag2` will be returned.
+
+Examples:
+
+* `findtag Friends` returns contacts with tag `Friends`
+* `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
+
+### Deleting a tag : `deltag`
+
+Deletes the specified tag(s)
+
+Format: `deltag TAGNAME [MORE_TAGNAME]`
+
+* Deletes the tag(s) identified by the given `TAGNAME`.
+* Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
+* If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
+  t
+  Examples:
+* `deltag friends` deletes the tag `friends`
+* `deltag friends colleagues` deletes the tag `friends` and `colleagues`
+* `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
+* `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
+
+
+
 ### Deleting a contact : `delete`
 
 Deletes the specified contact from the address book.
@@ -315,6 +363,23 @@ Examples:
 
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+### Deleting a tag : `deltag`
+
+Deletes the specified tag(s)
+
+Format: `deltag TAGNAME [MORE_TAGNAME]`
+
+* Deletes the tag(s) identified by the given `TAGNAME`.
+* Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
+* If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
+t
+Examples:
+* `deltag friends` deletes the tag `friends`
+* `deltag friends colleagues` deletes the tag `friends` and `colleagues`
+* `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
+* `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
+
 
 ### Adding deadlines to meet in relation to a contact : `deadline`
 
@@ -476,6 +541,7 @@ _*Detailed view format and examples to be added*_
 | **Create Tag**      | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          |                                   |
 | **Deadline**        | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |                                   |
 | **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |                                   |
+| **Delete Tag**   | `deltag TAGNAME`<br> e.g., `delete friends`                                                                                                     |                                   |
 | **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |                                   |
 | **Add Favourite**   | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |                                   |
 | **List Favourites** | `favourites`                                                                                                                                    |                                   |
@@ -487,6 +553,7 @@ _*Detailed view format and examples to be added*_
 | **Delete Image**    | `delimg INDEX i/IMAGE_INDEX` <br> e.g., `delimg 1 i/2`                                                                                          |                                   |
 | **Impt**            | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |                                   |
 | **Impts**           | `impts`                                                                                                                                         |                                   |
+| **Sort**         | `sort CRITERIA` <br> e.g., `sort address`                                                                                                       |                                   |
 | **List**            | `list`                                                                                                                                          |                                   |
 | **Note**            | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |                                   |
 | **Unassign Tag**    | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |                                   |
