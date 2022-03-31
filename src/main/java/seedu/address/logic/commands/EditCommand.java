@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +32,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -70,6 +69,16 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Constructs an EditCommand for {@code Person} in detailed view
+     * @param editPersonDescriptor details to edit the person with
+     */
+    public EditCommand(EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(editPersonDescriptor);
+        this.index = null;
+        this.editPersonDescriptor = editPersonDescriptor;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -87,8 +96,24 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+
+        Person personToEdit = model.getDetailedContactViewPerson();
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     /**
@@ -102,15 +127,15 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        DeadlineList updatedDeadlines = editPersonDescriptor.getDeadlines().orElse(personToEdit.getDeadlines());
+
+        DeadlineList oldDeadlines = personToEdit.getDeadlines();
         Notes oldNotes = personToEdit.getNotes();
         Set<Tag> oldTags = personToEdit.getTags();
-
         Favourite favouriteStatus = personToEdit.getFavouriteStatus();
         HighImportance highImportanceStatus = personToEdit.getHighImportanceStatus();
         ImageDetailsList imageDetailsList = personToEdit.getImageDetailsList();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDeadlines,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, oldDeadlines,
                 oldNotes, oldTags, favouriteStatus, highImportanceStatus, imageDetailsList);
     }
 
@@ -141,7 +166,6 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private DeadlineList deadlines;
 
         public EditPersonDescriptor() {}
 
@@ -154,14 +178,13 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setDeadlines(toCopy.deadlines);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, deadlines);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address);
         }
 
         public void setName(Name name) {
@@ -196,14 +219,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setDeadlines(DeadlineList deadlines) {
-            this.deadlines = deadlines;
-        }
-
-        public Optional<DeadlineList> getDeadlines() {
-            return Optional.ofNullable(deadlines);
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -222,8 +237,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getDeadlines().equals(e.getDeadlines());
+                    && getAddress().equals(e.getAddress());
         }
     }
 }

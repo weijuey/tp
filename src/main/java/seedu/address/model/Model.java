@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -167,6 +168,11 @@ public interface Model {
     void clearDetailedContactView();
 
     /**
+     * Gets the {@code Person} in detailed view.
+     */
+    Person getDetailedContactViewPerson();
+
+    /**
      * Updates the images to be displayed.
      */
     void updateImagesToView(ImageDetailsList images);
@@ -175,5 +181,17 @@ public interface Model {
      * Gets the images to be displayed.
      */
     ImageDetailsList getImagesToView();
+
+    /**
+     * Updates the commandText history
+     */
+    void updateCommandHistory(String commandText);
+
+    /**
+     * Retrieves the i-th latest command history
+     * @param i the number of commands we should backstep to retrieve
+     * @return the command text
+     */
+    CommandHistoryEntry getCommandHistory(int i);
 
 }

@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.image.ImageDetailsList;
 
 /**
@@ -38,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
-    private enum Panel { PERSON_LIST , DETAILED_VIEW , IMAGE_VIEW }
+    private enum Panel { PERSON_LIST, DETAILED_VIEW, IMAGE_VIEW }
 
     private Panel panelInDisplay;
 
@@ -85,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -135,7 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::getCommandHistory);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -214,7 +216,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            logic.cacheCommandText(commandText);
+
+            CommandResult commandResult = panelInDisplay == Panel.DETAILED_VIEW
+                    ? logic.executeInDetailedViewMode(commandText)
+                    : logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -242,5 +248,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Retrieves the command history from i-commands ago
+     * @param i the amount of commands to back-step
+     * @return the retrieved command text
+     */
+    private CommandHistoryEntry getCommandHistory(int i) {
+        return logic.getCommandText(i);
     }
 }
