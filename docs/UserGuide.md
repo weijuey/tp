@@ -169,7 +169,7 @@ Examples: `fav 1` — Adds contact at index 1 to your list of favourites
 
 ![favourite](images/favourite_command.png)
 
-- `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
+* `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
 
 ![unfavourited](images/after_unfavourite_command.png)
 
@@ -387,13 +387,13 @@ Creates a deadline that is placed under the profile of a contact.
 
 Format: `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 
-- deadline must have description.
-- The given date is added to the contact as deadline.
-- Date should be dd/mm/yyyy
+* Deadline must have description.
+* The given date is added to the contact as deadline.
+* Date should be dd/mm/yyyy
 
 Example:
 
-- `deadline 1 d/windows 01/01/2022` adds the description `windows` and date `01/01/2022` to the contact in index `1`.
+* `deadline 1 d/windows 01/01/2022` adds the description `windows` and date `01/01/2022` to the contact in index `1`.
 
 List before `deadline` command:
 
@@ -409,7 +409,7 @@ Deletes the deadline under the contact in detailed view. This command cannot be 
 
 Format: `deldl INDEX`
 
-- Deletes the note at the index of the list of deadlines displayed.
+* Deletes the note at the index of the list of deadlines displayed.
 
 Example:
 
@@ -422,8 +422,8 @@ Adds the given note under the contact.
 
 Format: `note INDEX r/NOTES`
 
-- Notes are displayed in a list.
-- The given note is appended to the existing list of notes at the end.
+* Notes are displayed in a list.
+* The given note is appended to the existing list of notes at the end.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Notes store good-to-know information about the user. To classify contacts so that you can search for them, use tags instead.
@@ -439,14 +439,14 @@ Deletes the note under the contact in detailed view. This command cannot be used
 
 Format: `delnote INDEX`
 
-- Deletes the note at the index of the list of notes displayed.
+* Deletes the note at the index of the list of notes displayed.
 
 Example:
 
 `view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the
 notes list of the contact
 
-### Add images : `addimg`
+### Adding images : `addimg`
 
 Add image(s) to a contact.
 
@@ -460,9 +460,9 @@ Format: `addimg INDEX`
 
 ![file chooser for images](images/images_file_chooser.png)
 
-- Upon running the command, a file chooser will appear for you to select images from.
-- Images can be in `.png` or `.jpg` formats.
-- Images uploaded cannot have duplicate names.
+* Upon running the command, a file chooser will appear for you to select images from.
+* Images can be in `.png` or `.jpg` formats.
+* Images uploaded cannot have duplicate names.
 
 ### List contact's images : `images`
 
@@ -470,7 +470,7 @@ Lists the contact's image(s).
 
 Format: `images INDEX`
 
-- You can click on the images to zoom into the picture.
+* You can click on the images to zoom into the picture.
 
 ### Delete images : `delimg`
 
@@ -480,8 +480,8 @@ Format: `delimg INDEX i/IMAGE_INDEX`
 
 ![identify image index from images command](images/image_index.png)
 
-- An image's index is relative to the person it belongs to.
-- You can identify it by running the images command for a given user
+* An image's index is relative to the person it belongs to.
+* You can identify it by running the images command for a given user
   (as seen in the above image). The `IMAGE_INDEX` of the image will be
 directly above the image itself.
 
