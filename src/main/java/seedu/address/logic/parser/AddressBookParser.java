@@ -194,6 +194,9 @@ public class AddressBookParser {
         case AddImageCommand.COMMAND_WORD:
             return new AddImageCommand();
 
+        case DeleteImageCommand.COMMAND_WORD:
+            return new DeleteImageCommandParser().parseInDetailedViewContext(arguments);
+
         case ImagesCommand.COMMAND_WORD:
             return new ImagesCommand();
 
