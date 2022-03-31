@@ -44,6 +44,8 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
+        historyPosition = 0; // Reset history pointer on new input
+
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
