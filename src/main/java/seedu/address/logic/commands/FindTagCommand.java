@@ -52,7 +52,6 @@ public class FindTagCommand extends Command {
             Tag currTag = new Tag(matched);
             model.addActivatedTag(currTag);
         }
-        System.out.println(model.getActivatedTagList());
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
