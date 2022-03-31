@@ -36,4 +36,11 @@ public class CommandHistory implements Iterable<CommandHistoryEntry> {
     public Iterator<CommandHistoryEntry> iterator() {
         return internalList.iterator();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CommandHistory // instanceof handles nulls
+                && internalList.equals(((CommandHistory) other).internalList));
+    }
 }

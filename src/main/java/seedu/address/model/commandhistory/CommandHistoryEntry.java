@@ -24,6 +24,13 @@ public class CommandHistoryEntry {
         return this.commandText;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CommandHistoryEntry // instanceof handles nulls
+                && commandText.equals(((CommandHistoryEntry) other).commandText));
+    }
+
     private static class CommandHistoryEntrySentinel extends CommandHistoryEntry {
         public CommandHistoryEntrySentinel() {
             super("");
@@ -37,6 +44,11 @@ public class CommandHistoryEntry {
         @Override
         public String getCommandText() {
             throw new HistoryDoesNotExistException();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other instanceof CommandHistoryEntrySentinel;
         }
     }
 }
