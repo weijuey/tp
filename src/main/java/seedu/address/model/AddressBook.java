@@ -8,6 +8,7 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.ActivatedTagList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -19,6 +20,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
+    private final ActivatedTagList activatedTags;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
+        activatedTags = new ActivatedTagList();
     }
 
     public AddressBook() {}
@@ -142,6 +145,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.remove(key);
     }
 
+    public void addActivatedTag(Tag tag) {
+        activatedTags.add(tag);
+    }
+
+    public void clearActivatedTagList() {
+        activatedTags.clear();
+    }
+
     //// util methods
 
     @Override
@@ -158,6 +169,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Tag> getActivatedTagList() {
+        return activatedTags.asUnmodifiableObservableList();
     }
 
     @Override
