@@ -441,7 +441,9 @@ _*Detailed view format and examples to be added*_
 | **Help**         | `help`                                                                                                                                          |                                   |
 | **Impt**         | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |                                   |
 | **Impts**        | `impts`                                                                                                                                         |                                   |
+| **Sort**         | `sort CRITERIA` <br> e.g., `sort address`                                                                                                       |                                   |
 | **List**         | `list`                                                                                                                                          |                                   |
 | **Note**         | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |                                   |
 | **Unassign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |                                   |
 | **View**         | `view INDEX` <br> e.g., `view 1`                                                                                                                |                                   |
+
