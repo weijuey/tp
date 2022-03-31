@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INCOMPATIBLE_VIEW_MODE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddImageCommand;
 import seedu.address.logic.commands.AssignTagCommand;
@@ -139,6 +141,11 @@ public class AddressBookParser {
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
+        case DeleteDeadlineCommand.COMMAND_WORD:
+            // Fallthrough
+        case DeleteNoteCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_INCOMPATIBLE_VIEW_MODE);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -211,6 +218,23 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            // Fallthrough
+        case DeleteCommand.COMMAND_WORD:
+            // Fallthrough
+        case DeleteTagCommand.COMMAND_WORD:
+            // Fallthrough
+        case FindCommand.COMMAND_WORD:
+            // Fallthrough
+        case FindTagCommand.COMMAND_WORD:
+            // Fallthrough
+        case ListFavouritesCommand.COMMAND_WORD:
+            // Fallthrough
+        case ListImportantCommand.COMMAND_WORD:
+            // Fallthrough
+        case SortsCommand.COMMAND_WORD:
+            throw new ParseException(MESSAGE_INCOMPATIBLE_VIEW_MODE);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
