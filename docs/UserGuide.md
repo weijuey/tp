@@ -31,7 +31,7 @@ quickly get started and make full of use of what the application has to offer.
   * [Assigning a tag to a contact](#assigning-a-tag-to-a-contact--assign)
   * [Unassigning a tag from a contact](#unassigning-a-tag-from-a-contact--unassign)
   * [Locating contacts by tag](#locating-contacts-by-tag--findtag)
-  * [Deleting a tag]
+  * [Deleting a tag](#deleting-a-tag--deltag)
   * [Deleting a contact](#deleting-a-contact--delete)
   * [Adding deadlines to meet in relation to a contact](#adding-deadlines-to-meet-in-relation-to-a-contact--deadline)
   * [Deleting a deadline from a contact](#deleting-a-deadline-from-a-contact--deldl)
@@ -106,6 +106,8 @@ quickly get started and make full of use of what the application has to offer.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
 
 ### Viewing help : `help`
 
@@ -371,8 +373,9 @@ Format: `deltag TAGNAME [MORE_TAGNAME]`
 * Deletes the tag(s) identified by the given `TAGNAME`.
 * Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
 * If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
-  t
-  Examples:
+
+Examples:
+
 * `deltag friends` deletes the tag `friends`
 * `deltag friends colleagues` deletes the tag `friends` and `colleagues`
 * `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
@@ -392,23 +395,6 @@ Examples:
 
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
-
-### Deleting a tag : `deltag`
-
-Deletes the specified tag(s)
-
-Format: `deltag TAGNAME [MORE_TAGNAME]`
-
-* Deletes the tag(s) identified by the given `TAGNAME`.
-* Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
-* If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
-
-Examples:
-
-* `deltag friends` deletes the tag `friends`
-* `deltag friends colleagues` deletes the tag `friends` and `colleagues`
-* `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
-* `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
 
 ### Adding deadlines to meet in relation to a contact : `deadline`
 
