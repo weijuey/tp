@@ -577,6 +577,12 @@ update data directly by editing that data file.
 If your changes to the data file makes its format invalid, d'Intérieur will discard all data and start with an empty data file at the next run.
 </div>
 
+### Cycling through input history
+
+You can cycle through your input history by hitting the up arrow key to go back to older inputs,
+and the down arrow key to your latest inputs. You can save type on typing repeat inputs, or re-writing erroneous
+inputs!
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._

@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -28,6 +29,17 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     CommandResult executeInDetailedViewMode(String commandText) throws CommandException, ParseException;
+
+    /**
+     * Caches raw user input.
+     */
+    void cacheCommandText(String commandText);
+
+    /**
+     * Retrieves the command text
+     * @param i the number of commands to backstep to
+     */
+    CommandHistoryEntry getCommandText(int i);
 
     /**
      * Returns the AddressBook.

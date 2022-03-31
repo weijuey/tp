@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -235,6 +236,16 @@ public class AddCommandTest {
 
         @Override
         public ImageDetailsList getImagesToView() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void updateCommandHistory(String commandText) {
+            throw uncalledAE;
+        }
+
+        @Override
+        public CommandHistoryEntry getCommandHistory(int i) {
             throw uncalledAE;
         }
 

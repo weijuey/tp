@@ -13,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.commandhistory.CommandHistory;
+import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.comparator.AddressComparator;
 import seedu.address.model.comparator.DeadlineListComparator;
 import seedu.address.model.comparator.EmailComparator;
@@ -35,7 +37,9 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
     private final ObservableList<Person> detailedContactView;
+    private final CommandHistory commandHistory;
     private final ObservableList<Tag> activatedTags;
+
     private ImageDetailsList imagesToView;
 
 
@@ -54,6 +58,7 @@ public class ModelManager implements Model {
         detailedContactView = FXCollections.observableArrayList();
         activatedTags = new FilteredList<>(this.addressBook.getActivatedTagList());
         this.imagesToView = new ImageDetailsList();
+        this.commandHistory = new CommandHistory();
     }
 
     public ModelManager() {
@@ -233,6 +238,25 @@ public class ModelManager implements Model {
         return this.imagesToView;
     }
 
+    /**
+     * Updates the commandText history
+     *
+     * @param commandText the text to cache
+     */
+    @Override
+    public void updateCommandHistory(String commandText) {
+        commandHistory.cacheCommand(commandText);
+    }
+
+    /**
+     * Retrieves the i-th latest command text
+     * @return
+     */
+    @Override
+    public CommandHistoryEntry getCommandHistory(int i) {
+        return commandHistory.retrieveCommand(i);
+    }
+
     @Override
     public void sortFilteredPersonListByName() {
         sortedPersons.setComparator(new NameComparator());
@@ -286,6 +310,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && detailedContactView.equals(other.detailedContactView)
-                && imagesToView.equals(other.imagesToView);
+                && imagesToView.equals(other.imagesToView)
+                && commandHistory.equals(other.commandHistory);
     }
 }
