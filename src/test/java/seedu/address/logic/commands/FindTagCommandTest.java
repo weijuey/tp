@@ -35,11 +35,6 @@ class FindTagCommandTest {
 
     @Test
     void equals() {
-        TagContainsKeywordsPredicate firstPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("first"));
-        TagContainsKeywordsPredicate secondPredicate =
-                new TagContainsKeywordsPredicate(Collections.singletonList("second"));
-
         List<String> firstKeywords = new ArrayList<>();
         firstKeywords.add("first");
         List<String> secondKeywords = new ArrayList<>();
@@ -84,8 +79,6 @@ class FindTagCommandTest {
         String expectedMessage = FindTagCommand.MESSAGE_USAGE;
         List<String> emptyKeywords = new ArrayList<>();
         FindTagCommand command = new FindTagCommand(emptyKeywords);
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(emptyKeywords);
-        expectedModel.updateFilteredPersonList(predicate);
         assertCommandFailure(command, model, expectedMessage);
 
     }
