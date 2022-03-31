@@ -50,6 +50,7 @@ public class DeleteTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.clearActivatedTagList();
         model.clearDetailedContactView();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         ObservableList<Person> allPersons = model.getFilteredPersonList();

@@ -119,7 +119,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getSortedPersonList());
+        personListPanel = new PersonListPanel(logic.getSortedPersonList(), logic.getActivatedTagList());
         informationDisplayPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         detailedContactPanel = new DetailedContactPanel(logic.getDetailedContactView());
@@ -218,7 +218,9 @@ public class MainWindow extends UiPart<Stage> {
         try {
             logic.cacheCommandText(commandText);
 
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = panelInDisplay == Panel.DETAILED_VIEW
+                    ? logic.executeInDetailedViewMode(commandText)
+                    : logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

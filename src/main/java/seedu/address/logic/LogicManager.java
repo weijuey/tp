@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DetailedViewExecutable;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,6 +19,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.storage.Storage;
 
 /**
@@ -58,6 +60,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public CommandResult executeInDetailedViewMode(String commandText) throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        CommandResult commandResult;
+        DetailedViewExecutable command = addressBookParser.parseDetailedViewCommand(commandText);
+        commandResult = command.executeInDetailedView(model);
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+
+        return commandResult;
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
     }
@@ -65,6 +84,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Tag> getActivatedTagList() {
+        return model.getActivatedTagList();
     }
 
     @Override

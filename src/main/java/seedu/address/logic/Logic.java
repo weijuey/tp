@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * API of the Logic component
@@ -26,6 +27,8 @@ public interface Logic {
      * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
+
+    CommandResult executeInDetailedViewMode(String commandText) throws CommandException, ParseException;
 
     /**
      * Caches raw user input.
@@ -49,6 +52,8 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of persons
      */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Tag> getActivatedTagList();
 
     SortedList<Person> getSortedPersonList();
 

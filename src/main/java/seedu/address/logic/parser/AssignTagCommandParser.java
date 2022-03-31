@@ -9,7 +9,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new AssignTagCommand object
  */
-public class AssignTagCommandParser implements Parser<AssignTagCommand> {
+public class AssignTagCommandParser implements Parser<AssignTagCommand>,
+        DetailedViewExecutableParser<AssignTagCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AssignTagCommand
@@ -37,5 +38,16 @@ public class AssignTagCommandParser implements Parser<AssignTagCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignTagCommand.MESSAGE_USAGE), pe);
         }
+    }
+
+    @Override
+    public AssignTagCommand parseInDetailedViewContext(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignTagCommand.MESSAGE_USAGE));
+        }
+
+        return new AssignTagCommand(trimmedArgs);
     }
 }

@@ -21,7 +21,7 @@ import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.image.util.ImageUtil;
 import seedu.address.model.person.Person;
 
-public class AddImageCommand extends Command {
+public class AddImageCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "addimg";
 
@@ -30,7 +30,7 @@ public class AddImageCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String ADD_IMAGE_SUCCESS = "Added %d image(s) to Person: %s";
+    public static final String ADD_IMAGE_SUCCESS = "Added %d image(s) to person: %s";
     public static final String ADD_IMAGE_NONE_SELECTED = "No images were selected to be added";
     public static final String ADD_IMAGE_FAIL = "Failed to add image(s)";
     public static final String DUPLICATE_IMAGES = "An image with the name: \"%s\" already exists";
@@ -43,10 +43,14 @@ public class AddImageCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    public AddImageCommand() {
+        this.targetIndex = null;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -77,14 +81,54 @@ public class AddImageCommand extends Command {
 
             imagesToAdd.add(copiedImage);
         }
-        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), targetIndex));
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = addImages(personToEdit, imagesToAdd);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), editedPerson));
 
         return new CommandResult(resultStringBuilder.toString());
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+
+        List<File> images = openImageChooser();
+
+        if (images.isEmpty()) {
+            return new CommandResult(ADD_IMAGE_NONE_SELECTED, CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        }
+
+        StringBuilder resultStringBuilder = new StringBuilder();
+        List<ImageDetails> imagesToAdd = new ArrayList<>();
+        for (File imgFile : images) {
+            Path destPath = CONTACT_IMAGES_PATH.resolve(imgFile.getName());
+            if (ImageUtil.fileExists(imgFile, CONTACT_IMAGES_PATH)) {
+                resultStringBuilder
+                        .append(String.format(DUPLICATE_IMAGES, imgFile.getName()))
+                        .append("\n");
+                continue;
+            }
+            ImageDetails copiedImage;
+            try {
+                copiedImage = ImageUtil.copyTo(imgFile, destPath);
+            } catch (IOException ioe) {
+                throw new CommandException(ADD_IMAGE_FAIL);
+            }
+
+            imagesToAdd.add(copiedImage);
+        }
+
+        Person personToEdit = model.getDetailedContactViewPerson();
+        Person editedPerson = addImages(personToEdit, imagesToAdd);
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), editedPerson));
+
+        return new CommandResult(resultStringBuilder.toString(),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     private static Person addImages(Person personToEdit, List<ImageDetails> images) {

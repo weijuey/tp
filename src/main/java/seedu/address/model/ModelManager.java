@@ -38,8 +38,10 @@ public class ModelManager implements Model {
     private final SortedList<Person> sortedPersons;
     private final ObservableList<Person> detailedContactView;
     private final CommandHistory commandHistory;
+    private final ObservableList<Tag> activatedTags;
 
     private ImageDetailsList imagesToView;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -54,6 +56,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
         detailedContactView = FXCollections.observableArrayList();
+        activatedTags = new FilteredList<>(this.addressBook.getActivatedTagList());
         this.imagesToView = new ImageDetailsList();
         this.commandHistory = new CommandHistory();
     }
@@ -156,6 +159,12 @@ public class ModelManager implements Model {
         addressBook.removeTag(target);
     }
 
+    @Override
+    public void addActivatedTag(Tag tag) {
+        requireNonNull(tag);
+        addressBook.addActivatedTag(tag);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -176,6 +185,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Tag> getActivatedTagList() {
+        return this.activatedTags;
+    }
+
+    @Override
+    public void clearActivatedTagList() {
+        logger.fine("Clearing activated tag lists");
+        addressBook.clearActivatedTagList();
     }
 
     //=========== Detailed Contact View methods =============================================================
@@ -199,6 +219,12 @@ public class ModelManager implements Model {
     public void clearDetailedContactView() {
         logger.fine("Clearing detailed view");
         detailedContactView.clear();
+    }
+
+    @Override
+    public Person getDetailedContactViewPerson() {
+        assert detailedContactView.size() == 1;
+        return detailedContactView.get(0);
     }
 
     //=========== Person Images to View ==============================================================================
