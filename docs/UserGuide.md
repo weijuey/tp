@@ -234,7 +234,7 @@ You may wish to use the `note` command to add a note to indicate why the contact
 
 Examples:
 
-`impt 1` - Adds contact at index 1 to your list of contacts with high importance, indicated by the red flag
+* `impt 1` - Adds contact at index 1 to your list of contacts with high importance, indicated by the red flag
 
 ![important](images/high-importance-flag/add_importance_flag.png)
 
@@ -508,6 +508,49 @@ Example:
 * `view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the 
 notes list of the contact
 
+### Adding images : `addimg`
+
+Add image(s) to a contact.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Take note that images uploaded are duplicated and stored in the data folder of the app.
+If your computer's storage space is a concern for you, please delete the original image
+after you have uploaded it!
+</div>
+
+Format: `addimg INDEX`
+
+![file chooser for images](images/images_file_chooser.png)
+
+* Upon running the command, a file chooser will appear for you to select images from.
+* Images can be in `.png` or `.jpg` formats.
+* Images uploaded cannot have duplicate names.
+
+### List contact's images : `images`
+
+Lists the contact's image(s).
+
+Format: `images INDEX`
+
+* You can click on the images to zoom into the picture.
+
+### Delete images : `delimg`
+
+Deletes the image(s) associated with a contact. 
+
+Format: `delimg INDEX i/IMAGE_INDEX`
+
+![identify image index from images command](images/image_index.png)
+
+* An image's index is relative to the person it belongs to.
+* You can identify it by running the images command for a given user
+  (as seen in the above image). The `IMAGE_INDEX` of the image will be
+directly above the image itself.
+
+Example: 
+
+`delimg 1 i/2` will delete the second image of the contact
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book. This command can only be used in list view.
@@ -550,24 +593,30 @@ the data of your previous d'Intérieur home folder.
 
 ## Command summary
 
-| Action           | Format, Examples in List View                                                                                                                   | Format, Examples in Detailed View                                                                      |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` | Same as list view                                                                                      |
-| **Assign Tag**   | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            | `assign TAGNAME` <br> e.g., `assign client`                                                            |
-| **Clear**        | `clear`                                                                                                                                         | -                                                                                                      |
-| **Create Tag**   | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          | Same as list view                                                                                      |
-| **Deadline**     | `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...` <br> e.g., `deadline 1 d/windows 01/01/2022`                                        | `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...` <br> e.g., `deadline d/Lunch meeting 03/06/2022` |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                             | -                                                                                                      |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            | `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​` <br> e.g., `edit p/88438809 e/alex_yeoh@example.com` |
-| **Fav**          | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  | `fav`                                                                                                  |
-| **Favourites**   | `favourites`                                                                                                                                    | -                                                                                                      |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      | -                                                                                                      |
-| **Find Tag**     | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  | -                                                                                                      |
-| **Help**         | `help`                                                                                                                                          | Same as list view                                                                                      |
-| **Impt**         | `impt INDEX` <br> e.g., `impt 1`                                                                                                                | `impt`                                                                                                 |
-| **Impts**        | `impts`                                                                                                                                         | -                                                                                                      |
-| **Sort**         | `sort CRITERIA` <br> e.g., `sort address`                                                                                                       | -                                                                                                      |
-| **List**         | `list`                                                                                                                                          | Same as list view                                                                                      |
-| **Note**         | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            | `note r/NOTES` <br> e.g., `note r/Likes wood furniture`                                                |
-| **Unassign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        | `unassign TAGNAME` <br> e.g., `unassign client`                                                        |
-| **View**         | `view INDEX` <br> e.g., `view 1`                                                                                                                | -                                                                                                      |
+| Action              | Format, Examples in List View                                                                                                                   | Format, Examples in Detailed View                                                                      |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` | Same as list view                                                                                      |
+| **Add Favourite**   | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |                                                                                                        |
+| **Add Image**       | `addimg INDEX` <br> e.g., `addimg 1`                                                                                                            | `addimg`                                                                                               |
+| **Assign Tag**      | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            | `assign TAGNAME` <br> e.g., `assign client`                                                            |
+| **Clear**           | `clear`                                                                                                                                         | -                                                                                                      |
+| **Create Tag**      | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          | Same as list view                                                                                      |
+| **Deadline**        | `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...` <br> e.g., `deadline 1 d/windows 01/01/2022`                                        | `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...` <br> e.g., `deadline d/Lunch meeting 03/06/2022` |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                             | -                                                                                                      |
+| **Delete Image**    | `delimg INDEX i/IMAGE_INDEX` <br> e.g., `delimg 1 i/2`                                                                                          | `delimg i/IMAGE_INDEX` <br> e.g., `delimg i/1`                                                         |
+| **Delete Tag**      | `deltag TAGNAME`<br> e.g., `delete friends`                                                                                                     |                                                                                                        |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            | `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​` <br> e.g., `edit p/88438809 e/alex_yeoh@example.com` |
+| **Fav**             | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  | `fav`                                                                                                  |
+| **Favourites**      | `favourites`                                                                                                                                    | -                                                                                                      |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      | -                                                                                                      |
+| **Find Tag**        | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  | -                                                                                                      |
+| **Help**            | `help`                                                                                                                                          | Same as list view                                                                                      |
+| **Impt**            | `impt INDEX` <br> e.g., `impt 1`                                                                                                                | `impt`                                                                                                 |
+| **Impts**           | `impts`                                                                                                                                         | -                                                                                                      |
+| **Sort**            | `sort CRITERIA` <br> e.g., `sort address`                                                                                                       | -                                                                                                      |
+| **List**            | `list`                                                                                                                                          | Same as list view                                                                                      |
+| **List Favourites** | `favourites`                                                                                                                                    |                                                                                                        |
+| **List Images**     | `images INDEX` <br> e.g., `images 1`                                                                                                            |                                                                                                        |
+| **Note**            | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            | `note r/NOTES` <br> e.g., `note r/Likes wood furniture`                                                |
+| **Unassign Tag**    | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        | `unassign TAGNAME` <br> e.g., `unassign client`                                                        |
+| **View**            | `view INDEX` <br> e.g., `view 1`                                                                                                                | -                                                                                                      |
