@@ -82,7 +82,7 @@ public class DeadlineList implements Comparable<DeadlineList> {
      * Gives the size of this deadline list, considering only deadlines given by user.
      */
     public int size() {
-        return this.deadlines.size() == 1 && this.deadlines.get(0).equals(EMPTY_DEADLINE) ? 0
+        return this.deadlines.get(0).equals(EMPTY_DEADLINE) ? 0
                 : this.deadlines.size();
     }
 
