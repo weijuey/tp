@@ -30,7 +30,7 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String ADD_IMAGE_SUCCESS = "Added %d image(s) to Person: %s";
+    public static final String ADD_IMAGE_SUCCESS = "Added %d image(s) to person: %s";
     public static final String ADD_IMAGE_NONE_SELECTED = "No images were selected to be added";
     public static final String ADD_IMAGE_FAIL = "Failed to add image(s)";
     public static final String DUPLICATE_IMAGES = "An image with the name: \"%s\" already exists";
@@ -81,12 +81,12 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
 
             imagesToAdd.add(copiedImage);
         }
-        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), targetIndex));
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
         Person editedPerson = addImages(personToEdit, imagesToAdd);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), editedPerson));
 
         return new CommandResult(resultStringBuilder.toString());
     }
@@ -120,12 +120,12 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
 
             imagesToAdd.add(copiedImage);
         }
-        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), targetIndex));
 
         Person personToEdit = model.getDetailedContactViewPerson();
         Person editedPerson = addImages(personToEdit, imagesToAdd);
         model.setPerson(personToEdit, editedPerson);
         model.setDetailedContactView(editedPerson);
+        resultStringBuilder.append(String.format(ADD_IMAGE_SUCCESS, imagesToAdd.size(), editedPerson));
 
         return new CommandResult(resultStringBuilder.toString(),
                 CommandResult.SpecialCommandResult.DETAILED_VIEW);
