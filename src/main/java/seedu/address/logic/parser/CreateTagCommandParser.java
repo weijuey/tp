@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.tag.Tag.VALIDATION_REGEX;
 
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,8 +23,10 @@ public class CreateTagCommandParser implements Parser<CreateTagCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
         }
 
-        String[] tagName = trimmedArgs.split("\\s+");
+        if (!trimmedArgs.matches(VALIDATION_REGEX)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
+        }
 
-        return new CreateTagCommand(tagName[0]);
+        return new CreateTagCommand(trimmedArgs);
     }
 }
