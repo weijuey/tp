@@ -296,20 +296,29 @@ Examples:
 
 ### Locating contacts by tag : `findtag`
 
-Finds contact with the given tag.
+Find contacts based on the selected tags given by keywords to search for.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
+* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`  
+  e.g.
+
+  * `findtag friends` adds `friends` as a tag to be searched for
+  * `findtag colleagues` adds `colleagues` to pre-existing search, now containing both colleagues and friends
 * The search is case-insensitive. e.g `tag` will match `Tag`
 * Only the tag is searched
 * Only full words will be matched e.g. `Ta` will not match `Tag`
 * List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with
-  tags `Tag1` and `Tag2` will be returned.
+  tags `Tag1` and `Tag2`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use `list` to clear currently selected tags!
+</div>
 
 Examples:
 
 * `findtag Friends` returns contacts with tag `Friends`
-* `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
+* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by at least `Friends`, InProgress` and `AlmostFinished`
 
 ### Deleting a tag : `deltag`
 
