@@ -165,17 +165,21 @@ Format: `fav INDEX`
 You can run `fav INDEX` where `INDEX` is the index of a contact that currently belongs in your favourites list to remove them.
 </div>
 
-Example: `fav 1` — Adds contact at index 1 to your list of favourites
+Examples:
+
+* `fav 1` — Adds contact at index 1 to your list of favourites
 
 ![favourite](images/favourite_command.png)
 
-- `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
+* `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
 
 ![unfavourited](images/after_unfavourite_command.png)
 
 Format in detailed view: `fav`
 
-Example: `fav` Adds the currently viewed contact to your list of favourites.
+Example:
+
+* `fav` Adds the currently viewed contact to your list of favourites.
 
 ### Listing Favourites : `favourites`
 
@@ -199,7 +203,9 @@ You may wish to use the `note` command to add a note to indicate why the contact
 
 Format in detailed view: `impt`
 
-Example: `impt` Adds the currently viewed contact to your list of contacts with high importance.
+Example:
+
+* `impt` Adds the currently viewed contact to your list of contacts with high importance.
 
 ### Listing contacts with high importance : `impts`
 
@@ -215,6 +221,7 @@ Format: `sort CRITERIA`
 * `CRITERIA` should be written in lower-case.
 
 Examples:
+
 * `sort name` sorts list by name alphabetically.
 * `sort fav` sorts list so that favourite contacts are on top of the list.
 
@@ -336,13 +343,13 @@ Creates a deadline that is placed under the profile of a contact. This command c
 
 Format: `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 
-- deadline must have description.
-- The given date is added to the contact as deadline.
-- Date should be dd/mm/yyyy
+* deadline must have description.
+* The given date is added to the contact as deadline.
+* Date should be dd/mm/yyyy
 
 Example:
 
-- `deadline 1 d/windows 01/01/2022` adds a deadline with description `windows` and date `01/01/2022` to the contact in index `1`.
+* `deadline 1 d/windows 01/01/2022` adds a deadline with description `windows` and date `01/01/2022` to the contact in index `1`.
 
 List before `deadline` command:
 
@@ -356,7 +363,7 @@ Format in detailed view: `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 
 Example:
 
-- `deadline d/Lunch meeting 03/06/2022` adds a deadline with description `Lunch meeting` and date `03/06/2022` to the 
+* `deadline d/Lunch meeting 03/06/2022` adds a deadline with description `Lunch meeting` and date `03/06/2022` to the 
 currently viewed contact.
 
 ### Deleting a deadline from a contact : `deldl`
@@ -365,11 +372,11 @@ Deletes the deadline under the contact in detailed view. This command cannot be 
 
 Format: `deldl INDEX`
 
-- Deletes the note at the index of the list of deadlines displayed.
+* Deletes the note at the index of the list of deadlines displayed.
 
 Example:
 
-`view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
+* `view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
 notes list of the contact
 
 ### Adding additional notes to a contact : `note`
@@ -378,8 +385,8 @@ Adds the given note under the contact. This command can be used in detailed view
 
 Format: `note INDEX r/NOTES`
 
-- Notes are displayed in a list.
-- The given note is appended to the existing list of notes at the end.
+* Notes are displayed in a list.
+* The given note is appended to the existing list of notes at the end.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Notes store good-to-know information about the user. To classify contacts so that you can search for them, use tags instead.
@@ -387,13 +394,13 @@ Notes store good-to-know information about the user. To classify contacts so tha
 
 Example:
 
-- `note 2 r/loves green` will add a note under the contact at index 2 that reads `loves green`.
+* `note 2 r/loves green` will add a note under the contact at index 2 that reads `loves green`.
 
 Format in detailed view: `note r/NOTES`
 
 Example:
 
-- `note r/Likes wood furniture` will add a note to currently viewed contact that reads `Likes wood furniture`.
+* `note r/Likes wood furniture` will add a note to currently viewed contact that reads `Likes wood furniture`.
 
 ### Deleting notes from a contact : `delnote`
 
@@ -401,11 +408,11 @@ Deletes the note under the contact in detailed view. This command cannot be used
 
 Format: `delnote INDEX`
 
-- Deletes the note at the index of the list of notes displayed.
+* Deletes the note at the index of the list of notes displayed.
 
 Example:
 
-`view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the 
+* `view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the 
 notes list of the contact
 
 ### Clearing all entries : `clear`
@@ -449,8 +456,6 @@ the data of your previous d'Intérieur home folder.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
-_*Detailed view format and examples to be added*_
 
 | Action           | Format, Examples in List View                                                                                                                   | Format, Examples in Detailed View                                                                      |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
