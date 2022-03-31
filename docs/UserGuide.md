@@ -443,7 +443,7 @@ Format: `delnote INDEX`
 
 Example:
 
-`view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the
+`view 1` shows you the detailed view of the contact at index 1, then using `delnote 2` will delete the second note in the
 notes list of the contact
 
 ### Adding images : `addimg`
