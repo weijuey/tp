@@ -26,4 +26,5 @@ public class FavouriteCommandParser implements Parser<FavouriteCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavouriteCommand.MESSAGE_USAGE), pe);
         }
     }
+
 }

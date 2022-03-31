@@ -252,6 +252,11 @@ public class AddCommandTest {
         public void clearDetailedContactView() {
             throw uncalledAE;
         };
+
+        @Override
+        public Person getDetailedContactViewPerson() {
+            throw uncalledAE;
+        }
     }
 
     /**

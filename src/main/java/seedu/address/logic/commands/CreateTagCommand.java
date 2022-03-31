@@ -6,7 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
-public class CreateTagCommand extends Command {
+public class CreateTagCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -37,6 +37,18 @@ public class CreateTagCommand extends Command {
         }
         model.addTag(createdTag);
         return new CommandResult(String.format(MESSAGE_CREATE_TAG_SUCCESS, this.tagName));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+        Tag createdTag = new Tag(this.tagName);
+        if (model.hasTag(createdTag)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
+        }
+        model.addTag(createdTag);
+        return new CommandResult(String.format(MESSAGE_CREATE_TAG_SUCCESS, this.tagName),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     @Override
