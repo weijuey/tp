@@ -24,7 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-public class DeleteImageCommand extends Command {
+public class DeleteImageCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "delimg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -50,10 +50,19 @@ public class DeleteImageCommand extends Command {
         this.imageIndex = imageIndex;
     }
 
+    /**
+     * Constructs a command to delete the image of the {@code Person} in detailed view.
+     * @param imageIndex of the image to delete.
+     */
+    public DeleteImageCommand(Index imageIndex) {
+        this.personIndex = null;
+        this.imageIndex = imageIndex;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
 
         if (personIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -76,6 +85,30 @@ public class DeleteImageCommand extends Command {
 
         return new CommandResult(
                 String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), editedPerson), VIEW_IMAGES);
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+
+        Person personToEdit = model.getDetailedContactViewPerson();
+        ImageDetailsList images = personToEdit.getImageDetailsList();
+
+        if (imageIndex.getZeroBased() >= images.size()) {
+            throw new CommandException(MESSAGE_INVALID_IMAGE_DISPLAYED_INDEX);
+        }
+
+        ImageDetails imageToDelete = images.get(imageIndex.getZeroBased());
+        ImageUtil.removeFile(imageToDelete);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images);
+        Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     private static Person createImageDeletedPerson(Person personToEdit, ImageDetailsList sanitizedList) {

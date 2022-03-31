@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Unassigns a tag to a contact in the address book.
  */
-public class UnassignTagCommand extends Command {
+public class UnassignTagCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "unassign";
 
@@ -43,13 +43,23 @@ public class UnassignTagCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * Creates an UnassignTagCommand to un-assign a {@code Tag} to a {@code Person}.
+     * Creates an UnassignTagCommand to un-assign a {@code Tag} from a {@code Person}.
      * @param targetIndex the index of the contact specified.
      * @param tagName the name of the Tag.
      */
     public UnassignTagCommand(Index targetIndex, String tagName) {
         this.tagName = tagName;
         this.targetIndex = targetIndex;
+    }
+
+    /**
+     * Creates an UnassignTagCommand to un-assign a {@code Tag} from the {@code Person}
+     * in detailed view.
+     * @param tagName the name of the Tag.
+     */
+    public UnassignTagCommand(String tagName) {
+        this.tagName = tagName;
+        this.targetIndex = null;
     }
 
     @Override
@@ -62,7 +72,7 @@ public class UnassignTagCommand extends Command {
             throw new CommandException(String.format(MESSAGE_UNKNOWN_TAG, tagName));
         }
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -73,9 +83,32 @@ public class UnassignTagCommand extends Command {
             throw new CommandException(MESSAGE_NOT_TAGGED);
         }
 
-        Person editedPerson = addTagToNewPerson(personToEdit, newTag);
+        Person editedPerson = removeTagFromNewPerson(personToEdit, newTag);
         model.setPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        requireNonNull(model);
+        Tag newTag = new Tag(tagName);
+        boolean tagHasBeenCreated = model.hasTag(newTag);
+
+        if (!tagHasBeenCreated) {
+            throw new CommandException(String.format(MESSAGE_UNKNOWN_TAG, tagName));
+        }
+
+        Person personToEdit = model.getDetailedContactViewPerson();
+
+        if (!canRemoveTag(personToEdit, newTag)) {
+            throw new CommandException(MESSAGE_NOT_TAGGED);
+        }
+
+        Person editedPerson = removeTagFromNewPerson(personToEdit, newTag);
+        model.setPerson(personToEdit, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     /**
@@ -84,7 +117,7 @@ public class UnassignTagCommand extends Command {
      * @param newTag the tag to remove.
      * @return the person with the removed tag.
      */
-    private static Person addTagToNewPerson(Person personToEdit, Tag newTag) {
+    private static Person removeTagFromNewPerson(Person personToEdit, Tag newTag) {
         requireNonNull(personToEdit);
         requireNonNull(newTag);
 

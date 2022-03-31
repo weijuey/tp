@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getSortedPersonList(), logic.getActivatedTagList());
         informationDisplayPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         detailedContactPanel = new DetailedContactPanel(logic.getDetailedContactView());
@@ -221,7 +221,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = panelInDisplay == Panel.DETAILED_VIEW
+                    ? logic.executeInDetailedViewMode(commandText)
+                    : logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

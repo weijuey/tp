@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -138,6 +139,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addActivatedTag(Tag tag) {
+            throw uncalledAE;
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw uncalledAE;
         }
@@ -168,7 +174,57 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Tag> getActivatedTagList() {
+            throw uncalledAE;
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw uncalledAE;
+        }
+
+        @Override
+        public SortedList<Person> getSortedPersonList() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void clearActivatedTagList() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByName() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByAddress() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByDeadlineList() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByEmail() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByPhone() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void sortFilteredPersonListByFavourite() {
+            throw uncalledAE;
+        };
+
+        @Override
+        public void sortFilteredPersonListByHighImportance() {
             throw uncalledAE;
         }
 
@@ -177,6 +233,7 @@ public class AddCommandTest {
             throw uncalledAE;
         }
 
+        @Override
         public ImageDetailsList getImagesToView() {
             throw uncalledAE;
         }
@@ -195,6 +252,11 @@ public class AddCommandTest {
         public void clearDetailedContactView() {
             throw uncalledAE;
         };
+
+        @Override
+        public Person getDetailedContactViewPerson() {
+            throw uncalledAE;
+        }
     }
 
     /**

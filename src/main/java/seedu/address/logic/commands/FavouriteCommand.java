@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -22,7 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-public class FavouriteCommand extends Command {
+public class FavouriteCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "fav";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Favourites the person identified by the index number used in the displayed person list.\n"
@@ -41,6 +40,10 @@ public class FavouriteCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    public FavouriteCommand() {
+        this.targetIndex = null;
+    }
+
     /**
      * Executes the Favourite command based on the {@code targetIndex} given.
      *
@@ -51,21 +54,36 @@ public class FavouriteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToFavourite = lastShownList.get(targetIndex.getZeroBased());
-        Favourite newFavouriteStatus = personToFavourite.getFavouriteStatus().equals(Favourite.IS_FAVOURITE)
+        Favourite newFavouriteStatus = personToFavourite.isFavourite()
                 ? Favourite.NOT_FAVOURITE
                 : Favourite.IS_FAVOURITE;
         Person editedPerson = createFavouritedPerson(personToFavourite, newFavouriteStatus);
 
         model.setPerson(personToFavourite, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        requireNonNull(model);
+
+        Person personToFavourite = model.getDetailedContactViewPerson();
+        Favourite newFavouriteStatus = personToFavourite.isFavourite()
+                ? Favourite.NOT_FAVOURITE
+                : Favourite.IS_FAVOURITE;
+        Person editedPerson = createFavouritedPerson(personToFavourite, newFavouriteStatus);
+
+        model.setPerson(personToFavourite, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     private static Person createFavouritedPerson(Person personToEdit, Favourite newFavouriteStatus) {
