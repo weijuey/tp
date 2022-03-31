@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-public class FavouriteCommand extends Command {
+public class FavouriteCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "fav";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Favourites the person identified by the index number used in the displayed person list.\n"
@@ -38,6 +38,10 @@ public class FavouriteCommand extends Command {
         requireNonNull(targetIndex);
 
         this.targetIndex = targetIndex;
+    }
+
+    public FavouriteCommand() {
+        this.targetIndex = null;
     }
 
     /**
@@ -57,13 +61,29 @@ public class FavouriteCommand extends Command {
         }
 
         Person personToFavourite = lastShownList.get(targetIndex.getZeroBased());
-        Favourite newFavouriteStatus = personToFavourite.getFavouriteStatus().equals(Favourite.IS_FAVOURITE)
+        Favourite newFavouriteStatus = personToFavourite.isFavourite()
                 ? Favourite.NOT_FAVOURITE
                 : Favourite.IS_FAVOURITE;
         Person editedPerson = createFavouritedPerson(personToFavourite, newFavouriteStatus);
 
         model.setPerson(personToFavourite, editedPerson);
         return new CommandResult(String.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        requireNonNull(model);
+
+        Person personToFavourite = model.getDetailedContactViewPerson();
+        Favourite newFavouriteStatus = personToFavourite.isFavourite()
+                ? Favourite.NOT_FAVOURITE
+                : Favourite.IS_FAVOURITE;
+        Person editedPerson = createFavouritedPerson(personToFavourite, newFavouriteStatus);
+
+        model.setPerson(personToFavourite, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     private static Person createFavouritedPerson(Person personToEdit, Favourite newFavouriteStatus) {

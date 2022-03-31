@@ -9,7 +9,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteImageCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class DeleteImageCommandParser implements Parser<DeleteImageCommand> {
+public class DeleteImageCommandParser implements Parser<DeleteImageCommand>,
+        DetailedViewExecutableParser<DeleteImageCommand> {
 
     /**
      * Parses {@code args} into a command and returns it.
@@ -21,8 +22,6 @@ public class DeleteImageCommandParser implements Parser<DeleteImageCommand> {
     public DeleteImageCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_IMAGE);
 
-
-
         if (!arePrefixesPresent(argMultimap, PREFIX_IMAGE) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteImageCommand.MESSAGE_USAGE));
         }
@@ -31,6 +30,19 @@ public class DeleteImageCommandParser implements Parser<DeleteImageCommand> {
         Index imageIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_IMAGE).get());
 
         return new DeleteImageCommand(personIndex, imageIndex);
+    }
+
+    @Override
+    public DeleteImageCommand parseInDetailedViewContext(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_IMAGE);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_IMAGE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteImageCommand.MESSAGE_USAGE));
+        }
+
+        Index imageIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_IMAGE).get());
+
+        return new DeleteImageCommand(imageIndex);
     }
 
     /**

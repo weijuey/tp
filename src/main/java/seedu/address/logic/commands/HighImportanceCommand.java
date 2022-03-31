@@ -22,7 +22,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 
-public class HighImportanceCommand extends Command {
+public class HighImportanceCommand extends Command implements DetailedViewExecutable {
     public static final String COMMAND_WORD = "impt";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a high importance tag to the person identified by the index number "
@@ -40,6 +40,10 @@ public class HighImportanceCommand extends Command {
         requireNonNull(index);
 
         this.index = index;
+    }
+
+    public HighImportanceCommand() {
+        this.index = null;
     }
 
     /**
@@ -61,13 +65,31 @@ public class HighImportanceCommand extends Command {
         Person highImportancePerson = lastShownList.get(index.getZeroBased());
         // Checks if person is already of high importance
         HighImportance highImportanceStatus =
-                highImportancePerson.getHighImportanceStatus().equals(HighImportance.HIGH_IMPORTANCE)
+                highImportancePerson.hasHighImportance()
                 ? HighImportance.NOT_HIGH_IMPORTANCE
                 : HighImportance.HIGH_IMPORTANCE;
         Person editedPerson = createHighImportancePerson(highImportancePerson, highImportanceStatus);
 
         model.setPerson(highImportancePerson, editedPerson);
         return new CommandResult(String.format(MESSAGE_CHANGE_HIGH_IMPORTANCE_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        requireNonNull(model);
+
+        Person highImportancePerson = model.getDetailedContactViewPerson();
+        // Checks if person is already of high importance
+        HighImportance highImportanceStatus =
+                highImportancePerson.hasHighImportance()
+                        ? HighImportance.NOT_HIGH_IMPORTANCE
+                        : HighImportance.HIGH_IMPORTANCE;
+        Person editedPerson = createHighImportancePerson(highImportancePerson, highImportanceStatus);
+
+        model.setPerson(highImportancePerson, editedPerson);
+        model.setDetailedContactView(editedPerson);
+        return new CommandResult(String.format(MESSAGE_CHANGE_HIGH_IMPORTANCE_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
     }
 
     private static Person createHighImportancePerson(Person highImportancePerson,
