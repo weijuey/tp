@@ -258,11 +258,13 @@ Shows you all contact(s) with high importance, tagged with the red flag. This co
 
 Format: `impts`
 
-Examples: You can enter `impt 1` followed by `impt 3` to add a red flag beside contacts at index 1 and index 3.
+Examples:
+
+* You can enter `impt 1` followed by `impt 3` to add a red flag beside contacts at index 1 and index 3.
 
 ![command_result](images/high-importance-flag/command_result.png)
 
-`impts` - To list all of your contacts that has been tagged with the red flag.
+* Use `impts` to list all of your contacts that has been tagged with the red flag.
 
 ![impts_command_result](images/high-importance-flag/impts_command_result.png)
 
@@ -372,7 +374,7 @@ Example:
 
 ### Locating contacts by tag : `findtag`
 
-Find contacts based on the selected tags given by keywords to search for.
+Find contacts based on the selected tags given by keywords to search for. This command only works in list view.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
