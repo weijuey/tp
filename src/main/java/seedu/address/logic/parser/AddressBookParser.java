@@ -161,6 +161,9 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+
         case DeadlineCommand.COMMAND_WORD:
             return new DeadlineCommandParser().parseInDetailedViewContext(arguments);
 
