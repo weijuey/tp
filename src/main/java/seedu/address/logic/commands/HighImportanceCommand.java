@@ -66,7 +66,7 @@ public class HighImportanceCommand extends Command implements DetailedViewExecut
         Person highImportancePerson = lastShownList.get(index.getZeroBased());
         // Checks if person is already of high importance
         HighImportance highImportanceStatus =
-                highImportancePerson.getHighImportanceStatus().equals(HighImportance.HIGH_IMPORTANCE)
+                highImportancePerson.hasHighImportance()
                 ? HighImportance.NOT_HIGH_IMPORTANCE
                 : HighImportance.HIGH_IMPORTANCE;
         Person editedPerson = createHighImportancePerson(highImportancePerson, highImportanceStatus);
@@ -83,7 +83,7 @@ public class HighImportanceCommand extends Command implements DetailedViewExecut
         Person highImportancePerson = model.getDetailedContactViewPerson();
         // Checks if person is already of high importance
         HighImportance highImportanceStatus =
-                highImportancePerson.getHighImportanceStatus().equals(HighImportance.HIGH_IMPORTANCE)
+                highImportancePerson.hasHighImportance()
                         ? HighImportance.NOT_HIGH_IMPORTANCE
                         : HighImportance.HIGH_IMPORTANCE;
         Person editedPerson = createHighImportancePerson(highImportancePerson, highImportanceStatus);

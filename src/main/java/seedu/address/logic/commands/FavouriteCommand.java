@@ -62,7 +62,7 @@ public class FavouriteCommand extends Command implements DetailedViewExecutable 
         }
 
         Person personToFavourite = lastShownList.get(targetIndex.getZeroBased());
-        Favourite newFavouriteStatus = personToFavourite.getFavouriteStatus().equals(Favourite.IS_FAVOURITE)
+        Favourite newFavouriteStatus = personToFavourite.isFavourite()
                 ? Favourite.NOT_FAVOURITE
                 : Favourite.IS_FAVOURITE;
         Person editedPerson = createFavouritedPerson(personToFavourite, newFavouriteStatus);
@@ -77,7 +77,7 @@ public class FavouriteCommand extends Command implements DetailedViewExecutable 
         requireNonNull(model);
 
         Person personToFavourite = model.getDetailedContactViewPerson();
-        Favourite newFavouriteStatus = personToFavourite.getFavouriteStatus().equals(Favourite.IS_FAVOURITE)
+        Favourite newFavouriteStatus = personToFavourite.isFavourite()
                 ? Favourite.NOT_FAVOURITE
                 : Favourite.IS_FAVOURITE;
         Person editedPerson = createFavouritedPerson(personToFavourite, newFavouriteStatus);
