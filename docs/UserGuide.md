@@ -179,7 +179,7 @@ Examples: `fav` Adds the currently viewed contact to your list of favourites
 
 ### Listing Favourites : `favourites`
 
-Lists all your favourite contacts to the list of displayed contacts.
+Lists all your favourite contacts in the list of displayed contacts.
 
 Format: `favourites`
 
@@ -198,11 +198,31 @@ You may wish to use the `note` command to add a note to indicate why the contact
 
 Format in detailed view: `impt`
 
+Examples: `impt 1` - Adds contact at index 1 to your list of contacts with high importance, indicated by the red flag
+
+![important](images/high-importance-flag/add_importance_flag.png)
+
+You will remove the red flag beside the contact's name after entering `impt 1` again.
+
+![not_important](images/high-importance-flag/before_command.png)
+
+`note 1 r/Mobility Issues` - Adds a note for your contact at index 1 indicating he/she has mobility issues
+
+![note_usage](images/high-importance-flag/add_note_for_reason.png)
+
 ### Listing contacts with high importance : `impts`
 
 Shows you all contact(s) with high importance, tagged with the red flag.
 
 Format: `impts`
+
+Examples: You can enter `impt 1` followed by `impt 3` to add a red flag beside contacts at index 1 and index 3.
+
+![command_result](images/high-importance-flag/command_result.png)
+
+`impts` - To list all of your contacts that has been tagged with the red flag.
+
+![impts_command_result](images/high-importance-flag/impts_command_result.png)
 
 ### Prioritising relevant contacts to you : `sort`
 Sort contacts by given criteria.
