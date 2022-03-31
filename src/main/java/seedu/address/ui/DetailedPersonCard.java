@@ -11,8 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,6 +47,9 @@ public class DetailedPersonCard extends UiPart<Region> {
     private Canvas starCanvas;
     @FXML
     private ImageView flagImageView;
+    @FXML
+    private TilePane imageListView;
+
     private final Image highImportanceFlag = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/red_flag.png")));
     private final Image notHighImportanceFlag = new Image(
@@ -79,6 +86,20 @@ public class DetailedPersonCard extends UiPart<Region> {
         }
         flagImageView.setFitHeight(20);
         flagImageView.setFitWidth(20);
+
+        addImages(person.getImageDetailsList());
+    }
+
+    private void addImages(ImageDetailsList images) {
+        double totalWidth = this.getRoot().getWidth();
+        int individualWidth = (int) totalWidth / 3;
+
+        for (int i = 0; i < images.size(); i++) {
+            Index index = Index.fromZeroBased(i);
+            ImageDetails imageDetails = images.get(index.getZeroBased());
+            ImageCard imageCard = new ImageCard(index.getOneBased(), imageDetails, 120, individualWidth);
+            imageListView.getChildren().add(imageCard.getRoot());
+        }
     }
 
     private void drawStarShape(GraphicsContext gc) {
