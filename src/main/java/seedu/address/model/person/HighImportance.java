@@ -2,7 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-public class HighImportance {
+public class HighImportance implements Comparable<HighImportance> {
+    public static final String MODEL_NAME = "impt";
     public static final HighImportance HIGH_IMPORTANCE = new HighImportance(true);
     public static final HighImportance NOT_HIGH_IMPORTANCE = new HighImportance(false);
     public static final String MESSAGE_CONSTRAINTS =
@@ -73,5 +74,18 @@ public class HighImportance {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(HighImportance other) {
+        if (this.hasHighImportance() && !other.hasHighImportance()) {
+            return -1;
+        } else if (this.hasHighImportance() == other.hasHighImportance()) {
+            return 0;
+        } else if (!this.hasHighImportance() && other.hasHighImportance()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
