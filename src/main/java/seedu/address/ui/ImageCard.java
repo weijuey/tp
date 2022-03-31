@@ -43,7 +43,7 @@ public class ImageCard extends UiPart<Region> {
     }
 
     @FXML
-    public void handleClick() {
+    private void handleClick() {
         Image image = new Image(imageDetails.getJavaFxImageUrl());
         if (imageWindow == null) {
             imageWindow = new ImageWindow(image);
