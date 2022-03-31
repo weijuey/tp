@@ -12,7 +12,38 @@ management tool, this application will be able to meet your needs.
 In this user guide, we will work you through the basic use cases and commands of the application, so that you can 
 quickly get started and make full of use of what the application has to offer.
 
-* Table of Contents {:toc}
+## Table of Contents
+
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Viewing help](#viewing-help--help)
+  * [Adding a contact](#adding-a-contact--add)
+  * [Listing all contacts](#listing-all-contacts--list)
+  * [Viewing a contact's full details](#viewing-a-contacts-full-details--view)
+  * [Editing a contact](#editing-a-contact--edit)
+  * [Adding favourites](#adding-favourites--fav)
+  * [Listing favourites](#listing-favourites--favourites)
+  * [Adding high importance flag](#adding-high-importance-flag--impt)
+  * [Listing contacts with high importance](#listing-contacts-with-high-importance--impts)
+  * [Prioritising relevant contacts to you](#prioritising-relevant-contacts-to-you--sort)
+  * [Locating contacts by name](#locating-contacts-by-name--find)
+  * [Creating a tag](#creating-a-tag--tag)
+  * [Assigning a tag to a contact](#assigning-a-tag-to-a-contact--assign)
+  * [Unassigning a tag from a contact](#unassigning-a-tag-from-a-contact--unassign)
+  * [Locating contacts by tag](#locating-contacts-by-tag--findtag)
+  * [Deleting a tag]
+  * [Deleting a contact](#deleting-a-contact--delete)
+  * [Adding deadlines to meet in relation to a contact](#adding-deadlines-to-meet-in-relation-to-a-contact--deadline)
+  * [Deleting a deadline from a contact](#deleting-a-deadline-from-a-contact--deldl)
+  * [Adding additional notes to a contact](#adding-additional-notes-to-a-contact--note)
+  * [Deleting notes from a contact](#deleting-notes-from-a-contact--delnote)
+  * [Clearing all entries](#clearing-all-entries--clear)
+  * [Exiting the program](#exiting-the-program--exit)
+  * [Saving the data](#saving-the-data)
+  * [Editing the data file](#editing-the-data-file)
+  * [Archiving data files](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
+* [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
