@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.logging.Logger;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -32,6 +33,15 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList, ObservableList<Tag> activatedTagList) {
         super(FXML);
+        activatedTagList.addListener((ListChangeListener<Tag>) change -> {
+            while (change.next()) {
+                activatedTags.getChildren().clear();
+                activatedTagList.stream()
+                        .sorted(Comparator.comparing(tag -> tag.tagName))
+                        .forEach(tag -> activatedTags.getChildren().add(new Label(tag.tagName)));
+
+            }
+        });
         activatedTagList.stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> activatedTags.getChildren().add(new Label(tag.tagName)));
