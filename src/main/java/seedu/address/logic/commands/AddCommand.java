@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "add";
 
@@ -67,6 +67,11 @@ public class AddCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) throws CommandException {
+        return execute(model);
     }
 
     @Override

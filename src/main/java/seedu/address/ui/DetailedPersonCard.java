@@ -11,8 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,6 +24,7 @@ import seedu.address.model.person.Person;
  */
 public class DetailedPersonCard extends UiPart<Region> {
     private static final String FXML = "DetailedPersonCard.fxml";
+    private static final int MAXIMUM_IMAGES_TO_DISPLAY = 6;
 
     @FXML
     private Label name;
@@ -43,6 +48,11 @@ public class DetailedPersonCard extends UiPart<Region> {
     private Canvas starCanvas;
     @FXML
     private ImageView flagImageView;
+    @FXML
+    private TilePane imageListView;
+    @FXML
+    private Label moreImages;
+
     private final Image highImportanceFlag = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/red_flag.png")));
     private final Image notHighImportanceFlag = new Image(
@@ -50,7 +60,7 @@ public class DetailedPersonCard extends UiPart<Region> {
 
     /**
      * Creates a {@code DetailedPersonCard} with the given {@code Person} to display
-     * @param person
+     * @param person the person to display
      */
     public DetailedPersonCard(Person person) {
         super(FXML);
@@ -79,6 +89,26 @@ public class DetailedPersonCard extends UiPart<Region> {
         }
         flagImageView.setFitHeight(20);
         flagImageView.setFitWidth(20);
+
+        setImageListView(person.getImageDetailsList());
+    }
+
+    private void setImageListView(ImageDetailsList images) {
+        double totalWidth = this.getRoot().getWidth();
+        int individualWidth = (int) totalWidth / 3;
+
+        for (int i = 0; i < Math.min(images.size(), MAXIMUM_IMAGES_TO_DISPLAY); i++) {
+            Index index = Index.fromZeroBased(i);
+            ImageDetails imageDetails = images.get(index.getZeroBased());
+            ImageCard imageCard = new ImageCard(index.getOneBased(), imageDetails, 120, individualWidth);
+            imageListView.getChildren().add(imageCard.getRoot());
+        }
+
+        if (images.size() > MAXIMUM_IMAGES_TO_DISPLAY) {
+            moreImages.setText(String.format("... and %d more images. Use the images command to see everything.",
+                            images.size() - MAXIMUM_IMAGES_TO_DISPLAY));
+            moreImages.setVisible(true);
+        }
     }
 
     private void drawStarShape(GraphicsContext gc) {

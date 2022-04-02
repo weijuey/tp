@@ -5,7 +5,7 @@ import seedu.address.model.Model;
 /**
  * Terminates the program.
  */
-public class ExitCommand extends Command {
+public class ExitCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "exit";
 
@@ -16,4 +16,8 @@ public class ExitCommand extends Command {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, CommandResult.SpecialCommandResult.EXIT);
     }
 
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        return execute(model);
+    }
 }

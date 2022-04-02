@@ -70,6 +70,19 @@ public class Notes {
     }
 
     /**
+     * Creates a new Notes that has this Notes' contents with the note at
+     * the given index deleted.
+     * @param index index of note to be deleted
+     * @return new Notes
+     */
+    public Notes delete(int index) {
+        Notes newNotes = new Notes();
+        newNotes.value.addAll(this.value);
+        newNotes.value.remove(index);
+        return newNotes;
+    }
+
+    /**
      * Produces a string representation of this Notes
      * object for printing to GUI.
      * @return list view of notes in this Notes object

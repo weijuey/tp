@@ -5,7 +5,7 @@ import seedu.address.model.Model;
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends Command {
+public class HelpCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "help";
 
@@ -17,5 +17,10 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, CommandResult.SpecialCommandResult.SHOW_HELP);
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        return execute(model);
     }
 }

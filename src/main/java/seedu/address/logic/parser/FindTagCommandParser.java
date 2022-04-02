@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindTagCommand object
@@ -27,7 +26,7 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindTagCommand(Arrays.asList(nameKeywords));
     }
 
 }

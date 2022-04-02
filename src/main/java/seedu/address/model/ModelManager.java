@@ -13,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.commandhistory.CommandHistory;
+import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.comparator.AddressComparator;
 import seedu.address.model.comparator.DeadlineListComparator;
 import seedu.address.model.comparator.EmailComparator;
@@ -35,7 +37,11 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
     private final ObservableList<Person> detailedContactView;
+    private final CommandHistory commandHistory;
+    private final ObservableList<Tag> activatedTags;
+
     private ImageDetailsList imagesToView;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -50,7 +56,9 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons);
         detailedContactView = FXCollections.observableArrayList();
+        activatedTags = new FilteredList<>(this.addressBook.getActivatedTagList());
         this.imagesToView = new ImageDetailsList();
+        this.commandHistory = new CommandHistory();
     }
 
     public ModelManager() {
@@ -151,6 +159,12 @@ public class ModelManager implements Model {
         addressBook.removeTag(target);
     }
 
+    @Override
+    public void addActivatedTag(Tag tag) {
+        requireNonNull(tag);
+        addressBook.addActivatedTag(tag);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -171,6 +185,17 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Tag> getActivatedTagList() {
+        return this.activatedTags;
+    }
+
+    @Override
+    public void clearActivatedTagList() {
+        logger.fine("Clearing activated tag lists");
+        addressBook.clearActivatedTagList();
     }
 
     //=========== Detailed Contact View methods =============================================================
@@ -196,6 +221,12 @@ public class ModelManager implements Model {
         detailedContactView.clear();
     }
 
+    @Override
+    public Person getDetailedContactViewPerson() {
+        assert detailedContactView.size() == 1;
+        return detailedContactView.get(0);
+    }
+
     //=========== Person Images to View ==============================================================================
     @Override
     public void updateImagesToView(ImageDetailsList images) {
@@ -205,6 +236,25 @@ public class ModelManager implements Model {
     @Override
     public ImageDetailsList getImagesToView() {
         return this.imagesToView;
+    }
+
+    /**
+     * Updates the commandText history
+     *
+     * @param commandText the text to cache
+     */
+    @Override
+    public void updateCommandHistory(String commandText) {
+        commandHistory.cacheCommand(commandText);
+    }
+
+    /**
+     * Retrieves the i-th latest command text
+     * @return
+     */
+    @Override
+    public CommandHistoryEntry getCommandHistory(int i) {
+        return commandHistory.retrieveCommand(i);
     }
 
     @Override
@@ -260,6 +310,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && detailedContactView.equals(other.detailedContactView)
-                && imagesToView.equals(other.imagesToView);
+                && imagesToView.equals(other.imagesToView)
+                && commandHistory.equals(other.commandHistory);
     }
 }

@@ -24,7 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-public class ImagesCommand extends Command {
+public class ImagesCommand extends Command implements DetailedViewExecutable {
 
     public static final String COMMAND_WORD = "images";
 
@@ -33,7 +33,7 @@ public class ImagesCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n";
 
-    public static final String MESSAGE_IMAGES_SUCCESS = "Images for Person: %1$s";
+    public static final String MESSAGE_IMAGES_SUCCESS = "%d Images for Person [%d]: %s";
 
     private static final Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
 
@@ -49,6 +49,10 @@ public class ImagesCommand extends Command {
         this.index = index;
     }
 
+    public ImagesCommand() {
+        this.index = null;
+    }
+
     /**
      * Executes the command and returns the result message.
      *
@@ -59,7 +63,7 @@ public class ImagesCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -67,6 +71,29 @@ public class ImagesCommand extends Command {
 
         Person targetPerson = lastShownList.get(index.getZeroBased());
         logger.info(String.format("Sanitizing images of person at index %d", index.getZeroBased()));
+
+        ImageDetailsList originalList = targetPerson.getImageDetailsList();
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList);
+        Person sanitizedPerson = createImageDeletedPerson(targetPerson, sanitizedList);
+        logger.info(String.format("Result of sanitization: %d -> %d", originalList.size(), sanitizedList.size()));
+
+        if (originalList.size() != sanitizedList.size()) {
+            model.setPerson(targetPerson, sanitizedPerson);
+        }
+
+        model.updateImagesToView(sanitizedList);
+
+        String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedList.size(),
+                index.getOneBased(), sanitizedPerson.getName() + "\n") + sanitizedList;
+        return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
+    }
+
+    @Override
+    public CommandResult executeInDetailedView(Model model) {
+        requireNonNull(model);
+
+        Person targetPerson = model.getDetailedContactViewPerson();
+        logger.info(String.format("Sanitizing images of person in detailed view"));
 
         ImageDetailsList originalList = targetPerson.getImageDetailsList();
         ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList);

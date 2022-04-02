@@ -12,7 +12,38 @@ management tool, this application will be able to meet your needs.
 In this user guide, we will work you through the basic use cases and commands of the application, so that you can 
 quickly get started and make full of use of what the application has to offer.
 
-* Table of Contents {:toc}
+## Table of Contents
+
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Viewing help](#viewing-help--help)
+  * [Adding a contact](#adding-a-contact--add)
+  * [Listing all contacts](#listing-all-contacts--list)
+  * [Viewing a contact's full details](#viewing-a-contacts-full-details--view)
+  * [Editing a contact](#editing-a-contact--edit)
+  * [Adding favourites](#adding-favourites--fav)
+  * [Listing favourites](#listing-favourites--favourites)
+  * [Adding high importance flag](#adding-high-importance-flag--impt)
+  * [Listing contacts with high importance](#listing-contacts-with-high-importance--impts)
+  * [Prioritising relevant contacts to you](#prioritising-relevant-contacts-to-you--sort)
+  * [Locating contacts by name](#locating-contacts-by-name--find)
+  * [Creating a tag](#creating-a-tag--tag)
+  * [Assigning a tag to a contact](#assigning-a-tag-to-a-contact--assign)
+  * [Unassigning a tag from a contact](#unassigning-a-tag-from-a-contact--unassign)
+  * [Locating contacts by tag](#locating-contacts-by-tag--findtag)
+  * [Deleting a tag](#deleting-a-tag--deltag)
+  * [Deleting a contact](#deleting-a-contact--delete)
+  * [Adding deadlines to meet in relation to a contact](#adding-deadlines-to-meet-in-relation-to-a-contact--deadline)
+  * [Deleting a deadline from a contact](#deleting-a-deadline-from-a-contact--deldl)
+  * [Adding additional notes to a contact](#adding-additional-notes-to-a-contact--note)
+  * [Deleting notes from a contact](#deleting-notes-from-a-contact--delnote)
+  * [Clearing all entries](#clearing-all-entries--clear)
+  * [Exiting the program](#exiting-the-program--exit)
+  * [Saving the data](#saving-the-data)
+  * [Editing the data file](#editing-the-data-file)
+  * [Archiving data files](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
+* [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -122,22 +153,24 @@ Some commands may work differently in the detailed view from in the list view.
 
 In general, commands for modifying a contact will work, and will modify the contact currently displayed. As such, there is no need to give an index for those commands anymore, and they will be ignored if the command is called in this view.
 
-If the command does not work in list view, the app will inform you. To return to list view, use `list`.
+If the command does not work in the current view, the app will inform you. To return to list view, use `list`.
+
+You may check out the summary table of commands for the overview.
 
 ### Editing a contact : `edit`
 
-Edits an existing contact in the address book.
+Edits an existing contact in the address book. This command can be used in detailed view.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To edit tags, use assign and unassign commands
-</div>
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To edit tags, use assign and unassign commands
+</div>
 
 Examples:
 
@@ -147,10 +180,6 @@ Examples:
 
 Format in detailed view: `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​`
 
-* Edits the contact currently being viewed.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-
 Example:
 
 * `edit p/88438809 e/alex_yeoh@example.com` Edits the phone number and email address of the contact in detailed view to
@@ -158,7 +187,7 @@ Example:
 
 ### Adding favourites : `fav`
 
-Toggles the favourite status of your contacts. 
+Toggles the favourite status of your contacts. This command can be used in detailed view.
 Favourited contacts **can be un-favourited** by running the same command on the contact again.
 
 Format: `fav INDEX`
@@ -167,27 +196,32 @@ Format: `fav INDEX`
 You can run `fav INDEX` where `INDEX` is the index of a contact that currently belongs in your favourites list to remove them.
 </div>
 
-Examples: `fav 1` — Adds contact at index 1 to your list of favourites
+Examples:
+
+* `fav 1` — Adds contact at index 1 to your list of favourites
 
 ![favourite](images/favourite_command.png)
 
-- `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
+* `fav 1` - Run the command for the same contact, and the favourite status will be toggled off.
 
 ![unfavourited](images/after_unfavourite_command.png)
 
 Format in detailed view: `fav`
 
-Examples: `fav` Adds the currently viewed contact to your list of favourites
+Example:
+
+* `fav` Adds the currently viewed contact to your list of favourites.
 
 ### Listing Favourites : `favourites`
 
-Lists all your favourite contacts to the list of displayed contacts.
+Lists all your favourite contacts to the list of displayed contacts. This command only works in list view.
 
 Format: `favourites`
 
 ### Adding high importance flag : `impt`
 
-Adds the contact to your list of contacts with high importance and a red flag will appear beside the contact's name to indicate that.
+Adds the contact to your list of contacts with high importance and a red flag will appear beside the contact's name to indicate that. 
+This command can be used in detailed view.
 
 Format: `impt INDEX`
 
@@ -198,27 +232,58 @@ When a red flag appears beside the contact's name, you can run `impt INDEX` agai
 You may wish to use the `note` command to add a note to indicate why the contact is important. E.g. Mobility Issues.
 </div>
 
+Examples:
+
+* `impt 1` - Adds contact at index 1 to your list of contacts with high importance, indicated by the red flag
+
+![important](images/high-importance-flag/add_importance_flag.png)
+
+You will remove the red flag beside the contact's name after entering `impt 1` again.
+
+![not_important](images/high-importance-flag/before_command.png)
+
+`note 1 r/Mobility Issues` - Adds a note for your contact at index 1 indicating he/she has mobility issues
+
+![note_usage](images/high-importance-flag/add_note_for_reason.png)
+
 Format in detailed view: `impt`
+
+Example:
+
+* `impt` Adds the currently viewed contact to your list of contacts with high importance.
 
 ### Listing contacts with high importance : `impts`
 
-Shows you all contact(s) with high importance, tagged with the red flag.
+Shows you all contact(s) with high importance, tagged with the red flag. This command only works in list view.
 
 Format: `impts`
 
+Examples:
+
+* You can enter `impt 1` followed by `impt 3` to add a red flag beside contacts at index 1 and index 3.
+
+![command_result](images/high-importance-flag/command_result.png)
+
+* Use `impts` to list all of your contacts that has been tagged with the red flag.
+
+![impts_command_result](images/high-importance-flag/impts_command_result.png)
+
 ### Prioritising relevant contacts to you : `sort`
-Sort contacts by given criteria.
+
+Sort contacts by given criteria. This command only works in list view.
 
 Format: `sort CRITERIA`
+
 * `CRITERIA` should be written in lower-case.
 
 Examples:
+
 * `sort name` sorts list by name alphabetically.
 * `sort fav` sorts list so that favourite contacts are on top of the list.
 
 ### Locating contacts by name : `find`
 
-Find contacts whose names contain any of the given keywords.
+Find contacts whose names contain any of the given keywords. This command only works in list view.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -235,39 +300,33 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating contacts by tag : `findtag`
-
-Finds contact with the given tag.
-
-Format: `findtag KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `tag` will match `Tag`
-* Only the tag is searched
-* Only full words will be matched e.g. `Ta` will not match `Tag`
-* List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with
-  tags `Tag1` and `Tag2` will be returned.
-
-Examples:
-
-* `findtag Friends` returns contacts with tag `Friends`
-* `findtag InProgress AlmostFinished` returns contacts tagged by at least both `InProgress` and `AlmostFinished`
-
 ### Creating a tag : `tag`
 
-Creates a tag that can be assigned to any contact.
+Creates a tag that can be assigned to any contact. This command can be used in detailed view with the same format.
 
 Format: `tag TAGNAME`
 
 * A tag with the same `TAGNAME` can only be created once.
 * The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created. 
 
-Examples:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can create meaningful tags to assign your contacts with! With tags, you can search for contacts assigned to that particular tag!
+Tags must be created first before you can perform any tag related features.
+</div>
+
+List of tag related features:
+* [Assign Tag](#assigning-a-tag-to-a-contact--assign)
+* [Unassign Tag](#unassigning-a-tag-from-a-contact--unassign)
+* [Find Tag](#locating-contacts-by-tag--findtag)
+* [Delete Tag](#deleting-a-tag--deltag)
+
+Example:
 
 * `tag Friends` creates a tag `Friends` to be stored in the address book.
 
 ### Assigning a tag to a contact : `assign`
 
-Assigns a created tag to a contact.
+Assigns a created tag to a contact. This command can be used in detailed view.
 
 Format: `assign INDEX TAGNAME`
 
@@ -280,13 +339,19 @@ Format: `assign INDEX TAGNAME`
 * The contact assigned to the given `TAGNAME` cannot be assigned to the same `TAGNAME` again.
 e.g. assigning the tag `friends` to Alice at index 1 will not allow `Friends` to be assigned to the same contact.
 
-Examples:
+Example:
 
-* `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`
+* `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`.
+
+Format in detailed view: `assign TAGNAME`
+
+Example:
+
+* `assign client` assigns a tag `client` to the currently viewed contact.
 
 ### Unassigning a tag from a contact : `unassign`
 
-Unassigns a created tag from a contact.
+Unassigns a created tag from a contact. This command can be used in detailed view.
 
 Format: `unassign INDEX TAGNAME`
 
@@ -297,13 +362,62 @@ Format: `unassign INDEX TAGNAME`
 * The index **must be a positive integer** 1, 2, 3, ...​
 * The contact must have been assigned to this `TAG` previously.
 
+Example:
+
+* `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`.
+
+Format in detailed view: `unassign TAGNAME`
+
+Example:
+
+* `unassign client` removes the tag `client` from the currently viewed contact.
+
+### Locating contacts by tag : `findtag`
+
+Find contacts based on the selected tags given by keywords to search for. This command only works in list view.
+
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`  
+  e.g.
+
+  * `findtag friends` adds `friends` as a tag to be searched for
+  * `findtag colleagues` adds `colleagues` to pre-existing search, now containing both colleagues and friends
+* The search is case-insensitive. e.g `tag` will match `Tag`
+* Only the tag is searched
+* Only full words will be matched e.g. `Ta` will not match `Tag`
+* List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with
+  tags `Tag1` and `Tag2`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use `list` to clear currently selected tags!
+</div>
+
 Examples:
 
-* `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`
+* `findtag Friends` returns contacts with tag `Friends`
+* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by at least `Friends`, InProgress` and `AlmostFinished`
+
+### Deleting a tag : `deltag`
+
+Deletes the specified tag(s)
+
+Format: `deltag TAGNAME [MORE_TAGNAME]`
+
+* Deletes the tag(s) identified by the given `TAGNAME`.
+* Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
+* If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
+
+Examples:
+
+* `deltag friends` deletes the tag `friends`
+* `deltag friends colleagues` deletes the tag `friends` and `colleagues`
+* `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
+* `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
 
 ### Deleting a contact : `delete`
 
-Deletes the specified contact from the address book.
+Deletes the specified contact from the address book. This command only works in list view.
 
 Format: `delete INDEX`
 
@@ -318,17 +432,17 @@ Examples:
 
 ### Adding deadlines to meet in relation to a contact : `deadline`
 
-Creates a deadline that is placed under the profile of a contact.
+Creates a deadline that is placed under the profile of a contact. This command can be used in detailed view.
 
 Format: `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 
-- deadline must have description.
-- The given date is added to the contact as deadline.
-- Date should be dd/mm/yyyy
+* Deadline must have description.
+* The given date is added to the contact as deadline.
+* Date should be dd/mm/yyyy
 
 Example:
 
-- `deadline 1 d/windows 01/01/2022` adds the description `windows` and date `01/01/2022` to the contact in index `1`.
+* `deadline 1 d/windows 01/01/2022` adds a deadline with description `windows` and date `01/01/2022` to the contact in index `1`.
 
 List before `deadline` command:
 
@@ -338,27 +452,34 @@ List after `deadline` command:
 
 ![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.jpg)
 
+Format in detailed view: `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
+
+Example:
+
+* `deadline d/Lunch meeting 03/06/2022` adds a deadline with description `Lunch meeting` and date `03/06/2022` to the 
+currently viewed contact.
+
 ### Deleting a deadline from a contact : `deldl`
 
 Deletes the deadline under the contact in detailed view. This command cannot be used in list view.
 
 Format: `deldl INDEX`
 
-- Deletes the note at the index of the list of deadlines displayed.
+* Deletes the note at the index of the list of deadlines displayed.
 
 Example:
 
-`view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
+* `view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
 notes list of the contact
 
 ### Adding additional notes to a contact : `note`
 
-Adds the given note under the contact.
+Adds the given note under the contact. This command can be used in detailed view.
 
 Format: `note INDEX r/NOTES`
 
-- Notes are displayed in a list.
-- The given note is appended to the existing list of notes at the end.
+* Notes are displayed in a list.
+* The given note is appended to the existing list of notes at the end.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Notes store good-to-know information about the user. To classify contacts so that you can search for them, use tags instead.
@@ -366,7 +487,13 @@ Notes store good-to-know information about the user. To classify contacts so tha
 
 Example:
 
-`note 2 r/loves green` will create a note under the contact at index 2 that reads `loves green`
+* `note 2 r/loves green` will add a note under the contact at index 2 that reads `loves green`.
+
+Format in detailed view: `note r/NOTES`
+
+Example:
+
+* `note r/Likes wood furniture` will add a note to currently viewed contact that reads `Likes wood furniture`.
 
 ### Deleting notes from a contact : `delnote`
 
@@ -374,16 +501,59 @@ Deletes the note under the contact in detailed view. This command cannot be used
 
 Format: `delnote INDEX`
 
-- Deletes the note at the index of the list of notes displayed.
+* Deletes the note at the index of the list of notes displayed.
 
 Example:
 
-`view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the 
+* `view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the 
 notes list of the contact
+
+### Adding images : `addimg`
+
+Add image(s) to a contact.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Take note that images uploaded are duplicated and stored in the data folder of the app.
+If your computer's storage space is a concern for you, please delete the original image
+after you have uploaded it!
+</div>
+
+Format: `addimg INDEX`
+
+![file chooser for images](images/images_file_chooser.png)
+
+* Upon running the command, a file chooser will appear for you to select images from.
+* Images can be in `.png` or `.jpg` formats.
+* Images uploaded cannot have duplicate names.
+
+### List contact's images : `images`
+
+Lists the contact's image(s).
+
+Format: `images INDEX`
+
+* You can click on the images to zoom into the picture.
+
+### Delete images : `delimg`
+
+Deletes the image(s) associated with a contact. 
+
+Format: `delimg INDEX i/IMAGE_INDEX`
+
+![identify image index from images command](images/image_index.png)
+
+* An image's index is relative to the person it belongs to.
+* You can identify it by running the images command for a given user
+  (as seen in the above image). The `IMAGE_INDEX` of the image will be
+directly above the image itself.
+
+Example: 
+
+`delimg 1 i/2` will delete the second image of the contact
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book. This command can only be used in list view.
 
 Format: `clear`
 
@@ -407,6 +577,12 @@ update data directly by editing that data file.
 If your changes to the data file makes its format invalid, d'Intérieur will discard all data and start with an empty data file at the next run.
 </div>
 
+### Cycling through input history
+
+You can cycle through your input history by hitting the up arrow key to go back to older inputs,
+and the down arrow key to your latest inputs. You can save type on typing repeat inputs, or re-writing erroneous
+inputs!
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -423,25 +599,30 @@ the data of your previous d'Intérieur home folder.
 
 ## Command summary
 
-_*Detailed view format and examples to be added*_
-
-| Action           | Format, Examples in List View                                                                                                                   | Format, Examples in Detailed View |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` |                                   |
-| **Assign Tag**   | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            |                                   |
-| **Clear**        | `clear`                                                                                                                                         |                                   |
-| **Create Tag**   | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          |                                   |
-| **Deadline**     | `deadline INDEX DATE`<br> e.g., `deadline 1 01/01/2022`                                                                                         |                                   |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                             |                                   |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            |                                   |
-| **Fav**          | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |                                   |
-| **Favourites**   | `favourites`                                                                                                                                    |                                   |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      |                                   |
-| **Find Tag**     | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  |                                   |
-| **Help**         | `help`                                                                                                                                          |                                   |
-| **Impt**         | `impt INDEX` <br> e.g., `impt 1`                                                                                                                |                                   |
-| **Impts**        | `impts`                                                                                                                                         |                                   |
-| **List**         | `list`                                                                                                                                          |                                   |
-| **Note**         | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            |                                   |
-| **Unassign Tag** | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        |                                   |
-| **View**         | `view INDEX` <br> e.g., `view 1`                                                                                                                |                                   |
+| Action              | Format, Examples in List View                                                                                                                   | Format, Examples in Detailed View                                                                      |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed` | Same as list view                                                                                      |
+| **Add Favourite**   | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  |                                                                                                        |
+| **Add Image**       | `addimg INDEX` <br> e.g., `addimg 1`                                                                                                            | `addimg`                                                                                               |
+| **Assign Tag**      | `assign INDEX TAGNAME` <br> e.g., `assign 1 Friends`                                                                                            | `assign TAGNAME` <br> e.g., `assign client`                                                            |
+| **Clear**           | `clear`                                                                                                                                         | -                                                                                                      |
+| **Create Tag**      | `tag TAGNAME` <br> e.g., `tag Friends`                                                                                                          | Same as list view                                                                                      |
+| **Deadline**        | `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...` <br> e.g., `deadline 1 d/windows 01/01/2022`                                        | `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...` <br> e.g., `deadline d/Lunch meeting 03/06/2022` |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                             | -                                                                                                      |
+| **Delete Image**    | `delimg INDEX i/IMAGE_INDEX` <br> e.g., `delimg 1 i/2`                                                                                          | `delimg i/IMAGE_INDEX` <br> e.g., `delimg i/1`                                                         |
+| **Delete Tag**      | `deltag TAGNAME`<br> e.g., `delete friends`                                                                                                     |                                                                                                        |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            | `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​` <br> e.g., `edit p/88438809 e/alex_yeoh@example.com` |
+| **Fav**             | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  | `fav`                                                                                                  |
+| **Favourites**      | `favourites`                                                                                                                                    | -                                                                                                      |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      | -                                                                                                      |
+| **Find Tag**        | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  | -                                                                                                      |
+| **Help**            | `help`                                                                                                                                          | Same as list view                                                                                      |
+| **Impt**            | `impt INDEX` <br> e.g., `impt 1`                                                                                                                | `impt`                                                                                                 |
+| **Impts**           | `impts`                                                                                                                                         | -                                                                                                      |
+| **Sort**            | `sort CRITERIA` <br> e.g., `sort address`                                                                                                       | -                                                                                                      |
+| **List**            | `list`                                                                                                                                          | Same as list view                                                                                      |
+| **List Favourites** | `favourites`                                                                                                                                    |                                                                                                        |
+| **List Images**     | `images INDEX` <br> e.g., `images 1`                                                                                                            |                                                                                                        |
+| **Note**            | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            | `note r/NOTES` <br> e.g., `note r/Likes wood furniture`                                                |
+| **Unassign Tag**    | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        | `unassign TAGNAME` <br> e.g., `unassign client`                                                        |
+| **View**            | `view INDEX` <br> e.g., `view 1`                                                                                                                | -                                                                                                      |
