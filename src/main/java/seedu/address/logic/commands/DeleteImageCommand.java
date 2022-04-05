@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 
 import java.util.List;
 import java.util.Set;
@@ -80,9 +81,10 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
         Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
 
         model.setPerson(personToEdit, editedPerson);
+        model.updateImagesToView(editedPerson.getImageDetailsList());
 
         return new CommandResult(
-                String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), editedPerson));
+                String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), editedPerson), VIEW_IMAGES);
     }
 
     @Override

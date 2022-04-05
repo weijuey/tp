@@ -33,7 +33,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n";
 
-    public static final String MESSAGE_IMAGES_SUCCESS = "Images for Person: %1$s";
+    public static final String MESSAGE_IMAGES_SUCCESS = "%d Images for Person [%d]: %s";
 
     private static final Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
 
@@ -83,7 +83,8 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
 
         model.updateImagesToView(sanitizedList);
 
-        String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedPerson + "\n") + sanitizedList;
+        String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedList.size(),
+                index.getOneBased(), sanitizedPerson.getName() + "\n") + sanitizedList;
         return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
     }
 
