@@ -499,6 +499,11 @@ Example:
 
 Clears all entries from the address book. This command can only be used in list view.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this 
+command only for clearing the sample data provided in the beginning.
+</div>
+
 Format: `clear`
 
 ### Navigating your contact list
