@@ -105,15 +105,54 @@ Before going into the commands, take note of how the command format is given in 
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-</div>
+### The UI
+
+The UI consists of the command line to enter your commands, the feedback box which displays textual information about 
+the result of the command execution, and the contact display.
+
+There are 2 main ways to view contacts.
+
+### Listing all contacts : `list`
+
+Shows the list view with all contacts in the address book.
+
+Format: `list`
+
+### Viewing a contact's full details : `view`
+
+Allows you to view the full details of the contact, as some are hidden in the contact list. This command only works in 
+list view.
+
+Format `view INDEX`
+
+#### Commands in detailed view
+
+Some commands may work differently in the detailed view from in the list view.
+
+In general, commands for modifying a contact will work, and will modify the contact currently displayed. As such, there is no need to give an index for those commands anymore, and they will be ignored if the command is called in this view.
+
+If the command does not work in the current view, the app will inform you. To return to list view, use `list`.
+
+You may check out the summary table of commands for the overview.
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Interiéur.
 
 Format: `help`
 
 ![helpMessage](images/helpMessage.png)
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Updating contacts
+
+There is a set of information that you can save for a contact. This section contains the commands for 
+adding contacts and modifying their information.
 
 ### Adding a contact : `add`
 
@@ -132,28 +171,6 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Mary Jane p/12345678 e/maryJ@example.com a/Bukit Timah t/completed`
-
-### Listing all contacts : `list`
-
-Shows the list view with all contacts in the address book.
-
-Format: `list`
-
-### Viewing a contact's full details : `view`
-
-Allows you to view the full details of the contact, as some are hidden in the contact list.
-
-Format `view INDEX`
-
-#### Commands in detailed view
-
-Some commands may work differently in the detailed view from in the list view. 
-
-In general, commands for modifying a contact will work, and will modify the contact currently displayed. As such, there is no need to give an index for those commands anymore, and they will be ignored if the command is called in this view.
-
-If the command does not work in the current view, the app will inform you. To return to list view, use `list`.
-
-You may check out the summary table of commands for the overview.
 
 ### Editing a contact : `edit`
 
@@ -183,6 +200,110 @@ Example:
 * `edit p/88438809 e/alex_yeoh@example.com` Edits the phone number and email address of the contact in detailed view to
   be `88438809` and `alex_yeoh@example.com` respectively.
 
+### Deleting a contact : `delete`
+
+Deletes the specified contact from the address book. This command only works in list view.
+
+Format: `delete INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+### Creating a tag : `tag`
+
+Creates a tag that can be assigned to any contact. This command can be used in detailed view with the same format.
+
+Format: `tag TAGNAME`
+
+* A tag with the same `TAGNAME` can only be created once.
+* The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can create meaningful tags to assign your contacts with! With tags, you can search for contacts assigned to that particular tag!
+Tags must be created first before you can perform any tag related features.
+</div>
+
+List of tag related features:
+* [Assign Tag](#assigning-a-tag-to-a-contact--assign)
+* [Unassign Tag](#unassigning-a-tag-from-a-contact--unassign)
+* [Find Tag](#locating-contacts-by-tag--findtag)
+* [Delete Tag](#deleting-a-tag--deltag)
+
+Example:
+
+* `tag Friends` creates a tag `Friends` to be stored in the address book.
+
+### Assigning a tag to a contact : `assign`
+
+Assigns a created tag to a contact. This command can be used in detailed view.
+
+Format: `assign INDEX TAGNAME`
+
+* Assigns a `TAG` with a given `TAGNAME` to a contact at the specified `INDEX`
+* The `TAG` given by the `TAGNAME` must be created first.
+* The `TAGNAME` is case-insensitive.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, ...​
+* The contact should have **at most one** `TAG` with a given unique `TAGNAME`.
+* The contact assigned to the given `TAGNAME` cannot be assigned to the same `TAGNAME` again.
+  e.g. assigning the tag `friends` to Alice at index 1 will not allow `Friends` to be assigned to the same contact.
+
+Example:
+
+* `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`.
+
+Format in detailed view: `assign TAGNAME`
+
+Example:
+
+* `assign client` assigns a tag `client` to the currently viewed contact.
+
+### Unassigning a tag from a contact : `unassign`
+
+Unassigns a created tag from a contact. This command can be used in detailed view.
+
+Format: `unassign INDEX TAGNAME`
+
+* Removes a `TAG` with a given `TAGNAME` from a contact at the specified `INDEX`
+* The `TAG` given by the `TAGNAME` must be created first.
+* The `TAGNAME` is case-insensitive.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, ...​
+* The contact must have been assigned to this `TAG` previously.
+
+Example:
+
+* `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`.
+
+Format in detailed view: `unassign TAGNAME`
+
+Example:
+
+* `unassign client` removes the tag `client` from the currently viewed contact.
+
+### Deleting a tag : `deltag`
+
+Deletes the specified tag(s)
+
+Format: `deltag TAGNAME [MORE_TAGNAME]`
+
+* Deletes the tag(s) identified by the given `TAGNAME`.
+* Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
+* If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
+
+Examples:
+
+* `deltag friends` deletes the tag `friends`
+* `deltag friends colleagues` deletes the tag `friends` and `colleagues`
+* `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
+* `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
+
 ### Adding favourites : `fav`
 
 Toggles the favourite status of your contacts. This command can be used in detailed view.
@@ -209,12 +330,6 @@ Format in detailed view: `fav`
 Example:
 
 * `fav` Adds the currently viewed contact to your list of favourites.
-
-### Listing Favourites : `favourites`
-
-Lists all your favourite contacts to the list of displayed contacts. This command only works in list view.
-
-Format: `favourites`
 
 ### Adding high importance flag : `impt`
 
@@ -250,6 +365,144 @@ Example:
 
 * `impt` Adds the currently viewed contact to your list of contacts with high importance.
 
+### Adding deadlines to meet in relation to a contact : `deadline`
+
+Creates a deadline that is placed under the profile of a contact. This command can be used in detailed view.
+
+Format: `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
+
+* Deadline must have description.
+* The given date is added to the contact as deadline.
+* Date should be dd/mm/yyyy
+
+Example:
+
+* `deadline 1 d/windows 01/01/2022` adds a deadline with description `windows` and date `01/01/2022` to the contact in index `1`.
+
+List before `deadline` command:
+
+![before 'deadline 1 d/windows 01/01/2022'](images/BeforeDeadlineCommand.png)
+
+List after `deadline` command:
+
+![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.jpg)
+
+Format in detailed view: `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
+
+Example:
+
+* `deadline d/Lunch meeting 03/06/2022` adds a deadline with description `Lunch meeting` and date `03/06/2022` to the
+  currently viewed contact.
+
+### Deleting a deadline from a contact : `deldl`
+
+Deletes the deadline under the contact in detailed view. This command cannot be used in list view.
+
+Format: `deldl INDEX`
+
+* Deletes the note at the index of the list of deadlines displayed.
+
+Example:
+
+* `view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
+  notes list of the contact
+
+### Adding additional notes to a contact : `note`
+
+Adds the given note under the contact. This command can be used in detailed view.
+
+Format: `note INDEX r/NOTES`
+
+* Notes are displayed in a list.
+* The given note is appended to the existing list of notes at the end.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Notes store good-to-know information about the user. To classify contacts so that you can search for them, use tags instead.
+</div>
+
+Example:
+
+* `note 2 r/loves green` will add a note under the contact at index 2 that reads `loves green`.
+
+Format in detailed view: `note r/NOTES`
+
+Example:
+
+* `note r/Likes wood furniture` will add a note to currently viewed contact that reads `Likes wood furniture`.
+
+### Deleting notes from a contact : `delnote`
+
+Deletes the note under the contact in detailed view. This command cannot be used in list view.
+
+Format: `delnote INDEX`
+
+* Deletes the note at the index of the list of notes displayed.
+
+Example:
+
+* `view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the
+  notes list of the contact
+
+### Adding images : `addimg`
+
+Add image(s) to a contact.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Take note that images uploaded are duplicated and stored in the data folder of the app.
+If your computer's storage space is a concern for you, please delete the original image
+after you have uploaded it!
+</div>
+
+Format: `addimg INDEX`
+
+![file chooser for images](images/images_file_chooser.png)
+
+* Upon running the command, a file chooser will appear for you to select images from.
+* Images can be in `.png` or `.jpg` formats.
+* Images uploaded cannot have duplicate names.
+
+### List contact's images : `images`
+
+Lists the contact's image(s).
+
+Format: `images INDEX`
+
+* You can click on the images to zoom into the picture.
+
+### Delete images : `delimg`
+
+Deletes the image(s) associated with a contact.
+
+Format: `delimg INDEX i/IMAGE_INDEX`
+
+![identify image index from images command](images/image_index.png)
+
+* An image's index is relative to the person it belongs to.
+* You can identify it by running the images command for a given user
+  (as seen in the above image). The `IMAGE_INDEX` of the image will be
+  directly above the image itself.
+
+Example:
+
+`delimg 1 i/2` will delete the second image of the contact
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book. This command can only be used in list view.
+
+Format: `clear`
+
+### Navigating your contact list
+
+As your contact list grows larger, you may start having trouble finding the contact you are looking for. 
+However, with these commands to aid you, finding contacts will still be easy and intuitive.
+
+### Listing Favourites : `favourites`
+
+Lists all your favourite contacts to the list of displayed contacts. This command only works in list view.
+
+Format: `favourites`
+
 ### Listing contacts with high importance : `impts`
 
 Shows you all contact(s) with high importance, tagged with the red flag. This command only works in list view.
@@ -260,7 +513,7 @@ Examples:
 
 * You can enter `impt 1` followed by `impt 3` to add a red flag beside contacts at index 1 and index 3.
 
-![command_result](images/high-importance-flag/command_result.png)
+  ![command_result](images/high-importance-flag/command_result.png)
 
 * Use `impts` to list all of your contacts that has been tagged with the red flag.
 
@@ -298,78 +551,6 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Creating a tag : `tag`
-
-Creates a tag that can be assigned to any contact. This command can be used in detailed view with the same format.
-
-Format: `tag TAGNAME`
-
-* A tag with the same `TAGNAME` can only be created once.
-* The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created. 
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can create meaningful tags to assign your contacts with! With tags, you can search for contacts assigned to that particular tag!
-Tags must be created first before you can perform any tag related features.
-</div>
-
-List of tag related features:
-* [Assign Tag](#assigning-a-tag-to-a-contact--assign)
-* [Unassign Tag](#unassigning-a-tag-from-a-contact--unassign)
-* [Find Tag](#locating-contacts-by-tag--findtag)
-* [Delete Tag](#deleting-a-tag--deltag)
-
-Example:
-
-* `tag Friends` creates a tag `Friends` to be stored in the address book.
-
-### Assigning a tag to a contact : `assign`
-
-Assigns a created tag to a contact. This command can be used in detailed view.
-
-Format: `assign INDEX TAGNAME`
-
-* Assigns a `TAG` with a given `TAGNAME` to a contact at the specified `INDEX`
-* The `TAG` given by the `TAGNAME` must be created first. 
-* The `TAGNAME` is case-insensitive.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, ...​
-* The contact should have **at most one** `TAG` with a given unique `TAGNAME`.
-* The contact assigned to the given `TAGNAME` cannot be assigned to the same `TAGNAME` again.
-e.g. assigning the tag `friends` to Alice at index 1 will not allow `Friends` to be assigned to the same contact.
-
-Example:
-
-* `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`.
-
-Format in detailed view: `assign TAGNAME`
-
-Example:
-
-* `assign client` assigns a tag `client` to the currently viewed contact.
-
-### Unassigning a tag from a contact : `unassign`
-
-Unassigns a created tag from a contact. This command can be used in detailed view.
-
-Format: `unassign INDEX TAGNAME`
-
-* Removes a `TAG` with a given `TAGNAME` from a contact at the specified `INDEX`
-* The `TAG` given by the `TAGNAME` must be created first.
-* The `TAGNAME` is case-insensitive.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, ...​
-* The contact must have been assigned to this `TAG` previously.
-
-Example:
-
-* `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`.
-
-Format in detailed view: `unassign TAGNAME`
-
-Example:
-
-* `unassign client` removes the tag `client` from the currently viewed contact.
-
 ### Locating contacts by tag : `findtag`
 
 Find contacts based on the selected tags given by keywords to search for. This command only works in list view.
@@ -394,172 +575,8 @@ Use `list` to clear currently selected tags!
 Examples:
 
 * `findtag Friends` returns contacts with tag `Friends`
-* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by at least `Friends`, InProgress` and `AlmostFinished`
-
-### Deleting a tag : `deltag`
-
-Deletes the specified tag(s)
-
-Format: `deltag TAGNAME [MORE_TAGNAME]`
-
-* Deletes the tag(s) identified by the given `TAGNAME`.
-* Unassigns the deleted tags from all contacts who were previously assigned to the `tag` with given `TAGNAME`.
-* If the multiple `TAGNAME` specified has more than 1 `tag` that cannot be identified , the identifiable tag(s) will be deleted.
-
-Examples:
-
-* `deltag friends` deletes the tag `friends`
-* `deltag friends colleagues` deletes the tag `friends` and `colleagues`
-* `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
-* `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
-
-### Deleting a contact : `delete`
-
-Deletes the specified contact from the address book. This command only works in list view.
-
-Format: `delete INDEX`
-
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
-
-### Adding deadlines to meet in relation to a contact : `deadline`
-
-Creates a deadline that is placed under the profile of a contact. This command can be used in detailed view.
-
-Format: `deadline INDEX d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
-
-* Deadline must have description.
-* The given date is added to the contact as deadline.
-* Date should be dd/mm/yyyy
-
-Example:
-
-* `deadline 1 d/windows 01/01/2022` adds a deadline with description `windows` and date `01/01/2022` to the contact in index `1`.
-
-List before `deadline` command:
-
-![before 'deadline 1 d/windows 01/01/2022'](images/BeforeDeadlineCommand.png)
-
-List after `deadline` command:
-
-![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.jpg)
-
-Format in detailed view: `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
-
-Example:
-
-* `deadline d/Lunch meeting 03/06/2022` adds a deadline with description `Lunch meeting` and date `03/06/2022` to the 
-currently viewed contact.
-
-### Deleting a deadline from a contact : `deldl`
-
-Deletes the deadline under the contact in detailed view. This command cannot be used in list view.
-
-Format: `deldl INDEX`
-
-* Deletes the note at the index of the list of deadlines displayed.
-
-Example:
-
-* `view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
-notes list of the contact
-
-### Adding additional notes to a contact : `note`
-
-Adds the given note under the contact. This command can be used in detailed view.
-
-Format: `note INDEX r/NOTES`
-
-* Notes are displayed in a list.
-* The given note is appended to the existing list of notes at the end.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Notes store good-to-know information about the user. To classify contacts so that you can search for them, use tags instead.
-</div>
-
-Example:
-
-* `note 2 r/loves green` will add a note under the contact at index 2 that reads `loves green`.
-
-Format in detailed view: `note r/NOTES`
-
-Example:
-
-* `note r/Likes wood furniture` will add a note to currently viewed contact that reads `Likes wood furniture`.
-
-### Deleting notes from a contact : `delnote`
-
-Deletes the note under the contact in detailed view. This command cannot be used in list view.
-
-Format: `delnote INDEX`
-
-* Deletes the note at the index of the list of notes displayed.
-
-Example:
-
-* `view 1` shows you the detailed view of  the contact at index 1, then using `delnote 2` will delete the second note in the 
-notes list of the contact
-
-### Adding images : `addimg`
-
-Add image(s) to a contact.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Take note that images uploaded are duplicated and stored in the data folder of the app.
-If your computer's storage space is a concern for you, please delete the original image
-after you have uploaded it!
-</div>
-
-Format: `addimg INDEX`
-
-![file chooser for images](images/images_file_chooser.png)
-
-* Upon running the command, a file chooser will appear for you to select images from.
-* Images can be in `.png` or `.jpg` formats.
-* Images uploaded cannot have duplicate names.
-
-### List contact's images : `images`
-
-Lists the contact's image(s).
-
-Format: `images INDEX`
-
-* You can click on the images to zoom into the picture.
-
-### Delete images : `delimg`
-
-Deletes the image(s) associated with a contact. 
-
-Format: `delimg INDEX i/IMAGE_INDEX`
-
-![identify image index from images command](images/image_index.png)
-
-* An image's index is relative to the person it belongs to.
-* You can identify it by running the images command for a given user
-  (as seen in the above image). The `IMAGE_INDEX` of the image will be
-directly above the image itself.
-
-Example: 
-
-`delimg 1 i/2` will delete the second image of the contact
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book. This command can only be used in list view.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
+* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by 
+* at least `Friends`, `InProgress` and `AlmostFinished`
 
 ### Saving the data
 
