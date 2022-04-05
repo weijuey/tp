@@ -4,7 +4,40 @@ title: Developer Guide
 ---
 Table of Contents
 
-{:toc}
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#storage-component)
+* [Implementation](#implementation)
+  * [Adding attributes to contacts](#adding-attributes-to-contacts)
+    * [Notes feature](#notes-feature)
+    * [Favourite feature](#favourite-feature)
+    * [Deadline feature](#deadline-feature)
+    * [Add contact with address as optional field feature](#add-contact-with-address-as-optional-field-feature)
+    * [High importance flag feature](#add-a-high-importance-flag-feature)
+  * [Adding features to Model](#adding-features-to-model)
+    * [Find tag feature](#find-tag-feature)
+  * [Assimilating new UI components](#assimilating-new-ui-components)
+    * [Contact view feature](#adding-the-contact-view)
+  * [Enhancing data storage](#enhancing-data-storage)
+    * [\[Proposed\] Undo/Redo feature](#proposed-undoredo-feature)
+    * [\[Proposed\] Data archiving](#proposed-data-archiving)
+  * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+  * [Appendix: Requirements](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-functional requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a person](#deleting-a-person)
+    * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -318,7 +351,7 @@ Given below is a code snippet implemented for `AddCommandParser`:
     * Pros: UI may look neater and cleaner.
     * Cons: Will need to change many components for address field to be an empty string.
 
-### Add a high importance flag feature
+### High importance flag feature
 
 #### Implementation
 
@@ -391,7 +424,7 @@ Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned 
 
 ### Assimilating new UI components
 
-### Adding the contact view
+### Contact view feature
 
 _*To be added*_
 
