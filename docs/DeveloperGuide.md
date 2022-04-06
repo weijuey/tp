@@ -366,11 +366,45 @@ Classes added for this feature:
 - `HighImportanceCommand`
 - `HighImportanceParser`
 
+Given below is an example scenario of the high importance flag feature.
+
+Step 1. When a user is created, they are automatically assigned `NOT_HIGH_IMPORTANCE` as their importance status.
+
+![ImportanceState0](images/high-importance-flag/ImportanceState0.png)
+
+Step 2. The user executes `impt 1` command to change the high importance status of the 1st person in the address book. The `impt` command executes and determines the current `highImportanceStatus` of the contact (which in this case is `NOT_FAVOURITE`). It then calls the private helper method `createFavouritedPerson` to create a copy of the target contact, except with their `highImportanceStatus` now pointing to the opposite `highImportanceStatus` value (which will be `HIGH_IMPORTANCE`).
+
+![ImportanceState1](images/high-importance-flag/ImportanceState1.png)
+
+Step 3. The command execution continues on to replace the existing person object with the contact with the newly updated high importance status through `Model#setPerson`. After the successful execution, the user can visually identify their high importance contacts through the red flag beside their contact names.
+
+![ImportanceState2](images/high-importance-flag/ImportanceState2.png)
+
+Step 4. The user decides that they want to see only their favourite contacts. The `impts` command will execute, passing the `PersonHasHighImportancePredicate` into the `Model#updateFilteredPersonList`.
+
 The following sequence diagram shows how the feature works:
 
-![HighImportanceSequenceDiagram](images/HighImportanceSequenceDiagram.png)
+![HighImportanceSequenceDiagram](images/high-importance-flag/HighImportanceSequenceDiagram.png)
 
-_{more aspects and alternatives to be added}_
+#### Design considerations:
+
+**Aspect: How important and list important commands execute:**
+
+* **Alternative 1 (current choice):** Each person responsible for their own favourite state
+    * Pros:
+        * Easy to implement.
+        * Easy to check high importance status of contact.
+        * Less coupling between `HighImportance` command and other commands such as edit and delete, as well as the model.
+    * Cons:
+        * Adds more fields to the person contact, increasing the complexity of the contact in the long run.
+        * Need to have a `HighImportance` class to represent a contact's status.
+* **Alternative 2:** Store contacts into a `HighImportancePersonList`.
+    * Pros:
+        * No need to add a field into `Person` class.
+        * No need to have `HighImportance` class, which acts like a boolean value.
+    * Cons:
+        * Have to update the `HighImportancePersonList` if a contact of high importance has been modified.
+        * Quite a fair bit of changes requires, especially within the storage.
 
 ### Adding features to Model
 
