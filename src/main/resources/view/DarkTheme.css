@@ -143,6 +143,8 @@
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-border-radius: 10px;
+     -fx-border-insets: 4 2;
      -fx-border-top-width: 1px;
 }
 
