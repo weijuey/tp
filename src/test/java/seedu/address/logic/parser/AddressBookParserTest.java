@@ -135,6 +135,4 @@ public class AddressBookParserTest {
                 + " 1 " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(command, commandWithIndex);
     }
-
-    
 }

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -21,7 +22,7 @@ class NoteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    void execute_addValidNote_success() {
+    public void execute_addValidNote_success() {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, VALID_NOTE);
 
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -34,12 +35,19 @@ class NoteCommandTest {
     }
 
     @Test
-    void execute_addInvalidNote_noChange() {
+    public void execute_addInvalidNote_noChange() {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, INVALID_NOTE);
 
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         String expectedMessage = String.format(NoteCommand.MESSAGE_NO_UPDATE_TO_NOTES, personToEdit);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void equals() {
+        NoteCommand listViewNoteCommand = new NoteCommand(INDEX_FIRST_PERSON, VALID_NOTE);
+        NoteCommand detailedViewNoteCommand = new NoteCommand(VALID_NOTE);
+        assertFalse(listViewNoteCommand.equals(detailedViewNoteCommand));
     }
 }
