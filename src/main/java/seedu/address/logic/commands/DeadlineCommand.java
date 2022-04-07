@@ -26,6 +26,7 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline for: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_DEADLINES_ADDED = "No deadlines given.";
 
     private final Index targetIndex;
     private final DeadlineList deadlines;
