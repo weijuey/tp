@@ -571,7 +571,7 @@ Find contacts based on the selected tags given by keywords to search for. This c
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
-* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD` 
+* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`
   e.g.
 
   * `findtag friends` adds `friends` as a tag to be searched for
