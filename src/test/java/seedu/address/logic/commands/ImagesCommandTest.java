@@ -60,7 +60,7 @@ class ImagesCommandTest {
                 INDEX_SECOND_PERSON.getOneBased(), personImagesList);
         CommandResult expectedResult = new CommandResult(expectedMessage, VIEW_IMAGES);
 
-        expectedModel.updateImagesToView(personImagesList);
+        expectedModel.setImagesToView(personImagesList);
         Command imagesCommand = new ImagesCommand(INDEX_SECOND_PERSON);
 
         assertCommandSuccess(imagesCommand, model, expectedResult, expectedModel);

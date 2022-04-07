@@ -240,7 +240,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateImagesToView(ImageDetailsList images) {
+        public void setImagesToView(ImageDetailsList images) {
             throw uncalledAE;
         }
 

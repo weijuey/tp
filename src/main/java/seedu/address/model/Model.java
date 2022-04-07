@@ -185,7 +185,7 @@ public interface Model {
     /**
      * Updates the images to be displayed.
      */
-    void updateImagesToView(ImageDetailsList images);
+    void setImagesToView(ImageDetailsList images);
 
     /**
      * Gets the images to be displayed.

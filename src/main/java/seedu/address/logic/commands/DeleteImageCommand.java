@@ -87,7 +87,7 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
         Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateImagesToView(editedPerson.getImageDetailsList());
+        model.setImagesToView(editedPerson.getImageDetailsList());
 
         return new CommandResult(
                 String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), editedPerson), VIEW_IMAGES);

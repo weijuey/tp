@@ -85,7 +85,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
             model.setPerson(targetPerson, sanitizedPerson);
         }
 
-        model.updateImagesToView(sanitizedList);
+        model.setImagesToView(sanitizedList);
 
         String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedList.size(),
                 index.getOneBased(), sanitizedList);
@@ -108,7 +108,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
             model.setPerson(targetPerson, sanitizedPerson);
         }
 
-        model.updateImagesToView(sanitizedList);
+        model.setImagesToView(sanitizedList);
 
         String result =
                 String.format(MESSAGE_IMAGES_SUCCESS, originalList.size(), targetPerson.getName(), sanitizedList);

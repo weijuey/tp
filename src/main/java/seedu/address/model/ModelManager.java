@@ -240,7 +240,7 @@ public class ModelManager implements Model {
 
     //=========== Person Images to View ==============================================================================
     @Override
-    public void updateImagesToView(ImageDetailsList images) {
+    public void setImagesToView(ImageDetailsList images) {
         this.imagesToView = images;
     }
 
