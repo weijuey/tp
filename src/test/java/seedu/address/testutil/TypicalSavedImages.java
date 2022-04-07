@@ -1,17 +1,16 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.image.ImageDetails;
-import seedu.address.model.image.ImageDetailsList;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.image.ImageDetails;
+import seedu.address.model.image.ImageDetailsList;
+import seedu.address.model.image.util.ImageUtil;
 
 /**
  * A utility class containing a list of {@code ImageDetails} objects to be used in tests.
@@ -45,6 +44,9 @@ public class TypicalSavedImages {
     public static final ImageDetails TEST_IMAGE_8 = new ImageDetails(TEST_IMAGE_8_FILE);
     public static final ImageDetails TEST_IMAGE_9 = new ImageDetails(TEST_IMAGE_9_FILE);
 
+    // prevents instantiation
+    private TypicalSavedImages() {}
+
     /**
      * Returns an {@code ImageDetailsList} with all the typical images.
      */
@@ -54,6 +56,23 @@ public class TypicalSavedImages {
 
     public static List<ImageDetails> getTypicalImageDetails() {
         return new ArrayList<>(Arrays.asList(TEST_IMAGE_1, TEST_IMAGE_2, TEST_IMAGE_3, TEST_IMAGE_4, TEST_IMAGE_5));
+    }
+
+    public static List<ImageDetails> getAllImageDetails() {
+        return new ArrayList<>(Arrays.asList(TEST_IMAGE_1, TEST_IMAGE_2, TEST_IMAGE_3, TEST_IMAGE_4, TEST_IMAGE_5,
+                TEST_IMAGE_6, TEST_IMAGE_7, TEST_IMAGE_8, TEST_IMAGE_9));
+    }
+
+    /**
+     * Used to populate the test images directory with the test images. Recommended to be called
+     * in the set up method of JUnit tests. {@see ImagesCommandTest.java}
+     * @throws IOException
+     */
+    public static void populateTestImages() throws IOException {
+        final File referenceImageForTests = TEST_IMAGES_DIRECTORY.resolve("reference_image_for_test.png").toFile();
+        for (ImageDetails image : getAllImageDetails()) {
+            ImageUtil.copyTo(referenceImageForTests, TEST_IMAGES_DIRECTORY.resolve(image.getName()));
+        }
     }
 
 }

@@ -47,6 +47,9 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
      * @param imageIndex of the image to delete, relative to the person to delete.
      */
     public DeleteImageCommand(Index personIndex, Index imageIndex) {
+        requireNonNull(personIndex);
+        requireNonNull(imageIndex);
+
         this.personIndex = personIndex;
         this.imageIndex = imageIndex;
     }
@@ -63,6 +66,8 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(personIndex);
+
         List<Person> lastShownList = model.getSortedPersonList();
 
         if (personIndex.getZeroBased() >= lastShownList.size()) {

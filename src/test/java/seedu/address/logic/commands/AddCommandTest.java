@@ -115,6 +115,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getContactImagesFilePath() {
+            throw uncalledAE;
+        }
+
+        @Override
+        public void setContactImagesFilePath(Path addressBookFilePath) {
+            throw uncalledAE;
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw uncalledAE;
         }

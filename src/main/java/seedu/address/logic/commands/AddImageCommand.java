@@ -40,7 +40,13 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs a new add image command object.
+     *
+     * @param targetIndex the index of the person to add images to.
+     */
     public AddImageCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -51,6 +57,8 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(targetIndex);
+
         List<Person> lastShownList = model.getSortedPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {

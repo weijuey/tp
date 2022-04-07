@@ -8,8 +8,8 @@ import static seedu.address.testutil.TypicalSavedImages.TEST_IMAGES_DIRECTORY;
 import static seedu.address.testutil.TypicalSavedImages.TEST_IMAGE_1_FILE;
 import static seedu.address.testutil.TypicalSavedImages.TEST_IMAGE_2_FILE;
 import static seedu.address.testutil.TypicalSavedImages.getTypicalImageDetailsList;
+import static seedu.address.testutil.TypicalSavedImages.populateTestImages;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,9 +18,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.image.ImageDetails;
 import seedu.address.model.image.ImageDetailsList;
 
@@ -35,6 +35,7 @@ class ImageUtilTest {
      */
     @BeforeAll
     static void setUp() throws IOException {
+        populateTestImages();
         Files.createDirectory(tempDirectory);
     }
 

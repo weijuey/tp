@@ -34,7 +34,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n";
 
-    public static final String MESSAGE_IMAGES_SUCCESS = "%d Images for Person [%d]: %s";
+    public static final String MESSAGE_IMAGES_SUCCESS = "%d Images for Person [%s]:\n %s";
 
     private static final Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
 
@@ -64,6 +64,8 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(index);
+
         List<Person> lastShownList = model.getSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -71,10 +73,11 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         }
 
         Person targetPerson = lastShownList.get(index.getZeroBased());
-        logger.info(String.format("Sanitizing images of person at index %d", index.getZeroBased()));
+        logger.info(String.format("Sanitizing images of person at index %d, at file path: %s", index.getZeroBased(),
+                model.getContactImagesFilePath()));
 
         ImageDetailsList originalList = targetPerson.getImageDetailsList();
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList, CONTACT_IMAGES_PATH);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList, model.getContactImagesFilePath());
         Person sanitizedPerson = createImageDeletedPerson(targetPerson, sanitizedList);
         logger.info(String.format("Result of sanitization: %d -> %d", originalList.size(), sanitizedList.size()));
 
@@ -85,7 +88,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         model.updateImagesToView(sanitizedList);
 
         String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedList.size(),
-                index.getOneBased(), sanitizedPerson.getName() + "\n") + sanitizedList;
+                index.getOneBased(), sanitizedList);
         return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
     }
 
@@ -107,7 +110,8 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
 
         model.updateImagesToView(sanitizedList);
 
-        String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedPerson + "\n") + sanitizedList;
+        String result =
+                String.format(MESSAGE_IMAGES_SUCCESS, originalList.size(), targetPerson.getName(), sanitizedList);
         return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
     }
 

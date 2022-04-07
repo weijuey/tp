@@ -100,6 +100,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getContactImagesFilePath() {
+        return userPrefs.getContactImagesFilePath();
+    }
+
+    @Override
+    public void setContactImagesFilePath(Path contactImagesFilePath) {
+        requireNonNull(contactImagesFilePath);
+        userPrefs.setContactImagesFilePath(contactImagesFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override

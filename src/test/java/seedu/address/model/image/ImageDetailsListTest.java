@@ -1,6 +1,9 @@
 package seedu.address.model.image;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalSavedImages.TEST_IMAGE_1;
 import static seedu.address.testutil.TypicalSavedImages.TEST_IMAGE_2;
 import static seedu.address.testutil.TypicalSavedImages.TEST_IMAGE_3;
@@ -13,6 +16,7 @@ import static seedu.address.testutil.TypicalSavedImages.getTypicalImageDetailsLi
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 
 class ImageDetailsListTest {
@@ -49,7 +53,7 @@ class ImageDetailsListTest {
     }
 
     @Test
-    void getImages_isEmpty_emptyImagesDetailsList_success() {
+    void getImages_emptyImagesDetailsList_success() {
         assertEquals(List.of(), emptyList.getImages());
     }
 
