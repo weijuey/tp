@@ -232,6 +232,10 @@ Format: `tag TAGNAME`
 
 * A tag with the same `TAGNAME` can only be created once.
 * The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created.
+* `TAGNAME` must be alphanumeric. e.g. `Hello`, `Friends`, `Colleagues`
+* `TAGNAME` such as `-1`, `Sub Contractors` are not allowed. i.e. non-alphanumeric characters, including spaces.
+* To create a tag named `Sub Contractors`, eliminate the whitespace in between in order for it to be a valid tag.  
+  e.g. `SubContractors`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can create meaningful tags to assign your contacts with! With tags, you can search for contacts assigned to that particular tag!
