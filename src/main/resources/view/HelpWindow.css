@@ -21,3 +21,8 @@
 #commandSummaryHelpContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+
+#helpWindowContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
