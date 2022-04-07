@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
+import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
 
 import java.util.List;
 import java.util.Set;
@@ -77,7 +78,7 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
 
         ImageDetails imageToDelete = images.get(imageIndex.getZeroBased());
         ImageUtil.removeFile(imageToDelete);
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images, CONTACT_IMAGES_PATH);
         Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
 
         model.setPerson(personToEdit, editedPerson);
@@ -100,7 +101,7 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
 
         ImageDetails imageToDelete = images.get(imageIndex.getZeroBased());
         ImageUtil.removeFile(imageToDelete);
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images, CONTACT_IMAGES_PATH);
         Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
 
         model.setPerson(personToEdit, editedPerson);
