@@ -2,13 +2,21 @@ package seedu.address.model.commandhistory;
 
 import seedu.address.model.commandhistory.exceptions.HistoryDoesNotExistException;
 
+import static java.util.Objects.requireNonNull;
+
 public class CommandHistoryEntry {
 
     private static final CommandHistoryEntry EMPTY_COMMAND_HISTORY = new CommandHistoryEntrySentinel();
 
     private final String commandText;
 
+    // hidden default constructor
+    private CommandHistoryEntry() {
+        commandText = "";
+    }
+
     public CommandHistoryEntry(String commandText) {
+        requireNonNull(commandText);
         this.commandText = commandText;
     }
 
@@ -32,9 +40,6 @@ public class CommandHistoryEntry {
     }
 
     private static class CommandHistoryEntrySentinel extends CommandHistoryEntry {
-        public CommandHistoryEntrySentinel() {
-            super("");
-        }
 
         @Override
         public boolean exists() {

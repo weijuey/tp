@@ -5,26 +5,34 @@ import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import static java.util.Objects.requireNonNull;
+
 public class CommandHistory implements Iterable<CommandHistoryEntry> {
 
     private final ObservableList<CommandHistoryEntry> internalList = FXCollections.observableArrayList();
 
     public void cacheCommand(String commandText) {
+        requireNonNull(commandText);
+
+        if (commandText.isBlank()) {
+            return;
+        }
+
         this.internalList.add(new CommandHistoryEntry(commandText));
     }
 
     /**
-     * Retrieves the command at size - i position.
-     * If I is out of bounds, returns an empty history entry.
+     * Retrieves the command at (size - offset) position.
+     * If offset is out of bounds, returns an empty history entry.
      *
-     * @param i the number of commands to step back from
+     * @param offset the number of commands to step back from
      * @return the resulting entry
      */
-    public CommandHistoryEntry retrieveCommand(int i) {
-        if (i > internalList.size() || i < 0) {
+    public CommandHistoryEntry retrieveCommand(int offset) {
+        if (offset > internalList.size() || offset <= 0) {
             return CommandHistoryEntry.getEmptyHistory();
         }
-        return internalList.get(internalList.size() - i);
+        return internalList.get(internalList.size() - offset);
     }
 
     /**
