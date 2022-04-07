@@ -251,6 +251,7 @@ List of tag related features:
 Example:
 
 * `tag Friends` creates a tag `Friends` to be stored in the address book.
+  ![result for create tag friends](images/create-tag/create-tag-friends.png)
 
 ### Assigning a tag to a contact : `assign`
 
@@ -271,11 +272,32 @@ Example:
 
 * `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`.
 
+  * Before using the command `assign 1 Friends`:
+  ![before assign 1 friends](images/assign-tag/before-assign-1-friends.png)
+
+  * `assign 1 Friends`:
+  ![result for assign 1 friends](images/assign-tag/assign-1-friends.png)
+
+* `assign 3 Colleagues` assigns a tag `Colleagues` to the contact at index `3`.
+
+  * Before using the command `assign 3 Colleagues`:
+  ![before assign 3 colleagues](images/assign-tag/before-assign-3-colleagues.png)
+
+  * `assign 3 Colleagues`:
+  ![result for assign 3 colleagues](images/assign-tag/assign-3-colleagues.png)
+
 Format in detailed view: `assign TAGNAME`
 
 Example:
 
 * `assign client` assigns a tag `client` to the currently viewed contact.
+
+  * `view 1`
+  ![result for view 1](images/assign-tag/view-1.png)
+
+  * `assign client`
+  ![result for assign client](images/assign-tag/view-assign-client.png)
+
 
 ### Unassigning a tag from a contact : `unassign`
 
@@ -293,12 +315,23 @@ Format: `unassign INDEX TAGNAME`
 Example:
 
 * `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`.
+  * Before using the command `unassign 1 Friends`
+  ![before unassign 1 Friends](images/unassign-tag/before-unassign-1-friends.png)
+  
+  * `unassign 1 Friends`
+  ![result for unassign 1 Friends](images/unassign-tag/unassign-1-friends.png)
+  
 
 Format in detailed view: `unassign TAGNAME`
 
 Example:
 
 * `unassign client` removes the tag `client` from the currently viewed contact.
+  * `view 1`
+  ![result for view 1](images/unassign-tag/view-1.png)
+  
+  * `unassign client`
+  ![result for unassign client](images/unassign-tag/view-unassign-client.png)
 
 ### Deleting a tag : `deltag`
 
@@ -313,9 +346,13 @@ Format: `deltag TAGNAME [MORE_TAGNAME]`
 Examples:
 
 * `deltag friends` deletes the tag `friends`
+![result for deltag friends](images/del-tag/deltag-friends.png)
 * `deltag friends colleagues` deletes the tag `friends` and `colleagues`
+![result for deltag friends colleagues](images/del-tag/deltag-friends-colleagues.png)
 * `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
+![result for deltag friends colleagues, colleagues not exist](images/del-tag/deltag-friends-colleagues-not-exist.png)
 * `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
+![result for deltag colleagues](images/del-tag/deltag-colleagues-not-exist.png)
 
 ### Adding favourites : `fav`
 
@@ -593,8 +630,10 @@ Use `list` to clear currently selected tags!
 Examples:
 
 * `findtag Friends` returns contacts with tag `Friends`
+  ![result findtag Friends](images/findtag/findtag-friends.png)
 * `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by 
 * at least `Friends`, `InProgress` and `AlmostFinished`
+  ![result findtag InProgress AlmostFinished](images/findtag/findtag-friends-inprogress-almostfinished.png)
 
 ### Saving the data
 
