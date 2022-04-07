@@ -1,18 +1,20 @@
 package seedu.address.model.commandhistory;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.Command;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class CommandHistoryTest {
 
-    CommandHistory commandHistory = new CommandHistory();
-    CommandHistoryEntry sentinel = CommandHistoryEntry.getEmptyHistory();
+    private CommandHistory commandHistory = new CommandHistory();
+    private final CommandHistoryEntry sentinel = CommandHistoryEntry.getEmptyHistory();
 
     @BeforeEach
     void setUp() {

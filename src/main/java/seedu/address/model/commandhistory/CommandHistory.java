@@ -1,16 +1,20 @@
 package seedu.address.model.commandhistory;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import static java.util.Objects.requireNonNull;
-
 public class CommandHistory implements Iterable<CommandHistoryEntry> {
 
     private final ObservableList<CommandHistoryEntry> internalList = FXCollections.observableArrayList();
 
+    /**
+     * Caches the command into the history for future retrieval.
+     * @param commandText the command text to be cached.
+     */
     public void cacheCommand(String commandText) {
         requireNonNull(commandText);
 

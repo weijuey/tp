@@ -1,8 +1,8 @@
 package seedu.address.model.commandhistory;
 
-import seedu.address.model.commandhistory.exceptions.HistoryDoesNotExistException;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.model.commandhistory.exceptions.HistoryDoesNotExistException;
 
 public class CommandHistoryEntry {
 
@@ -15,6 +15,11 @@ public class CommandHistoryEntry {
         commandText = "";
     }
 
+    /**
+     * Creates a command history entry. Encapsulates the information of a past command made by the user.
+     *
+     * @param commandText the raw input provided by the user.
+     */
     public CommandHistoryEntry(String commandText) {
         requireNonNull(commandText);
         this.commandText = commandText;

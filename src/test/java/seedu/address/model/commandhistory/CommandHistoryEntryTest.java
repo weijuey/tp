@@ -1,13 +1,14 @@
 package seedu.address.model.commandhistory;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.commandhistory.exceptions.HistoryDoesNotExistException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.commandhistory.CommandHistoryEntry.getEmptyHistory;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.commandhistory.exceptions.HistoryDoesNotExistException;
 
 class CommandHistoryEntryTest {
 
