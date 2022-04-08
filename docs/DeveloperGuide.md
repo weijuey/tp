@@ -458,7 +458,9 @@ Step 1. The user gives the command `note r/red`. `MainWindow` realises it is in 
 ![DetailedViewExecutionState1](images/detailedview/DetailedViewExecutionState1.png)
 
 Step 2. `LogicManager` calls `AddressBookParser::parseInDetailedViewContext` to parse the user input in a different
-way. The method returns a `DetailedViewExecutable`.
+way. The method returns a `NoteCommand`, which is a `DetailedViewExecutable`.
+
+![DetailedViewExecutionState2](images/detailedview/DetailedViewExecutionState2.png)
 
 ### Enhancing data storage
 
