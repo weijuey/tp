@@ -16,6 +16,7 @@ public class CommandResult {
         EXIT, // The application should exit
         VIEW_IMAGES, // Should load up the contact's images
         DETAILED_VIEW, // Should show the detailed contact view
+        LIST_VIEW, // Should show the entire list of contacts
         NONE
     }
 
@@ -41,20 +42,8 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public boolean isShowHelp() {
-        return this.specialCommandResult == SpecialCommandResult.SHOW_HELP;
-    }
-
-    public boolean isExit() {
-        return this.specialCommandResult == SpecialCommandResult.EXIT;
-    }
-
-    public boolean isViewImages() {
-        return this.specialCommandResult == SpecialCommandResult.VIEW_IMAGES;
-    }
-
-    public boolean isDetailedView() {
-        return this.specialCommandResult == SpecialCommandResult.DETAILED_VIEW;
+    public SpecialCommandResult getSpecialCommandResult() {
+        return specialCommandResult;
     }
 
     @Override

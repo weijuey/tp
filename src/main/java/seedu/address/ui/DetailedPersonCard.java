@@ -24,6 +24,7 @@ import seedu.address.model.person.Person;
  */
 public class DetailedPersonCard extends UiPart<Region> {
     private static final String FXML = "DetailedPersonCard.fxml";
+    private static final int MAXIMUM_IMAGES_TO_DISPLAY = 6;
 
     @FXML
     private Label name;
@@ -49,6 +50,8 @@ public class DetailedPersonCard extends UiPart<Region> {
     private ImageView flagImageView;
     @FXML
     private TilePane imageListView;
+    @FXML
+    private Label moreImages;
 
     private final Image highImportanceFlag = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/red_flag.png")));
@@ -57,7 +60,7 @@ public class DetailedPersonCard extends UiPart<Region> {
 
     /**
      * Creates a {@code DetailedPersonCard} with the given {@code Person} to display
-     * @param person
+     * @param person the person to display
      */
     public DetailedPersonCard(Person person) {
         super(FXML);
@@ -87,18 +90,24 @@ public class DetailedPersonCard extends UiPart<Region> {
         flagImageView.setFitHeight(20);
         flagImageView.setFitWidth(20);
 
-        addImages(person.getImageDetailsList());
+        setImageListView(person.getImageDetailsList());
     }
 
-    private void addImages(ImageDetailsList images) {
+    private void setImageListView(ImageDetailsList images) {
         double totalWidth = this.getRoot().getWidth();
         int individualWidth = (int) totalWidth / 3;
 
-        for (int i = 0; i < images.size(); i++) {
+        for (int i = 0; i < Math.min(images.size(), MAXIMUM_IMAGES_TO_DISPLAY); i++) {
             Index index = Index.fromZeroBased(i);
             ImageDetails imageDetails = images.get(index.getZeroBased());
             ImageCard imageCard = new ImageCard(index.getOneBased(), imageDetails, 120, individualWidth);
             imageListView.getChildren().add(imageCard.getRoot());
+        }
+
+        if (images.size() > MAXIMUM_IMAGES_TO_DISPLAY) {
+            moreImages.setText(String.format("... and %d more images. Use the images command to see everything.",
+                            images.size() - MAXIMUM_IMAGES_TO_DISPLAY));
+            moreImages.setVisible(true);
         }
     }
 

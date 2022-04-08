@@ -14,10 +14,6 @@
     -fx-background-color: darkgray;
 }
 
-#helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
-
-#commandSummaryHelpContainer {
+#successMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }

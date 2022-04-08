@@ -2,8 +2,42 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+Table of Contents
+
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#storage-component)
+* [Implementation](#implementation)
+  * [Adding attributes to contacts](#adding-attributes-to-contacts)
+    * [Notes feature](#notes-feature)
+    * [Favourite feature](#favourite-feature)
+    * [Deadline feature](#deadline-feature)
+    * [Add contact with address as optional field feature](#add-contact-with-address-as-optional-field-feature)
+    * [High importance flag feature](#add-a-high-importance-flag-feature)
+  * [Adding features to Model](#adding-features-to-model)
+    * [Find tag feature](#find-tag-feature)
+  * [Assimilating new UI components](#assimilating-new-ui-components)
+    * [Contact view feature](#adding-the-contact-view)
+  * [Enhancing data storage](#enhancing-data-storage)
+    * [\[Proposed\] Undo/Redo feature](#proposed-undoredo-feature)
+    * [\[Proposed\] Data archiving](#proposed-data-archiving)
+  * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+  * [Appendix: Requirements](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-functional requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a person](#deleting-a-person)
+    * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,53 +188,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find tag feature
-
-#### Implementation
-
-The find tag feature is used when a user is interested in finding contacts who have a certain `Tag`. Each `Person` has a set of `Tags` which contains unique `Tags` since each `Person` should not have more than 1 of the same tag.
-
-This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
-
-The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list.
-
-As such, `FindTagCommand` extends `Command` and executes the command by calling `FindTagCommand#execute()`.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are multiple keywords, e.g.`findtag friends colleagues`, then the contact should have both tags `friends` and `colleagues` in order for the contact to be reflected on the updated filtered person list.
-
-</div>
-
-Given below is an example usage scenario and how the find tag feature behaves at each step.
-
-Step 1. The user launches the address book for the first time, initialized with the initial address book state.
-
-Step 2. The user executes the command `findtag friends` to find contacts with the tag `friends` in their set of tags.
-
-Step 3. The AddressBookParser parses the command `findtag friends` and creates a `FindTagCommandParser` to parse the keyword `friends`.
-
-Step 4. The `TagContainsKeywordPredicate` is created and passed onto the constructor of `FindTagCommand` to create a new `FindTagCommand` object.
-
-Step 5. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
-
-Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
-
-![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindTagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-#### Design considerations:
-
-**Aspect: Should contacts have all the keywords searched for:**
-
-* **Alternative 1 (current choice):** Contacts containing strictly the same tags as all the keywords searched for.
-    * Pros: More intuitive, as only contacts with strictly the same tags as all the keywords searched will be listed.
-    * Cons: Have to ensure the contacts are tagged correctly, or they will not be found with this feature.
-
-* **Alternative 2:** Contacts containing any tags of the keywords searched for.
-    * Pros: Can find contacts who have any tags the keywords searched.
-    * Cons: Unintuitive, as we usually narrow down the scope for filtering.
+### Adding attributes to contacts
 
 ### Notes feature
 
@@ -257,8 +245,6 @@ The following sequence diagram shows how the favourite operation works:
 ![FavouriteSequenceDiagram](images/favourite/FavouriteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
 </div>
 
 If the user runs `fav 3` again, or commands `fav` on an existing favourited contact, the only difference in the execution would be that the `NOT_FAVOURITE` reference will be passed into the `FavouriteCommand#createFavouritePerson` method instead.
@@ -365,7 +351,7 @@ Given below is a code snippet implemented for `AddCommandParser`:
     * Pros: UI may look neater and cleaner.
     * Cons: Will need to change many components for address field to be an empty string.
 
-### Add a high importance flag feature
+### High importance flag feature
 
 #### Implementation
 
@@ -385,6 +371,64 @@ The following sequence diagram shows how the feature works:
 ![HighImportanceSequenceDiagram](images/HighImportanceSequenceDiagram.png)
 
 _{more aspects and alternatives to be added}_
+
+### Adding features to Model
+
+### Find tag feature
+
+#### Implementation
+
+The find tag feature is used when a user is interested in finding contacts who have a certain `Tag`. Each `Person` has a set of `Tags` which contains unique `Tags` since each `Person` should not have more than 1 of the same tag.
+
+This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
+
+The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list.
+
+As such, `FindTagCommand` extends `Command` and executes the command by calling `FindTagCommand#execute()`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are multiple keywords, e.g.`findtag friends colleagues`, then the contact should have both tags `friends` and `colleagues` in order for the contact to be reflected on the updated filtered person list.
+
+</div>
+
+Given below is an example usage scenario and how the find tag feature behaves at each step.
+
+Step 1. The user launches the address book for the first time, initialized with the initial address book state.
+
+Step 2. The user executes the command `findtag friends` to find contacts with the tag `friends` in their set of tags.
+
+Step 3. The AddressBookParser parses the command `findtag friends` and creates a `FindTagCommandParser` to parse the keyword `friends`.
+
+Step 4. The `TagContainsKeywordPredicate` is created and passed onto the constructor of `FindTagCommand` to create a new `FindTagCommand` object.
+
+Step 5. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
+
+Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
+
+![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindTagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: Should contacts have all the keywords searched for:**
+
+* **Alternative 1 (current choice):** Contacts containing strictly the same tags as all the keywords searched for.
+    * Pros: More intuitive, as only contacts with strictly the same tags as all the keywords searched will be listed.
+    * Cons: Have to ensure the contacts are tagged correctly, or they will not be found with this feature.
+
+* **Alternative 2:** Contacts containing any tags of the keywords searched for.
+    * Pros: Can find contacts who have any tags the keywords searched.
+    * Cons: Unintuitive, as we usually narrow down the scope for filtering.
+
+### Assimilating new UI components
+
+### Contact view feature
+
+_*To be added*_
+
+### Enhancing data storage
 
 ### \[Proposed\] Undo/redo feature
 
