@@ -1,9 +1,6 @@
 @startuml
 !include ../style.puml
 
-Box UI UI_COLOR_T1
-participant ":MainWindow" as MainWindow UI_COLOR
-
 Box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as ABParser LOGIC_COLOR
@@ -11,10 +8,6 @@ participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
 participant "noteCommand:NoteCommand" as NoteCommand LOGIC_COLOR
 end box
 
-[-> MainWindow : executeCommand("note r/red")
-activate MainWindow
-
-MainWindow -> LogicManager : executeInDetailedViewMode("note r/red")
 activate LogicManager
 
 LogicManager -> ABParser : parseInDetailedViewContext("note r/red")
