@@ -15,16 +15,20 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
+    public static final String HELPWINDOW_MESSAGE = "Need help? Check out any of the links below!";
     public static final String USERGUIDE_URL = "https://ay2122s2-cs2103t-t12-2.github.io/tp/UserGuide.html#quick-start";
-    public static final String USER_GUIDE_HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USER_GUIDE_HELP_MESSAGE = "User Guide: " + USERGUIDE_URL;
     public static final String COMMAND_SUMMARY_URL =
             "https://ay2122s2-cs2103t-t12-2.github.io/tp/UserGuide.html#command-summary";
-    public static final String COMMAND_SUMMARY_HELP_MESSAGE = "Refer to the command summary: " + COMMAND_SUMMARY_URL;
+    public static final String COMMAND_SUMMARY_HELP_MESSAGE = "Command Summary: " + COMMAND_SUMMARY_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     private CopyUrlWindow copyUrlWindow;
+
+    @FXML
+    private Label helpWindowMessage;
 
     @FXML
     private Button userGuideCopyButton;
@@ -47,6 +51,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         userGuideHelpMessage.setText(USER_GUIDE_HELP_MESSAGE);
         commandSummaryHelpMessage.setText(COMMAND_SUMMARY_HELP_MESSAGE);
+        helpWindowMessage.setText(HELPWINDOW_MESSAGE);
 
         copyUrlWindow = new CopyUrlWindow();
     }
