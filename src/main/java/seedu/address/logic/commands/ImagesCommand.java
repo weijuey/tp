@@ -108,6 +108,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         }
 
         model.setImagesToView(sanitizedList);
+        model.clearDetailedContactView();
 
         String result =
                 String.format(MESSAGE_IMAGES_SUCCESS, originalList.size(), targetPerson.getName(), sanitizedList);
