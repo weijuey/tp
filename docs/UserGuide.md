@@ -346,11 +346,28 @@ Format: `deltag TAGNAME [MORE_TAGNAME]`
 Examples:
 
 * `deltag friends` deletes the tag `friends`
-![result for deltag friends](images/del-tag/deltag-friends.png)
+
+  * Before using the command `deltag friends`:
+  ![before deltag friends](images/del-tag/before-deltag-friends.png)
+
+  * `deltag Friends` 
+  ![result for deltag friends](images/del-tag/deltag-friends.png)
+  
 * `deltag friends colleagues` deletes the tag `friends` and `colleagues`
-![result for deltag friends colleagues](images/del-tag/deltag-friends-colleagues.png)
+
+  * Before using the command `deltag friends colleagues`
+  ![before deltag friends colleagues](images/del-tag/before-deltag-friends-colleagues.png)
+  
+  * `deltag friends colleagues`
+  ![result for deltag friends colleagues](images/del-tag/deltag-friends-colleagues.png)
+  
 * `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
-![result for deltag friends colleagues, colleagues not exist](images/del-tag/deltag-friends-colleagues-not-exist.png)
+  * Before using the command `deltag friends colleagues`
+  ![before deltag friends colleagues not exist](images/del-tag/before-deltag-friends-colleagues-not-exist.png)
+  
+  * `deltag friends colleagues`
+  ![result for deltag friends colleagues, colleagues not exist](images/del-tag/deltag-friends-colleagues-not-exist.png)
+  
 * `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
 ![result for deltag colleagues](images/del-tag/deltag-colleagues-not-exist.png)
 
