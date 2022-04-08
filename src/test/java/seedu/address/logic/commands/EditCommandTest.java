@@ -150,15 +150,15 @@ public class EditCommandTest {
 
     @Test
     public void executeInDetailedView_success() {
-        Person personInDetailedView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        model.setDetailedContactView(personInDetailedView);
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToEdit);
 
-        Person editedPerson = new PersonBuilder(personInDetailedView).withName("Alex Yeoh").build();
+        Person editedPerson = new PersonBuilder(personToEdit).withName("Alex Yeoh").build();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(editPersonDescriptor);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personInDetailedView, editedPerson);
+        expectedModel.setPerson(personToEdit, editedPerson);
         expectedModel.setDetailedContactView(editedPerson);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
