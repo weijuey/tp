@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,8 +73,8 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         StringBuilder resultStringBuilder = new StringBuilder();
         List<ImageDetails> imagesToAdd = new ArrayList<>();
         for (File imgFile : images) {
-            Path destPath = CONTACT_IMAGES_PATH.resolve(imgFile.getName());
-            if (ImageUtil.fileExists(imgFile, CONTACT_IMAGES_PATH)) {
+            Path destPath = model.getContactImagesFilePath().resolve(imgFile.getName());
+            if (ImageUtil.fileExists(imgFile, model.getContactImagesFilePath())) {
                 resultStringBuilder
                         .append(String.format(DUPLICATE_IMAGES, imgFile.getName()))
                         .append("\n");
@@ -113,8 +112,8 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         StringBuilder resultStringBuilder = new StringBuilder();
         List<ImageDetails> imagesToAdd = new ArrayList<>();
         for (File imgFile : images) {
-            Path destPath = CONTACT_IMAGES_PATH.resolve(imgFile.getName());
-            if (ImageUtil.fileExists(imgFile, CONTACT_IMAGES_PATH)) {
+            Path destPath = model.getContactImagesFilePath().resolve(imgFile.getName());
+            if (ImageUtil.fileExists(imgFile, model.getContactImagesFilePath())) {
                 resultStringBuilder
                         .append(String.format(DUPLICATE_IMAGES, imgFile.getName()))
                         .append("\n");

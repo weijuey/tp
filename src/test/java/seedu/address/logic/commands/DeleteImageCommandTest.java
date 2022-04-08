@@ -58,7 +58,7 @@ class DeleteImageCommandTest {
     }
 
     @Test
-    public void execute_nullIndex_throwsNullPointerException() {
+    public void execute_nullPersonIndex_throwsNullPointerException() {
         Command deleteImageCommand = new DeleteImageCommand(Index.fromZeroBased(0));
         assertThrows(NullPointerException.class, () -> deleteImageCommand.execute(model));
     }

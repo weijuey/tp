@@ -36,7 +36,7 @@ class ImagesCommandTest {
     }
 
     @Test
-    public void execute_nullIndex_throwsNullPointerException() {
+    public void execute_nullPersonIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ImagesCommand().execute(model));
     }
 

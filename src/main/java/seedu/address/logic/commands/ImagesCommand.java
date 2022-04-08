@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
 
 import java.util.List;
 import java.util.Set;
@@ -97,10 +96,10 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         requireNonNull(model);
 
         Person targetPerson = model.getDetailedContactViewPerson();
-        logger.info(String.format("Sanitizing images of person in detailed view"));
+        logger.info("Sanitizing images of person in detailed view");
 
         ImageDetailsList originalList = targetPerson.getImageDetailsList();
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList, CONTACT_IMAGES_PATH);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList, model.getContactImagesFilePath());
         Person sanitizedPerson = createImageDeletedPerson(targetPerson, sanitizedList);
         logger.info(String.format("Result of sanitization: %d -> %d", originalList.size(), sanitizedList.size()));
 

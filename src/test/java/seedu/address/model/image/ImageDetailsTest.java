@@ -37,16 +37,17 @@ class ImageDetailsTest {
         File file = path.toFile();
         ImageDetails imageDetails = new ImageDetails(file);
 
-        assertEquals(path.toString(), imageDetails.getPath(TEST_IMAGES_DIRECTORY));
+        assertEquals(path.toString(), imageDetails.getPath());
     }
 
     @Test
     void getJavaFxImageUrl() {
-        Path path = ImageDetails.CONTACT_IMAGES_PATH.resolve(testFileName);
-        File file = path.toFile();
+        Path path = TEST_IMAGES_DIRECTORY.resolve(testFileName);
 
-        ImageDetails imageDetails = new ImageDetails(file);
         String expected = String.format("file:%s", path);
+
+        File file = path.toFile();
+        ImageDetails imageDetails = new ImageDetails(file);
 
         assertEquals(expected, imageDetails.getJavaFxImageUrl());
     }

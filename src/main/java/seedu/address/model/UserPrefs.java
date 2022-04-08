@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private Path contactImagesFilePath = CONTACT_IMAGES_PATH;
+    private Path contactImagesFilePath = Paths.get("data", "images");
 
     /**
      * Creates a {@code UserPrefs} with default values.
