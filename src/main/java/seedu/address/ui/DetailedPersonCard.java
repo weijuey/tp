@@ -37,9 +37,13 @@ public class DetailedPersonCard extends UiPart<Region> {
     @FXML
     private VBox notesPane;
     @FXML
+    private Label notesTitle;
+    @FXML
     private Label notes;
     @FXML
     private VBox deadlinesPane;
+    @FXML
+    private Label deadlinesTitle;
     @FXML
     private Label deadlines;
     @FXML
@@ -71,6 +75,8 @@ public class DetailedPersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         notes.setText(person.getNotes().listFormat());
         deadlines.setText(person.getDeadlines().listFormat());
+        deadlinesTitle.setText("Deadlines");
+        notesTitle.setText("Notes");
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
