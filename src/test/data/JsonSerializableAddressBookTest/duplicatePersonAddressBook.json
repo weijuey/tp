@@ -4,10 +4,15 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "deadlines" : [ ],
-    "tagged": [ "friends" ],
+    "deadlines" : [ {
+      "description" : "happy",
+      "date" : "1/1/2349"
+    } ],
+    "notes" : [ ],
+    "tagged" : [ "colleagues", "friends" ],
     "isFavourite" : "false",
-    "hasHighImportance" : "false"
+    "images" : [ ],
+    "hasHighImportance" : "true"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -17,5 +22,5 @@
     "isFavourite" : "true",
     "hasHighImportance" : "false"
   } ],
-  "tags": [ "friends" ]
+  "tags" : [ "friends", "colleagues", "neighbours", "classmates", "family" ]
 }
