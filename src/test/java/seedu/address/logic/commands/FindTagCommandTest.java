@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_FRIENDS;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_OWESMONEY;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_COLLEAGUES;
 import static seedu.address.testutil.TypicalTags.VALID_TAG_FRIENDS;
+import static seedu.address.testutil.TypicalTags.VALID_TAG_OWESMONEY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,6 +70,7 @@ class FindTagCommandTest {
         FindTagCommand command = new FindTagCommand(singleKeyword);
         TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(singleKeyword);
         expectedModel.addTag(VALID_TAG_COLLEAGUES);
+        expectedModel.addActivatedTag(VALID_TAG_COLLEAGUES);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -90,6 +92,7 @@ class FindTagCommandTest {
         singleKeyword.add(VALID_TAGNAME_FRIENDS);
         FindTagCommand command = new FindTagCommand(singleKeyword);
         TagContainsKeywordsPredicate predicate = preparePredicate("friends");
+        expectedModel.addActivatedTag(VALID_TAG_FRIENDS);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
@@ -104,6 +107,8 @@ class FindTagCommandTest {
         model.addActivatedTag(activatedTag);
         FindTagCommand command = new FindTagCommand(singleKeyword);
         TagContainsKeywordsPredicate predicate = preparePredicate("friends owesMoney");
+        expectedModel.addActivatedTag(activatedTag);
+        expectedModel.addActivatedTag(VALID_TAG_OWESMONEY);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());

@@ -311,6 +311,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && detailedContactView.equals(other.detailedContactView)
                 && imagesToView.equals(other.imagesToView)
-                && commandHistory.equals(other.commandHistory);
+                && commandHistory.equals(other.commandHistory)
+                && activatedTags.equals(other.activatedTags);
     }
 }
