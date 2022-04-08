@@ -458,9 +458,18 @@ Step 1. The user gives the command `note r/red`. `MainWindow` realises it is in 
 ![DetailedViewExecutionState1](images/detailedview/DetailedViewExecutionState1.png)
 
 Step 2. `LogicManager` calls `AddressBookParser::parseInDetailedViewContext` to parse the user input in a different
-way. The method returns a `NoteCommand`, which is a `DetailedViewExecutable`.
+way. The method returns a `NoteCommand`, which is a `DetailedViewExecutable`. Note that `NoteCommandParser`
+successfully parsed a `NoteCommand` without an index.
 
 ![DetailedViewExecutionState2](images/detailedview/DetailedViewExecutionState2.png)
+
+Step 3. `LogicManager` calls `NoteCommand::executeInDetailedView`. `NoteCommand` executes a slightly different logic,
+as it can get `personToEdit` from `model::getDetailedContactViewPerson`. It replaces `personToEdit` in both the person
+list as well as in the detailed contact view. Finally, the `CommandResult` produced has the field
+`SpecialCommandResult.DETAILED_VIEW`, and is returned to `LogicManager`.
+
+![DetailedViewExecutionState3](images/detailedview/DetailedViewExecutionState3.png)
+
 
 ### Enhancing data storage
 
