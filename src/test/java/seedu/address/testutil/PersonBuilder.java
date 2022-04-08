@@ -1,12 +1,9 @@
 package seedu.address.testutil;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Deadline;
@@ -103,12 +100,12 @@ public class PersonBuilder {
     /**
      * Sets the {@code Deadline} of the {@code Person} that we are building.
      */
-    public PersonBuilder withDeadlines(String[] deadlines) throws ParseException {
+    public PersonBuilder withDeadlines(String[] deadlines) {
         if (deadlines.length == 1 && deadlines[0].equals(Deadline.NO_DEADLINE_PLACEHOLDER)) {
             this.deadlines = new DeadlineList();
             return this;
         }
-        this.deadlines = ParserUtil.parseDeadlines(Arrays.asList(deadlines));
+        this.deadlines = this.deadlines.appendDeadlines(SampleDataUtil.getDeadlineList(deadlines));
         return this;
     }
 
