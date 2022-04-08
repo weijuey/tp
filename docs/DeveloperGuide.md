@@ -437,20 +437,25 @@ resolving the following two challenges:
 #### Implementation
 
 The first challenge is particularly complex, as switching between panel views is done through commands, which are
-executed by Logic, and modify Model. In the current design, commands are not aware of UI.
+executed by `Logic`, and modify `Model`. In the current design, commands are not aware of UI.
 
-However, the MainWindow class does have some responsibilities to fulfill in the process of command execution. It handles
-the special cases where the command is either ExitCommand or HelpCommand, and closes the main window or displays the
-help window respectively. Building upon this behaviour, the CommandResult, produced by every Command after its
-execution, can be responsible for signalling to the MainWindow to change view. The main draw of this implementation is
-that MainWindow continues to solely handle UI-related responsibilities, while commands will handle the logic of what
-should be displayed, hence preserving the Single-Responsibility Principle.
+However, the `MainWindow` class does have some responsibilities to fulfill in the process of command execution. It
+handles the special cases where the command is either `ExitCommand` or `HelpCommand`, and closes the main window or
+displays the help window respectively. Building upon this behaviour, the `CommandResult`, produced by every `Command`
+after its execution, can be responsible for signalling to the `MainWindow` to change view. The main draw of this
+implementation is that `MainWindow` continues to solely handle UI-related responsibilities, while `Command` will handle
+the logic of what should be displayed, hence preserving the Single-Responsibility Principle.
 
-For the second challenge, since the MainWindow knows which panel it is displaying, the LogicManager can be informed of
-to parse the command differently.
+For the second challenge, since the `MainWindow` knows which panel it is displaying, the `LogicManager` can be
+informed to parse the command differently.
 
 To illustrate the behaviour of the implementation, let's examine the process where the user passes
-"fav", while the MainWindow is displaying the detailed contact view.
+`fav`, while the MainWindow is displaying the detailed contact view.
+
+Step 1. The user gives the command `fav`. `MainWindow` realises it is in detailed view, and calls
+`LogicManager::executeInDetailedViewMode`.
+
+![DetailedViewExecutionState1](images/detailedview/DetailedViewExecutionState1.png)
 
 ### Enhancing data storage
 
