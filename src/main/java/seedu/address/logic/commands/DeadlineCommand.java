@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -98,10 +99,20 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeadlineCommand // instanceof handles nulls
-                && targetIndex.equals(((DeadlineCommand) other).targetIndex))
-                && deadlines.equals(((DeadlineCommand) other).deadlines); // state check
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeadlineCommand)) {
+            return false;
+        }
+
+        // state check
+        DeadlineCommand e = (DeadlineCommand) other;
+        return Objects.equals(this.targetIndex, e.targetIndex)
+                && deadlines.equals(e.deadlines);
     }
 
 }
