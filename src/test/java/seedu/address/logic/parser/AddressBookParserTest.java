@@ -9,22 +9,16 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -34,10 +28,10 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+    private final Person person = new PersonBuilder().build();
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
@@ -57,7 +51,6 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
@@ -117,14 +110,25 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseDetailedViewCommand_add() throws Exception {
+        AddCommand command = (AddCommand) parser.parseDetailedViewCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
     public void parseDetailedViewCommand_exit() throws Exception {
         assertTrue(parser.parseDetailedViewCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseDetailedViewCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
+    public void parseDetailedViewCommand_help() throws Exception {
+        assertTrue(parser.parseDetailedViewCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseDetailedViewCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
     public void parseDetailedViewCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseDetailedViewCommand(EditCommand.COMMAND_WORD + " "
                 + PersonUtil.getEditPersonDescriptorDetails(descriptor));
@@ -135,4 +139,93 @@ public class AddressBookParserTest {
                 + " 1 " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(command, commandWithIndex);
     }
+
+    @Test
+    public void parseDetailedViewCommand_deadline() throws Exception {
+        String deadlineString = "d/test 21/02/2022";
+        DeadlineList deadlineList = ParserUtil.parseDeadlines(Collections.singletonList(deadlineString));
+        DeadlineCommand command = (DeadlineCommand) parser.parseDetailedViewCommand(DeadlineCommand.COMMAND_WORD
+                + " " + deadlineString);
+        assertEquals(command, new DeadlineCommand(deadlineList));
+
+        // same command with index given -> index ignored
+        DeadlineCommand commandWithIndex = (DeadlineCommand) parser.parseDetailedViewCommand(
+                DeadlineCommand.COMMAND_WORD + " 2 " + deadlineString);
+        assertEquals(commandWithIndex, command);
+    }
+
+    @Test
+    public void parseDetailedViewCommand_note() throws Exception {
+        String note = "r/likes green";
+        NoteCommand command = (NoteCommand) parser.parseDetailedViewCommand(NoteCommand.COMMAND_WORD
+                + " " + note);
+        assertEquals(command, new NoteCommand(note));
+
+        // same command with index given -> index ignored
+        NoteCommand commandWithIndex = (NoteCommand) parser.parseDetailedViewCommand(NoteCommand.COMMAND_WORD
+                + " 2 " + note);
+        assertEquals(commandWithIndex, command);
+    }
+
+    @Test
+    public void parseDetailedViewCommand_fav() throws Exception {
+        FavouriteCommand command = (FavouriteCommand) parser.parseDetailedViewCommand(FavouriteCommand.COMMAND_WORD);
+        assertEquals(command, new FavouriteCommand());
+
+        // same command with index given -> index ignored
+        FavouriteCommand commandWithIndex = (FavouriteCommand) parser.parseDetailedViewCommand(
+                FavouriteCommand.COMMAND_WORD + " 2");
+        assertEquals(commandWithIndex, command);
+    }
+
+    @Test
+    public void parseDetailedViewCommand_impt() throws Exception {
+        HighImportanceCommand command = (HighImportanceCommand) parser.parseDetailedViewCommand(
+                HighImportanceCommand.COMMAND_WORD);
+        assertEquals(command, new HighImportanceCommand());
+
+        // same command with index given -> index ignored
+        HighImportanceCommand commandWithIndex = (HighImportanceCommand) parser.parseDetailedViewCommand(
+                HighImportanceCommand.COMMAND_WORD + " 2");
+        assertEquals(commandWithIndex, command);
+    }
+
+    @Test
+    public void parseDetailedViewCommand_assign() throws Exception {
+        String tag = "tag";
+        AssignTagCommand command = (AssignTagCommand) parser.parseDetailedViewCommand(
+                AssignTagCommand.COMMAND_WORD + " " + tag);
+        assertEquals(command, new AssignTagCommand(tag));
+
+        // same command with index given -> index ignored
+        AssignTagCommand commandWithIndex = (AssignTagCommand) parser.parseDetailedViewCommand(
+                AssignTagCommand.COMMAND_WORD + " 2 " + tag);
+        assertEquals(commandWithIndex, command);
+    }
+
+    @Test
+    public void parseDetailedViewCommand_unassign() throws Exception {
+        String tag = "tag";
+        UnassignTagCommand command = (UnassignTagCommand) parser.parseDetailedViewCommand(
+                UnassignTagCommand.COMMAND_WORD + " " + tag);
+        assertEquals(command, new AssignTagCommand(tag));
+
+        // same command with index given -> index ignored
+        UnassignTagCommand commandWithIndex = (UnassignTagCommand) parser.parseDetailedViewCommand(
+                UnassignTagCommand.COMMAND_WORD + " 2 " + tag);
+        assertEquals(commandWithIndex, command);
+    }
+
+    @Test
+    public void parseDetailedViewCommand_tag() throws Exception {
+        String tag = "tag";
+        // same command parsed regardless of panel view
+        CreateTagCommand parsedCommand = (CreateTagCommand) parser.parseCommand(
+                CreateTagCommand.COMMAND_WORD + " " + tag);
+        CreateTagCommand detailedViewParsedCommand = (CreateTagCommand) parser.parseDetailedViewCommand(
+                CreateTagCommand.COMMAND_WORD + " " + tag);
+        assertEquals(parsedCommand, detailedViewParsedCommand);
+    }
+
+    
 }
