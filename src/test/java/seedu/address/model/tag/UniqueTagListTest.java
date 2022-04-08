@@ -74,6 +74,7 @@ public class UniqueTagListTest {
     @Test
     public void setTag_editedTagIsSameTag_success() {
         uniqueTagList.add(VALID_TAG_NEIGHBOURS);
+        System.out.println(uniqueTagList.contains(VALID_TAG_NEIGHBOURS));
         uniqueTagList.setTag(VALID_TAG_NEIGHBOURS, VALID_TAG_NEIGHBOURS);
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
         expectedUniqueTagList.add(VALID_TAG_NEIGHBOURS);

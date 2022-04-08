@@ -68,15 +68,15 @@ class ActivatedTagListTest {
 
     @Test
     public void setTag_targetTagNotInLIst_throwsTagNotFoundException() {
-        assertThrows(TagNotFoundException.class, () -> activatedTagList.setTag(VALID_TAG_FRIENDS, null));
+        assertThrows(TagNotFoundException.class, () -> activatedTagList.setTag(VALID_TAG_FRIENDS, VALID_TAG_FRIENDS));
     }
 
     @Test
     public void setTag_editedTagIsSameTag_success() {
-        activatedTagList.add(VALID_TAG_FRIENDS);
-        activatedTagList.setTag(VALID_TAG_FRIENDS, VALID_TAG_FRIENDS);
+        activatedTagList.add(VALID_TAG_NEIGHBOURS);
+        activatedTagList.setTag(VALID_TAG_NEIGHBOURS, VALID_TAG_NEIGHBOURS);
         ActivatedTagList expectedActivatedTagList = new ActivatedTagList();
-        activatedTagList.add(VALID_TAG_FRIENDS);
+        expectedActivatedTagList.add(VALID_TAG_NEIGHBOURS);
         assertEquals(expectedActivatedTagList, activatedTagList);
     }
 
@@ -86,7 +86,7 @@ class ActivatedTagListTest {
         Tag sameNameDifferentCaseTag = new Tag("frIeNDs");
         activatedTagList.setTag(VALID_TAG_FRIENDS, sameNameDifferentCaseTag);
         ActivatedTagList expectedActivatedTagList = new ActivatedTagList();
-        expectedActivatedTagList.add(VALID_TAG_FRIENDS);
+        expectedActivatedTagList.add(sameNameDifferentCaseTag);
         assertEquals(expectedActivatedTagList, activatedTagList);
     }
 
@@ -104,7 +104,7 @@ class ActivatedTagListTest {
 
     @Test
     public void remove_tagDoesNotExist_throwsTagNotFoundException() {
-        assertThrows(NullPointerException.class, () -> activatedTagList.remove(VALID_TAG_FRIENDS));
+        assertThrows(TagNotFoundException.class, () -> activatedTagList.remove(VALID_TAG_FRIENDS));
     }
 
     @Test
