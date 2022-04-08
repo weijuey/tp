@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -92,6 +94,31 @@ public class UnassignTagCommandTest {
         UnassignTagCommand unassignTagCommand = new UnassignTagCommand(outOfBoundIndex, VALID_TAGNAME_TEST);
         String expectedMessage = String.format(UnassignTagCommand.MESSAGE_UNKNOWN_TAG, VALID_TAGNAME_TEST);
         assertCommandFailure(unassignTagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void executeInDetailedView_personTagged_success() {
+        Person personToRemoveTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToRemoveTag);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag removingTag = VALID_TAG_FRIENDS;
+        Person editedPerson = new PersonBuilder(personToRemoveTag).withoutTag(removingTag).build();
+        expectedModel.setPerson(personToRemoveTag, editedPerson);
+
+        UnassignTagCommand unassignTagCommand = new UnassignTagCommand(VALID_TAGNAME_FRIENDS);
+        CommandResult expectedResult = new CommandResult(String.format(UnassignTagCommand.MESSAGE_SUCCESS,
+                editedPerson), CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        assertDetailedViewCommandSuccess(unassignTagCommand, model, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void executeInDetailedView_personNotTagged_failure() {
+        Person personToRemoveTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToRemoveTag);
+        UnassignTagCommand unassignTagCommand = new UnassignTagCommand(VALID_TAGNAME_OWESMONEY);
+
+        assertDetailedViewCommandFailure(unassignTagCommand, model, UnassignTagCommand.MESSAGE_NOT_TAGGED);
     }
 
     @Test
