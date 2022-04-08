@@ -32,8 +32,9 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     /**
      * Creates a DeadlineCommand to add to specified {@code Person}.
+     *
      * @param targetIndex the index of the person specified.
-     * @param deadlines the date of the deadline.
+     * @param deadlines   the date of the deadline.
      */
     public DeadlineCommand(Index targetIndex, DeadlineList deadlines) {
         requireNonNull(targetIndex);
@@ -44,6 +45,7 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     /**
      * Creates a DeadlineCommand to add to {@code Person} in detailed view.
+     *
      * @param deadlines the date of the deadline.
      */
     public DeadlineCommand(DeadlineList deadlines) {
@@ -97,10 +99,22 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeadlineCommand // instanceof handles nulls
-                && targetIndex.equals(((DeadlineCommand) other).targetIndex))
-                && deadlines.equals(((DeadlineCommand) other).deadlines); // state check
+        boolean isIndexEqual = false;
+        if (other == this) {
+            return true; // short circuit if same object
+        }
+
+        if (!(other instanceof DeadlineCommand)) {
+            return false; // instanceof handles nulls
+        }
+
+        if (targetIndex == null || ((DeadlineCommand) other).targetIndex == null) {
+            isIndexEqual = targetIndex == ((DeadlineCommand) other).targetIndex;
+        } else {
+            isIndexEqual = targetIndex.equals(((DeadlineCommand) other).targetIndex);
+        }
+
+        return isIndexEqual && deadlines.equals(((DeadlineCommand) other).deadlines); // state check
     }
 
 }
