@@ -1,0 +1,17 @@
+@startuml
+!include ../style.puml
+
+Box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+
+Box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+[-> MainWindow : executeCommand("fav")
+activate MainWindow
+
+MainWindow -> LogicManager : executeInDetailedViewMode("fav")
+activate LogicManager
+
+@enduml

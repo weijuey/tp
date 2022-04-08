@@ -450,7 +450,7 @@ For the second challenge, since the MainWindow knows which panel it is displayin
 to parse the command differently.
 
 To illustrate the behaviour of the implementation, let's examine the process where the user passes
-"edit e/test@example.com", while the MainWindow is displaying the detailed contact view.
+"fav", while the MainWindow is displaying the detailed contact view.
 
 ### Enhancing data storage
 
