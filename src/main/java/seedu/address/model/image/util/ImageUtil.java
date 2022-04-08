@@ -94,10 +94,10 @@ public class ImageUtil {
      *
      * @return a sanitized {@code ImageDetailsList} object.
      */
-    public static ImageDetailsList sanitizeList(ImageDetailsList listToSanitize) {
+    public static ImageDetailsList sanitizeList(ImageDetailsList listToSanitize, Path pathToSanitize) {
         List<ImageDetails> sanitizedList = new ArrayList<>();
         for (ImageDetails img : listToSanitize) {
-            if (fileExists(img.getImageFile(), ImageDetails.CONTACT_IMAGES_PATH)) {
+            if (fileExists(img.getImageFile(), pathToSanitize)) {
                 sanitizedList.add(img);
             }
         }
