@@ -93,9 +93,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_detailedViewCommands_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseCommand("deldl 3"));
+                -> parser.parseCommand(DeleteDeadlineCommand.COMMAND_WORD + " 3"));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseCommand("delnote 2"));
+                -> parser.parseCommand(DeleteNoteCommand.COMMAND_WORD + " 2"));
     }
 
     @Test
@@ -156,14 +156,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseDetailedViewCommand_note() throws Exception {
-        String note = "r/likes green";
+        String note = "likes green";
         NoteCommand command = (NoteCommand) parser.parseDetailedViewCommand(NoteCommand.COMMAND_WORD
-                + " " + note);
+                + " " + CliSyntax.PREFIX_NOTE + note);
         assertEquals(command, new NoteCommand(note));
 
         // same command with index given -> index ignored
         NoteCommand commandWithIndex = (NoteCommand) parser.parseDetailedViewCommand(NoteCommand.COMMAND_WORD
-                + " 2 " + note);
+                + " 2 " + CliSyntax.PREFIX_NOTE + note);
         assertEquals(commandWithIndex, command);
     }
 
@@ -208,7 +208,7 @@ public class AddressBookParserTest {
         String tag = "tag";
         UnassignTagCommand command = (UnassignTagCommand) parser.parseDetailedViewCommand(
                 UnassignTagCommand.COMMAND_WORD + " " + tag);
-        assertEquals(command, new AssignTagCommand(tag));
+        assertEquals(command, new UnassignTagCommand(tag));
 
         // same command with index given -> index ignored
         UnassignTagCommand commandWithIndex = (UnassignTagCommand) parser.parseDetailedViewCommand(
@@ -227,5 +227,25 @@ public class AddressBookParserTest {
         assertEquals(parsedCommand, detailedViewParsedCommand);
     }
 
-    
+    @Test
+    public void parseDetailedViewCommand_listCommands_throwException() {
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(ClearCommand.COMMAND_WORD));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(DeleteCommand.COMMAND_WORD + " 1"));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(DeleteTagCommand.COMMAND_WORD + " tag"));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(FindCommand.COMMAND_WORD + " alex"));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(FindTagCommand.COMMAND_WORD + " tag"));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(ListFavouritesCommand.COMMAND_WORD));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(ListImportantCommand.COMMAND_WORD));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(SortsCommand.COMMAND_WORD + " address"));
+        assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
+                -> parser.parseDetailedViewCommand(ViewCommand.COMMAND_WORD + " 1"));
+    }
 }
