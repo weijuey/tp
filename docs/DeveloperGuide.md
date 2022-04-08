@@ -426,7 +426,31 @@ Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned 
 
 ### Contact view feature
 
-_*To be added*_
+The detailed contact view feature is a new component added to the UI. The detailed view would replace the list of
+contacts when it is requested. While in this view, commands to edit the contact no longer need to specify an index,
+since it is implied that the contact to edit is the one being displayed. Thus, implementing the feature required
+resolving the following two challenges:
+
+1. How to tell the UI whether to show the list panel or the detailed view panel.
+2. How to support alternative command formats for modifying the contact in detailed view
+
+#### Implementation
+
+The first challenge is particularly complex, as switching between panel views is done through commands, which are
+executed by Logic, and modify Model. In the current design, commands are not aware of UI.
+
+However, the MainWindow class does have some responsibilities to fulfill in the process of command execution. It handles
+the special cases where the command is either ExitCommand or HelpCommand, and closes the main window or displays the
+help window respectively. Building upon this behaviour, the CommandResult, produced by every Command after its
+execution, can be responsible for signalling to the MainWindow to change view. The main draw of this implementation is
+that MainWindow continues to solely handle UI-related responsibilities, while commands will handle the logic of what
+should be displayed, hence preserving the Single-Responsibility Principle.
+
+For the second challenge, since the MainWindow knows which panel it is displaying, the LogicManager can be informed of
+to parse the command differently.
+
+To illustrate the behaviour of the implementation, let's examine the process where the user passes
+"edit e/test@example.com", while the MainWindow is displaying the detailed contact view.
 
 ### Enhancing data storage
 
