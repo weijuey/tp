@@ -2,14 +2,14 @@
 layout: page title: User Guide
 ---
 
-d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a 
-Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, d'Intérieur can get your contact management tasks done faster than traditional GUI apps.
 
 If you utilize other online applications for interior designing and lack a centralized, robust, and efficient customer
 management tool, this application will be able to meet your needs.
 
-In this user guide, we will work you through the basic use cases and commands of the application, so that you can 
+In this user guide, we will work you through the basic use cases and commands of the application, so that you can
 quickly get started and make full of use of what the application has to offer.
 
 ## Table of Contents
@@ -116,7 +116,7 @@ Before going into the commands, take note of how the command format is given in 
 
 ### The UI
 
-The UI consists of the command line to enter your commands, the feedback box which displays textual information about 
+The UI consists of the command line to enter your commands, the feedback box which displays textual information about
 the result of the command execution, and the contact display.
 
 There are 2 main ways to view contacts.
@@ -129,7 +129,7 @@ Format: `list`
 
 ### Viewing a contact's full details : `view`
 
-Allows you to view the full details of the contact, as some are hidden in the contact list. This command only works in 
+Allows you to view the full details of the contact, as some are hidden in the contact list. This command only works in
 list view.
 
 Format `view INDEX`
@@ -160,7 +160,7 @@ Format: `exit`
 
 ### Updating contacts
 
-There is a set of information that you can save for a contact. This section contains the commands for 
+There is a set of information that you can save for a contact. This section contains the commands for
 adding contacts and modifying their information.
 
 ### Adding a contact : `add`
@@ -400,7 +400,7 @@ Example:
 
 ### Adding high importance flag : `impt`
 
-Adds the contact to your list of contacts with high importance and a red flag will appear beside the contact's name to indicate that. 
+Adds the contact to your list of contacts with high importance and a red flag will appear beside the contact's name to indicate that.
 This command can be used in detailed view.
 
 Format: `impt INDEX`
@@ -558,7 +558,7 @@ Example:
 Clears all entries from the address book. This command can only be used in list view.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this 
+There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this
 command only for clearing the sample data provided in the beginning.
 </div>
 
@@ -566,7 +566,7 @@ Format: `clear`
 
 ### Navigating your contact list
 
-As your contact list grows larger, you may start having trouble finding the contact you are looking for. 
+As your contact list grows larger, you may start having trouble finding the contact you are looking for.
 However, with these commands to aid you, finding contacts will still be easy and intuitive.
 
 ### Listing Favourites : `favourites`
@@ -629,7 +629,7 @@ Find contacts based on the selected tags given by keywords to search for. This c
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
-* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`  
+* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`
   e.g.
 
   * `findtag friends` adds `friends` as a tag to be searched for
@@ -648,8 +648,7 @@ Examples:
 
 * `findtag Friends` returns contacts with tag `Friends`
   ![result findtag Friends](images/findtag/findtag-friends.png)
-* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by 
-* at least `Friends`, `InProgress` and `AlmostFinished`
+* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by at least `Friends`, `InProgress` and `AlmostFinished`
   ![result findtag InProgress AlmostFinished](images/findtag/findtag-friends-inprogress-almostfinished.png)
 
 ### Saving the data
