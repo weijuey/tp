@@ -2,13 +2,17 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -42,6 +46,22 @@ class NoteCommandTest {
         String expectedMessage = String.format(NoteCommand.MESSAGE_NO_UPDATE_TO_NOTES, personToEdit);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, model);
+    }
+
+    @Test
+    public void executeInDetailedView_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToEdit);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withNotes(List.of(VALID_NOTE)).build();
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.setDetailedContactView(editedPerson);
+
+        NoteCommand noteCommand = new NoteCommand(VALID_NOTE);
+        CommandResult expectedResult = new CommandResult(String.format(NoteCommand.MESSAGE_UPDATE_NOTE_SUCCESS,
+                editedPerson), CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        assertDetailedViewCommandSuccess(noteCommand, model, expectedResult, expectedModel);
     }
 
     @Test
