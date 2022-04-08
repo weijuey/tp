@@ -28,7 +28,7 @@ public class Deadline implements Comparable<Deadline> {
      */
     public Deadline(String description, String dateAsString) {
         requireNonNull(dateAsString);
-        checkArgument(isValidDeadline(description, dateAsString));
+        checkArgument(isValidDeadline(description, dateAsString), MESSAGE_CONSTRAINTS);
         if (dateAsString.equals(NO_DEADLINE_PLACEHOLDER)) {
             new Deadline();
         }
@@ -114,7 +114,8 @@ public class Deadline implements Comparable<Deadline> {
 
         try {
             date = FORMATTER.parse(dateAsString);
-            return true;
+
+            return date.before(FORMATTER.parse("01/01/10000"));
         } catch (java.text.ParseException e) {
             return false;
         }
