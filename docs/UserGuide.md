@@ -146,7 +146,7 @@ You may check out the summary table of commands for the overview.
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Interiéur.
+Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Intérieur.
 
 Format: `help`
 

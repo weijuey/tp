@@ -708,8 +708,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AddressBook shows an error message.
 
       Use case resumes at step 1.
+    
+**UC08: Updating contact information in detailed view**
 
-*{More to be added}*
+1. User requests to view a contact's full information.
+2. d'Intérieur shows the contact's full information.
+3. User edits the contact's information.
+4. d'Intérieur updates the contact's information and displays it. <br>
+  Steps 3 and 4 repeats until the user has updated the contact as they have needed.
+5. User requests to list contacts.
+6. d'Intérieur shows the list of contacts
+
+  Use case ends.
+
+   *{More to be added}*
 
 ### Non-Functional Requirements
 
