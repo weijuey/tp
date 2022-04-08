@@ -15,8 +15,30 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AssignTagCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.DeadlineCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDeadlineCommand;
+import seedu.address.logic.commands.DeleteNoteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FavouriteCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTagCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HighImportanceCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFavouritesCommand;
+import seedu.address.logic.commands.ListImportantCommand;
+import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.SortsCommand;
+import seedu.address.logic.commands.UnassignTagCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -93,9 +115,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_detailedViewCommands_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseCommand(DeleteDeadlineCommand.COMMAND_WORD + " 3"));
+            -> parser.parseCommand(DeleteDeadlineCommand.COMMAND_WORD + " 3"));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseCommand(DeleteNoteCommand.COMMAND_WORD + " 2"));
+            -> parser.parseCommand(DeleteNoteCommand.COMMAND_WORD + " 2"));
     }
 
     @Test
@@ -230,22 +252,22 @@ public class AddressBookParserTest {
     @Test
     public void parseDetailedViewCommand_listCommands_throwException() {
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(ClearCommand.COMMAND_WORD));
+            -> parser.parseDetailedViewCommand(ClearCommand.COMMAND_WORD));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(DeleteCommand.COMMAND_WORD + " 1"));
+            -> parser.parseDetailedViewCommand(DeleteCommand.COMMAND_WORD + " 1"));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(DeleteTagCommand.COMMAND_WORD + " tag"));
+            -> parser.parseDetailedViewCommand(DeleteTagCommand.COMMAND_WORD + " tag"));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(FindCommand.COMMAND_WORD + " alex"));
+            -> parser.parseDetailedViewCommand(FindCommand.COMMAND_WORD + " alex"));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(FindTagCommand.COMMAND_WORD + " tag"));
+            -> parser.parseDetailedViewCommand(FindTagCommand.COMMAND_WORD + " tag"));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(ListFavouritesCommand.COMMAND_WORD));
+            -> parser.parseDetailedViewCommand(ListFavouritesCommand.COMMAND_WORD));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(ListImportantCommand.COMMAND_WORD));
+            -> parser.parseDetailedViewCommand(ListImportantCommand.COMMAND_WORD));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(SortsCommand.COMMAND_WORD + " address"));
+            -> parser.parseDetailedViewCommand(SortsCommand.COMMAND_WORD + " address"));
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
-                -> parser.parseDetailedViewCommand(ViewCommand.COMMAND_WORD + " 1"));
+            -> parser.parseDetailedViewCommand(ViewCommand.COMMAND_WORD + " 1"));
     }
 }

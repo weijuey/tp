@@ -100,7 +100,7 @@ public class DeadlineCommandTest {
     }
 
     @Test
-    public void executeInDetailedView_success() throws ParseException {
+    public void executeInDetailedView_validDeadline_success() throws ParseException {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         model.setDetailedContactView(personToEdit);
 

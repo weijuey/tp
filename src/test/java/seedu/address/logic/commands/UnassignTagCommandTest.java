@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -105,6 +105,7 @@ public class UnassignTagCommandTest {
         Tag removingTag = VALID_TAG_FRIENDS;
         Person editedPerson = new PersonBuilder(personToRemoveTag).withoutTag(removingTag).build();
         expectedModel.setPerson(personToRemoveTag, editedPerson);
+        expectedModel.setDetailedContactView(editedPerson);
 
         UnassignTagCommand unassignTagCommand = new UnassignTagCommand(VALID_TAGNAME_FRIENDS);
         CommandResult expectedResult = new CommandResult(String.format(UnassignTagCommand.MESSAGE_SUCCESS,
