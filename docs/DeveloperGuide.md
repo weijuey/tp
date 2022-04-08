@@ -450,12 +450,15 @@ For the second challenge, since the `MainWindow` knows which panel it is display
 informed to parse the command differently.
 
 To illustrate the behaviour of the implementation, let's examine the process where the user passes
-`fav`, while the MainWindow is displaying the detailed contact view.
+`note r/red`, while the MainWindow is displaying the detailed contact view.
 
-Step 1. The user gives the command `fav`. `MainWindow` realises it is in detailed view, and calls
+Step 1. The user gives the command `note r/red`. `MainWindow` realises it is in detailed view, and calls
 `LogicManager::executeInDetailedViewMode`.
 
 ![DetailedViewExecutionState1](images/detailedview/DetailedViewExecutionState1.png)
+
+Step 2. `LogicManager` calls `AddressBookParser::parseInDetailedViewContext` to parse the user input in a different
+way. The method returns a `DetailedViewExecutable`.
 
 ### Enhancing data storage
 
