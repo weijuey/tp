@@ -41,4 +41,7 @@ deactivate NoteCommandParser
 NoteCommandParser -[hidden]-> NoteCommandParser
 destroy NoteCommandParser
 
+ABParser -> LogicManager : noteCommand
+deactivate ABParser
+
 @enduml
