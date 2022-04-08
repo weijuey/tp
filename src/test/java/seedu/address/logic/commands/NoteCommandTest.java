@@ -49,7 +49,7 @@ class NoteCommandTest {
     }
 
     @Test
-    public void executeInDetailedView_success() {
+    public void executeInDetailedView_addValidNote_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         model.setDetailedContactView(personToEdit);
 
@@ -62,6 +62,18 @@ class NoteCommandTest {
         CommandResult expectedResult = new CommandResult(String.format(NoteCommand.MESSAGE_UPDATE_NOTE_SUCCESS,
                 editedPerson), CommandResult.SpecialCommandResult.DETAILED_VIEW);
         assertDetailedViewCommandSuccess(noteCommand, model, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void executeInDetailedView_addInvalidNote_noChange() {
+        NoteCommand noteCommand = new NoteCommand(INVALID_NOTE);
+
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToEdit);
+        CommandResult expectedResult = new CommandResult(String.format(NoteCommand.MESSAGE_NO_UPDATE_TO_NOTES,
+                personToEdit), CommandResult.SpecialCommandResult.DETAILED_VIEW);
+
+        assertDetailedViewCommandSuccess(noteCommand, model, expectedResult, model);
     }
 
     @Test
