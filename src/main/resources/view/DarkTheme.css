@@ -98,29 +98,33 @@
 }
 
 .list-cell {
-    -fx-label-padding: 0 0 0 0;
+    -fx-label-padding: 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 10px 5px;
 }
 
 .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
+    -fx-background-radius: 20px;
 }
 
 .list-cell:filled:odd {
     -fx-background-color: #515658;
+    -fx-background-radius: 20px;
 }
 
 .list-cell:filled:selected {
     -fx-background-color: #424d5f;
+    -fx-background-radius: 20px;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-radius: 20px;
+    -fx-padding: 4px;
 }
 
 .list-cell .label {
+    -fx-padding: 1px 0;
     -fx-text-fill: white;
 }
 
@@ -315,7 +319,7 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 0px;
 }
 
 #commandTypeLabel {
