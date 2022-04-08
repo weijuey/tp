@@ -541,10 +541,15 @@ Format: `sort CRITERIA`
 
 * `CRITERIA` should be written in lower-case.
 
-Examples:
-
-* `sort name` sorts list by name alphabetically.
-* `sort fav` sorts list so that favourite contacts are on top of the list.
+| `CRITERIA` | Comparator                                           |
+|------------|------------------------------------------------------|
+| `address`  | Alphabetically sorted                                |
+| `deadline` | Early dates to later dates                           |
+| `email`    | Alphabetically sorted                                |
+| `fav`      | Favourited contacts to not favourited contacts       |
+| `impt`     | HighImportant contacts to not HighImportant contacts |
+| `name`     | Alphabetically sorted                                |
+| `phone`    | Numerically sorted                                   |
 
 ### Locating contacts by name : `find`
 
