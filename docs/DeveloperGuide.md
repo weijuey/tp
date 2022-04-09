@@ -380,7 +380,7 @@ Step 3. The command execution continues on to replace the existing person object
 
 ![ImportanceState2](images/high-importance-flag/ImportanceState2.png)
 
-Step 4. The user decides that they want to see only their favourite contacts. The `impts` command will execute, passing the `PersonHasHighImportancePredicate` into the `Model#updateFilteredPersonList`.
+Step 4. The user decides that they want to see only their high importance contacts. The `impts` command will execute, passing the `PersonHasHighImportancePredicate` into the `Model#updateFilteredPersonList`.
 
 The following sequence diagram shows how the feature works:
 
@@ -390,7 +390,7 @@ The following sequence diagram shows how the feature works:
 
 **Aspect: How important and list important commands execute:**
 
-* **Alternative 1 (current choice):** Each person responsible for their own favourite state
+* **Alternative 1 (current choice):** Each person responsible for their own high importance state
     * Pros:
         * Easy to implement.
         * Easy to check high importance status of contact.
