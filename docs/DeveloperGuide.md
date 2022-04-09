@@ -470,6 +470,10 @@ list as well as in the detailed contact view. Finally, the `CommandResult` produ
 
 ![DetailedViewExecutionState3](images/detailedview/DetailedViewExecutionState3.png)
 
+Step 4. `LogicManager` returns the same `CommandResult` to `MainWindow`. `MainWindow` checks and finds that it has
+to call its `handleDetailedView` method. It continues to show the detailed view panel.
+
+![DetailedViewExecutionState4](images/detailedview/DetailedViewExecutionState4.png)
 
 ### Enhancing data storage
 
