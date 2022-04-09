@@ -475,6 +475,11 @@ to call its `handleDetailedView` method. It continues to show the detailed view 
 
 ![DetailedViewExecutionState4](images/detailedview/DetailedViewExecutionState4.png)
 
+To summarise, here is a generalised sequence diagram for a command execution in detailed view mode, with some details
+omitted.
+
+![DetailedViewGeneralExecution](images/detailedview/DetailedViewGeneralExecution.png)
+
 ### Enhancing data storage
 
 ### \[Proposed\] Undo/redo feature
