@@ -380,7 +380,9 @@ _{more aspects and alternatives to be added}_
 
 The find tag feature is used when a user is interested in finding contacts who have a certain `Tag`. Each `Person` has a set of `Tags` which contains unique `Tags` since each `Person` should not have more than 1 of the same tag.
 
-This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
+This feature is facilitated by `FindTagCommand`, which makes use of a `List` of keywords that the `TagContainsKeywordPredicate` uses to checks if the `Tag` set of a `Person` contains all the tag names in the current `ActivatedTagList` which contains all selected keywords used as filter (case-insensitive).
+
+Each use of the find tag feature adds the given keyword(s) into the `ActivatedTagList` that serves as a filter for selected tags. The keywords in the `ActivatedTagList` are then used to create the `TagContainsKeywordPredicate` to check the `Tag` set of each `Person`. The keywords in the `ActivatedTagList` is only cleared when `list` command is called.
 
 The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list.
 
@@ -398,11 +400,13 @@ Step 2. The user executes the command `findtag friends` to find contacts with th
 
 Step 3. The AddressBookParser parses the command `findtag friends` and creates a `FindTagCommandParser` to parse the keyword `friends`.
 
-Step 4. The `TagContainsKeywordPredicate` is created and passed onto the constructor of `FindTagCommand` to create a new `FindTagCommand` object.
+Step 4. The `FindTagCommand` object is created with the given keyword `friends` as a `Singleton List`.
 
-Step 5. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
+Step 5. The current tag names in the `ActivatedTagList` are then retrieved, creating a new `TagContainsKeywordPredicate`.  
 
-Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
+Step 6. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
+
+Step 7. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
 
 ![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
 
