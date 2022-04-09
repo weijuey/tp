@@ -637,7 +637,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The label requested does not currently exist in d'Intérieur.
 
-  * To be added
+   * 3b1. Create a label
+
+     
 
 **UC04: Filter contacts using labels**
 
@@ -652,7 +654,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given label does not exist.
 
-  * To be added
+  * <ins>Add a label to d'Intérieur (UC08)</ins>
+  
+    Use case ends.
+  
 
 **UC05: Adding a note to a contact**
 
@@ -713,6 +718,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**UC08: Add a label to d'Intérieur**
+
+**MSS**
+
+1. User requests to create a label to label contacts in the contact list.
+2. d'Intérieur adds the label to the contact list.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters non-alphanumeric name or nothing as the name for the label.
+
+    * 1a1. d'Intérieur alerts the user that the given name is invalid.
+
+      Use case ends.
+
+
+**UC09: Deleting a label in d'Intérieur**
+
+**MSS**
+
+1. User requests to delete one or more labels in the contact list.
+2. d'Intérieur deletes the given labels and <ins>unassign (UC10)</ins> the labels from every contact.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters all labels that do not exist.
+
+    * 1a1. d'Intérieur alerts the user that the given labels do not exist.
+
+      Use case ends.
+
+* 1b. Users enter some labels that do not exist.
+
+    * 1b1. d'Intérieur alerts the user that only some labels will be deleted.
+
+      Use case resumes at step 2.
+
+**UC10: Unassign a label from a contact**
+
+**MSS**
+
+1. User requests to unassign a label from a specified contact.
+2. d'Intérieur removes the given label from the specified contact.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The given label does not exist.
+
+    * <ins>Add a label to d'Intérieur (UC08)</ins>
+
+      Use case ends.
+    
 *{More to be added}*
 
 ### Non-Functional Requirements
