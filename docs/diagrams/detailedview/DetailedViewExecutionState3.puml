@@ -46,4 +46,7 @@ deactivate CommandResult
 
 NoteCommand -> LogicManager : commandResult
 
+NoteCommand -[hidden]-> NoteCommand
+destroy NoteCommand
+
 @enduml
