@@ -99,7 +99,7 @@ public class SortCommandTest {
         SortsCommand command = new SortsCommand("impt");
         expectedModel.sortFilteredPersonListByHighImportance();
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getSortedPersonList());
+        assertEquals(Arrays.asList(BENSON, ELLE, ALICE, CARL, DANIEL, FIONA, GEORGE), model.getSortedPersonList());
     }
 
     @Test
