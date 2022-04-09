@@ -478,6 +478,14 @@ Example:
 * `deadline d/Lunch meeting 03/06/2022` adds a deadline with description `Lunch meeting` and date `03/06/2022` to the
   currently viewed contact.
 
+Interface before `deadline` command in detailed view mode:
+
+![before 'deadline d/Lunch meeting 03/06/2022'](images/BeforeDetailedViewDeadlineCommand.png)
+
+Interface after `deadline` command in detailed view mode:
+
+![after 'deadline d/Lunch meeting 03/06/2022'](images/AfterDetailedViewDeadlineCommand.png)
+
 ### Deleting a deadline from a contact : `deldl`
 
 Deletes the deadline under the contact in detailed view. This command cannot be used in list view.
@@ -490,6 +498,14 @@ Example:
 
 * `view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
   notes list of the contact
+
+Interface before `deldl` command:
+
+![before 'deldl 2'](images/BeforeDeleteDeadlineCommand.png)
+
+Interface after `deldl` command:
+
+![after 'deldl 2'](images/AfterDeleteDeadlineCommand.png)
 
 ### Adding additional notes to a contact : `note`
 
