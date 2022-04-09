@@ -11,14 +11,14 @@ d'Intérieur is a desktop address book application, designed with interior desig
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to add address as an optional field.
-    * Justification: This feature was done because it is not critical for an interior designer to know a client's address. 
+    * Justification: This feature was done because it is not critical for an interior designer to know a client's address.
 
-* **New Feature**: Added a high importance flag icon which appears beside the contact name 
+* **New Feature**: Added a high importance flag icon which appears beside the contact name
   * What it does: Each contact will have an unlit flag beside the contact name by default. When activated, it turns red.
   * Justification: This feature is used to indicate which contacts are of high importance, whereby there are some important concerns that the interior designers should take note of for each particular contact.
   * Highlights: This feature should be used in tandem with the `note` feature for best results as the `note` feature can be used to write down key concerns that the interior designers should take note of for a particular contact.
 
-* **New Feature**: Added a list important contacts command. 
+* **New Feature**: Added a list important contacts command.
   * What it does: It acts like a filter to only display contacts who have the red flag lit up beside their name .
   * Justification: This feature will help interior designers pay special attention to those contacts listed so that their needs or concerns will be met.
 
@@ -36,12 +36,10 @@ Given below are my contributions to the project.
         * Updated description for the commands `add`, `help`, `impt` and `impts`: [\#72]()
         * Updated command summary for the commands `add`, `impt` and `impts`: [\#74]()
     * Developer Guide:
-        * Added description for the enhanced `add` command and added code snippet  
+        * Added description for the enhanced `add` command and added code snippet
         * Added implementation details and UML diagram for the `high importance flag` feature.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#20](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/20), [\#99](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/99)
     * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/244), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/111)
     * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-
-* _{you can add/remove categories in the list above}_

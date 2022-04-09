@@ -129,7 +129,7 @@ Format: `list`
 
 ### Viewing a contact's full details : `view`
 
-Allows you to view the full details of the contact, as some are hidden in the contact list. This command **only works in 
+Allows you to view the full details of the contact, as some are hidden in the contact list. This command **only works in
 list view**.
 
 Format `view INDEX`
@@ -179,7 +179,7 @@ You can add a contact to the address book with the **address as an optional fiel
 
 <div markdown="block" class="alert alert-info">
 
-Your contacts are uniquely identified by their `NAME` which is case-sensitive.</br> 
+Your contacts are uniquely identified by their `NAME` which is case-sensitive.</br>
 Example: `Alex Yeoh` is different from `alex yeoh`
 
 </div>
@@ -251,7 +251,7 @@ Format: `tag TAGNAME`
 * The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created.
 * `TAGNAME` must be alphanumeric. e.g. `Hello`, `Friends`, `Colleagues`
 * `TAGNAME` such as `-1`, `Sub Contractors` are not allowed. i.e. non-alphanumeric characters, including spaces.
-* To create a tag named `Sub Contractors`, eliminate the whitespace in between in order for it to be a valid tag.  
+* To create a tag named `Sub Contractors`, eliminate the whitespace in between in order for it to be a valid tag.
   e.g. `SubContractors`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -334,10 +334,10 @@ Example:
 * `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`.
   * Before using the command `unassign 1 Friends`
   ![before unassign 1 Friends](images/unassign-tag/before-unassign-1-friends.png)
-  
+
   * `unassign 1 Friends`
   ![result for unassign 1 Friends](images/unassign-tag/unassign-1-friends.png)
-  
+
 
 Format in detailed view: `unassign TAGNAME`
 
@@ -346,7 +346,7 @@ Example:
 * `unassign client` removes the tag `client` from the currently viewed contact.
   * `view 1`
   ![result for view 1](images/unassign-tag/view-1.png)
-  
+
   * `unassign client`
   ![result for unassign client](images/unassign-tag/view-unassign-client.png)
 
@@ -367,24 +367,24 @@ Examples:
   * Before using the command `deltag friends`:
   ![before deltag friends](images/del-tag/before-deltag-friends.png)
 
-  * `deltag Friends` 
+  * `deltag Friends`
   ![result for deltag friends](images/del-tag/deltag-friends.png)
-  
+
 * `deltag friends colleagues` deletes the tag `friends` and `colleagues`
 
   * Before using the command `deltag friends colleagues`
   ![before deltag friends colleagues](images/del-tag/before-deltag-friends-colleagues.png)
-  
+
   * `deltag friends colleagues`
   ![result for deltag friends colleagues](images/del-tag/deltag-friends-colleagues.png)
-  
+
 * `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
   * Before using the command `deltag friends colleagues`
   ![before deltag friends colleagues not exist](images/del-tag/before-deltag-friends-colleagues-not-exist.png)
-  
+
   * `deltag friends colleagues`
   ![result for deltag friends colleagues, colleagues not exist](images/del-tag/deltag-friends-colleagues-not-exist.png)
-  
+
 * `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
 ![result for deltag colleagues](images/del-tag/deltag-colleagues-not-exist.png)
 
@@ -575,7 +575,7 @@ Example:
 Clears all entries from the address book. This command can **only be used in list view**.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this 
+There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this
 command **only for clearing the sample data provided in the beginning**.
 </div>
 
