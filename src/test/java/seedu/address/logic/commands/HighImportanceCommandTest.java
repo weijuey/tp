@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -77,6 +78,23 @@ class HighImportanceCommandTest {
         HighImportanceCommand highImportanceCommand = new HighImportanceCommand(outOfBoundIndex);
 
         assertCommandFailure(highImportanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void executeInDetailedView_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToEdit);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withHighImportance("true").build();
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.setDetailedContactView(editedPerson);
+
+        HighImportanceCommand highImportanceCommand = new HighImportanceCommand();
+        CommandResult expectedResult = new CommandResult(String.format(
+                HighImportanceCommand.MESSAGE_CHANGE_HIGH_IMPORTANCE_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        assertDetailedViewCommandSuccess(highImportanceCommand, model, expectedResult, expectedModel);
     }
 
     @Test
