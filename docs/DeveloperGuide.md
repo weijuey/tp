@@ -372,7 +372,7 @@ Step 1. When a user is created, they are automatically assigned `NOT_HIGH_IMPORT
 
 ![ImportanceState0](images/high-importance-flag/ImportanceState0.png)
 
-Step 2. The user executes `impt 1` command to change the high importance status of the 1st person in the address book. The `impt` command executes and determines the current `highImportanceStatus` of the contact (which in this case is `NOT_FAVOURITE`). It then calls the private helper method `createFavouritedPerson` to create a copy of the target contact, except with their `highImportanceStatus` now pointing to the opposite `highImportanceStatus` value (which will be `HIGH_IMPORTANCE`).
+Step 2. The user executes `impt 1` command to change the high importance status of the 1st person in the address book. The `impt` command executes and determines the current `highImportanceStatus` of the contact (which in this case is `NOT_HIGH_IMPORTANCE`). It then calls the private helper method `createHighImportancePerson` to create a copy of the target contact, except with their `highImportanceStatus` now pointing to the opposite `highImportanceStatus` value (which will be `HIGH_IMPORTANCE`).
 
 ![ImportanceState1](images/high-importance-flag/ImportanceState1.png)
 

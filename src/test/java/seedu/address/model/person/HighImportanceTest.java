@@ -15,7 +15,7 @@ class HighImportanceTest {
 
     @Test
     void isValidHighImportance() {
-        // null favourite
+        // null high importance value
         assertThrows(NullPointerException.class, () -> HighImportance.isValidHighImportance(null));
 
         // invalid high importance values
@@ -30,6 +30,7 @@ class HighImportanceTest {
         assertFalse(HighImportance.isValidHighImportance("FALSE")); // capitalized boolean string
         assertFalse(HighImportance.isValidHighImportance("TRUE")); // capitalized boolean string
 
+        // valid high importance values
         assertTrue(HighImportance.isValidHighImportance("false"));
         assertTrue(HighImportance.isValidHighImportance("true"));
     }
