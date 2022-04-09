@@ -43,14 +43,14 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=glennljw&breakdown=true)
 
 * **Project management**:
-  * Managed releases `-` - `-` (- releases) on GitHub
+  * Managed releases `1.2` - `1.4` (5 releases) on GitHub
   * Added photos and details of team members [\#11](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/11)
 
 * **Enhancements to existing features**:
-  * Morphed existing `Tag` to be a class of its own
+  * Enhanced existing `Tag` to be a class of its own instead of a `String`.
   * Allowed `add` feature to create and assign `Tag` upon adding a new contact. [\#83](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/83)
-  * Removed the editing tags functionality in the `edit` feature, abstracting this feature into an `assign` and `unassign` feature for tags. [\#83](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/83)
-  * Modified the help window to display useful links to different sections of the User Guide. [\#190](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/190)
+  * Removed the editing tag functionality in the `edit` feature, abstracting this feature into an `assign` and `unassign` feature for tags. [\#83](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/83)
+  * Modified the help window by improving the GUI for displaying useful links to different sections of the User Guide. [\#190](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/190)
 
 * **Documentation**:
   * User Guide:
@@ -65,14 +65,10 @@ Given below are my contributions to the project.
       * Delete Tag
       * Find Tag
       * Unassign Tag
-    * Added use cases **UC**, **UC**, **UC**, **UC**
+    * Added sequence diagram in the implementation details of Find Tag.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
+  * PRs reviewed (with non-trivial review comments): [\#87](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/87), [\#89](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/89), [\#196](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/196)
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028047189), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028530974), [3](), [4]())
 
-* **Tools**:
-  * `To be added`
-  * `To be added`
 
-* _{you can add/remove categories in the list above}_
