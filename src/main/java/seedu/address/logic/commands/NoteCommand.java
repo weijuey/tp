@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -129,7 +130,7 @@ public class NoteCommand extends Command implements DetailedViewExecutable {
         }
 
         NoteCommand e = (NoteCommand) other;
-        return index.equals(e.index)
+        return Objects.equals(this.index, e.index)
                 && note.equals(e.note);
     }
 }

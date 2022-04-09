@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -74,6 +74,23 @@ class FavouriteCommandTest {
         FavouriteCommand favouriteCommand = new FavouriteCommand(outOfBoundIndex);
 
         assertCommandFailure(favouriteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void executeInDetailedView_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToEdit);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withFavourite("true").build();
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.setDetailedContactView(editedPerson);
+
+        FavouriteCommand favouriteCommand = new FavouriteCommand();
+        CommandResult expectedResult = new CommandResult(String.format(
+                FavouriteCommand.MESSAGE_FAVOURITE_PERSON_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        assertDetailedViewCommandSuccess(favouriteCommand, model, expectedResult, expectedModel);
     }
 
     @Test

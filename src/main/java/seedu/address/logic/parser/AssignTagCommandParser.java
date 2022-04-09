@@ -43,11 +43,14 @@ public class AssignTagCommandParser implements Parser<AssignTagCommand>,
     @Override
     public AssignTagCommand parseInDetailedViewContext(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        String[] inputs = trimmedArgs.split("\\s+");
+        String tag = inputs[inputs.length - 1];
+
+        if (tag.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignTagCommand.MESSAGE_USAGE));
         }
 
-        return new AssignTagCommand(trimmedArgs);
+        return new AssignTagCommand(tag);
     }
 }
