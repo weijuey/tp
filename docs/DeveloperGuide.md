@@ -480,6 +480,40 @@ omitted.
 
 ![DetailedViewGeneralExecution](images/detailedview/DetailedViewGeneralExecution.png)
 
+#### Design Considerations
+
+To support this implementation, on top of the Command design pattern that was in place, the `DetailedViewExecutable`
+interface was added to enforce which commands can run in detailed view mode. This implementation does not preserve the
+Command design pattern. Notice that commands have to implement two separate kinds of execute method, when the ideal
+case is that commands are simply executed by `LogicManager`, without having to intently call two different kinds of
+`execute`.
+
+This can be resolved by having an intermediate abstract class `DetailedViewExecutableCommand`, that extends `Command`
+and is inherited by concrete `Command` classes. `LogicManager` will parse for a `DetailedViewExecutableCommand`, and
+call its `execute` method.
+
+However, there are also cons for such a method. The following table gives some comparisons.
+
+| Aspect                    | Interface forcing additional `execute` methods (current choice)                                      | Abstract Class allowing singular `execute` method                                                                     |
+|---------------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Effort to change          | More lines of code required implementing multiple methods with some repetition                       | Less lines of code as some code is common between different execution and can be placed in one method                 |
+| Extensibility             | Easy to extend to include more types of command using a new interface and implementing a new method  | Difficult to extend as adding existing commands to a new type requires rewriting existing code and regression testing |
+| Simplicity                | Easy to reason as command execution is isolated to each method and depends solely on which is called | Difficult to reason as command execution depends on potentially many external factors                                 |
+
+However, one area that both implementations can improve is interacting with Model. Due to the pre-existing requirements,
+commands only needed `Index` as a way to retrieve a `Person` object from `Model`. For commands running in detailed view
+mode, this `Index` was not required, but retrieving a `Person` explicitly called `getDetailedContactViewPerson` of the
+`ModelManager`.
+
+A more ideal solution is for commands to have an `Identifier` field, which can retrieve a `Person` from a `Model`. The
+`Identifier` can be an `Index`, which will be a superclass, or a different superclass that will retrieve the `Person`
+in detailed view. Do note that `Index` is a utility class for indexing and is used in places other than identifying
+`Person` in the contact list. You should implement a different class to behave like an index for this usage so as to
+preserve Single Responsibility Principle.
+
+This feature has potential to be even more useful. If commands are enhanced to support operating on multiple `Person`
+at once, a new `Identifier` can be implemented to support this, thus changes to commands will be minimal.
+
 ### Enhancing data storage
 
 ### \[Proposed\] Undo/redo feature
