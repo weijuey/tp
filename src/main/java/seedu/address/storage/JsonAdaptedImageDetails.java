@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
-
 import java.io.File;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -26,7 +24,7 @@ public class JsonAdaptedImageDetails {
      * Converts a given {@code source} into this class for Jackson use.
      */
     public JsonAdaptedImageDetails(ImageDetails source) {
-        imageFilePath = source.getPath(CONTACT_IMAGES_PATH);
+        imageFilePath = source.getPath();
     }
 
     @JsonValue

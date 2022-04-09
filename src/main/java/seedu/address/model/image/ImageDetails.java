@@ -3,11 +3,8 @@ package seedu.address.model.image;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class ImageDetails {
-    public static final Path CONTACT_IMAGES_PATH = Paths.get("data", "images");
     public final File imageFile;
 
     /**
@@ -33,12 +30,12 @@ public class ImageDetails {
      *
      * @return path of the image file, relative to the project root.
      */
-    public String getPath(Path parentDirectory) {
-        return parentDirectory.resolve(getName()).toString();
+    public String getPath() {
+        return this.imageFile.getPath();
     }
 
     public String getJavaFxImageUrl() {
-        return String.format("file:%s", CONTACT_IMAGES_PATH.resolve(getName()));
+        return String.format("file:%s", this.imageFile.getPath());
     }
 
     @Override

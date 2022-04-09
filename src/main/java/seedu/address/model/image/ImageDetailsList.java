@@ -17,6 +17,7 @@ public class ImageDetailsList implements Iterable<ImageDetails> {
 
     /**
      * Creates an iterable list of image details, appended to this current list.
+     * The returned list is a new list.
      *
      * @param appendedImages the images to append to this list.
      * @return the newly appended list.
