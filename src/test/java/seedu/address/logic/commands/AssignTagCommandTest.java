@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -92,6 +94,32 @@ public class AssignTagCommandTest {
         AssignTagCommand assignTagCommand = new AssignTagCommand(outOfBoundIndex, VALID_TAGNAME_TEST);
         String expectedMessage = String.format(AssignTagCommand.MESSAGE_UNKNOWN_TAG, VALID_TAGNAME_TEST);
         assertCommandFailure(assignTagCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void executeInDetailedView_personNotTagged_success() {
+        Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToAddTag);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Tag newTag = VALID_TAG_OWESMONEY;
+        Person editedPerson = new PersonBuilder(personToAddTag).withNewTag(newTag).build();
+        expectedModel.setPerson(personToAddTag, editedPerson);
+        expectedModel.setDetailedContactView(editedPerson);
+
+        AssignTagCommand assignTagCommand = new AssignTagCommand(VALID_TAGNAME_OWESMONEY);
+        CommandResult expectedResult = new CommandResult(String.format(AssignTagCommand.MESSAGE_SUCCESS, editedPerson),
+                CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        assertDetailedViewCommandSuccess(assignTagCommand, model, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void executeInDetailedView_personTagged_failure() {
+        Person personToAddTag = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToAddTag);
+        AssignTagCommand assignTagCommand = new AssignTagCommand(VALID_TAGNAME_FRIENDS);
+
+        assertDetailedViewCommandFailure(assignTagCommand, model, AssignTagCommand.MESSAGE_DUPLICATE_TAG);
     }
 
     @Test

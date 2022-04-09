@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessInDetailedViewMode;
+import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -118,6 +119,23 @@ public class DeadlineCommandTest {
                 new PersonBuilder(firstPerson).withDeadlines(INVALID_DEADLINE).build());
         String expectedMessage = Deadline.MESSAGE_CONSTRAINTS;
         assertTrue(exception.getMessage().contains(expectedMessage));
+    }
+
+    @Test
+    public void executeInDetailedView_validDeadline_success() throws ParseException {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(personToEdit);
+
+        Person editedPerson = new PersonBuilder(personToEdit).withDeadlines(VALID_DEADLINE).build();
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.setDetailedContactView(editedPerson);
+
+        DeadlineCommand deadlineCommand = new DeadlineCommand(ParserUtil.parseDeadlines(
+                Arrays.asList(VALID_DEADLINE)));
+        CommandResult expectedResult = new CommandResult(String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS,
+                personToEdit), CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        assertDetailedViewCommandSuccess(deadlineCommand, model, expectedResult, expectedModel);
     }
 
     @Test

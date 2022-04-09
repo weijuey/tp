@@ -34,6 +34,9 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand>, DetailedV
                     DeadlineCommand.MESSAGE_USAGE), ive);
         }
         DeadlineList deadlines = ParserUtil.parseDeadlines(argMultimap.getAllValues(PREFIX_DEADLINE));
+        if (deadlines.size() == 0) {
+            throw new ParseException(DeadlineCommand.MESSAGE_NO_DEADLINES_ADDED);
+        }
 
         return new DeadlineCommand(index, deadlines);
     }
@@ -45,6 +48,9 @@ public class DeadlineCommandParser implements Parser<DeadlineCommand>, DetailedV
                 PREFIX_DEADLINE);
 
         DeadlineList deadlines = ParserUtil.parseDeadlines(argMultimap.getAllValues(PREFIX_DEADLINE));
+        if (deadlines.size() == 0) {
+            throw new ParseException(DeadlineCommand.MESSAGE_NO_DEADLINES_ADDED);
+        }
 
         return new DeadlineCommand(deadlines);
     }

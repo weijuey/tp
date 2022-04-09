@@ -43,11 +43,14 @@ public class UnassignTagCommandParser implements Parser<UnassignTagCommand>,
     @Override
     public UnassignTagCommand parseInDetailedViewContext(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        String[] inputs = trimmedArgs.split("\\s+");
+        String tag = inputs[inputs.length - 1];
+
+        if (tag.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignTagCommand.MESSAGE_USAGE));
         }
 
-        return new UnassignTagCommand(trimmedArgs);
+        return new UnassignTagCommand(tag);
     }
 }

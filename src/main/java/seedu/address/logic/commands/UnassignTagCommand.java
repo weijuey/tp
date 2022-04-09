@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -154,9 +155,16 @@ public class UnassignTagCommand extends Command implements DetailedViewExecutabl
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UnassignTagCommand // instanceof handles nulls
-                && tagName.equals(((UnassignTagCommand) other).tagName)
-                && targetIndex.equals(((UnassignTagCommand) other).targetIndex));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UnassignTagCommand)) {
+            return false;
+        }
+
+        UnassignTagCommand e = (UnassignTagCommand) other;
+        return Objects.equals(targetIndex, e.targetIndex)
+                && this.tagName.equals(e.tagName);
     }
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -26,6 +27,7 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Added deadline for: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_DEADLINES_ADDED = "No deadlines given.";
 
     private final Index targetIndex;
     private final DeadlineList deadlines;
@@ -99,22 +101,20 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     @Override
     public boolean equals(Object other) {
-        boolean isIndexEqual = false;
+        // short circuit if same object
         if (other == this) {
-            return true; // short circuit if same object
+            return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof DeadlineCommand)) {
-            return false; // instanceof handles nulls
+            return false;
         }
 
-        if (targetIndex == null || ((DeadlineCommand) other).targetIndex == null) {
-            isIndexEqual = targetIndex == ((DeadlineCommand) other).targetIndex;
-        } else {
-            isIndexEqual = targetIndex.equals(((DeadlineCommand) other).targetIndex);
-        }
-
-        return isIndexEqual && deadlines.equals(((DeadlineCommand) other).deadlines); // state check
+        // state check
+        DeadlineCommand e = (DeadlineCommand) other;
+        return Objects.equals(this.targetIndex, e.targetIndex)
+                && deadlines.equals(e.deadlines);
     }
 
 }
