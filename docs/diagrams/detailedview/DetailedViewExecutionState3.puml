@@ -45,7 +45,9 @@ CommandResult -> NoteCommand
 deactivate CommandResult
 
 NoteCommand -> LogicManager : commandResult
+deactivate NoteCommand
 
+'Hidden arrow to move destroy marker lower'
 NoteCommand -[hidden]-> NoteCommand
 destroy NoteCommand
 

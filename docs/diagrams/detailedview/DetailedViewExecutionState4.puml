@@ -21,6 +21,7 @@ CommandResult -> MainWindow : DETAILED_VIEW
 MainWindow -> MainWindow : handleDetailedView
 activate MainWindow
 deactivate MainWindow
+'Hidden arrow to move return arrow lower'
 MainWindow -[hidden]-> MainWindow
 [<- MainWindow
 deactivate MainWindow
