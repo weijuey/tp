@@ -168,7 +168,11 @@ public class PersonBuilder {
      * Sets the {@code ImageDetailsList} of the {@code Person} that we are building.
      */
     public PersonBuilder withImageDetails(String... imagePaths) {
-        this.images = SampleDataUtil.getImageDetailsList(imagePaths);
+        if (imagePaths.length == 0) {
+            this.images = new ImageDetailsList();
+        } else {
+            this.images = SampleDataUtil.getImageDetailsList(imagePaths);
+        }
         return this;
     }
 

@@ -54,6 +54,16 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the user prefs' contact images file path.
+     */
+    Path getContactImagesFilePath();
+
+    /**
+     * Sets the user prefs' contact images file path.
+     */
+    void setContactImagesFilePath(Path contactImagesFilePath);
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
@@ -175,7 +185,7 @@ public interface Model {
     /**
      * Updates the images to be displayed.
      */
-    void updateImagesToView(ImageDetailsList images);
+    void setImagesToView(ImageDetailsList images);
 
     /**
      * Gets the images to be displayed.

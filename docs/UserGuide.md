@@ -2,14 +2,14 @@
 layout: page title: User Guide
 ---
 
-d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a 
-Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a
+Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, d'Intérieur can get your contact management tasks done faster than traditional GUI apps.
 
 If you utilize other online applications for interior designing and lack a centralized, robust, and efficient customer
 management tool, this application will be able to meet your needs.
 
-In this user guide, we will work you through the basic use cases and commands of the application, so that you can 
+In this user guide, we will work you through the basic use cases and commands of the application, so that you can
 quickly get started and make full of use of what the application has to offer.
 
 ## Table of Contents
@@ -116,7 +116,7 @@ Before going into the commands, take note of how the command format is given in 
 
 ### The UI
 
-The UI consists of the command line to enter your commands, the feedback box which displays textual information about 
+The UI consists of the command line to enter your commands, the feedback box which displays textual information about
 the result of the command execution, and the contact display.
 
 There are 2 main ways to view contacts.
@@ -129,8 +129,8 @@ Format: `list`
 
 ### Viewing a contact's full details : `view`
 
-Allows you to view the full details of the contact, as some are hidden in the contact list. This command only works in 
-list view.
+Allows you to view the full details of the contact, as some are hidden in the contact list. This command **only works in
+list view**.
 
 Format `view INDEX`
 
@@ -138,7 +138,7 @@ Format `view INDEX`
 
 Some commands may work differently in the detailed view from in the list view.
 
-In general, commands for modifying a contact will work, and will modify the contact currently displayed. As such, there is no need to give an index for those commands anymore, and they will be ignored if the command is called in this view.
+In general, commands for modifying a contact will work, and will modify the contact currently displayed. As such, there is no need to give an index for those commands anymore, and **they will be ignored** if the command is called in this view.
 
 If the command does not work in the current view, the app will inform you. To return to list view, use `list`.
 
@@ -148,9 +148,19 @@ You may check out the summary table of commands for the overview.
 
 Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Interiéur.
 
+When you're feeling overwhelmed by the number of commands available, refer to the [command summary](#command-summary) and the examples!
+
 Format: `help`
 
 ![helpMessage](images/helpMessage.png)
+
+<div markdown="block" class="alert alert-info">
+After you successfully clicked on the `copy url` button, you will see the following window:
+
+![copyUrlSuccessMessage](images/copyLinkSuccessMessage.png)
+
+You're now ready to paste the link into your browser!
+</div>
 
 ### Exiting the program : `exit`
 
@@ -160,12 +170,19 @@ Format: `exit`
 
 ### Updating contacts
 
-There is a set of information that you can save for a contact. This section contains the commands for 
+There is a set of information that you can save for a contact. This section contains the commands for
 adding contacts and modifying their information.
 
 ### Adding a contact : `add`
 
-You can add a contact to the address book with the address as an optional field.
+You can add a contact to the address book with the **address as an optional field**.</br>
+
+<div markdown="block" class="alert alert-info">
+
+Your contacts are uniquely identified by their `NAME` which is case-sensitive.</br>
+Example: `Alex Yeoh` is different from `alex yeoh`
+
+</div>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
@@ -211,7 +228,7 @@ Example:
 
 ### Deleting a contact : `delete`
 
-Deletes the specified contact from the address book. This command only works in list view.
+Deletes the specified contact from the address book. This command **only works in list view**.
 
 Format: `delete INDEX`
 
@@ -230,8 +247,12 @@ Creates a tag that can be assigned to any contact. This command can be used in d
 
 Format: `tag TAGNAME`
 
-* A tag with the same `TAGNAME` can only be created once.
+* A tag with the same `TAGNAME` can **only be created once**.
 * The `TAGNAME` is case-insensitive. e.g. creating the tag `friends` will not allow `Friends` to be created.
+* `TAGNAME` must be alphanumeric. e.g. `Hello`, `Friends`, `Colleagues`
+* `TAGNAME` such as `-1`, `Sub Contractors` are not allowed. i.e. non-alphanumeric characters, including spaces.
+* To create a tag named `Sub Contractors`, eliminate the whitespace in between in order for it to be a valid tag.
+  e.g. `SubContractors`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can create meaningful tags to assign your contacts with! With tags, you can search for contacts assigned to that particular tag!
@@ -247,6 +268,7 @@ List of tag related features:
 Example:
 
 * `tag Friends` creates a tag `Friends` to be stored in the address book.
+  ![result for create tag friends](images/create-tag/create-tag-friends.png)
 
 ### Assigning a tag to a contact : `assign`
 
@@ -267,11 +289,32 @@ Example:
 
 * `assign 1 Friends` assigns a tag `Friends` to the contact at index `1`.
 
+  * Before using the command `assign 1 Friends`:
+  ![before assign 1 friends](images/assign-tag/before-assign-1-friends.png)
+
+  * `assign 1 Friends`:
+  ![result for assign 1 friends](images/assign-tag/assign-1-friends.png)
+
+* `assign 3 Colleagues` assigns a tag `Colleagues` to the contact at index `3`.
+
+  * Before using the command `assign 3 Colleagues`:
+  ![before assign 3 colleagues](images/assign-tag/before-assign-3-colleagues.png)
+
+  * `assign 3 Colleagues`:
+  ![result for assign 3 colleagues](images/assign-tag/assign-3-colleagues.png)
+
 Format in detailed view: `assign TAGNAME`
 
 Example:
 
 * `assign client` assigns a tag `client` to the currently viewed contact.
+
+  * `view 1`
+  ![result for view 1](images/assign-tag/view-1.png)
+
+  * `assign client`
+  ![result for assign client](images/assign-tag/view-assign-client.png)
+
 
 ### Unassigning a tag from a contact : `unassign`
 
@@ -289,12 +332,23 @@ Format: `unassign INDEX TAGNAME`
 Example:
 
 * `unassign 1 Friends` removes the tag `Friends` from the contact at index `1`.
+  * Before using the command `unassign 1 Friends`
+  ![before unassign 1 Friends](images/unassign-tag/before-unassign-1-friends.png)
+
+  * `unassign 1 Friends`
+  ![result for unassign 1 Friends](images/unassign-tag/unassign-1-friends.png)
+
 
 Format in detailed view: `unassign TAGNAME`
 
 Example:
 
 * `unassign client` removes the tag `client` from the currently viewed contact.
+  * `view 1`
+  ![result for view 1](images/unassign-tag/view-1.png)
+
+  * `unassign client`
+  ![result for unassign client](images/unassign-tag/view-unassign-client.png)
 
 ### Deleting a tag : `deltag`
 
@@ -309,9 +363,30 @@ Format: `deltag TAGNAME [MORE_TAGNAME]`
 Examples:
 
 * `deltag friends` deletes the tag `friends`
+
+  * Before using the command `deltag friends`:
+  ![before deltag friends](images/del-tag/before-deltag-friends.png)
+
+  * `deltag Friends`
+  ![result for deltag friends](images/del-tag/deltag-friends.png)
+
 * `deltag friends colleagues` deletes the tag `friends` and `colleagues`
+
+  * Before using the command `deltag friends colleagues`
+  ![before deltag friends colleagues](images/del-tag/before-deltag-friends-colleagues.png)
+
+  * `deltag friends colleagues`
+  ![result for deltag friends colleagues](images/del-tag/deltag-friends-colleagues.png)
+
 * `deltag friends colleagues` when the tag `colleagues` does not exist will delete the tag `friends` and unassign the tag `friends` from every contact
+  * Before using the command `deltag friends colleagues`
+  ![before deltag friends colleagues not exist](images/del-tag/before-deltag-friends-colleagues-not-exist.png)
+
+  * `deltag friends colleagues`
+  ![result for deltag friends colleagues, colleagues not exist](images/del-tag/deltag-friends-colleagues-not-exist.png)
+
 * `deltag colleagues` when the tag `colleagues` does not exist will not change the data.
+![result for deltag colleagues](images/del-tag/deltag-colleagues-not-exist.png)
 
 ### Adding favourites : `fav`
 
@@ -342,7 +417,7 @@ Example:
 
 ### Adding high importance flag : `impt`
 
-Adds the contact to your list of contacts with high importance and a red flag will appear beside the contact's name to indicate that. 
+Adds the contact to your list of contacts with high importance and a red flag will appear beside the contact's name to indicate that.
 This command can be used in detailed view.
 
 Format: `impt INDEX`
@@ -497,29 +572,29 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book. This command can only be used in list view.
+Clears all entries from the address book. This command can **only be used in list view**.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this 
-command only for clearing the sample data provided in the beginning.
+There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this
+command **only for clearing the sample data provided in the beginning**.
 </div>
 
 Format: `clear`
 
 ### Navigating your contact list
 
-As your contact list grows larger, you may start having trouble finding the contact you are looking for. 
+As your contact list grows larger, you may start having trouble finding the contact you are looking for.
 However, with these commands to aid you, finding contacts will still be easy and intuitive.
 
 ### Listing Favourites : `favourites`
 
-Lists all your favourite contacts to the list of displayed contacts. This command only works in list view.
+Lists all your favourite contacts to the list of displayed contacts. This command **only works in list view**.
 
 Format: `favourites`
 
 ### Listing contacts with high importance : `impts`
 
-Shows you all contact(s) with high importance, tagged with the red flag. This command only works in list view.
+Shows you all contact(s) with high importance, tagged with the red flag. This command **only works in list view**.
 
 Format: `impts`
 
@@ -535,7 +610,7 @@ Examples:
 
 ### Prioritising relevant contacts to you : `sort`
 
-Sort contacts by given criteria. This command only works in list view.
+Sort contacts by given criteria. This command **only works in list view**.
 
 Format: `sort CRITERIA`
 
@@ -548,14 +623,14 @@ Examples:
 
 ### Locating contacts by name : `find`
 
-Find contacts whose names contain any of the given keywords. This command only works in list view.
+Find contacts whose names contain any of the given keywords. This command **only works in list view**.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* **Only the name is searched**.
+* **Only full words will be matched** e.g. `Han` will not match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`
   , `Bo Yang`
 
@@ -567,18 +642,18 @@ Examples:
 
 ### Locating contacts by tag : `findtag`
 
-Find contacts based on the selected tags given by keywords to search for. This command only works in list view.
+Find contacts based on the selected tags given by keywords to search for. This command **only works in list view**.
 
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
 
-* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`  
+* Each `findtag` command selects a `TAG` to be found by using the given `KEYWORD`
   e.g.
 
   * `findtag friends` adds `friends` as a tag to be searched for
   * `findtag colleagues` adds `colleagues` to pre-existing search, now containing both colleagues and friends
 * The search is case-insensitive. e.g `tag` will match `Tag`
-* Only the tag is searched
-* Only full words will be matched e.g. `Ta` will not match `Tag`
+* **Only the tag is searched**
+* **Only full words will be matched** e.g. `Ta` will not match `Tag`
 * List of contacts matching at least the searched tag\(s\) will be returned. e.g. `Tag1` will return `Contact` A with
   tags `Tag1` and `Tag2`.
 
@@ -589,8 +664,9 @@ Use `list` to clear currently selected tags!
 Examples:
 
 * `findtag Friends` returns contacts with tag `Friends`
-* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by 
-* at least `Friends`, `InProgress` and `AlmostFinished`
+  ![result findtag Friends](images/findtag/findtag-friends.png)
+* `findtag Friends` followed by `findtag InProgress AlmostFinished` returns contacts tagged by at least `Friends`, `InProgress` and `AlmostFinished`
+  ![result findtag InProgress AlmostFinished](images/findtag/findtag-friends-inprogress-almostfinished.png)
 
 ### Saving the data
 
