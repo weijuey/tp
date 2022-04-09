@@ -469,7 +469,7 @@ List before `deadline` command:
 
 List after `deadline` command:
 
-![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.jpg)
+![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.png)
 
 Format in detailed view: `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 
