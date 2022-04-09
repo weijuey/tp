@@ -452,6 +452,12 @@ informed to parse the command differently.
 To illustrate the behaviour of the implementation, let's examine the process where the user passes
 `note r/red`, while the MainWindow is displaying the detailed contact view.
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the follwing sequence diagrams, the
+lifelines for deleted objects should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline
+reaches the end of diagram.
+
+</div>
+
 Step 1. The user gives the command `note r/red`. `MainWindow` realises it is in detailed view, and calls
 `LogicManager::executeInDetailedViewMode`.
 
