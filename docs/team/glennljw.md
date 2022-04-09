@@ -53,11 +53,8 @@ Given below are my contributions to the project.
     
   * Developer Guide:
     * Added implementation details of the following features:
-      * Assign Tag
-      * Create Tag
-      * Delete Tag
       * Find Tag
-      * Unassign Tag
+      
     * Added sequence diagram in the implementation details of Find Tag.
 
 * **Community**:
