@@ -27,7 +27,8 @@ Given below are my contributions to the project.
   * What it does: Acts as a filter to locate contacts with a certain tag. 
   * Justification: This feature helps interior designers locate contacts that are grouped by their tags.
   * Highlights: This enhancement was made through the use of an `ActivatedTagList` which acts as a list of selected criteria/category just like how an eCommerce store would select filter to apply.
-
+<div style="page-break-after: always;"></div>
+  
 * **New Feature**: `Unassign Tag`
   * What it does: Unassigns a tag from a contact.
   * Justification: This feature allows contacts who reach different stages of the design cycle can have their older tags (which specifies their older stage) removed from them. 
