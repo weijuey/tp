@@ -608,7 +608,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. d'Intérieur shows an error message.
 
       Use case resumes at step 2.
 
@@ -631,13 +631,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. d'Intérieur shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The label requested does not currently exist in d'Intérieur.
 
-   * 3b1. Create a label
+    * 3b1. <ins>Add a label to d'Intérieur (UC08)</ins>
+
+      Use case ends.
 
      
 
@@ -678,7 +680,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The given index is invalid.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. d'Intérieur shows an error message.
 
       Use case resumes at step 1.
 
@@ -695,7 +697,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. d'Intérieur shows an error message.
 
       Use case resumes at step 1.
 
@@ -714,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The given index is invalid.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. d'Intérieur shows an error message.
 
       Use case resumes at step 1.
 
