@@ -847,7 +847,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. d'Intérieur shows an error message.
 
       Use case resumes at step 1.
-    
+
 **UC08: Add a label to d'Intérieur**
 
 **MSS**
