@@ -1,4 +1,4 @@
-                                  ---
+---
 layout: page
 title: David Limantara's Project Portfolio Page
 ---
@@ -33,13 +33,14 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Updated description for the commands `add`, `help`, `impt` and `impts`: [\#72]()
-        * Updated command summary for the commands `add`, `impt` and `impts`: [\#74]()
+        * Updated description for the commands `add`, `impt`, `impts` and `help`: [\#29](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/29), [\#88](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/88), [\#110](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/110), [\#196](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/196)
+        * Updated command summary for the commands `add`, `impt` and `impts`: [\#29](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/29), [\#88](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/88)
+        * Updated UG throughout to standardise styling and emphasis on key points: [\#196](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/196)
     * Developer Guide:
         * Added description for the enhanced `add` command and added code snippet
         * Added implementation details and UML diagram for the `high importance flag` feature.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#20](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/20), [\#99](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/99)
-    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/244), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/111)
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
+    * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/244), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/111))
+    * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/xSaints19x/ped/issues/1), [2](https://github.com/xSaints19x/ped/issues/2), [3](https://github.com/xSaints19x/ped/issues/3))
