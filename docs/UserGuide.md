@@ -2,14 +2,14 @@
 layout: page title: User Guide
 ---
 
-d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a 
-Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, d'Intérieur can get your contact management tasks done faster than traditional GUI apps.
+d'Intérieur is a **desktop app for interior designers to manage their contacts and projects efficiently**.
 
 If you utilize other online applications for interior designing and lack a centralized, robust, and efficient customer
-management tool, this application will be able to meet your needs.
+management tool, this application will be able to meet your needs. Designed with modern, tech-savvy interior designers
+in mind, the app is minimalistic, practical, and greatly rewards users with basic computer proficiency, such as
+quick typing speed and general know-how.
 
-In this user guide, we will work you through the basic use cases and commands of the application, so that you can 
+In this user guide, we will walk you through the basic features and commands of the application, so that you can 
 quickly get started and make full of use of what the application has to offer.
 
 ## Table of Contents
@@ -80,11 +80,15 @@ quickly get started and make full of use of what the application has to offer.
 
     * **`favourites`** : Lists all your favourite contacts.
 
-    * **`clear`** : Deletes all contacts.
-
     * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Tutorial
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
