@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -133,5 +134,23 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
         return new Person(name, phone, email, address, deadlines,
                 notes, tags, favouriteStatus, highImportanceStatus, sanitizedList);
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteImageCommand)) {
+            return false;
+        }
+
+        // state check
+        DeleteImageCommand e = (DeleteImageCommand) other;
+        return Objects.equals(this.personIndex, e.personIndex)
+                && imageIndex.equals(e.imageIndex);
     }
 }
