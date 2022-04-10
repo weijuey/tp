@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -153,7 +154,7 @@ public class EditCommand extends Command implements DetailedViewExecutable {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
+        return Objects.equals(this.index, e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 

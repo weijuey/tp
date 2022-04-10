@@ -4,7 +4,7 @@ title: d'Intérieur
 ---
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/AY2122S2-CS2103-T12-2/tp/branch/master/graph/badge.svg?token=LTPAH44EQN)](https://codecov.io/gh/AY2122S2-CS2103-T12-2/tp)
+[![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T12-2/tp/branch/master/graph/badge.svg?token=LTPAH44EQN)](https://codecov.io/gh/AY2122S2-CS2103-T12-2/tp)
 
 ![Ui](images/Ui.png)
 

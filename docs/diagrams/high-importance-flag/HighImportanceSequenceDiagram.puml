@@ -1,5 +1,5 @@
 @startuml
-!include Style.puml
+!include ../style.puml
 
 box <font color=black>Logic
 participant ":LogicManager" as LogicManager LOGIC_COLOR_T5
@@ -33,9 +33,22 @@ LogicManager -> HighImportanceCommand ++ : execute()
 
 box <font color=black>Model MODEL_COLOR_T1
 participant "<font color=white>:Model" as model MODEL_COLOR_T4
+participant "<font color=white>personList:List" as personList MODEL_COLOR_T4
 end box
 
-HighImportanceCommand -> model ++ : setPerson()
+HighImportanceCommand -> model ++ : getSortedPersonList()
+model --> HighImportanceCommand : personList
+deactivate model
+
+HighImportanceCommand -> personList ++ : get(2)
+personList --> HighImportanceCommand : targetPerson
+deactivate personList
+
+HighImportanceCommand -> HighImportanceCommand ++ : createHighImportancePerson(targetPerson, HIGH_IMPORTANCE)
+HighImportanceCommand --> HighImportanceCommand : editedPerson
+deactivate HighImportanceCommand
+
+HighImportanceCommand -> model ++ : setPerson(targetPerson, editedPerson)
 model --> HighImportanceCommand
 deactivate model
 
@@ -44,6 +57,8 @@ HighImportanceCommand -> CommandResult ++
 CommandResult --> HighImportanceCommand --
 
 HighImportanceCommand --> LogicManager
+deactivate HighImportanceCommand
+destroy HighImportanceCommand
 <-- LogicManager
 
 @enduml

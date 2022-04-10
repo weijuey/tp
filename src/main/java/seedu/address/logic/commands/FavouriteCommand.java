@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -116,6 +117,6 @@ public class FavouriteCommand extends Command implements DetailedViewExecutable 
         }
 
         FavouriteCommand e = (FavouriteCommand) other;
-        return targetIndex.equals(e.targetIndex);
+        return Objects.equals(targetIndex, e.targetIndex);
     }
 }
