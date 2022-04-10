@@ -11,20 +11,24 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added notes feature
   * What it does: allows the user to add and delete notes to each contact, to be referenced in the future.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+  * Justification: This feature is flexible in utility, allowing the user to save any information they deem important, thus enhancing the product.
+  * Highlights: Implementing the feature required understanding how modification of internal data is done. Integrating a variably-sized UI element also required careful consideration of pros and cons of different solutions.
+  * Credits: UI design decisions were made as a team.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added detailed view feature
+  * What it does: allows the user to view a contact in detail, which the app will switch to a more focused view.
+  * Justification: This feature enables the user to do more focused work with one particular contact, especially because some information is only fully available to view by using this feature. It can allow adding as many new information to a contact as desired.
+  * Highlights: The feature involved multiple components of the application and adding new interfaces to each of them to interact, thus it required a good understanding of their current interactions. Adding new capabilities to current commands also required understanding their existing behaviour.
+  * Credits: Idea to communicate to MainWindow the panel view to show was first implemented by Ezekiel for his Images feature, and was adapted from his implementation. Final design of the detailed contact view was also refined by Ezekiel. Normal command execution path of new features were first implemented by team members.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=weijuey&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-02-18&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed releases `v1.2` - `v1.4` (5 releases) on GitHub
+  * Added target user profile, value proposition and glossary to Developer Guide
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Update existing commands to work in the new detailed view feature mentioned above, with simpler command formats.
 
 * **Documentation**:
   * User Guide:
@@ -38,9 +42,6 @@ Given below are my contributions to the project.
   * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
   * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
+  
 
 * _{you can add/remove categories in the list above}_
