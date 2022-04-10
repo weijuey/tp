@@ -56,9 +56,11 @@ Given below are my contributions to the project.
       * Find Tag
       
     * Added sequence diagram in the implementation details of Find Tag.
+    * Added instructions for manual testing for Create Tag feature.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#87](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/87), [\#89](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/89), [\#196](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/196)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028047189), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028530974))
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/glennljw/ped/issues/4), [2](https://github.com/glennljw/ped/issues/3), [3](https://github.com/glennljw/ped/issues/2))
 
 
