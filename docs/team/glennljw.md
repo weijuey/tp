@@ -5,7 +5,7 @@ title: Glenn Lim's Project Portfolio Page
 
 ### Project: d'Intérieur
 
-d'Intérieur is a desktop address book application, designed with interior designers in mind. The designer interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+d'Intérieur is a desktop address book application, designed with interior designers in mind. The designer interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 26 kLoC.
 
 Given below are my contributions to the project.
 
@@ -59,6 +59,6 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#87](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/87), [\#89](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/89), [\#196](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/196)
-  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028047189), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028530974), [3](), [4]())
+  * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028047189), [2](https://github.com/nus-cs2103-AY2122S2/forum/issues/84#issuecomment-1028530974))
 
 
