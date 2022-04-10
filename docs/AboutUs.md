@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Ezekiel Toh
+### Ezekiel Toh Fun Kai
 
 <img src="images/takufunkai.png" width="200px">
 
