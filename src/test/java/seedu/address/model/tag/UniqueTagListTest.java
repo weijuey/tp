@@ -100,7 +100,7 @@ public class UniqueTagListTest {
     }
 
     @Test
-    public void setTag_editedTagHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setTag_editedTagHasNonUniqueIdentity_throwsDuplicateTagException() {
         uniqueTagList.add(VALID_TAG_TEST);
         uniqueTagList.add(VALID_TAG_FRIENDS);
         assertThrows(DuplicateTagException.class, () -> uniqueTagList.setTag(VALID_TAG_TEST, VALID_TAG_FRIENDS));
