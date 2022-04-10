@@ -631,7 +631,7 @@ Format: `sort CRITERIA`
 
 * `CRITERIA` should be written in lower-case.
 
-| `CRITERIA` | Comparator                                           |
+| `CRITERIA` | Order                                                |
 |------------|------------------------------------------------------|
 | `address`  | Alphabetically sorted                                |
 | `deadline` | Early dates to later dates                           |
