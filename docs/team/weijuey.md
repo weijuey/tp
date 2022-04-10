@@ -32,10 +32,12 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the new features `note` and `view` [\#28](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/28) [\#93](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/93)
+    * Reorganised commands to sections and added table of contents for more flexible linking to sections. [\#183](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/183)
+    * Added information to each existing commands on compatibility with new detailed view feature, and update command summary table to capture the information succinctly. [\#99](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/99)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added implementation details of the `note` and `view` features. [#72](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/72) [\#203](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/203)
+    * Update existing clas diagrams to match new architecture. [\#203](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/203)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
