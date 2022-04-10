@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/tehkokhoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deadline and Sort feature
 
 ### Yoong Wei Jue
 
