@@ -438,7 +438,7 @@ Step 3. The AddressBookParser parses the command `findtag friends` and creates a
 
 Step 4. The `FindTagCommand` object is created with the given keyword `friends` as a `Singleton List`.
 
-Step 5. The current tag names in the `ActivatedTagList` are then retrieved, creating a new `TagContainsKeywordPredicate`.  
+Step 5. The current tag names in the `ActivatedTagList` are then retrieved, creating a new `TagContainsKeywordPredicate`.
 
 Step 6. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
 
@@ -769,8 +769,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-     
-
 **UC04: Filter contacts using labels**
 
 **MSS**
@@ -787,7 +785,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * <ins>Add a label to d'Intérieur (UC08)</ins>
   
     Use case ends.
-  
 
 **UC05: Adding a note to a contact**
 
@@ -864,8 +861,7 @@ Use case ends.
     * 1a1. d'Intérieur alerts the user that the given name is invalid.
 
       Use case ends.
-
-
+    
 **UC09: Deleting a label in d'Intérieur**
 
 **MSS**
