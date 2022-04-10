@@ -106,8 +106,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Executes the give {@code command}, in detailed view mode, confirms that <br>
-     * - thre returned {@link CommandResult} matches {@code expectedCommandResult} <br>
+     * Executes the given {@code command}, in detailed view mode, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      * @param command the command in detailed view mode.
      * @param actualModel the actual model produced by test.
