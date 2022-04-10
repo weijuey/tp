@@ -171,6 +171,7 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         }
 
         AddImageCommand e = (AddImageCommand) other;
-        return Objects.equals(targetIndex, e.targetIndex);
+
+        return Objects.equals(this.targetIndex, e.targetIndex);
     }
 }

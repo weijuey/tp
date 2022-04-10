@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Ezekiel Toh
+### Ezekiel Toh Fun Kai
 
 <img src="images/takufunkai.png" width="200px">
 
@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Glenn Lim
+### Glenn Lim Jun Wei
 
 <img src="images/glennljw.png" width="200px">
 

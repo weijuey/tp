@@ -8,6 +8,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_FRIENDS;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,13 +17,16 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddImageCommand;
 import seedu.address.logic.commands.AssignTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeadlineCommand;
+import seedu.address.logic.commands.DeleteImageCommand;
 import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -33,6 +37,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HighImportanceCommand;
+import seedu.address.logic.commands.ImagesCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFavouritesCommand;
 import seedu.address.logic.commands.ListImportantCommand;
@@ -41,6 +46,7 @@ import seedu.address.logic.commands.SortsCommand;
 import seedu.address.logic.commands.UnassignTagCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.DeadlineList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -130,6 +136,85 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_findTag() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindTagCommand command = (FindTagCommand) parser.parseCommand(
+                FindTagCommand.COMMAND_WORD
+                        + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTagCommand(keywords), command);
+    }
+
+    @Test
+    public void parseCommand_tag() throws Exception {
+        String tagName = VALID_TAGNAME_FRIENDS;
+        CreateTagCommand command = (CreateTagCommand) parser.parseCommand(
+                CreateTagCommand.COMMAND_WORD + " " + tagName);
+        assertEquals(new CreateTagCommand(tagName), command);
+    }
+
+    @Test
+    public void parseCommand_assign() throws Exception {
+        String tagName = VALID_TAGNAME_FRIENDS;
+        AssignTagCommand command = (AssignTagCommand) parser.parseCommand(
+                AssignTagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + tagName);
+        assertEquals(new AssignTagCommand(INDEX_FIRST_PERSON, tagName), command);
+    }
+
+    @Test
+    public void parseCommand_unassign() throws Exception {
+        String tagName = VALID_TAGNAME_FRIENDS;
+        UnassignTagCommand command = (UnassignTagCommand) parser.parseCommand(
+                UnassignTagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " " + tagName);
+        assertEquals(new UnassignTagCommand(INDEX_FIRST_PERSON, tagName), command);
+    }
+
+    @Test
+    public void parseCommand_deltag() throws Exception {
+        List<String> keywords = Arrays.asList(VALID_TAGNAME_FRIENDS);
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(
+                DeleteTagCommand.COMMAND_WORD
+                        + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new DeleteTagCommand(keywords), command);
+    }
+
+    @Test
+    public void parseCommand_fav() throws Exception {
+        FavouriteCommand command = (FavouriteCommand) parser.parseCommand(
+                FavouriteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new FavouriteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_favourites() throws Exception {
+        ListFavouritesCommand command = (ListFavouritesCommand) parser.parseCommand(
+                ListFavouritesCommand.COMMAND_WORD);
+        assertEquals(new ListFavouritesCommand(), command);
+        assertTrue(parser.parseCommand(
+                ListFavouritesCommand.COMMAND_WORD + " 3") instanceof ListFavouritesCommand);
+    }
+
+    @Test
+    public void parseCommand_impts() throws Exception {
+        ListImportantCommand command = (ListImportantCommand) parser.parseCommand(
+                ListImportantCommand.COMMAND_WORD);
+        assertEquals(new ListImportantCommand(), command);
+        assertTrue(parser.parseCommand(
+                ListImportantCommand.COMMAND_WORD + " 3") instanceof ListImportantCommand);
+    }
+
+    @Test
+    public void parseCommand_deadline() throws Exception {
+        List<Deadline> deadlines = Arrays.asList(new Deadline("description", "11/11/2022"));
+        DeadlineList deadlineList = new DeadlineList(deadlines);
+        DeadlineCommand command = (DeadlineCommand) parser.parseCommand(
+                DeadlineCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " d/description 11/11/2022");
+        assertEquals(new DeadlineCommand(INDEX_FIRST_PERSON, deadlineList), command);
     }
 
     @Test
@@ -271,4 +356,49 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
             -> parser.parseDetailedViewCommand(ViewCommand.COMMAND_WORD + " 1"));
     }
+
+    @Test
+    public void parseCommand_impt() throws Exception {
+        HighImportanceCommand command = (HighImportanceCommand) parser.parseCommand(
+                HighImportanceCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new HighImportanceCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_addimg() throws Exception {
+        AddImageCommand command = (AddImageCommand) parser.parseCommand(
+                AddImageCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new AddImageCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_images() throws Exception {
+        ImagesCommand command = (ImagesCommand) parser.parseCommand(
+                ImagesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ImagesCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_note() throws Exception {
+        NoteCommand command = (NoteCommand) parser.parseCommand(
+                NoteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " r/note");
+        assertEquals(new NoteCommand(INDEX_FIRST_PERSON, "note"), command);
+    }
+
+    @Test
+    public void parseCommand_delimg() throws Exception {
+        Index indexFirstImage = Index.fromOneBased(1);
+        DeleteImageCommand command = (DeleteImageCommand) parser.parseCommand(
+                DeleteImageCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/"
+                        + indexFirstImage.getOneBased());
+        assertEquals(new DeleteImageCommand(INDEX_FIRST_PERSON, indexFirstImage), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        SortsCommand command = (SortsCommand) parser.parseCommand(
+                SortsCommand.COMMAND_WORD + " " + "name");
+        assertEquals(new SortsCommand("name"), command);
+    }
+
 }

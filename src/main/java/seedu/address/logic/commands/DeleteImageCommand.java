@@ -138,19 +138,16 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
 
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof DeleteImageCommand)) {
             return false;
         }
 
-        // state check
         DeleteImageCommand e = (DeleteImageCommand) other;
         return Objects.equals(this.personIndex, e.personIndex)
-                && imageIndex.equals(e.imageIndex);
+                && Objects.equals(this.imageIndex, e.imageIndex);
     }
 }

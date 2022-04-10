@@ -875,6 +875,21 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Creating a tag
+
+1. Creating a tag after clearing sample data
+
+    1. Test case: `tag Friends`<br>
+       Expected: Friends tag is created. 
+    
+    2. Test case: `tag Friends & Colleagues`<br>
+       Expected: No tag is created. Error details shown in the status message. 
+
+    3. Other incorrect commands to try: `tag`, `tag _`, `tag -1`, `tag foo Bar`, `tag TAGNAME`, `...` (where TAGNAME is non-alphanumeric)<br>
+       Expected: Similar to previous.
+    
+1. _{ more test cases …​ }_
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
