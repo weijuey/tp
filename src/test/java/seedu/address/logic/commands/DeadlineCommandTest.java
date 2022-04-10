@@ -56,7 +56,7 @@ public class DeadlineCommandTest {
     }
 
     @Test
-    public void execute_addValidDeadlineUnfilteredList_success() throws ParseException {
+    public void execute_addValidDeadlineUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withDeadlines(VALID_DEADLINE).build();
 
@@ -161,6 +161,9 @@ public class DeadlineCommandTest {
 
         // different person -> returns false
         assertNotEquals(deadlineFirstCommand, deadlineSecondCommand);
+
+        // other is null -> returns false
+        assertNotEquals(deadlineFirstCommand, null);
 
     }
 }
