@@ -500,11 +500,11 @@ call its `execute` method.
 
 However, there are also cons for such a method. The following table gives some comparisons.
 
-| Aspect                    | Interface forcing additional `execute` methods (current choice)                                      | Abstract Class allowing singular `execute` method                                                                     |
-|---------------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| Effort to change          | More lines of code required implementing multiple methods with some repetition                       | Less lines of code as some code is common between different execution and can be placed in one method                 |
-| Extensibility             | Easy to extend to include more types of command using a new interface and implementing a new method  | Difficult to extend as adding existing commands to a new type requires rewriting existing code and regression testing |
-| Simplicity                | Easy to reason as command execution is isolated to each method and depends solely on which is called | Difficult to reason as command execution depends on potentially many external factors                                 |
+| Aspect                    | Interface forcing additional `execute` methods (current choice)                                     | Abstract Class allowing singular `execute` method                                                                     |
+|---------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Effort to change          | More lines of code required implementing multiple methods with some repetition                      | Less lines of code as some code is common between different execution and can be placed in one method                 |
+| Extensibility             | Easy to extend to include more types of command using a new interface and implementing a new method | Difficult to extend as adding existing commands to a new type requires rewriting existing code and regression testing |
+| Simplicity                | Easy to reason as command execution is isolated to each method and depends on which is called       | Difficult to reason as command execution depends on potentially many external factors                                 |
 
 However, one area that both implementations can improve is interacting with Model. Due to the pre-existing requirements,
 commands only needed `Index` as a way to retrieve a `Person` object from `Model`. For commands running in detailed view
@@ -880,6 +880,35 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Commands in detailed view
+
+*Refer to the command summary table in the User Guide for all the valid commands to test.*
+
+1. Commands that work in both list view and detailed view
+
+   1. Prerequisite: Use `view` on a contact.
+
+   1. Test case: `note r/Likes dark wood` <br>
+      Expected: Note `Likes dark wood` is added to the contact's list of notes.
+
+   1. Test case: `note 2 r/Likes dark wood` <br>
+      Expected: Same outcome as above test case where no index is specified
+
+   1. Test case: `note Likes dark wood` <br>
+      Expected: No note added. Error details shown.
+
+   1. Repeat above three test cases for other commands, using the correct detailed view command format, followed by the list view command format, and lastly erroneous command formats, if any.
+
+1. Commands that do not work in detailed view
+
+   1. Prerequisite: Use `view` on a contact.
+   
+   1. Test case: `clear` <br>
+      Expected: Error message shown, using `list` will show that the list of contacts were not cleared.
+   
+   1. Repeat the test for other commands that do not work in detailed view.
+
 
 ### Saving data
 
