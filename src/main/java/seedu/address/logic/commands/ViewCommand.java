@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -31,7 +32,7 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -41,5 +42,19 @@ public class ViewCommand extends Command {
         model.setDetailedContactView(personToView);
         return new CommandResult(String.format(VIEW_SUCCESS, personToView.getName().fullName),
                 CommandResult.SpecialCommandResult.DETAILED_VIEW);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+
+        ViewCommand e = (ViewCommand) other;
+        return Objects.equals(this.index, e.index);
     }
 }
