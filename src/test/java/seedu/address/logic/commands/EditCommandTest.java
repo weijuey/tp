@@ -10,8 +10,11 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SEVENTH_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
@@ -21,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -171,6 +175,20 @@ public class EditCommandTest {
         CommandResult expectedResult = new CommandResult(expectedMessage,
                 CommandResult.SpecialCommandResult.DETAILED_VIEW);
         assertDetailedViewCommandSuccess(editCommand, model, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void executeInDetailedView_duplicatePerson_errorThrown() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIFTH_PERSON.getZeroBased());
+        Person duplicatePerson = model.getFilteredPersonList().get(INDEX_SEVENTH_PERSON.getZeroBased());
+        model.setDetailedContactView(personToEdit);
+        new HighImportanceCommand().executeInDetailedView(model);
+
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptorBuilder(duplicatePerson).build();
+        EditCommand editCommand = new EditCommand(editPersonDescriptor);
+
+        assertThrows(CommandException.class, EditCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                editCommand.executeInDetailedView(model));
     }
 
     @Test

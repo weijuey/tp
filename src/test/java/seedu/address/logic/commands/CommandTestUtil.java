@@ -83,7 +83,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             expectedCommandResult.equals(result);
@@ -109,10 +109,11 @@ public class CommandTestUtil {
      * Executes the given {@code command}, in detailed view mode, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
-     * @param command the command in detailed view mode.
-     * @param actualModel the actual model produced by test.
+     *
+     * @param command               the command in detailed view mode.
+     * @param actualModel           the actual model produced by test.
      * @param expectedCommandResult expected feedback to user.
-     * @param expectedModel the expected model when executing command.
+     * @param expectedModel         the expected model when executing command.
      */
     public static void assertCommandSuccessInDetailedViewMode(DetailedViewExecutable command, Model actualModel,
                                                               CommandResult expectedCommandResult,
@@ -129,15 +130,21 @@ public class CommandTestUtil {
     /**
      * Convenience wrapper to {@link #assertCommandSuccessInDetailedViewMode(DetailedViewExecutable, Model, String,
      * Model)} that takes a string {@code expectedMessage}.
-     * @param command the command in detailed view mode.
-     * @param actualModel the actual model produced by test.
+     *
+     * @param command         the command in detailed view mode.
+     * @param actualModel     the actual model produced by test.
      * @param expectedMessage expected message to user.
-     * @param expectedModel the expected model when executing command.
+     * @param expectedModel   the expected model when executing command.
      */
     public static void assertCommandSuccessInDetailedViewMode(DetailedViewExecutable command, Model actualModel,
                                                               String expectedMessage, Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                CommandResult.SpecialCommandResult.DETAILED_VIEW);
+        CommandResult.SpecialCommandResult specialCommandResult = CommandResult.SpecialCommandResult.DETAILED_VIEW;
+
+        if (command.equals(new ListCommand())) {
+            specialCommandResult = CommandResult.SpecialCommandResult.NONE;
+        }
+
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, specialCommandResult);
         assertCommandSuccessInDetailedViewMode(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -157,13 +164,14 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertDetailedViewCommandSuccess(DetailedViewExecutable command, Model actualModel,
-            CommandResult expectedCommandResult, Model expectedModel) {
+                                                        CommandResult expectedCommandResult, Model expectedModel) {
         try {
             CommandResult result = command.executeInDetailedView(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -178,7 +186,7 @@ public class CommandTestUtil {
      * Model)} that takes a string {@code expectedMessage}.
      */
     public static void assertDetailedViewCommandSuccess(DetailedViewExecutable command, Model actualModel,
-            String expectedMessage, Model expectedModel) {
+                                                        String expectedMessage, Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertDetailedViewCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -190,7 +198,7 @@ public class CommandTestUtil {
      * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
      */
     public static void assertDetailedViewCommandFailure(DetailedViewExecutable command, Model actualModel,
-            String expectedMessage) {
+                                                        String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
