@@ -908,6 +908,8 @@ Use case ends.
 
 **UC11: Updating contact information in detailed view**
 
+**MSS**
+
 1. User requests to view a contact's full information.
 2. d'Intérieur shows the contact's full information.
 3. User edits the contact's information.
