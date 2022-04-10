@@ -155,7 +155,10 @@ Format: `help`
 ![helpMessage](images/helpMessage.png)
 
 <div markdown="block" class="alert alert-info">
-After you successfully clicked on the `copy url` button, you will see the following window:
+
+**:information_source: More information about the help window:**<br>
+
+After you successfully clicked on the `Copy URL` button, you will see the following window:
 
 ![copyUrlSuccessMessage](images/copyLinkSuccessMessage.png)
 
@@ -175,14 +178,10 @@ adding contacts and modifying their information.
 
 ### Adding a contact : `add`
 
-You can add a contact to the address book with the **address as an optional field**.</br>
+You can add a contact to the address book with the **address as an optional field**.
 
-<div markdown="block" class="alert alert-info">
-
-Your contacts are uniquely identified by their `NAME` which is case-sensitive.</br>
-Example: `Alex Yeoh` is different from `alex yeoh`
-
-</div>
+Your contacts are uniquely identified by their `NAME` which is **case-sensitive**.<br>
+e.g. `Alex Yeoh` is different from `alex yeoh`
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
