@@ -16,13 +16,16 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddImageCommand;
 import seedu.address.logic.commands.AssignTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.logic.commands.DeadlineCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeadlineCommand;
+import seedu.address.logic.commands.DeleteImageCommand;
 import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -33,6 +36,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HighImportanceCommand;
+import seedu.address.logic.commands.ImagesCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFavouritesCommand;
 import seedu.address.logic.commands.ListImportantCommand;
@@ -351,4 +355,49 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_INCOMPATIBLE_VIEW_MODE, ()
             -> parser.parseDetailedViewCommand(ViewCommand.COMMAND_WORD + " 1"));
     }
+
+    @Test
+    public void parseCommand_impt() throws Exception {
+        HighImportanceCommand command = (HighImportanceCommand) parser.parseCommand(
+                HighImportanceCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new HighImportanceCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_addimg() throws Exception {
+        AddImageCommand command = (AddImageCommand) parser.parseCommand(
+                AddImageCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new AddImageCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_images() throws Exception {
+        ImagesCommand command = (ImagesCommand) parser.parseCommand(
+                ImagesCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new ImagesCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_note() throws Exception {
+        NoteCommand command = (NoteCommand) parser.parseCommand(
+                NoteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " r/note");
+        assertEquals(new NoteCommand(INDEX_FIRST_PERSON, "note"), command);
+    }
+
+    @Test
+    public void parseCommand_delimg() throws Exception {
+        Index indexFirstImage = Index.fromOneBased(1);
+        DeleteImageCommand command = (DeleteImageCommand) parser.parseCommand(
+                DeleteImageCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " i/"
+                        + indexFirstImage.getOneBased());
+        assertEquals(new DeleteImageCommand(INDEX_FIRST_PERSON, indexFirstImage), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        SortsCommand command = (SortsCommand) parser.parseCommand(
+                SortsCommand.COMMAND_WORD + " " + "name");
+        assertEquals(new SortsCommand("name"), command);
+    }
+
 }

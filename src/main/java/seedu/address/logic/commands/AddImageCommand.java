@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.stage.FileChooser;
@@ -157,5 +158,19 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
             return new ArrayList<>();
         }
         return selectedFiles;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddImageCommand)) {
+            return false;
+        }
+
+        AddImageCommand e = (AddImageCommand) other;
+        return Objects.equals(this.targetIndex, e.targetIndex);
     }
 }
