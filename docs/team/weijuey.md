@@ -13,7 +13,7 @@ Given below are my contributions to the project.
   * What it does: allows the user to add and delete notes to each contact, to be referenced in the future.
   * Justification: This feature is flexible in utility, allowing the user to save any information they deem important, thus enhancing the product.
   * Highlights: Implementing the feature required understanding how modification of internal data is done. Integrating a variably-sized UI element also required careful consideration of pros and cons of different solutions.
-  * Credits: UI design decisions were made as a team.
+  * Credits: UI design decisions were discussed and finalised as a team.
 
 * **New Feature**: Added detailed view feature
   * What it does: allows the user to view a contact in detail, which the app will switch to a more focused view.
@@ -36,8 +36,8 @@ Given below are my contributions to the project.
     * Reorganised commands to sections and added table of contents for more flexible linking to sections. [\#183](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/183)
     * Added information to each existing commands on compatibility with new detailed view feature, and update command summary table to capture the information succinctly. [\#99](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/99)
   * Developer Guide:
-    * Added implementation details of the `note` and `view` features. [#72](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/72), [\#203](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/203)
-    * Update existing clas diagrams to match new architecture. [\#203](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/203)
+    * Added implementation details and diagrams for the `note` and `view` features. [#72](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/72), [\#203](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/203)
+    * Update existing class diagrams to match new architecture. [\#203](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/203)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#44](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/44), [\#74](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/74), [\#85](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/85), [\#92](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/92)
