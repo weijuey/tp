@@ -984,7 +984,7 @@ Use case ends.
 **MSS**
 
 1. User requests to delete an image from a contact.
-2. d'Intérieur removes the images from the contact.
+2. d'Intérieur removes the image from the contact.
 
 Use case ends.
 
@@ -993,7 +993,7 @@ Use case ends.
 **MSS**
 
 1. User requests to view all images of a contact.
-2. d'Intérieur locates the contact and lists all their image(s) in the images view panel.
+2. d'Intérieur lists all their image(s) in the images view panel.
 
 Use case ends.
 
