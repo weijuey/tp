@@ -13,13 +13,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/xsaints19x.png" width="200px">
 
-[[github](http://github.com/xsaintsx19)]
-[[portfolio](team/xsaintsx19.md)]
+[[github](https://github.com/xSaints19x)]
+[[portfolio](team/xsaints19x.md)]
 
 * Role: Developer
 * Responsibilities: UI
 
-### Ezekiel Toh
+### Ezekiel Toh Fun Kai
 
 <img src="images/takufunkai.png" width="200px">
 
@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI
 
-### Glenn Lim
+### Glenn Lim Jun Wei
 
 <img src="images/glennljw.png" width="200px">
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/tehkokhoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deadline and Sort feature
 
 ### Yoong Wei Jue
 

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccessInDetailedViewMode;
 import static seedu.address.logic.commands.CommandTestUtil.assertDetailedViewCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -27,6 +28,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 
 public class DeadlineCommandTest {
@@ -36,11 +38,30 @@ public class DeadlineCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_addValidDeadlineUnfilteredList_success() throws ParseException {
+    public void execute_addValidDeadlineInViewMode_success() {
+        Person firstPerson = model.getSortedPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(firstPerson);
+        Person personToAddDeadline = model.getDetailedContactViewPerson();
+        Person editedPerson = new PersonBuilder(personToAddDeadline).withDeadlines(VALID_DEADLINE).build();
+
+        DeadlineCommand deadlineCommand = new DeadlineCommand(SampleDataUtil.getDeadlineList(VALID_DEADLINE));
+
+        String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, firstPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setDetailedContactView(editedPerson);
+
+        assertCommandSuccessInDetailedViewMode(deadlineCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addValidDeadlineUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withDeadlines(VALID_DEADLINE).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, editedPerson.getDeadlines());
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
+                SampleDataUtil.getDeadlineList(VALID_DEADLINE));
 
         String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, firstPerson);
 
@@ -51,13 +72,14 @@ public class DeadlineCommandTest {
     }
 
     @Test
-    public void execute_addValidDeadlineFilteredList_success() throws ParseException {
+    public void execute_addValidDeadlineFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = model.getSortedPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withDeadlines(VALID_DEADLINE).build();
 
-        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON, editedPerson.getDeadlines());
+        DeadlineCommand deadlineCommand = new DeadlineCommand(INDEX_FIRST_PERSON,
+                SampleDataUtil.getDeadlineList(VALID_DEADLINE));
 
         String expectedMessage = String.format(DeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS, firstPerson);
 
@@ -91,9 +113,9 @@ public class DeadlineCommandTest {
     }
 
     @Test
-    public void execute_addInvalidDeadline_throwsParseException() throws ParseException {
+    public void execute_addInvalidDeadline_throwsParseException() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Exception exception = assertThrows(ParseException.class, () ->
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
                 new PersonBuilder(firstPerson).withDeadlines(INVALID_DEADLINE).build());
         String expectedMessage = Deadline.MESSAGE_CONSTRAINTS;
         assertTrue(exception.getMessage().contains(expectedMessage));
@@ -139,6 +161,9 @@ public class DeadlineCommandTest {
 
         // different person -> returns false
         assertNotEquals(deadlineFirstCommand, deadlineSecondCommand);
+
+        // other is null -> returns false
+        assertNotEquals(deadlineFirstCommand, null);
 
     }
 }

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,8 +21,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.commandhistory.CommandHistoryEntry;
 import seedu.address.model.image.ImageDetailsList;
 import seedu.address.model.person.Person;
@@ -28,6 +32,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -42,6 +47,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(CommandResult.SpecialCommandResult.NONE, commandResult.getSpecialCommandResult());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
@@ -52,6 +58,35 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_newTag_createNewTagSuccessful() throws Exception {
+        Person validPerson = new PersonBuilder().withTags("newTag").build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(model);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(CommandResult.SpecialCommandResult.NONE, commandResult.getSpecialCommandResult());
+        assertTrue(model.hasTag(new Tag("newTag")));
+        assertTrue(model.hasPerson(validPerson));
+    }
+
+    @Test
+    public void executeInDetailedView_personAcceptedByModel_addSuccessful() throws Exception {
+        Person firstPerson = model.getSortedPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setDetailedContactView(firstPerson); //Enter detailed view mode
+        Person validPerson = new PersonBuilder().build();
+
+        CommandResult commandResult = new AddCommand(validPerson).executeInDetailedView(model);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(CommandResult.SpecialCommandResult.NONE, commandResult.getSpecialCommandResult());
+
+        //View mode doesn't change and stays on the current person
+        assertEquals(model.getDetailedContactViewPerson(), firstPerson);
+
+        assertTrue(model.hasPerson(validPerson));
     }
 
     @Test
@@ -232,7 +267,7 @@ public class AddCommandTest {
         @Override
         public void sortFilteredPersonListByFavourite() {
             throw uncalledAE;
-        };
+        }
 
         @Override
         public void sortFilteredPersonListByHighImportance() {
@@ -267,12 +302,12 @@ public class AddCommandTest {
         @Override
         public void setDetailedContactView(Person person) {
             throw uncalledAE;
-        };
+        }
 
         @Override
         public void clearDetailedContactView() {
             throw uncalledAE;
-        };
+        }
 
         @Override
         public Person getDetailedContactViewPerson() {

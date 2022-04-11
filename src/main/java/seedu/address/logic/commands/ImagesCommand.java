@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -132,5 +133,20 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         return new Person(name, phone, email, address, deadlines,
                 notes, tags, favouriteStatus, highImportanceStatus, sanitizedList);
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ImagesCommand)) {
+            return false;
+        }
+
+        ImagesCommand e = (ImagesCommand) other;
+
+        return Objects.equals(this.index, e.index);
     }
 }

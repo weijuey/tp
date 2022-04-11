@@ -6,14 +6,20 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "deadlines" : [ {
-      "description" : "",
-      "date" : "*No deadline specified*"
-    } ],
+      "description" : "a",
+      "date" : "16/13/2028"
+    }, {
+      "description" : "d",
+      "date" : "18/10/2025"
+    }, {
+      "description" : "f",
+      "date" : "27/10/2024"
+    }],
     "notes" : [ ],
     "tagged" : [ "friends" ],
     "isFavourite" : "false",
     "images" : [ ],
-    "hasHighImportance" : "true"
+    "hasHighImportance" : "false"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -25,8 +31,8 @@
     } ],
     "notes" : [ ],
     "tagged" : [ "owesMoney", "friends" ],
-    "isFavourite" : "false",
-    "images" : [ ],
+    "isFavourite" : "true",
+    "images" : [ "src/test/data/images/test_image_1.png" ],
     "hasHighImportance" : "true"
   }, {
     "name" : "Carl Kurz",
@@ -34,14 +40,17 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "deadlines" : [ {
-      "description" : "",
-      "date" : "*No deadline specified*"
-    } ],
+      "description" : "c",
+      "date" : "16/07/2026"
+    }, {
+      "description" : "e",
+      "date" : "11/04/2022"
+    }],
     "notes" : [ ],
     "tagged" : [ ],
     "isFavourite" : "false",
     "images" : [ ],
-    "hasHighImportance" : "true"
+    "hasHighImportance" : "false"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -53,9 +62,9 @@
     } ],
     "notes" : [ ],
     "tagged" : [ "friends" ],
-    "isFavourite" : "true",
+    "isFavourite" : "false",
     "images" : [ ],
-    "hasHighImportance" : "true"
+    "hasHighImportance" : "false"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -76,14 +85,14 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "deadlines" : [ {
-      "description" : "",
-      "date" : "*No deadline specified*"
+      "description" : "a",
+      "date" : "04/12/2027"
     } ],
     "notes" : [ ],
     "tagged" : [ ],
     "isFavourite" : "true",
     "images" : [ ],
-    "hasHighImportance" : "true"
+    "hasHighImportance" : "false"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -97,8 +106,7 @@
     "tagged" : [ ],
     "isFavourite" : "false",
     "images" : [ ],
-    "hasHighImportance" : "true"
+    "hasHighImportance" : "false"
   } ],
-  "_comment2": "AddressBook save file with invalid tag",
-  "tags": [ "friends", "owesMoney", "+" ]
+  "tags": [ "friends", "owesMoney" ]
 }
