@@ -2,14 +2,15 @@
 layout: page title: User Guide
 ---
 
-d'Intérieur is a **desktop app for interior designers to manage their contacts and projects, optimized for use via a
-Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+d'Intérieur is a **desktop app for interior designers to manage their contacts and projects efficiently**. 
 If you can type fast, d'Intérieur can get your contact management tasks done faster than traditional GUI apps.
 
 If you utilize other online applications for interior designing and lack a centralized, robust, and efficient customer
-management tool, this application will be able to meet your needs.
+management tool, this application will be able to meet your needs. Designed with modern, tech-savvy interior designers
+in mind, the app is minimalistic, practical, and greatly rewards users with basic computer proficiency, such as
+quick typing speed and general know-how.
 
-In this user guide, we will work you through the basic use cases and commands of the application, so that you can
+In this user guide, we will walk you through the basic features and commands of the application, so that you can 
 quickly get started and make full of use of what the application has to offer.
 
 ## Table of Contents
@@ -48,6 +49,7 @@ quickly get started and make full of use of what the application has to offer.
     * [Locating contacts by tag](#locating-contacts-by-tag--findtag)
   * [Saving the data](#saving-the-data)
   * [Editing the data file](#editing-the-data-file)
+  * [Cycling through input history](#cycling-through-input-history)
   * [Archiving data files](#archiving-data-files-coming-in-v20)
 * [FAQ](#faq)
 * [Command summary](#command-summary)
@@ -64,7 +66,8 @@ quickly get started and make full of use of what the application has to offer.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
-   ![Ui](images/Ui.png)
+![Sample List View](images/Sample1.png)
+![Sample Detailed View](images/Sample2.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -78,13 +81,41 @@ quickly get started and make full of use of what the application has to offer.
 
     * **`fav`** `2` : Adds the 2nd contact shown in the current list to your list of favourite contacts
 
-    * **`favourites`** : Lists all your favourite contacts.
-
-    * **`clear`** : Deletes all contacts.
+    * **`view`** `2` : Brings the 2nd contact into detailed view.
 
     * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Tutorial
+
+1. This is the **list view**, the primary view you will work with when using the app.
+![Default list view](images/Sample1.png)
+2. In list view, all commands requiring an `INDEX` will reference the index provided on the left side of the contact's
+name. For example, typing the command `fav 2` will favourite the 2nd contact in the list.
+![Tutorial fav](images/TutorialFav.png)
+
+3. Add a new contact by running `add n/<YOUR NAME> p/<YOUR PHONE NUMBER> e/<YOUR EMAIL ADDRESS>`. These fields are 
+mandatory when creating a new contact. However, you can add more optional information in the same add command, or in a
+future edit command. See [adding a contact](#adding-a-contact--add) and [editing a contact](#editing-a-contact--edit)
+for more information.
+![Tutorial add](images/TutorialAdd.png)
+
+4. To bring the second contact into **detailed view**, input `view 2`.
+![Tutorial view](images/TutorialView.png)
+
+5. In **detailed view**, some commands available to you in **list view** are no longer available, however, your commands
+will now automatically reference the current contact you are viewing in **detailed view**. For example, you can type
+`impt` to simply label the current contact you are viewing to set them as an important contact.
+![Tutorial impt](images/TutorialImpt.png)
+
+6. To exit **detailed view**, simply input `list` to return to the **list view**.
+
+These are just the basic features to get you ready to start using the app. There are many more features for you to
+explore, it is recommended for you to have a read through our User Guide to familiarize yourself with the functionalities
+of the app. You can always input the `help` command whenever you need help or want to reference the User Guide again!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -146,7 +177,7 @@ You may check out the summary table of commands for the overview.
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Interiéur.
+Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Intérieur.
 
 When you're feeling overwhelmed by the number of commands available, refer to the [command summary](#command-summary) and the examples!
 
@@ -566,7 +597,7 @@ Lists the contact's image(s).
 
 Format: `images INDEX`
 
-* You can click on the images to zoom into the picture.
+* You can click on the images to get a focused view of the image.
 
 ### Deleting images : `delimg`
 
@@ -590,8 +621,10 @@ Example:
 Clears all entries from the address book. This command can **only be used in list view**.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-There is no warning if you run this command, so make sure you intend to run this command. It is recommended to use this
-command **only for clearing the sample data provided in the beginning**.
+There is no warning if you run this command, and there is **no way to recover the deleted data**. Ensure you intend to 
+run this command. 
+
+It is recommended to use this command **only for clearing the sample data provided in the beginning**.
 </div>
 
 Format: `clear`
@@ -705,7 +738,7 @@ If your changes to the data file makes its format invalid, d'Intérieur will dis
 ### Cycling through input history
 
 You can cycle through your input history by hitting the up arrow key to go back to older inputs,
-and the down arrow key to your latest inputs. You can save type on typing repeat inputs, or re-writing erroneous
+and the down arrow key to your latest inputs. You can save time on typing repeat inputs, or re-writing erroneous
 inputs!
 
 ### Archiving data files `[coming in v2.0]`
@@ -741,7 +774,6 @@ Empty entries mean the commands cannot be used in the view.
 | **Delete Tag**      | `deltag TAGNAME`<br> e.g., `delete friends`                                                                                                     | -                                                                                                      |
 | **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            | `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​` <br> e.g., `edit p/88438809 e/alex_yeoh@example.com` |
 | **Fav**             | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  | `fav`                                                                                                  |
-| **Favourites**      | `favourites`                                                                                                                                    | -                                                                                                      |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      | -                                                                                                      |
 | **Find Tag**        | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  | -                                                                                                      |
 | **Help**            | `help`                                                                                                                                          | Same as list view                                                                                      |
@@ -750,7 +782,7 @@ Empty entries mean the commands cannot be used in the view.
 | **Sort**            | `sort CRITERIA` <br> e.g., `sort address`                                                                                                       | -                                                                                                      |
 | **List**            | `list`                                                                                                                                          | Same as list view                                                                                      |
 | **List Favourites** | `favourites`                                                                                                                                    | -                                                                                                      |
-| **List Images**     | `images INDEX` <br> e.g., `images 1`                                                                                                            | -                                                                                                      |
+| **List Images**     | `images INDEX` <br> e.g., `images 1`                                                                                                            | `images`                                                                                               |
 | **Note**            | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            | `note r/NOTES` <br> e.g., `note r/Likes wood furniture`                                                |
 | **Unassign Tag**    | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        | `unassign TAGNAME` <br> e.g., `unassign client`                                                        |
 | **View**            | `view INDEX` <br> e.g., `view 1`                                                                                                                | -                                                                                                      |
