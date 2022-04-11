@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for [`sort`*](https://ay2122s2-cs2103t-t12-2.github.io/tp/UserGuide.html#prioritising-relevant-contacts-to-you--sort) and [`deadline`*](https://ay2122s2-cs2103t-t12-2.github.io/tp/UserGuide.html#adding-deadlines-to-meet-in-relation-to-a-contact--deadline) [#92](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/92) [#24](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/24)
+    * Added documentation for [`sort*`](https://ay2122s2-cs2103t-t12-2.github.io/tp/UserGuide.html#prioritising-relevant-contacts-to-you--sort) and [`deadline*`](https://ay2122s2-cs2103t-t12-2.github.io/tp/UserGuide.html#adding-deadlines-to-meet-in-relation-to-a-contact--deadline) [#92](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/92) [#24](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/24)
   * Developer Guide:
-    * Added implementation details of the [`deadline`*](https://ay2122s2-cs2103t-t12-2.github.io/tp/DeveloperGuide.html#deadline-feature) feature. [#74](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/74)
+    * Added implementation details of the [`deadline*`](https://ay2122s2-cs2103t-t12-2.github.io/tp/DeveloperGuide.html#deadline-feature) feature. [#74](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/74)
 
