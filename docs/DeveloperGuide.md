@@ -20,6 +20,7 @@ Table of Contents
     * [Deadline feature](#deadline-feature)
     * [Add contact with address as optional field feature](#add-contact-with-address-as-optional-field-feature)
     * [High importance flag feature](#add-a-high-importance-flag-feature)
+    * [Images feature](#images-feature)
   * [Adding features to Model](#adding-features-to-model)
     * [Find tag feature](#find-tag-feature)
   * [Assimilating new UI components](#assimilating-new-ui-components)
@@ -393,6 +394,67 @@ The following sequence diagram shows how the feature works:
         * Have to update the `HighImportancePersonList` if a contact of high importance has been modified.
         * Quite a fair bit of changes requires, especially within the storage.
 
+### Images feature
+
+#### Implementation
+
+All images added by the user must be associated to some contact. This is done by storing a `ImageDetailsList` within
+the contact's `Person` object. The `ImageDetailsList` encapsulates the information and methods of an iterable list of
+`ImageDetails`. `ImageDetails` encapsulates the information of images added to the contact, such as the file name
+and the filepath of the image.
+
+It is worth noting that `ImageDetailsList` and `ImageDetails` do not actually hold the image files, but only the
+file and path names. This means that an `ImageDetails` object could exist for a non-existent image file. This is resolved
+by using the `ImageUtil` helper class' methods.
+
+Apart from the `ImageDetailsList` and `ImageDetails`, the `ImageUtil` helper class can be seen as the bridge between
+the `ImageDetails` object and the actual directory/image file. It contains methods to check the existence of files at
+a specified filepath, copying an image into a directory, and sanitizing `ImageDetailList`s (removing `ImageDetails`
+objects from the list which do not have an existing image in the specified filepath).
+
+Users first interact with images by adding them to a specific contact through the `AddImagesCommand`. It leverages
+on the `JFileChooser` class provided by `JavaFX`. This is the interface that users will encounter when trying to
+select image(s) to add into the application. Note that only `.jpg` and `.png` files are allowed by default, and there
+is no existing way for the user to customize it.
+
+The `ImagesCommand` will identify the contact whose images are of interest to the user, based on the given index.
+The `Logic` will then pass the `ImageDetailsList` of this `Person` into the `ImagesToView` field of the `Model`.
+It will return a `SpecialCommandResult` which is `VIEW_IMAGES`, and the `UI` will then push the user to the `ViewImagesPanel`,
+where the images stored in the `ImagesToView` field will be shown to the user.
+
+The user can delete images by running the `DeleteImageCommand`, with parameters: 1. The index of the contact whose images
+are to be deleted, 2. The index of the image belonging to the contact. The logic will then identify the person and the
+image of choice. It will remove the `ImageDetails` object from the `Person`'s `ImageDetailsList`, _and_ delete the
+image associated with it.
+
+Given below is an example scenario of the add images feature in operation
+
+Step 1. When a user types `images INDEX`, `Logic` looks for the specified person at `INDEX` based on `SortedPersonList`.
+
+Step 2. `Logic` will then open the `JFileChooser` interface for the user to select any amount of images they wish to
+add into the selected contact.
+
+Step 3. After selecting the image(s), they will be copied through the help of the `ImageUtil` class, which leverages on the
+`ImageIO` class provided by the `javax` `imageio` library, into the specified `contact_images_path` specified in the
+`UserPrefs`. By default, this is `/data/images/` directory.
+
+Step 4. Each of these newly copied images will have their filepaths stored into their own newly created `ImageDetails` objects.
+The existing images of the contact, if any, will be added together with the new `ImageDetails` into a new `ImageDetailsList`
+
+Step 5. The `ImageDetailsList` will be added to the `Person` object.
+
+#### Design considerations
+
+Aspect: How the images should be saved
+* Alternative 1 (current choice): Image details associated with a contact is stored directly as a `Person`'s field.
+    * Pros: Easier to search for a contact's images, as we only have to search for the given contact.
+    * Cons: Not necessarily part of a contact's personal information. Eventually starts to bloat up the `Person` class.
+* Alternative 2: Image details are stored in a list in the `Model`.
+    * Pros: Easier to maintain/sanitize the list of images for outdated/corrupted images.
+    * Cons: Hard to associate the images with the persons, since there is no unique identifying number/value associated
+      with `Person`.
+
+
 ### Adding features to Model
 
 ### Find tag feature
@@ -446,66 +508,6 @@ Step 7. The `CommandResult` created from `FindTagCommand#execute()` is returned 
 * **Alternative 2:** Contacts containing any tags of the keywords searched for.
     * Pros: Can find contacts who have any tags the keywords searched.
     * Cons: Unintuitive, as we usually narrow down the scope for filtering.
-
-### Images feature
-
-#### Implementation
-
-All images added by the user must be associated to some contact. This is done by storing a `ImageDetailsList` within
-the contact's `Person` object. The `ImageDetailsList` encapsulates the information and methods of an iterable list of
-`ImageDetails`. `ImageDetails` encapsulates the information of images added to the contact, such as the file name
-and the filepath of the image.
-
-It is worth noting that `ImageDetailsList` and `ImageDetails` do not actually hold the image files, but only the 
-file and path names. This means that an `ImageDetails` object could exist for a non-existent image file. This is resolved
-by using the `ImageUtil` helper class' methods.
-
-Apart from the `ImageDetailsList` and `ImageDetails`, the `ImageUtil` helper class can be seen as the bridge between
-the `ImageDetails` object and the actual directory/image file. It contains methods to check the existence of files at
-a specified filepath, copying an image into a directory, and sanitizing `ImageDetailList`s (removing `ImageDetails`
-objects from the list which do not have an existing image in the specified filepath).
-
-Users first interact with images by adding them to a specific contact through the `AddImagesCommand`. It leverages
-on the `JFileChooser` class provided by `JavaFX`. This is the interface that users will encounter when trying to
-select image(s) to add into the application. Note that only `.jpg` and `.png` files are allowed by default, and there
-is no existing way for the user to customize it.
-
-The `ImagesCommand` will identify the contact whose images are of interest to the user, based on the given index.
-The `Logic` will then pass the `ImageDetailsList` of this `Person` into the `ImagesToView` field of the `Model`.
-It will return a `SpecialCommandResult` which is `VIEW_IMAGES`, and the `UI` will then push the user to the `ViewImagesPanel`,
-where the images stored in the `ImagesToView` field will be shown to the user.
-
-The user can delete images by running the `DeleteImageCommand`, with parameters: 1. The index of the contact whose images
-are to be deleted, 2. The index of the image belonging to the contact. The logic will then identify the person and the
-image of choice. It will remove the `ImageDetails` object from the `Person`'s `ImageDetailsList`, _and_ delete the
-image associated with it.
-
-Given below is an example scenario of the add images feature in operation
-
-Step 1. When a user types `images INDEX`, `Logic` looks for the specified person at `INDEX` based on `SortedPersonList`.
-
-Step 2. `Logic` will then open the `JFileChooser` interface for the user to select any amount of images they wish to
-add into the selected contact.
-
-Step 3. After selecting the image(s), they will be copied through the help of the `ImageUtil` class, which leverages on the
-`ImageIO` class provided by the `javax` `imageio` library, into the specified `contact_images_path` specified in the
-`UserPrefs`. By default, this is `/data/images/` directory.
-
-Step 4. Each of these newly copied images will have their filepaths stored into their own newly created `ImageDetails` objects.
-The existing images of the contact, if any, will be added together with the new `ImageDetails` into a new `ImageDetailsList`
-
-Step 5. The `ImageDetailsList` will be added to the `Person` object.
-
-#### Design considerations
-
-Aspect: How the images should be saved
-* Alternative 1 (current choice): Image details associated with a contact is stored directly as a `Person`'s field.
-  * Pros: Easier to search for a contact's images, as we only have to search for the given contact.
-  * Cons: Not necessarily part of a contact's personal information. Eventually starts to bloat up the `Person` class.
-* Alternative 2: Image details are stored in a list in the `Model`.
-  * Pros: Easier to maintain/sanitize the list of images for outdated/corrupted images.
-  * Cons: Hard to associate the images with the persons, since there is no unique identifying number/value associated 
-    with `Person`.
 
 ### Assimilating new UI components
 
