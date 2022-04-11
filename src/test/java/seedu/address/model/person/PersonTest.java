@@ -98,5 +98,9 @@ public class PersonTest {
         // different favourites -> returns false
         editedAlice = new PersonBuilder(ALICE).withFavourite(String.valueOf(!ALICE.isFavourite())).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different high importance status -> returns false
+        editedAlice = new PersonBuilder(ALICE).withHighImportance(String.valueOf(!ALICE.hasHighImportance())).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 }

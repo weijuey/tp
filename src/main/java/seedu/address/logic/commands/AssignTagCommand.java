@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -154,9 +155,16 @@ public class AssignTagCommand extends Command implements DetailedViewExecutable 
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AssignTagCommand // instanceof handles nulls
-                && tagName.equals(((AssignTagCommand) other).tagName)
-                && targetIndex.equals(((AssignTagCommand) other).targetIndex));
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AssignTagCommand)) {
+            return false;
+        }
+
+        AssignTagCommand e = (AssignTagCommand) other;
+        return Objects.equals(targetIndex, e.targetIndex)
+                && this.tagName.equals(e.tagName);
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -33,7 +34,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1\n";
 
-    public static final String MESSAGE_IMAGES_SUCCESS = "%d Images for Person [%d]: %s";
+    public static final String MESSAGE_IMAGES_SUCCESS = "%d Images for Person [%s]:\n %s";
 
     private static final Logger logger = Logger.getLogger(String.valueOf(MainApp.class));
 
@@ -63,6 +64,8 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(index);
+
         List<Person> lastShownList = model.getSortedPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -70,10 +73,11 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         }
 
         Person targetPerson = lastShownList.get(index.getZeroBased());
-        logger.info(String.format("Sanitizing images of person at index %d", index.getZeroBased()));
+        logger.info(String.format("Sanitizing images of person at index %d, at file path: %s", index.getZeroBased(),
+                model.getContactImagesFilePath()));
 
         ImageDetailsList originalList = targetPerson.getImageDetailsList();
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList, model.getContactImagesFilePath());
         Person sanitizedPerson = createImageDeletedPerson(targetPerson, sanitizedList);
         logger.info(String.format("Result of sanitization: %d -> %d", originalList.size(), sanitizedList.size()));
 
@@ -81,10 +85,10 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
             model.setPerson(targetPerson, sanitizedPerson);
         }
 
-        model.updateImagesToView(sanitizedList);
+        model.setImagesToView(sanitizedList);
 
         String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedList.size(),
-                index.getOneBased(), sanitizedPerson.getName() + "\n") + sanitizedList;
+                index.getOneBased(), sanitizedList);
         return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
     }
 
@@ -93,10 +97,10 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         requireNonNull(model);
 
         Person targetPerson = model.getDetailedContactViewPerson();
-        logger.info(String.format("Sanitizing images of person in detailed view"));
+        logger.info("Sanitizing images of person in detailed view");
 
         ImageDetailsList originalList = targetPerson.getImageDetailsList();
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(originalList, model.getContactImagesFilePath());
         Person sanitizedPerson = createImageDeletedPerson(targetPerson, sanitizedList);
         logger.info(String.format("Result of sanitization: %d -> %d", originalList.size(), sanitizedList.size()));
 
@@ -104,9 +108,11 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
             model.setPerson(targetPerson, sanitizedPerson);
         }
 
-        model.updateImagesToView(sanitizedList);
+        model.setImagesToView(sanitizedList);
+        model.clearDetailedContactView();
 
-        String result = String.format(MESSAGE_IMAGES_SUCCESS, sanitizedPerson + "\n") + sanitizedList;
+        String result =
+                String.format(MESSAGE_IMAGES_SUCCESS, originalList.size(), targetPerson.getName(), sanitizedList);
         return new CommandResult(result, CommandResult.SpecialCommandResult.VIEW_IMAGES);
     }
 
@@ -127,5 +133,20 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         return new Person(name, phone, email, address, deadlines,
                 notes, tags, favouriteStatus, highImportanceStatus, sanitizedList);
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ImagesCommand)) {
+            return false;
+        }
+
+        ImagesCommand e = (ImagesCommand) other;
+
+        return Objects.equals(this.index, e.index);
     }
 }

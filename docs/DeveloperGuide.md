@@ -57,7 +57,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S2-CS2103T-T12-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -70,7 +70,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S2-CS2103T-T12-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S2-CS2103T-T12-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -103,7 +103,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S2-CS2103T-T12-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -120,7 +120,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S2-CS2103T-T12-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -148,7 +148,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S2-CS2103T-T12-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -169,7 +169,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S2-CS2103T-T12-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -308,17 +308,10 @@ Diagram below shows the execution of `deadline 1 /d return book 1/1/2023` comman
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Calling `deadline 1` without the date and description clears the deadlines for contact specified in index given.
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Duplicate `deadline` for the same `Person` is not allowed.
-</div>
-
 #### Limitations and proposed solutions
-Currently, calling `deadline` command resets all `deadlines` previously stored for `Person` specified, so it does not scale well.
+Currently, `deadline` command allows duplicate deadlines to be added, it will be changed in a later version
 
-**Solution 1**: Allow `deadline` command to differentiate between adding and deleting `deadline`.
-
-**Solution 2**: Modify the `add` command and `delete` command to include adding and deleting deadlines.
-
-The main problem with the solutions is that new delimiters have to be created. These delimiters might not be intuitive for users to remember or might overlap with other delimiters.
+**Solution**: Check `DeadlineList` before adding `deadline`.
 
 (more limitations and solutions to be discovered...)
 
@@ -366,11 +359,45 @@ Classes added for this feature:
 - `HighImportanceCommand`
 - `HighImportanceParser`
 
+Given below is an example scenario of the high importance flag feature.
+
+Step 1. When a user is created, they are automatically assigned `NOT_HIGH_IMPORTANCE` as their importance status.
+
+![ImportanceState0](images/high-importance-flag/ImportanceState0.png)
+
+Step 2. The user executes `impt 1` command to change the high importance status of the 1st person in the address book. The `impt` command executes and determines the current `highImportanceStatus` of the contact (which in this case is `NOT_HIGH_IMPORTANCE`). It then calls the private helper method `createHighImportancePerson` to create a copy of the target contact, except with their `highImportanceStatus` now pointing to the opposite `highImportanceStatus` value (which will be `HIGH_IMPORTANCE`).
+
+![ImportanceState1](images/high-importance-flag/ImportanceState1.png)
+
+Step 3. The command execution continues on to replace the existing person object with the contact with the newly updated high importance status through `Model#setPerson`. After the successful execution, the user can visually identify their high importance contacts through the red flag beside their contact names.
+
+![ImportanceState2](images/high-importance-flag/ImportanceState2.png)
+
+Step 4. The user decides that they want to see only their high importance contacts. The `impts` command will execute, passing the `PersonHasHighImportancePredicate` into the `Model#updateFilteredPersonList`.
+
 The following sequence diagram shows how the feature works:
 
-![HighImportanceSequenceDiagram](images/HighImportanceSequenceDiagram.png)
+![HighImportanceSequenceDiagram](images/high-importance-flag/HighImportanceSequenceDiagram.png)
 
-_{more aspects and alternatives to be added}_
+#### Design considerations:
+
+**Aspect: How important and list important commands execute:**
+
+* **Alternative 1 (current choice):** Each person responsible for their own high importance state
+    * Pros:
+        * Easy to implement.
+        * Easy to check high importance status of contact.
+        * Less coupling between `HighImportance` command and other commands such as edit and delete, as well as the model.
+    * Cons:
+        * Adds more fields to the person contact, increasing the complexity of the contact in the long run.
+        * Need to have a `HighImportance` class to represent a contact's status.
+* **Alternative 2:** Store contacts into a `HighImportancePersonList`.
+    * Pros:
+        * No need to add a field into `Person` class.
+        * No need to have `HighImportance` class, which acts like a boolean value.
+    * Cons:
+        * Have to update the `HighImportancePersonList` if a contact of high importance has been modified.
+        * Quite a fair bit of changes requires, especially within the storage.
 
 ### Adding features to Model
 
@@ -380,7 +407,9 @@ _{more aspects and alternatives to be added}_
 
 The find tag feature is used when a user is interested in finding contacts who have a certain `Tag`. Each `Person` has a set of `Tags` which contains unique `Tags` since each `Person` should not have more than 1 of the same tag.
 
-This feature is facilitated by `FindTagCommand`, which makes use of a `TagContainsKeywordPredicate` that checks if the `Tag` set of a `Person` contains all the tag names in the `List` of keywords (case-insensitive).
+This feature is facilitated by `FindTagCommand`, which makes use of a `List` of keywords that the `TagContainsKeywordPredicate` uses to checks if the `Tag` set of a `Person` contains all the tag names in the current `ActivatedTagList` which contains all selected keywords used as filter (case-insensitive).
+
+Each use of the find tag feature adds the given keyword(s) into the `ActivatedTagList` that serves as a filter for selected tags. The keywords in the `ActivatedTagList` are then used to create the `TagContainsKeywordPredicate` to check the `Tag` set of each `Person`. The keywords in the `ActivatedTagList` is only cleared when `list` command is called.
 
 The `FindTagCommand#execute()` method looks through the `Tag` set of each `Person` and updates the `Model#filteredPersons` using `Model#updateFilteredPersonsList()` which uses the `TagContainsKeywordPredicate`. The `Model` then displays the currently most updated filtered person list which reflects contacts with the specified tags in the list.
 
@@ -398,11 +427,13 @@ Step 2. The user executes the command `findtag friends` to find contacts with th
 
 Step 3. The AddressBookParser parses the command `findtag friends` and creates a `FindTagCommandParser` to parse the keyword `friends`.
 
-Step 4. The `TagContainsKeywordPredicate` is created and passed onto the constructor of `FindTagCommand` to create a new `FindTagCommand` object.
+Step 4. The `FindTagCommand` object is created with the given keyword `friends` as a `Singleton List`.
 
-Step 5. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
+Step 5. The current tag names in the `ActivatedTagList` are then retrieved, creating a new `TagContainsKeywordPredicate`.  
 
-Step 6. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
+Step 6. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
+
+Step 7. The `CommandResult` created from `FindTagCommand#execute()` is returned to the `LogicManager` which will be reflected in the `ResultDisplay` of the `GUI`.
 
 ![FindTagSequenceDiagram](images/FindTagSequenceDiagram.png)
 
@@ -604,7 +635,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. d'Intérieur shows an error message.
 
       Use case resumes at step 2.
 
@@ -627,13 +658,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. d'Intérieur shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The label requested does not currently exist in d'Intérieur.
 
-  * To be added
+    * 3b1. <ins>Add a label to d'Intérieur (UC08)</ins>
+
+      Use case ends.
+
+     
 
 **UC04: Filter contacts using labels**
 
@@ -648,7 +683,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given label does not exist.
 
-  * To be added
+  * <ins>Add a label to d'Intérieur (UC08)</ins>
+  
+    Use case ends.
+  
 
 **UC05: Adding a note to a contact**
 
@@ -669,7 +707,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The given index is invalid.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. d'Intérieur shows an error message.
 
       Use case resumes at step 1.
 
@@ -686,7 +724,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given index is invalid.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. d'Intérieur shows an error message.
 
       Use case resumes at step 1.
 
@@ -701,14 +739,74 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The deadline given does not contain a valid date or time.
 
-  * To be added
+    * 1a1. d'Intérieur shows an error message.
+
+      Use case ends
 
 * 1b. The given index is invalid.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. d'Intérieur shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
+**UC08: Add a label to d'Intérieur**
+
+**MSS**
+
+1. User requests to create a label to label contacts in the contact list.
+2. d'Intérieur adds the label to the contact list.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters non-alphanumeric name or nothing as the name for the label.
+
+    * 1a1. d'Intérieur alerts the user that the given name is invalid.
+
+      Use case ends.
+
+
+**UC09: Deleting a label in d'Intérieur**
+
+**MSS**
+
+1. User requests to delete one or more labels in the contact list.
+2. d'Intérieur deletes the given labels and <ins>unassign (UC10)</ins> the labels from every contact.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters all labels that do not exist.
+
+    * 1a1. d'Intérieur alerts the user that the given labels do not exist.
+
+      Use case ends.
+
+* 1b. Users enter some labels that do not exist.
+
+    * 1b1. d'Intérieur alerts the user that only some labels will be deleted.
+
+      Use case resumes at step 2.
+
+**UC10: Unassign a label from a contact**
+
+**MSS**
+
+1. User requests to unassign a label from a specified contact.
+2. d'Intérieur removes the given label from the specified contact.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The given label does not exist.
+
+    * <ins>Add a label to d'Intérieur (UC08)</ins>
+
+      Use case ends.
+    
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -775,6 +873,21 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+1. _{ more test cases …​ }_
+
+### Creating a tag
+
+1. Creating a tag after clearing sample data
+
+    1. Test case: `tag Friends`<br>
+       Expected: Friends tag is created. 
+    
+    2. Test case: `tag Friends & Colleagues`<br>
+       Expected: No tag is created. Error details shown in the status message. 
+
+    3. Other incorrect commands to try: `tag`, `tag _`, `tag -1`, `tag foo Bar`, `tag TAGNAME`, `...` (where TAGNAME is non-alphanumeric)<br>
+       Expected: Similar to previous.
+    
 1. _{ more test cases …​ }_
 
 ### Saving data

@@ -229,6 +229,8 @@ public class AddressBookParser {
         case ListImportantCommand.COMMAND_WORD:
             // Fallthrough
         case SortsCommand.COMMAND_WORD:
+            // Fallthrough
+        case ViewCommand.COMMAND_WORD:
             throw new ParseException(MESSAGE_INCOMPATIBLE_VIEW_MODE);
 
         default:

@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.image.ImageDetails.CONTACT_IMAGES_PATH;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.stage.FileChooser;
@@ -40,7 +40,13 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs a new add image command object.
+     *
+     * @param targetIndex the index of the person to add images to.
+     */
     public AddImageCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -51,6 +57,8 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(targetIndex);
+
         List<Person> lastShownList = model.getSortedPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -66,8 +74,8 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         StringBuilder resultStringBuilder = new StringBuilder();
         List<ImageDetails> imagesToAdd = new ArrayList<>();
         for (File imgFile : images) {
-            Path destPath = CONTACT_IMAGES_PATH.resolve(imgFile.getName());
-            if (ImageUtil.fileExists(imgFile, CONTACT_IMAGES_PATH)) {
+            Path destPath = model.getContactImagesFilePath().resolve(imgFile.getName());
+            if (ImageUtil.fileExists(imgFile, model.getContactImagesFilePath())) {
                 resultStringBuilder
                         .append(String.format(DUPLICATE_IMAGES, imgFile.getName()))
                         .append("\n");
@@ -105,8 +113,8 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         StringBuilder resultStringBuilder = new StringBuilder();
         List<ImageDetails> imagesToAdd = new ArrayList<>();
         for (File imgFile : images) {
-            Path destPath = CONTACT_IMAGES_PATH.resolve(imgFile.getName());
-            if (ImageUtil.fileExists(imgFile, CONTACT_IMAGES_PATH)) {
+            Path destPath = model.getContactImagesFilePath().resolve(imgFile.getName());
+            if (ImageUtil.fileExists(imgFile, model.getContactImagesFilePath())) {
                 resultStringBuilder
                         .append(String.format(DUPLICATE_IMAGES, imgFile.getName()))
                         .append("\n");
@@ -136,9 +144,9 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         ImageDetailsList oldImages = personToEdit.getImageDetailsList();
         ImageDetailsList newImages = oldImages.appendImageDetails(images);
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                          personToEdit.getAddress(), personToEdit.getDeadlines(), personToEdit.getNotes(),
-                          personToEdit.getTags(), personToEdit.getFavouriteStatus(),
-                          personToEdit.getHighImportanceStatus(), newImages);
+                personToEdit.getAddress(), personToEdit.getDeadlines(), personToEdit.getNotes(),
+                personToEdit.getTags(), personToEdit.getFavouriteStatus(),
+                personToEdit.getHighImportanceStatus(), newImages);
     }
 
     private List<File> openImageChooser() {
@@ -150,5 +158,20 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
             return new ArrayList<>();
         }
         return selectedFiles;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AddImageCommand)) {
+            return false;
+        }
+
+        AddImageCommand e = (AddImageCommand) other;
+
+        return Objects.equals(this.targetIndex, e.targetIndex);
     }
 }

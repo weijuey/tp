@@ -27,4 +27,9 @@ public class ListCommand extends Command implements DetailedViewExecutable {
     public CommandResult executeInDetailedView(Model model) {
         return execute(model);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ListCommand;
+    }
 }

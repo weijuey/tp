@@ -100,6 +100,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getContactImagesFilePath() {
+        return userPrefs.getContactImagesFilePath();
+    }
+
+    @Override
+    public void setContactImagesFilePath(Path contactImagesFilePath) {
+        requireNonNull(contactImagesFilePath);
+        userPrefs.setContactImagesFilePath(contactImagesFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -229,7 +240,7 @@ public class ModelManager implements Model {
 
     //=========== Person Images to View ==============================================================================
     @Override
-    public void updateImagesToView(ImageDetailsList images) {
+    public void setImagesToView(ImageDetailsList images) {
         this.imagesToView = images;
     }
 
@@ -311,6 +322,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && detailedContactView.equals(other.detailedContactView)
                 && imagesToView.equals(other.imagesToView)
-                && commandHistory.equals(other.commandHistory);
+                && commandHistory.equals(other.commandHistory)
+                && activatedTags.equals(other.activatedTags);
     }
 }

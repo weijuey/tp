@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.VIEW_IMAGES;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -46,6 +47,9 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
      * @param imageIndex of the image to delete, relative to the person to delete.
      */
     public DeleteImageCommand(Index personIndex, Index imageIndex) {
+        requireNonNull(personIndex);
+        requireNonNull(imageIndex);
+
         this.personIndex = personIndex;
         this.imageIndex = imageIndex;
     }
@@ -62,6 +66,8 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        requireNonNull(personIndex);
+
         List<Person> lastShownList = model.getSortedPersonList();
 
         if (personIndex.getZeroBased() >= lastShownList.size()) {
@@ -77,11 +83,11 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
 
         ImageDetails imageToDelete = images.get(imageIndex.getZeroBased());
         ImageUtil.removeFile(imageToDelete);
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images, model.getContactImagesFilePath());
         Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateImagesToView(editedPerson.getImageDetailsList());
+        model.setImagesToView(editedPerson.getImageDetailsList());
 
         return new CommandResult(
                 String.format(MESSAGE_DELETE_IMAGE_SUCCESSFUL, imageIndex.getOneBased(), editedPerson), VIEW_IMAGES);
@@ -100,7 +106,7 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
 
         ImageDetails imageToDelete = images.get(imageIndex.getZeroBased());
         ImageUtil.removeFile(imageToDelete);
-        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images);
+        ImageDetailsList sanitizedList = ImageUtil.sanitizeList(images, model.getContactImagesFilePath());
         Person editedPerson = createImageDeletedPerson(personToEdit, sanitizedList);
 
         model.setPerson(personToEdit, editedPerson);
@@ -128,5 +134,20 @@ public class DeleteImageCommand extends Command implements DetailedViewExecutabl
         return new Person(name, phone, email, address, deadlines,
                 notes, tags, favouriteStatus, highImportanceStatus, sanitizedList);
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof DeleteImageCommand)) {
+            return false;
+        }
+
+        DeleteImageCommand e = (DeleteImageCommand) other;
+        return Objects.equals(this.personIndex, e.personIndex)
+                && Objects.equals(this.imageIndex, e.imageIndex);
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -110,5 +111,19 @@ public class HighImportanceCommand extends Command implements DetailedViewExecut
         return new Person(name, phone, email, address, deadlines,
                 notes, tags, favouriteStatus, newHighImportanceStatus, images);
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof HighImportanceCommand)) {
+            return false;
+        }
+
+        HighImportanceCommand e = (HighImportanceCommand) other;
+        return Objects.equals(index, e.index);
     }
 }
