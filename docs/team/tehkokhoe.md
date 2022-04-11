@@ -6,6 +6,8 @@ title: Teh Kok Hoe's Project Portfolio Page
 ### Project: d'Intérieur
 d'Intérieur is a desktop app for interior designers to manage their contacts and projects. The designer interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 26 kLoC.
 
+Interior designers can use d'Intèrieur to improve contact management and take on the needs of an ever-growing client base, so that they can focus on what matters most - delivering quality service for clients.
+
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to add deadlines to contact.
