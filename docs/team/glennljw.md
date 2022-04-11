@@ -7,6 +7,8 @@ title: Glenn Lim's Project Portfolio Page
 
 d'Intérieur is a desktop address book application, designed with interior designers in mind. The designer interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 26 kLoC.
 
+Interior designers can use d'Intérieur to improve contact management and take on the needs of an ever-growing client base, so that they can focus on what matters most - delivering quality service for clients.
+
 Given below are my contributions to the project.
 
 * **New Feature**: `Assign Tag`
@@ -22,6 +24,7 @@ Given below are my contributions to the project.
 * **New Feature**: `Delete Tag`
   * What it does: Deletes a tag stored in the data, and unassigns any contact that are assigned to the tag to be deleted.
   * Justification: This feature helps interior designers manage unused tags, or do a mass unassignment at once.
+<div style="page-break-after: always;"></div>
 
 * **New Feature**: `Find Tag`
   * What it does: Acts as a filter to locate contacts with a certain tag. 
@@ -37,7 +40,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s2.github.io/tp-dashboard/?search=glennljw&breakdown=true)
 
 * **Project management**:
-  * Managed releases `1.2` - `1.4` (5 releases) on GitHub
+  * Managed releases `1.2` - `1.4` (4 releases) on GitHub
   * Added photos and details of team members [\#11](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/11)
 
 * **Enhancements to existing features**:
