@@ -26,7 +26,6 @@ Table of Contents
     * [Contact view feature](#adding-the-contact-view)
   * [Enhancing data storage](#enhancing-data-storage)
     * [\[Proposed\] Undo/Redo feature](#proposed-undoredo-feature)
-    * [\[Proposed\] Data archiving](#proposed-data-archiving)
   * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -626,11 +625,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -904,8 +898,6 @@ Use case ends.
 
 Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -916,8 +908,6 @@ Use case ends.
 6. The system is not required to handle a non-text input.
 7. The system should be able to have up to 5000 contacts.
 8. The response to any action should become visible within five seconds.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -1003,14 +993,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `tag Friends`<br>
        Expected: Friends tag is created. 
     
-    2. Test case: `tag Friends & Colleagues`<br>
+   1. Test case: `tag Friends & Colleagues`<br>
        Expected: No tag is created. Error details shown in the status message. 
 
-    3. Other incorrect commands to try: `tag`, `tag _`, `tag -1`, `tag foo Bar`, `tag TAGNAME`, `...` (where TAGNAME is non-alphanumeric)<br>
+   1. Other incorrect commands to try: `tag`, `tag _`, `tag -1`, `tag foo Bar`, `tag TAGNAME`, `...` (where TAGNAME is non-alphanumeric)<br>
        Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
