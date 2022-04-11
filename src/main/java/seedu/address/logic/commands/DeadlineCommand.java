@@ -34,8 +34,9 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     /**
      * Creates a DeadlineCommand to add to specified {@code Person}.
+     *
      * @param targetIndex the index of the person specified.
-     * @param deadlines the date of the deadline.
+     * @param deadlines   the date of the deadline.
      */
     public DeadlineCommand(Index targetIndex, DeadlineList deadlines) {
         requireNonNull(targetIndex);
@@ -46,6 +47,7 @@ public class DeadlineCommand extends Command implements DetailedViewExecutable {
 
     /**
      * Creates a DeadlineCommand to add to {@code Person} in detailed view.
+     *
      * @param deadlines the date of the deadline.
      */
     public DeadlineCommand(DeadlineList deadlines) {

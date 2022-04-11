@@ -57,9 +57,8 @@ public class CommandResult {
             return false;
         }
 
-        CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && specialCommandResult == otherCommandResult.specialCommandResult;
+        return feedbackToUser.equals(((CommandResult) other).feedbackToUser)
+                && specialCommandResult == ((CommandResult) other).specialCommandResult;
     }
 
     @Override
