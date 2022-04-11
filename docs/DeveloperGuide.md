@@ -26,7 +26,6 @@ Table of Contents
     * [Contact view feature](#adding-the-contact-view)
   * [Enhancing data storage](#enhancing-data-storage)
     * [\[Proposed\] Undo/Redo feature](#proposed-undoredo-feature)
-    * [\[Proposed\] Data archiving](#proposed-data-archiving)
   * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -107,6 +106,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
+![Information Panels](images/InformationPanels.png)
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -159,13 +160,6 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -429,7 +423,7 @@ Step 3. The AddressBookParser parses the command `findtag friends` and creates a
 
 Step 4. The `FindTagCommand` object is created with the given keyword `friends` as a `Singleton List`.
 
-Step 5. The current tag names in the `ActivatedTagList` are then retrieved, creating a new `TagContainsKeywordPredicate`.  
+Step 5. The current tag names in the `ActivatedTagList` are then retrieved, creating a new `TagContainsKeywordPredicate`.
 
 Step 6. The `LogicManager` then calls `FindTagCommand#execute()`, calling `Model#updateFilteredPersonList()` which updates the list of persons to be displayed.
 
@@ -457,7 +451,99 @@ Step 7. The `CommandResult` created from `FindTagCommand#execute()` is returned 
 
 ### Contact view feature
 
-_*To be added*_
+The detailed contact view feature is a new component added to the UI. The detailed view would replace the list of
+contacts when it is requested. While in this view, commands to edit the contact no longer need to specify an index,
+since it is implied that the contact to edit is the one being displayed. Thus, implementing the feature required
+resolving the following two challenges:
+
+1. How to tell the UI whether to show the list panel or the detailed view panel.
+2. How to support alternative command formats for modifying the contact in detailed view
+
+#### Implementation
+
+The first challenge is particularly complex, as switching between panel views is done through commands, which are
+executed by `Logic`, and modify `Model`. In the current design, commands are not aware of UI.
+
+However, the `MainWindow` class does have some responsibilities to fulfill in the process of command execution. It
+handles the special cases where the command is either `ExitCommand` or `HelpCommand`, and closes the main window or
+displays the help window respectively. Building upon this behaviour, the `CommandResult`, produced by every `Command`
+after its execution, can be responsible for signalling to the `MainWindow` to change view. The main draw of this
+implementation is that `MainWindow` continues to solely handle UI-related responsibilities, while `Command` will handle
+the logic of what should be displayed, hence preserving the Single-Responsibility Principle.
+
+For the second challenge, since the `MainWindow` knows which panel it is displaying, the `LogicManager` can be
+informed to parse the command differently.
+
+To illustrate the behaviour of the implementation, let's examine the process where the user passes
+`note r/red`, while the MainWindow is displaying the detailed contact view.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the follwing sequence diagrams, the
+lifelines for deleted objects should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline
+reaches the end of diagram.
+
+</div>
+
+Step 1. The user gives the command `note r/red`. `MainWindow` realises it is in detailed view, and calls
+`LogicManager::executeInDetailedViewMode`.
+
+![DetailedViewExecutionState1](images/detailedview/DetailedViewExecutionState1.png)
+
+Step 2. `LogicManager` calls `AddressBookParser::parseInDetailedViewContext` to parse the user input in a different
+way. The method returns a `NoteCommand`, which is a `DetailedViewExecutable`. Note that `NoteCommandParser`
+successfully parsed a `NoteCommand` without an index.
+
+![DetailedViewExecutionState2](images/detailedview/DetailedViewExecutionState2.png)
+
+Step 3. `LogicManager` calls `NoteCommand::executeInDetailedView`. `NoteCommand` executes a slightly different logic,
+as it can get `personToEdit` from `model::getDetailedContactViewPerson`. It replaces `personToEdit` in both the person
+list as well as in the detailed contact view. Finally, the `CommandResult` produced has the field
+`SpecialCommandResult.DETAILED_VIEW`, and is returned to `LogicManager`.
+
+![DetailedViewExecutionState3](images/detailedview/DetailedViewExecutionState3.png)
+
+Step 4. `LogicManager` returns the same `CommandResult` to `MainWindow`. `MainWindow` checks and finds that it has
+to call its `handleDetailedView` method. It continues to show the detailed view panel.
+
+![DetailedViewExecutionState4](images/detailedview/DetailedViewExecutionState4.png)
+
+To summarise, here is a generalised sequence diagram for a command execution in detailed view mode, with some details
+omitted.
+
+![DetailedViewGeneralExecution](images/detailedview/DetailedViewGeneralExecution.png)
+
+#### Design Considerations
+
+To support this implementation, on top of the Command design pattern that was in place, the `DetailedViewExecutable`
+interface was added to enforce which commands can run in detailed view mode. This implementation does not preserve the
+Command design pattern. Notice that commands have to implement two separate kinds of execute method, when the ideal
+case is that commands are simply executed by `LogicManager`, without having to intently call two different kinds of
+`execute`.
+
+This can be resolved by having an intermediate abstract class `DetailedViewExecutableCommand`, that extends `Command`
+and is inherited by concrete `Command` classes. `LogicManager` will parse for a `DetailedViewExecutableCommand`, and
+call its `execute` method.
+
+However, there are also cons for such a method. The following table gives some comparisons.
+
+| Aspect                    | Interface forcing additional `execute` methods (current choice)                                     | Abstract Class allowing singular `execute` method                                                                     |
+|---------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Effort to change          | More lines of code required implementing multiple methods with some repetition                      | Less lines of code as some code is common between different execution and can be placed in one method                 |
+| Extensibility             | Easy to extend to include more types of command using a new interface and implementing a new method | Difficult to extend as adding existing commands to a new type requires rewriting existing code and regression testing |
+| Simplicity                | Easy to reason as command execution is isolated to each method and depends on which is called       | Difficult to reason as command execution depends on potentially many external factors                                 |
+
+However, one area that both implementations can improve is interacting with Model. Due to the pre-existing requirements,
+commands only needed `Index` as a way to retrieve a `Person` object from `Model`. For commands running in detailed view
+mode, this `Index` was not required, but retrieving a `Person` explicitly called `getDetailedContactViewPerson` of the
+`ModelManager`.
+
+A more ideal solution is for commands to have an `Identifier` field, which can retrieve a `Person` from a `Model`. The
+`Identifier` can be an `Index`, which will be a superclass, or a different superclass that will retrieve the `Person`
+in detailed view. Do note that `Index` is a utility class for indexing and is used in places other than identifying
+`Person` in the contact list. You should implement a different class to behave like an index for this usage so as to
+preserve Single Responsibility Principle.
+
+This feature has potential to be even more useful. If commands are enhanced to support operating on multiple `Person`
+at once, a new `Identifier` can be implemented to support this, thus changes to commands will be minimal.
 
 ### Enhancing data storage
 
@@ -538,11 +624,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -668,8 +749,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-     
-
 **UC04: Filter contacts using labels**
 
 **MSS**
@@ -686,7 +765,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * <ins>Add a label to d'Intérieur (UC08)</ins>
   
     Use case ends.
-  
 
 **UC05: Adding a note to a contact**
 
@@ -765,8 +843,7 @@ Use case ends.
     * 1a1. d'Intérieur alerts the user that the given name is invalid.
 
       Use case ends.
-
-
+    
 **UC09: Deleting a label in d'Intérieur**
 
 **MSS**
@@ -806,8 +883,20 @@ Use case ends.
     * <ins>Add a label to d'Intérieur (UC08)</ins>
 
       Use case ends.
-    
-*{More to be added}*
+
+**UC11: Updating contact information in detailed view**
+
+**MSS**
+
+1. User requests to view a contact's full information.
+2. d'Intérieur shows the contact's full information.
+3. User edits the contact's information.
+4. d'Intérieur updates the contact's information and displays it. <br>
+   Steps 3 and 4 repeats until the user has updated the contact as they have needed.
+5. User requests to list contacts.
+6. d'Intérieur shows the list of contacts
+
+Use case ends.
 
 ### Non-Functional Requirements
 
@@ -819,8 +908,6 @@ Use case ends.
 6. The system is not required to handle a non-text input.
 7. The system should be able to have up to 5000 contacts.
 8. The response to any action should become visible within five seconds.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -856,8 +943,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -873,8 +958,34 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Commands in detailed view
 
+*Refer to the command summary table in the User Guide for all the valid commands to test.*
+
+1. Commands that work in both list view and detailed view
+
+   1. Prerequisite: Use `view` on a contact.
+
+   1. Test case: `note r/Likes dark wood` <br>
+      Expected: Note `Likes dark wood` is added to the contact's list of notes.
+
+   1. Test case: `note 2 r/Likes dark wood` <br>
+      Expected: Same outcome as above test case where no index is specified
+
+   1. Test case: `note Likes dark wood` <br>
+      Expected: No note added. Error details shown.
+
+   1. Repeat above three test cases for other commands, using the correct detailed view command format, followed by the list view command format, and lastly erroneous command formats, if any.
+
+1. Commands that do not work in detailed view
+
+   1. Prerequisite: Use `view` on a contact.
+   
+   1. Test case: `clear` <br>
+      Expected: Error message shown, using `list` will show that the list of contacts were not cleared.
+   
+   1. Repeat the test for other commands that do not work in detailed view.
+   
 ### Creating a tag
 
 1. Creating a tag after clearing sample data
@@ -882,18 +993,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `tag Friends`<br>
        Expected: Friends tag is created. 
     
-    2. Test case: `tag Friends & Colleagues`<br>
+   1. Test case: `tag Friends & Colleagues`<br>
        Expected: No tag is created. Error details shown in the status message. 
 
-    3. Other incorrect commands to try: `tag`, `tag _`, `tag -1`, `tag foo Bar`, `tag TAGNAME`, `...` (where TAGNAME is non-alphanumeric)<br>
+   1. Other incorrect commands to try: `tag`, `tag _`, `tag -1`, `tag foo Bar`, `tag TAGNAME`, `...` (where TAGNAME is non-alphanumeric)<br>
        Expected: Similar to previous.
-    
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

@@ -146,7 +146,7 @@ You may check out the summary table of commands for the overview.
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Interiéur.
+Shows a message explaining how to access the help page. You may use this frequently when you first begin using d'Intérieur.
 
 When you're feeling overwhelmed by the number of commands available, refer to the [command summary](#command-summary) and the examples!
 
@@ -741,7 +741,6 @@ Empty entries mean the commands cannot be used in the view.
 | **Delete Tag**      | `deltag TAGNAME`<br> e.g., `delete friends`                                                                                                     | -                                                                                                      |
 | **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] …​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                            | `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]…​` <br> e.g., `edit p/88438809 e/alex_yeoh@example.com` |
 | **Fav**             | `fav INDEX` <br> e.g., `fav 1`                                                                                                                  | `fav`                                                                                                  |
-| **Favourites**      | `favourites`                                                                                                                                    | -                                                                                                      |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                      | -                                                                                                      |
 | **Find Tag**        | `findtag KEYWORD [MORE_KEYWORDS}` <br> e.g., `findtag Friends`                                                                                  | -                                                                                                      |
 | **Help**            | `help`                                                                                                                                          | Same as list view                                                                                      |
@@ -750,7 +749,7 @@ Empty entries mean the commands cannot be used in the view.
 | **Sort**            | `sort CRITERIA` <br> e.g., `sort address`                                                                                                       | -                                                                                                      |
 | **List**            | `list`                                                                                                                                          | Same as list view                                                                                      |
 | **List Favourites** | `favourites`                                                                                                                                    | -                                                                                                      |
-| **List Images**     | `images INDEX` <br> e.g., `images 1`                                                                                                            | -                                                                                                      |
+| **List Images**     | `images INDEX` <br> e.g., `images 1`                                                                                                            | `images`                                                                                               |
 | **Note**            | `note INDEX r/NOTES`<br> e.g. `note 2 r/loves green`                                                                                            | `note r/NOTES` <br> e.g., `note r/Likes wood furniture`                                                |
 | **Unassign Tag**    | `unassign INDEX TAGNAME` <br> e.g., `unassign 1 Friends`                                                                                        | `unassign TAGNAME` <br> e.g., `unassign client`                                                        |
 | **View**            | `view INDEX` <br> e.g., `view 1`                                                                                                                | -                                                                                                      |
