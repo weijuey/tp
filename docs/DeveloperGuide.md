@@ -429,7 +429,7 @@ image associated with it.
 
 Given below is an example scenario of the add images feature in operation
 
-Step 1. When a user types `images INDEX`, `Logic` looks for the specified person at `INDEX` based on `SortedPersonList`.
+Step 1. When a user types `addimg INDEX`, `Logic` looks for the specified person at `INDEX` based on `SortedPersonList`.
 
 Step 2. `Logic` will then open the `JFileChooser` interface for the user to select any amount of images they wish to
 add into the selected contact.
@@ -957,6 +957,44 @@ Use case ends.
    Steps 3 and 4 repeats until the user has updated the contact as they have needed.
 5. User requests to list contacts.
 6. d'Intérieur shows the list of contacts
+
+Use case ends.
+
+**UC12: Adding an image to a contact**
+
+**MSS**
+
+1. User requests to add image(s) to a contact.
+2. d'Intérieur opens a file chooser interface for the user to select the images.
+3. The user selects and confirms the image(s).
+4. d'Intérieur adds the images to the given contact.
+5. d'Intérieur shows the newly added images in the images view.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. User closes the interface without selecting any image(s).
+
+    * 3a1. d'Intérieur alerts the user that no images have been added. 
+
+      Use case ends.
+
+**UC13: Deleting an image from a contact**
+
+**MSS**
+
+1. User requests to delete an image from a contact.
+2. d'Intérieur removes the images from the contact.
+
+Use case ends.
+
+**UC14: Listing all images of a contact**
+
+**MSS**
+
+1. User requests to view all images of a contact.
+2. d'Intérieur locates the contact and lists all their image(s) in the images view panel.
 
 Use case ends.
 
