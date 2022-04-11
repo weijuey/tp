@@ -12,7 +12,7 @@ Table of Contents
   * [Logic component](#logic-component)
   * [Model component](#model-component)
   * [Storage component](#storage-component)
-  * [Common classes](#storage-component)
+  * [Common classes](#common-classes)
 * [Implementations](#implementations)
   * [Adding attributes to contacts](#adding-attributes-to-contacts)
     * [Notes feature](#notes-feature)
@@ -27,18 +27,18 @@ Table of Contents
     * [Contact view feature](#contact-view-feature)
   * [Enhancing data storage](#enhancing-data-storage)
     * [\[Proposed\] Undo/Redo feature](#proposed-undoredo-feature)
-  * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-  * [Appendix: Requirements](#appendix-requirements)
-    * [Product scope](#product-scope)
-    * [User stories](#user-stories)
-    * [Use cases](#use-cases)
-    * [Non-functional requirements](#non-functional-requirements)
-    * [Glossary](#glossary)
-  * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-    * [Launch and shutdown](#launch-and-shutdown)
-    * [Deleting a person](#deleting-a-person)
-    * [Commands in detailed view](#commands-in-detailed-view)
-    * [Creating a tag](#creating-a-tag)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix: Requirements](#appendix-requirements)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-functional requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Deleting a person](#deleting-a-person)
+  * [Commands in detailed view](#commands-in-detailed-view)
+  * [Creating a tag](#creating-a-tag)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -113,7 +113,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S2-CS2103T-T12-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S2-CS2103T-T12-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
