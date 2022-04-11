@@ -302,9 +302,6 @@ Diagram below shows the execution of `deadline 1 /d return book 1/1/2023` comman
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeadlineCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Calling `deadline 1` without the date and description clears the deadlines for contact specified in index given.
-</div>
-
 #### Limitations and proposed solutions
 Currently, `deadline` command allows duplicate deadlines to be added, it will be changed in a later version
 
