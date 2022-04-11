@@ -966,18 +966,16 @@ Use case ends.
 **MSS**
 
 1. User requests to add image(s) to a contact.
-2. d'Intérieur opens a file chooser interface for the user to select the images.
-3. The user selects and confirms the image(s).
-4. d'Intérieur adds the images to the given contact.
-5. d'Intérieur shows the newly added images in the images view.
+2. d'Intérieur adds the images to the given contact.
+3. d'Intérieur shows the newly added images in the images view.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. User closes the interface without selecting any image(s).
+* 1a. User closes the interface without selecting any image(s).
 
-    * 3a1. d'Intérieur alerts the user that no images have been added. 
+    * 1a1. d'Intérieur alerts the user that no images have been added. 
 
       Use case ends.
 
