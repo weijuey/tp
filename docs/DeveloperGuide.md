@@ -37,7 +37,8 @@ Table of Contents
   * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a person](#deleting-a-person)
-    * [Saving data](#saving-data)
+    * [Commands in detailed view](#commands-in-detailed-view)
+    * [Creating a tag](#creating-a-tag)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -730,11 +731,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | interior designer                         | add notes under a contact                                                            | keep track of the demands and requirements of each individual project                             |
 | `* * *`  | busy interior designer                    | add a deadline under a contact                                                       | keep track of my deadlines easily                                                                 |
 | `* * *`  | user                                      | favourite certain contacts                                                           | look up favourites and contact them easily                                                        |
+| `* * *`  | interior designer                         | add images under a client                                                            | keep track of images such as floor plans and inspirational designs relevant to the client         |
 | `* *`    | interior designer                         | check upcoming deadlines in chronological order                                      | keep track of deadlines automatically                                                             |
 | `* *`    | long-time user                            | separate past and current clients                                                    | avoid contacting clients with similar names or old clients that I am not presently working with   |
 | `* *`    | new user                                  | view a list of commands                                                              | know what commands are available and the right commands to use                                    |
 | `* *`    | interior designer                         | add a high importance flag to a client                                               | take note of pressing issues regarding a client, such as mobility issues                          |
-| `*`      | interior designer                         | add images under a client                                                            | keep track of images such as floor plans and inspirational designs relevant to the client         |
 | `*`      | interior designer                         | track and calculate costs accumulated for a client                                   | at a glance, know how much money has been spent on them for a project                             |
 | `*`      | interior designer                         | generate invoices                                                                    | easily generate, store and print invoices for my clients                                          |
 | `*`      | interior designer                         | send out automated messages/emails to clients to wish them well on festive occasions | maintain good rapport with clients                                                                |
