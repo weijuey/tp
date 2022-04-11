@@ -7,6 +7,8 @@ title: Yoong Wei Jue's Project Portfolio Page
 
 d'Intérieur is a desktop app for interior designers to manage their contacts and projects. The designer interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 26 kLoC.
 
+Interior designers can use d'Intèrieur to improve contact management and take on the needs of an ever-growing client base, so that they can focus on what matters most - delivering quality service for clients.
+
 Given below are my contributions to the project.
 
 * **New Feature**: Added notes feature
@@ -41,3 +43,5 @@ Given below are my contributions to the project.
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#44](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/44), [\#74](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/74), [\#85](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/85), [\#92](https://github.com/AY2122S2-CS2103T-T12-2/tp/pull/92)
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/weijuey/ped/issues/1), [2](https://github.com/weijuey/ped/issues/3), [3](https://github.com/weijuey/ped/issues/5)
+
