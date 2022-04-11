@@ -44,7 +44,8 @@ Table of Contents
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Star used to represent a favourited person
+  * Reused from https://zetcode.com/gui/javafx/canvas/ with minor modifications to the points and fill, for suitable colour and size.
 
 --------------------------------------------------------------------------------------------------------------------
 
