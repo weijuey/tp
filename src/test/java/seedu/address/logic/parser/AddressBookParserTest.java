@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INCOMPATIBLE_VIEW_MODE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalTags.VALID_TAGNAME_FRIENDS;
@@ -265,12 +266,12 @@ public class AddressBookParserTest {
     public void parseDetailedViewCommand_note() throws Exception {
         String note = "likes green";
         NoteCommand command = (NoteCommand) parser.parseDetailedViewCommand(NoteCommand.COMMAND_WORD
-                + " " + CliSyntax.PREFIX_NOTE + note);
+                + " " + PREFIX_NOTE + note);
         assertEquals(command, new NoteCommand(note));
 
         // same command with index given -> index ignored
         NoteCommand commandWithIndex = (NoteCommand) parser.parseDetailedViewCommand(NoteCommand.COMMAND_WORD
-                + " 2 " + CliSyntax.PREFIX_NOTE + note);
+                + " 2 " + PREFIX_NOTE + note);
         assertEquals(commandWithIndex, command);
     }
 

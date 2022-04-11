@@ -468,7 +468,7 @@ List before `deadline` command:
 
 List after `deadline` command:
 
-![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.jpg)
+![after 'deadline 1 d/windows 01/01/2022'](images/AfterDeadlineCommand.png)
 
 Format in detailed view: `deadline d/DESCRIPTION DATE [d/DESCRIPTION DATE]...`
 
@@ -476,6 +476,14 @@ Example:
 
 * `deadline d/Lunch meeting 03/06/2022` adds a deadline with description `Lunch meeting` and date `03/06/2022` to the
   currently viewed contact.
+
+Interface before `deadline` command in detailed view mode:
+
+![before 'deadline d/Lunch meeting 03/06/2022'](images/BeforeDetailedViewDeadlineCommand.png)
+
+Interface after `deadline` command in detailed view mode:
+
+![after 'deadline d/Lunch meeting 03/06/2022'](images/AfterDetailedViewDeadlineCommand.png)
 
 ### Deleting a deadline from a contact : `deldl`
 
@@ -489,6 +497,14 @@ Example:
 
 * `view 2` shows you the detailed view of  the contact at index 2, then using `deldl 2` will delete the second deadline in the
   notes list of the contact
+
+Interface before `deldl` command:
+
+![before 'deldl 2'](images/BeforeDeleteDeadlineCommand.png)
+
+Interface after `deldl` command:
+
+![after 'deldl 2'](images/AfterDeleteDeadlineCommand.png)
 
 ### Adding additional notes to a contact : `note`
 
@@ -615,10 +631,15 @@ Format: `sort CRITERIA`
 
 * `CRITERIA` should be written in lower-case.
 
-Examples:
-
-* `sort name` sorts list by name alphabetically.
-* `sort fav` sorts list so that favourite contacts are on top of the list.
+| `CRITERIA` | Order                                                |
+|------------|------------------------------------------------------|
+| `address`  | Alphabetically sorted                                |
+| `deadline` | Early dates to later dates                           |
+| `email`    | Alphabetically sorted                                |
+| `fav`      | Favourited contacts to not favourited contacts       |
+| `impt`     | HighImportant contacts to not HighImportant contacts |
+| `name`     | Alphabetically sorted                                |
+| `phone`    | Numerically sorted                                   |
 
 ### Locating contacts by name : `find`
 

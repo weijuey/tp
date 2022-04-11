@@ -144,9 +144,9 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         ImageDetailsList oldImages = personToEdit.getImageDetailsList();
         ImageDetailsList newImages = oldImages.appendImageDetails(images);
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                          personToEdit.getAddress(), personToEdit.getDeadlines(), personToEdit.getNotes(),
-                          personToEdit.getTags(), personToEdit.getFavouriteStatus(),
-                          personToEdit.getHighImportanceStatus(), newImages);
+                personToEdit.getAddress(), personToEdit.getDeadlines(), personToEdit.getNotes(),
+                personToEdit.getTags(), personToEdit.getFavouriteStatus(),
+                personToEdit.getHighImportanceStatus(), newImages);
     }
 
     private List<File> openImageChooser() {
@@ -171,6 +171,7 @@ public class AddImageCommand extends Command implements DetailedViewExecutable {
         }
 
         AddImageCommand e = (AddImageCommand) other;
+
         return Objects.equals(this.targetIndex, e.targetIndex);
     }
 }

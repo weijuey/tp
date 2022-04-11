@@ -146,6 +146,7 @@ public class ImagesCommand extends Command implements DetailedViewExecutable {
         }
 
         ImagesCommand e = (ImagesCommand) other;
+
         return Objects.equals(this.index, e.index);
     }
 }
