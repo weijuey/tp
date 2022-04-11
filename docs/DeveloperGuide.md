@@ -303,17 +303,10 @@ Diagram below shows the execution of `deadline 1 /d return book 1/1/2023` comman
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Calling `deadline 1` without the date and description clears the deadlines for contact specified in index given.
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Duplicate `deadline` for the same `Person` is not allowed.
-</div>
-
 #### Limitations and proposed solutions
-Currently, calling `deadline` command resets all `deadlines` previously stored for `Person` specified, so it does not scale well.
+Currently, `deadline` command allows duplicate deadlines to be added, it will be changed in a later version
 
-**Solution 1**: Allow `deadline` command to differentiate between adding and deleting `deadline`.
-
-**Solution 2**: Modify the `add` command and `delete` command to include adding and deleting deadlines.
-
-The main problem with the solutions is that new delimiters have to be created. These delimiters might not be intuitive for users to remember or might overlap with other delimiters.
+**Solution**: Check `DeadlineList` before adding `deadline`.
 
 (more limitations and solutions to be discovered...)
 
@@ -830,13 +823,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The deadline given does not contain a valid date or time.
 
-  * To be added
+    * 1a1. d'Intérieur shows an error message.
+
+      Use case ends
 
 * 1b. The given index is invalid.
 
     * 1b1. d'Intérieur shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 **UC08: Add a label to d'Intérieur**
 
@@ -958,8 +953,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -974,8 +967,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Commands in detailed view
 
@@ -1004,12 +995,22 @@ testers are expected to do more *exploratory* testing.
       Expected: Error message shown, using `list` will show that the list of contacts were not cleared.
    
    1. Repeat the test for other commands that do not work in detailed view.
+   
+### Creating a tag
 
+1. Creating a tag after clearing sample data
+
+    1. Test case: `tag Friends`<br>
+       Expected: Friends tag is created. 
+    
+    2. Test case: `tag Friends & Colleagues`<br>
+       Expected: No tag is created. Error details shown in the status message. 
+
+    3. Other incorrect commands to try: `tag`, `tag _`, `tag -1`, `tag foo Bar`, `tag TAGNAME`, `...` (where TAGNAME is non-alphanumeric)<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
