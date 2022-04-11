@@ -13,17 +13,18 @@ Table of Contents
   * [Model component](#model-component)
   * [Storage component](#storage-component)
   * [Common classes](#storage-component)
-* [Implementation](#implementation)
+* [Implementations](#implementations)
   * [Adding attributes to contacts](#adding-attributes-to-contacts)
     * [Notes feature](#notes-feature)
     * [Favourite feature](#favourite-feature)
     * [Deadline feature](#deadline-feature)
     * [Add contact with address as optional field feature](#add-contact-with-address-as-optional-field-feature)
-    * [High importance flag feature](#add-a-high-importance-flag-feature)
+    * [High importance flag feature](#high-importance-flag-feature)
+    * [Images feature](#images-feature)
   * [Adding features to Model](#adding-features-to-model)
     * [Find tag feature](#find-tag-feature)
   * [Assimilating new UI components](#assimilating-new-ui-components)
-    * [Contact view feature](#adding-the-contact-view)
+    * [Contact view feature](#contact-view-feature)
   * [Enhancing data storage](#enhancing-data-storage)
     * [\[Proposed\] Undo/Redo feature](#proposed-undoredo-feature)
   * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -36,13 +37,15 @@ Table of Contents
   * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a person](#deleting-a-person)
-    * [Saving data](#saving-data)
+    * [Commands in detailed view](#commands-in-detailed-view)
+    * [Creating a tag](#creating-a-tag)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Star used to represent a favourited person
+  * Reused from https://zetcode.com/gui/javafx/canvas/ with minor modifications to the points and fill, for suitable colour and size.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -178,7 +181,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementations**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -392,6 +395,67 @@ The following sequence diagram shows how the feature works:
     * Cons:
         * Have to update the `HighImportancePersonList` if a contact of high importance has been modified.
         * Quite a fair bit of changes requires, especially within the storage.
+
+### Images feature
+
+#### Implementation
+
+All images added by the user must be associated to some contact. This is done by storing a `ImageDetailsList` within
+the contact's `Person` object. The `ImageDetailsList` encapsulates the information and methods of an iterable list of
+`ImageDetails`. `ImageDetails` encapsulates the information of images added to the contact, such as the file name
+and the filepath of the image.
+
+It is worth noting that `ImageDetailsList` and `ImageDetails` do not actually hold the image files, but only the
+file and path names. This means that an `ImageDetails` object could exist for a non-existent image file. This is resolved
+by using the `ImageUtil` helper class' methods.
+
+Apart from the `ImageDetailsList` and `ImageDetails`, the `ImageUtil` helper class can be seen as the bridge between
+the `ImageDetails` object and the actual directory/image file. It contains methods to check the existence of files at
+a specified filepath, copying an image into a directory, and sanitizing `ImageDetailList`s (removing `ImageDetails`
+objects from the list which do not have an existing image in the specified filepath).
+
+Users first interact with images by adding them to a specific contact through the `AddImagesCommand`. It leverages
+on the `JFileChooser` class provided by `JavaFX`. This is the interface that users will encounter when trying to
+select image(s) to add into the application. Note that only `.jpg` and `.png` files are allowed by default, and there
+is no existing way for the user to customize it.
+
+The `ImagesCommand` will identify the contact whose images are of interest to the user, based on the given index.
+The `Logic` will then pass the `ImageDetailsList` of this `Person` into the `ImagesToView` field of the `Model`.
+It will return a `SpecialCommandResult` which is `VIEW_IMAGES`, and the `UI` will then push the user to the `ViewImagesPanel`,
+where the images stored in the `ImagesToView` field will be shown to the user.
+
+The user can delete images by running the `DeleteImageCommand`, with parameters: 1. The index of the contact whose images
+are to be deleted, 2. The index of the image belonging to the contact. The logic will then identify the person and the
+image of choice. It will remove the `ImageDetails` object from the `Person`'s `ImageDetailsList`, _and_ delete the
+image associated with it.
+
+Given below is an example scenario of the add images feature in operation
+
+Step 1. When a user types `addimg INDEX`, `Logic` looks for the specified person at `INDEX` based on `SortedPersonList`.
+
+Step 2. `Logic` will then open the `JFileChooser` interface for the user to select any amount of images they wish to
+add into the selected contact.
+
+Step 3. After selecting the image(s), they will be copied through the help of the `ImageUtil` class, which leverages on the
+`ImageIO` class provided by the `javax` `imageio` library, into the specified `contact_images_path` specified in the
+`UserPrefs`. By default, this is `/data/images/` directory.
+
+Step 4. Each of these newly copied images will have their filepaths stored into their own newly created `ImageDetails` objects.
+The existing images of the contact, if any, will be added together with the new `ImageDetails` into a new `ImageDetailsList`
+
+Step 5. The `ImageDetailsList` will be added to the `Person` object.
+
+#### Design considerations
+
+Aspect: How the images should be saved
+* Alternative 1 (current choice): Image details associated with a contact is stored directly as a `Person`'s field.
+    * Pros: Easier to search for a contact's images, as we only have to search for the given contact.
+    * Cons: Not necessarily part of a contact's personal information. Eventually starts to bloat up the `Person` class.
+* Alternative 2: Image details are stored in a list in the `Model`.
+    * Pros: Easier to maintain/sanitize the list of images for outdated/corrupted images.
+    * Cons: Hard to associate the images with the persons, since there is no unique identifying number/value associated
+      with `Person`.
+
 
 ### Adding features to Model
 
@@ -668,11 +732,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | interior designer                         | add notes under a contact                                                            | keep track of the demands and requirements of each individual project                             |
 | `* * *`  | busy interior designer                    | add a deadline under a contact                                                       | keep track of my deadlines easily                                                                 |
 | `* * *`  | user                                      | favourite certain contacts                                                           | look up favourites and contact them easily                                                        |
+| `* * *`  | interior designer                         | add images under a client                                                            | keep track of images such as floor plans and inspirational designs relevant to the client         |
 | `* *`    | interior designer                         | check upcoming deadlines in chronological order                                      | keep track of deadlines automatically                                                             |
 | `* *`    | long-time user                            | separate past and current clients                                                    | avoid contacting clients with similar names or old clients that I am not presently working with   |
 | `* *`    | new user                                  | view a list of commands                                                              | know what commands are available and the right commands to use                                    |
 | `* *`    | interior designer                         | add a high importance flag to a client                                               | take note of pressing issues regarding a client, such as mobility issues                          |
-| `*`      | interior designer                         | add images under a client                                                            | keep track of images such as floor plans and inspirational designs relevant to the client         |
 | `*`      | interior designer                         | track and calculate costs accumulated for a client                                   | at a glance, know how much money has been spent on them for a project                             |
 | `*`      | interior designer                         | generate invoices                                                                    | easily generate, store and print invoices for my clients                                          |
 | `*`      | interior designer                         | send out automated messages/emails to clients to wish them well on festive occasions | maintain good rapport with clients                                                                |
@@ -895,6 +959,42 @@ Use case ends.
    Steps 3 and 4 repeats until the user has updated the contact as they have needed.
 5. User requests to list contacts.
 6. d'Intérieur shows the list of contacts
+
+Use case ends.
+
+**UC12: Adding an image to a contact**
+
+**MSS**
+
+1. User requests to add image(s) to a contact.
+2. d'Intérieur adds the images to the given contact.
+3. d'Intérieur shows the newly added images in the images view.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User closes the interface without selecting any image(s).
+
+    * 1a1. d'Intérieur alerts the user that no images have been added. 
+
+      Use case ends.
+
+**UC13: Deleting an image from a contact**
+
+**MSS**
+
+1. User requests to delete an image from a contact.
+2. d'Intérieur removes the image from the contact.
+
+Use case ends.
+
+**UC14: Listing all images of a contact**
+
+**MSS**
+
+1. User requests to view all images of a contact.
+2. d'Intérieur lists all their image(s) in the images view panel.
 
 Use case ends.
 
