@@ -13,18 +13,18 @@ Table of Contents
   * [Model component](#model-component)
   * [Storage component](#storage-component)
   * [Common classes](#storage-component)
-* [Implementation](#implementation)
+* [Implementations](#implementations)
   * [Adding attributes to contacts](#adding-attributes-to-contacts)
     * [Notes feature](#notes-feature)
     * [Favourite feature](#favourite-feature)
     * [Deadline feature](#deadline-feature)
     * [Add contact with address as optional field feature](#add-contact-with-address-as-optional-field-feature)
-    * [High importance flag feature](#add-a-high-importance-flag-feature)
+    * [High importance flag feature](#high-importance-flag-feature)
     * [Images feature](#images-feature)
   * [Adding features to Model](#adding-features-to-model)
     * [Find tag feature](#find-tag-feature)
   * [Assimilating new UI components](#assimilating-new-ui-components)
-    * [Contact view feature](#adding-the-contact-view)
+    * [Contact view feature](#contact-view-feature)
   * [Enhancing data storage](#enhancing-data-storage)
     * [\[Proposed\] Undo/Redo feature](#proposed-undoredo-feature)
   * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -180,7 +180,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementations**
 
 This section describes some noteworthy details on how certain features are implemented.
 
