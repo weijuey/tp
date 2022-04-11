@@ -39,7 +39,7 @@ quickly get started and make full of use of what the application has to offer.
     * [Deleting notes from a contact](#deleting-notes-from-a-contact--delnote)
     * [Adding images](#adding-images--addimg)
     * [List contact's images](#list-contacts-images--images)
-    * [Deleting images](#delete-images--delimg)
+    * [Deleting images](#deleting-images--delimg)
     * [Clearing all entries](#clearing-all-entries--clear)
   * [Navigating your contact list](#navigating-your-contact-list)
     * [Listing favourites](#listing-favourites--favourites)
